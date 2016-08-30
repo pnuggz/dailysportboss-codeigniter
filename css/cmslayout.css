@@ -1,0 +1,231 @@
+h1 {
+    margin: 0px;
+}
+
+h2 {
+    margin: 0px;
+}
+
+h3 {
+    margin: 0px;
+}
+
+h4{
+    margin: 0px;
+}
+
+h5 {
+    margin: 0px;
+}
+
+.body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0px;
+}
+
+.navbar {
+    width: 100%;
+    height: 40px;
+    background-color: black;
+    color: white;
+    line-height: 40px;
+    box-sizing: border-box;
+    padding: 0px 10px 0px 10px;
+}
+
+.brand {
+    width: 150px;
+    height: 40px;
+    float: left;
+    font-size: 20px;
+}
+
+.brand a:link {
+    color: white;
+}
+
+.brand a:hover {
+    color: white;
+}
+
+.brand a:visited {
+    color: white;
+}
+
+.home-btn {
+    width: 100px;
+    height: 40px;
+    float: left;
+    text-align: center;
+}
+
+.home-btn a:link {
+    color: white;
+    text-decoration: none;
+}
+
+.home-btn a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.home-btn a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.list-btn {
+    width: 100px;
+    height: 40px;
+    float: left;
+    text-align: center;
+}
+
+.list-btn a:link {
+    color: white;
+    text-decoration: none;
+}
+
+.list-btn a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+.list-btn a:visited {
+    color: white;
+    text-decoration: none;
+}
+
+.register-btn {
+    width: 500px;
+    height: 40px;
+    float: right;
+    color: white;
+    text-align: right;
+}
+
+.register-btn a:link {
+    color: blue;
+}
+
+.register-btn a:hover {
+    color: blue;
+}
+
+.register-btn a:visited {
+    color: blue;
+}
+
+.sidebar {
+    width: 300px;
+    box-sizing: border-box;
+    background-color: grey;
+    float: left;
+    padding-top: 15px;
+    padding-left: 33px;
+    padding-bottom: 15px;
+    min-height: 1300px;
+}
+
+.main-content {
+    margin-left: 15px;
+    margin-right: 15px;
+    width: calc(100% - 445px);
+    float: left;
+    box-sizing: border-box;
+}
+
+.success {
+    margin-top: 10px;
+    border: 1px solid green;
+    width: auto;
+    padding: 5px;
+    height: 25px;
+    line-height: 25px;
+    color: green;
+    border-radius: 5px;
+    background-color: #ABFFB0;
+}
+
+.fail {
+    margin-top: 10px;
+    border: 1px solid red;
+    width: auto;
+    padding: 5px;
+    height: 25px;
+    line-height: 25px;
+    color: red;
+    border-radius: 5px;
+    background-color: #FFABAB;
+}
+
+.lists-name {
+    padding-top: 7px;
+    padding-bottom: 7px;
+}
+
+.lists-name a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+.lists-name a:hover {
+    color: blue;
+    text-decoration: none;
+}
+
+.lists-name a:visited {
+    color: blue;
+    text-decoration: none;
+}
+
+.lists-body {
+    padding-bottom: 7px;
+    border-bottom: 1px dashed black;
+}
+
+.lists-new a:link{
+    color: blue;
+    text-decoration: none;
+}
+
+.lists-new a:hover{
+    color: blue;
+    text-decoration: none;
+}
+
+
+.lists-new a:visited{
+    color: blue;
+    text-decoration: none;
+}
+
+
+.list-actions {
+    padding: 5px 5px 20px 5px;
+    margin: 0px;
+    float: right;
+    width: 180px;
+    background-color: grey;
+    border: 1px solid grey;
+    border-radius: 5px;    
+}
+
+.list-actions li {
+    padding: 2px 0px 2px 10px;
+    margin: 0px;
+    list-style: none;
+}
+
+.list-actions a:link {
+    color: blue;
+    text-decoration: none;
+}
+
+.hidden-form {
+    width: 0px;
+    height: 0px;
+    font-size: 0px;
+    color: white;
+    border-color: white;
+}

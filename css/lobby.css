@@ -1,0 +1,37 @@
+#ad-wrapper {
+    border: 10px solid black;
+    height: 100%;
+    box-sizing: border-box;
+    width: 100%;
+    float: left;
+    margin: 0px;
+}
+
+#ad-main {
+    box-sizing: border-box;
+    float: left;
+    height: 100%;
+    border-left: 2px solid orange;
+    border-top: 2px solid orange;
+    border-bottom: 2px solid orange;
+    margin: 0px;
+    width: 800px;
+    color: white;
+}
+
+#ad-side {
+    box-sizing: border-box;
+    float: right;
+    height: 100%;
+    margin: 0px;
+    width: 380px;
+}
+
+#ad-small {
+    box-sizing: border-box;
+    height: 180px;
+    margin: 0px;
+    width: 100%;
+    border: 2px solid orange;
+    color: white;
+}
