@@ -1,7 +1,10 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Cmshome extends MX_Controller {
+define('__ROOT__', dirname(dirname(__FILE__)));
+defined('BASEPATH') OR exit('No direct script access allowed');
+define('DS', DIRECTORY_SEPARATOR);
+require_once("secure_area.php");
+class Cmshome extends Secure_area {
 
     function __construct() {
         parent::__construct();
@@ -46,7 +49,8 @@ class Cmshome extends MX_Controller {
       $key = base64_encode(openssl_random_pseudo_bytes(64));
       $jwt = $this->jwt->encode($data, $key,'HS256');
       $jwtdec = $this->jwt->decode($jwt, $key);
-      echo json_encode($jwtdec);
+      $this->session->set_userdata('token',$jwt);
+      echo json_encode($this->session->userdata('token'));
     }
 
 }
