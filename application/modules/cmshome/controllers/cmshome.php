@@ -1,13 +1,12 @@
 <?php
-
-define('__ROOT__', dirname(dirname(__FILE__)));
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('ROOT', dirname(dirname(__FILE__)));
 define('DS', DIRECTORY_SEPARATOR);
-require_once("secure_area.php");
+require_once(APPPATH.DS."modules/secure_area.php");
 class Cmshome extends Secure_area {
 
     function __construct() {
-        parent::__construct();
+        parent::__construct($this->input->request_headers());
     }
 
     function index() {
@@ -20,8 +19,7 @@ class Cmshome extends Secure_area {
         //}
 
         $data['view_file'] = "cmshome";
-        $this->load->module('template');
-        $this->template->cmslayout($data);
+        $this->output->set_output(json_encode($data), 200);
     }
 
     function tes(){

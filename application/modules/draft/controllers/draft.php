@@ -1,11 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Draft extends MX_Controller
+define('ROOT', dirname(dirname(__FILE__)));
+define('DS', DIRECTORY_SEPARATOR);
+require_once(APPPATH.DS."modules/secure_area.php");
+class Draft extends Secure_area
 {
 
     function __construct() {
-        parent::__construct();
+        parent::__construct($this->input->request_headers());
         }
 
     function index($contest_id)
@@ -77,10 +79,7 @@ class Draft extends MX_Controller
 
             $contest_roster_data = array_merge($roster_name, $forwards, $midfielders, $defenders);
 
-            if ($this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data)) {
-                $this->session->set_flashdata('team_phase_created', 'The team phase has been set');
-            }
-            redirect('/games/details/'.$contest_id.'/'.$user_id.'/'.$user_id_count_entry.'/');
+            $this->output->set_output(json_encode($contest_roster_data), 200);
         }
 
     }
@@ -121,7 +120,7 @@ class Draft extends MX_Controller
 
         $user_id_count_entry = 1;
         $user_id = $this->session->userdata('user_id');
-        
+
         $this->form_validation->set_rules('roster_name', 'Roster Name', 'required|trim|xss_clean');
 
         $contest_id = $this->uri->segment(3);
@@ -191,7 +190,7 @@ class Draft extends MX_Controller
         }
 
     }
-    
+
     function get_contest_details() {
         $league_id = 1;
         $contest_id = $this->uri->segment(3);

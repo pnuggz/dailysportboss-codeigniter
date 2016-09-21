@@ -12,20 +12,20 @@ class Secure_area extends MX_Controller
 	{
 		parent::__construct();
 		$this->load->library('jwt');
-   if($token)
+   if($token['Authorization'])
 		{
-			if($token == $this->session->userdata['token'])
+			if($token['Authorization'] == $this->session->userdata['token'])
 			{
-				$decode_token = $this->decode_token($token);
+				$decode_token = $this->decode_token($token['Authorization']);
 	      if($decode_token->exp > time() && $decode_token->data->userid == $this->session->userdata['userid'] && $decode_token->data->username == $this->session->userdata['username'])
 	  		{
 
 					$this->session->set_userdata('token',$this->generate_token());
 	  		}else{
-					redirect(login);
+					echo json_encode("0");exit;
 				}
 			}else{
-				redirect(login);
+				echo json_encode("0");exit;
 			}
     }else{
       exit('No direct script access allowed');
