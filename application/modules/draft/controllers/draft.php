@@ -114,29 +114,12 @@ class Draft extends Secure_area
 
     function add()
     {
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_flashdata('noaccess', 'Sorry, you are not logged in');
-            redirect('login/');
-        }
-
         $user_id_count_entry = 1;
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('userid');
 
-        $this->form_validation->set_rules('roster_name', 'Roster Name', 'required|trim|xss_clean');
-
-        $contest_id = $this->uri->segment(3);
 
         $this->load->module('contests');
-        $data['contest_details'] = $this->contests->get_where_custom('id', $contest_id);
-
-        if ($this->form_validation->run() == FALSE) {
-
-            $data['view_file'] = 'add_contest_entry';
-            $this->load->module('template');
-            $this->template->draftlayout($data);
-
-        } else {
-            $user_id = $this->session->userdata('user_id');
+            $user_id = $this->session->userdata('userid');
             $contest_id = $this->input->post('contest_id');
 
             $this->load->module('contests_users_entries');
@@ -185,10 +168,10 @@ class Draft extends Secure_area
             $contest_roster_data = array_merge($roster_name, $forwards, $midfielders, $defenders);
 
             if ($this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data)) {
-                $this->session->set_flashdata('team_phase_created', 'The team phase has been set');
+                $this->output->set_output(json_encode("The team phase has been set"), 200);
+            }else{
+              $this->output->set_output(json_encode("0"), 200);
             }
-            redirect('/games/details/'.$contest_id.'/'.$user_id.'/'.$user_id_count_entry.'/');
-        }
 
     }
 
