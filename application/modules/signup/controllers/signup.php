@@ -32,10 +32,10 @@ class Signup extends MX_Controller {
 
              $cekemail = $this->mdl_users->check_email($this->input->post('email'));
 
-             if($cekusername == 0)
+             if($cekusername > 0)
              {
                $this->output->set_output(json_encode("Username Already Exists"), 200);
-             }else if($cekemail == 0)
+             }else if($cekemail > 0)
              {
                $this->output->set_output(json_encode("Email Already Exists"), 200);
              }else{
@@ -49,7 +49,7 @@ class Signup extends MX_Controller {
                             );
 
                $this->_insert($data);
-               $this->output->set_output(json_encode("Success"), 200);
+               $this->output->set_output(json_encode("1"), 200);
              }
            }
        }

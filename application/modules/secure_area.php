@@ -22,10 +22,10 @@ class Secure_area extends MX_Controller
 
 					$this->session->set_userdata('token',$this->generate_token());
 	  		}else{
-					echo json_encode("0");exit;
+					//echo json_encode("0");exit;
 				}
 			}else{
-				echo json_encode("0");exit;
+				//echo json_encode("0");exit;
 			}
     }else{
       exit('No direct script access allowed');
