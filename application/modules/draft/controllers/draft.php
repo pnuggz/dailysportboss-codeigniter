@@ -87,14 +87,15 @@ class Draft extends Secure_area
     function lobby()
     {
         $league_id = 1;
-
         $this->load->model('mdl_draft');
-        $data['active_contests'] = $this->mdl_draft->get_contest_status($league_id, TRUE);
-        $data['inactive_contests'] = $this->mdl_draft->get_contest_status($league_id, FALSE);
-
-        $data['view_file'] = 'league_contests_entry';
-        $this->load->module('template');
-        $this->template->lobbylayout($data);
+        $data = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => array(
+              'active_contests' => $this->mdl_draft->get_contest_status($league_id, TRUE),
+              'inactive_contests' => $this->mdl_draft->get_contest_status($league_id, FALSE)
+          )
+        );
+        $this->output->set_output(json_encode($data), 200);
     }
 
     function details($contest_id)
@@ -298,23 +299,14 @@ class Draft extends Secure_area
         return $query;
     }
 
-    function get_events() {
-        $contest_id = $this->uri->segment(3);
+    function events($contest_id) {
 
         $this->load->model('mdl_draft');
-        $data = $this->mdl_draft->get_events($contest_id);
-        foreach ($data->result() as $row) {
-            $array[] = array(
-                'team_id_home'          =>      $row->team_id_home,
-                'team_name_home'        =>      $row->team_name_home,
-                'team_id_away'          =>      $row->team_id_away,
-                'team_name_away'        =>      $row->team_name_away,
-                'start_date'            =>      $row->start_date,
-                'start_time'            =>      $row->start_time,
-                'home_ground'           =>      $row->home_ground
-            );
-        }
-        echo json_encode($array);
+        $data = array(
+          "token" => $this->session->userdata['token'],
+          "data" => $this->mdl_draft->get_events($contest_id),
+        );
+        $this->output->set_output(json_encode($data), 200);
     }
 
     function get_events_id()
@@ -355,9 +347,8 @@ class Draft extends Secure_area
 //        echo json_encode($array);
     }
 
-    function get_players()
+    function players($contest_id)
     {
-        $contest_id = $this->uri->segment(3);
         $opid = 0;
 
         $this->load->module('contests');
@@ -402,16 +393,18 @@ class Draft extends Secure_area
                 'salary'    =>  $row->salary
             );
         };
-
-        echo json_encode($array_players);
+        $result = array(
+          'token' => $this->session->userdata['token'],
+          'data' => $array_players,
+        );
+        $this->output->set_output(json_encode($result), 200);
     }
 
-    function calc_form_data() {
-        $contest_id = $this->uri->segment(3);
-        $player_id = $this->uri->segment(4);
+    function playerdetail($contest_id,$player_id) {
 
         $this->load->module('players_phases');
         $player_stats = $this->players_phases->get_player_stats_individual_trial($contest_id, $player_id);
+        $array_stat_individual = array();
         foreach ($player_stats->result() as $row) {
             $fp_goals = $row->goals * 5;
             $fp_assists = $row->assists * 4;
@@ -475,7 +468,12 @@ class Draft extends Secure_area
             }
         }
 
-        echo json_encode($result);
+        $datas = array(
+          'token' => $this->session->userdata['token'],
+          'data' => $result,
+        );
+
+        $this->output->set_output(json_encode($datas), 200);
 
     }
 

@@ -11,6 +11,7 @@ class Mdl_draft extends CI_Model
 
     function get_contest_status($league_id, $active = TRUE)
     {
+        $result = array();
         $query = $this->db->query('
           SELECT
           contests.id as contests_id,
@@ -45,7 +46,21 @@ class Mdl_draft extends CI_Model
           WHERE leagues.id = '.$league_id.' and contests.contest_status = 0
           ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
         ');
-        return $query;
+         $query;
+         foreach($query->result() as $row)
+         {
+           $result[] = array(
+             "contest_id" => $row->contests_id,
+             "contest_name" => $row->contest_name,
+             "league_shorthand" => $row->league_shorthand,
+             "start_date" => $row->start_date,
+             "start_time" => $row->start_time,
+             "entry_max" => $row->entry_max,
+             "entry_count" => $row->entry_count,
+             "sponsor_id" => $row->sponsors_id,
+           );
+         }
+         return $result;
     }
 
     function get_contest_details($league_id, $contest_id)
@@ -115,7 +130,7 @@ class Mdl_draft extends CI_Model
 
     function get_db_selected_players($contest_id) {
         $query = $this->db->query('
-        SELECT 
+        SELECT
         players_p1.first_name as first_name_p1,
         players_p1.last_name as last_name_p1,
         players_phases_p1.position as position_p1,
@@ -206,8 +221,8 @@ class Mdl_draft extends CI_Model
     function get_start_date($contest_id) {
         $query = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN teams_phases as teams_phases_home ON sports_events.home_team_phase_id = teams_phases_home.id
             JOIN teams_phases as teams_phases_away ON sports_events.away_team_phase_id = teams_phases_away.id
@@ -223,8 +238,8 @@ class Mdl_draft extends CI_Model
     function get_end_date($contest_id) {
         $query = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN teams_phases as teams_phases_home ON sports_events.home_team_phase_id = teams_phases_home.id
             JOIN teams_phases as teams_phases_away ON sports_events.away_team_phase_id = teams_phases_away.id
@@ -240,8 +255,8 @@ class Mdl_draft extends CI_Model
     function get_all_players_one($contest_id) {
         $query_start = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date ASC
@@ -253,8 +268,8 @@ class Mdl_draft extends CI_Model
 
         $query_end = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date DESC
@@ -265,14 +280,14 @@ class Mdl_draft extends CI_Model
         }
 
         $query = $this->db->query('
-                SELECT 
-                i9.players_phases_id, 
-                i9.players_phases_teams_phases_id, 
-                i9.position, 
-                i9.height, 
-                i9.weight, 
+                SELECT
+                i9.players_phases_id,
+                i9.players_phases_teams_phases_id,
+                i9.position,
+                i9.height,
+                i9.weight,
                 i9.depth_chart,
-                i9.descrip, 
+                i9.descrip,
                 i6.salary,
                 players.first_name,
                 players.last_name,
@@ -295,7 +310,7 @@ class Mdl_draft extends CI_Model
                     FROM contests_has_sports_events
                     INNER JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
                     WHERE contests_has_sports_events.contests_id = '.$contest_id.'
-                        UNION 
+                        UNION
                         SELECT
                         sports_events.away_team_phase_id, \'away\' descrip
                         FROM contests_has_sports_events
@@ -307,14 +322,14 @@ class Mdl_draft extends CI_Model
                 ) i9
                 JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = i9.players_phases_id
                 JOIN (
-                    SELECT 
+                    SELECT
                     soccer_stats.id,
                     soccer_stats.players_phases_id,
                     soccer_stats.salary
                     FROM soccer_stats
                     WHERE soccer_stats.id IN (
                             SELECT MAX(soccer_stats.id)
-                            FROM soccer_stats 
+                            FROM soccer_stats
                             WHERE soccer_stats.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'"
                             GROUP BY soccer_stats.players_phases_id
                         )
@@ -329,15 +344,15 @@ class Mdl_draft extends CI_Model
 
     function get_events($contest_id) {
         $query = $this->db->query('
-        SELECT   
+        SELECT
         sports_events.home_team_phase_id as team_id_home,
         sports_events.away_team_phase_id as team_id_away,
-        teams_home.team_shorthand as team_name_home, 
-        teams_away.team_shorthand as team_name_away, 
-        sports_events.start_date, 
+        teams_home.team_shorthand as team_name_home,
+        teams_away.team_shorthand as team_name_away,
+        sports_events.start_date,
         sports_events.start_time,
         teams_phases_home.stadium_name as home_ground
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         JOIN teams_phases as teams_phases_home ON sports_events.home_team_phase_id = teams_phases_home.id
         JOIN teams_phases as teams_phases_away ON sports_events.away_team_phase_id = teams_phases_away.id
@@ -346,7 +361,21 @@ class Mdl_draft extends CI_Model
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         ORDER BY sports_events.start_date, sports_events.start_time, teams_away.team_shorthand
         ');
-        return $query;
+
+        $result = array();
+        foreach ($query->result() as $row) {
+            $result[] = array(
+                'team_id_home'          =>      $row->team_id_home,
+                'team_name_home'        =>      $row->team_name_home,
+                'team_id_away'          =>      $row->team_id_away,
+                'team_name_away'        =>      $row->team_name_away,
+                'start_date'            =>      $row->start_date,
+                'start_time'            =>      $row->start_time,
+                'home_ground'           =>      $row->home_ground
+            );
+        }
+
+        return $result;
     }
 
     function get_words() {
