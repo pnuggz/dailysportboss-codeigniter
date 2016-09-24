@@ -79,7 +79,7 @@ class Users extends Secure_area {
                        );
 
           $this->mdl_users->_update($id,$data);
-          $this->output->set_output(json_encode("1"), 200);
+          $this->output->set_output(json_encode($this->session->userdata['token']), 200);
         }
       }
     }
@@ -109,7 +109,7 @@ class Users extends Secure_area {
                        );
 
           $this->mdl_users->_update($id,$data);
-          $this->output->set_output(json_encode("1"), 200);
+          $this->output->set_output(json_encode($this->session->userdata['token']), 200);
         }
       }
     }
