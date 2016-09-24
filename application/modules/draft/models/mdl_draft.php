@@ -58,9 +58,38 @@ class Mdl_draft extends CI_Model
              "entry_max" => $row->entry_max,
              "entry_count" => $row->entry_count,
              "sponsor_id" => $row->sponsors_id,
+             "leagues_id" => $row->leagues_id
            );
          }
          return $result;
+    }
+
+    function get_league()
+    {
+      $result = array();
+      $query = $this->db->query('
+        SELECT leagues.id,
+               leagues.sports_id,
+               leagues.league_name,
+               leagues.league_shorthand,
+               leagues.league_country
+        FROM leagues
+        ORDER BY id,sports_id ASC
+        ');
+       $query;
+
+       foreach($query->result() as $row)
+       {
+         $result[] = array(
+           'leagues_id' => $row->id,
+           'sports_id' => $row->sports_id,
+           'league_name' => $row->league_name,
+           'league_shorthand' => $row->league_shorthand,
+           'league_country' => $row->league_country
+         );
+       }
+
+       return $result;
     }
 
     function get_contest_details($league_id, $contest_id)
@@ -198,6 +227,7 @@ class Mdl_draft extends CI_Model
     }
 
     function get_users_list($contest_id, $user_id) {
+        $result = array();
         $query = $this->db->query('
         SELECT contests_users_entries.id as contests_users_entries_id,
         contests_users_entries.entry_date_time,
@@ -215,7 +245,23 @@ class Mdl_draft extends CI_Model
         INNER JOIN contests_rosters ON contests_users_entries.id = contests_rosters.contests_users_entry_id
         WHERE contests_users_entries.contest_id = ' .$contest_id. ' AND user_id = '.$user_id.'
         ');
-        return $query;
+        foreach($query->result() as $row)
+        {
+          $result[] = array(
+            "contests_users_entries_id" => $row->contests_users_entries_id,
+            "entry_date_time" => $row->entry_date_time,
+            "contest_id" => $row->contest_id,
+            "user_entry_count" => $row->user_entry_count,
+            "contests_rosters_id" => $row->contests_rosters_id,
+            "roster_name" => $row->roster_name,
+            "userid" => $row->user_id,
+            "first_name" => $row->first_name,
+            "last_name" => $row->last_name,
+            "username" => $row->username,
+            "email" => $row->email,
+          );
+        }
+        return $result;
     }
 
     function get_start_date($contest_id) {

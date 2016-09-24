@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Mdl_players_phases extends CI_Model {
-    
+
     function __construct() {
         parent::__construct();
     }
@@ -185,14 +185,14 @@ class Mdl_players_phases extends CI_Model {
                 JOIN teams ON teams.id = teams_phases.teams_id
                 JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = players_phases.id
                 WHERE players_phases.id = '.$player_id.'
-        '); 
+        ');
         return $query;
     }
 
     function get_player_stats($contest_id) {
         $events_date = $this->db->query('
         SELECT DISTINCT sports_events.start_date
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         LIMIT 1
@@ -200,7 +200,7 @@ class Mdl_players_phases extends CI_Model {
         foreach($events_date->result() as $row) {
             $event_date = $row->start_date;
             $query = $this->db->query('
-                SELECT 
+                SELECT
                 soccer_stats.players_phases_id,
                 COUNT(soccer_stats.players_phases_id) as counting,
                 SUM(soccer_stats.goals) as total_goals,
@@ -214,7 +214,7 @@ class Mdl_players_phases extends CI_Model {
                 SUM(soccer_stats.accurate_crosses) as total_accurate_crosses
                 FROM soccer_stats
                 WHERE soccer_stats.date < \''.$event_date.'\'
-                GROUP BY soccer_stats.players_phases_id  
+                GROUP BY soccer_stats.players_phases_id
                 ORDER BY `soccer_stats`.`players_phases_id` ASC
                 ');
             };
@@ -224,7 +224,7 @@ class Mdl_players_phases extends CI_Model {
     function get_form($contest_id) {
         $events_date = $this->db->query('
         SELECT DISTINCT sports_events.start_date
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         LIMIT 1
@@ -232,7 +232,7 @@ class Mdl_players_phases extends CI_Model {
         foreach($events_date->result() as $row) {
             $event_date = $row->start_date;
             $query = $this->db->query('
-                SELECT 
+                SELECT
                 i3.players_phases_id,
                 COUNT(i3.players_phases_id) as counting,
                 SUM(i3.goals) as total_goals,
@@ -249,11 +249,11 @@ class Mdl_players_phases extends CI_Model {
                 FROM soccer_stats i1
                 LEFT OUTER JOIN soccer_stats i2 ON (i1.players_phases_id = i2.players_phases_id and i1.id > i2.id)
                 WHERE i1.date < \''.$event_date.'\'
-                GROUP BY i1.id  
+                GROUP BY i1.id
                 HAVING COUNT(*) < 4
                 ) as i3
                 GROUP BY i3.players_phases_id
-                ORDER BY i3.players_phases_id ASC, i3.date DESC 
+                ORDER BY i3.players_phases_id ASC, i3.date DESC
                 ');
         };
         return $query;
@@ -262,7 +262,7 @@ class Mdl_players_phases extends CI_Model {
     function get_player_salary($contest_id) {
         $events_date = $this->db->query('
         SELECT DISTINCT sports_events.start_date
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         LIMIT 1
@@ -270,14 +270,14 @@ class Mdl_players_phases extends CI_Model {
         foreach($events_date->result() as $row) {
             $event_date = $row->start_date;
             $query = $this->db->query('
-                SELECT 
+                SELECT
                 soccer_stats.id,
                 soccer_stats.players_phases_id,
                 soccer_stats.salary
                 FROM soccer_stats
                 WHERE soccer_stats.id IN (
                         SELECT MAX(soccer_stats.id)
-                        FROM soccer_stats 
+                        FROM soccer_stats
                     	WHERE soccer_stats.date <= DATE_ADD(\''.$event_date.'\',INTERVAL 5 DAY)
                         GROUP BY soccer_stats.players_phases_id
                     ) ORDER BY `players_phases_id` ASC
@@ -289,7 +289,7 @@ class Mdl_players_phases extends CI_Model {
     function get_form_individual($contest_id, $player_id) {
         $events_date = $this->db->query('
         SELECT DISTINCT sports_events.start_date
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         LIMIT 1
@@ -297,7 +297,7 @@ class Mdl_players_phases extends CI_Model {
         foreach($events_date->result() as $row) {
             $event_date = $row->start_date;
             $query = $this->db->query('
-                SELECT 
+                SELECT
                 i3.players_phases_id,
                 COUNT(i3.players_phases_id) as counting,
                 SUM(i3.goals) as total_goals,
@@ -314,7 +314,7 @@ class Mdl_players_phases extends CI_Model {
                 FROM soccer_stats i1
                 LEFT OUTER JOIN soccer_stats i2 ON (i1.players_phases_id = i2.players_phases_id and i1.id > i2.id)
                 WHERE i1.date < \''.$event_date.'\'
-                GROUP BY i1.id  
+                GROUP BY i1.id
                 HAVING COUNT(*) < 4
                 ) as i3
                 WHERE i3.players_phases_id = '.$player_id.'
@@ -329,7 +329,7 @@ class Mdl_players_phases extends CI_Model {
         $table = $this->get_table();
         $events_date = $this->db->query('
         SELECT DISTINCT sports_events.start_date
-        FROM `contests_has_sports_events` 
+        FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
         ');
@@ -348,58 +348,54 @@ class Mdl_players_phases extends CI_Model {
 
     function get_player_stats_individual_trial($contest_id, $player_id) {
         $query_start = $this->db->query('
-        SELECT DISTINCT sports_events.start_date
+        SELECT MAX(sports_events.start_date) as start_date
         FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
-        ORDER BY `sports_events`.`start_date` ASC
-        LIMIT 1
         ');
+
         foreach($query_start->result() as $row) {
             $contest_start_date = $row->start_date;
         };
 
         $query_end = $this->db->query('
-        SELECT DISTINCT sports_events.start_date
+        SELECT MIN(sports_events.start_date) as start_date
         FROM `contests_has_sports_events`
         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
-        ORDER BY `sports_events`.`start_date` DESC
-        LIMIT 1
         ');
         foreach($query_end->result() as $row) {
             $contest_end_date = $row->start_date;
         };
 
         $query_season = $this->db->query('
-        SELECT teams_phases.start_date
+        SELECT MIN(teams_phases.start_date) as start_date
         FROM teams_phases
-        ORDER BY teams_phases.start_date DESC 
-        LIMIT 1
         ');
         foreach($query_season->result() as $row) {
             $season_start_date = $row->start_date;
         };
 
         $query = $this->db->query('
-        SELECT * 
-        FROM `soccer_stats` 
+        SELECT *
+        FROM `soccer_stats`
         JOIN (
-            SELECT 
+            SELECT
             soccer_stats.id,
             soccer_stats.players_phases_id,
             soccer_stats.salary as latest_salary
             FROM soccer_stats
             WHERE soccer_stats.id IN (
                     SELECT MAX(soccer_stats.id)
-                    FROM soccer_stats 
+                    FROM soccer_stats
                     WHERE soccer_stats.date <= "' .$contest_end_date. '"
                     GROUP BY soccer_stats.players_phases_id
                     )
             ) i1 ON soccer_stats.players_phases_id = i1.players_phases_id
-        WHERE (soccer_stats.date >= " '.$season_start_date.' " AND soccer_stats.date < " '.$contest_start_date.' " AND soccer_stats.players_phases_id = '.$player_id.') 
+        WHERE (soccer_stats.date >= " '.$season_start_date.' " AND soccer_stats.date < " '.$contest_start_date.' " AND soccer_stats.players_phases_id = '.$player_id.')
         ORDER BY `soccer_stats`.`date` DESC
         ');
+        
         return $query;
     }
 //
@@ -448,19 +444,19 @@ class Mdl_players_phases extends CI_Model {
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function get_table() {
         $table = "players_phases";
         return $table;
     }
-    
+
     function get($order_by) {
         $table = $this->get_table();
         $this->db->order_by($order_by);
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function get_with_limit($limit, $offset, $order_by) {
         $table = $this->get_table();
         $this->db->limit($limit, $offset);
@@ -468,21 +464,21 @@ class Mdl_players_phases extends CI_Model {
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function get_where ($id) {
         $table = $this->get_table();
         $this->db->where('id', $id);
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function get_where_custom($col, $value) {
         $table = $this->get_table();
         $this->db->where($col,$value);
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function get_where_custom_ordered($col, $value, $order_by) {
         $table = $this->get_table();
         $this->db->where($col,$value);
@@ -490,24 +486,24 @@ class Mdl_players_phases extends CI_Model {
         $query = $this->db->get($table);
         return $query;
     }
-    
+
     function _insert($data) {
         $table = $this->get_table();
         $this->db->insert($table, $data);
     }
-    
+
     function _update($id, $data) {
         $table = $this->get_table();
         $this->db->where('id', $id);
         $this->db->update($table, $data);
     }
-    
+
     function _delete($id) {
         $table = $this->get_table();
         $this->db->where('id', $id);
         $this->db->delete($table);
     }
-    
+
     function count_where($column, $value) {
         $table = $this->get_table();
         $this->db->where($column, $value);
@@ -515,14 +511,14 @@ class Mdl_players_phases extends CI_Model {
         $num_rows = $query->num_rows();
         return $num_rows;
     }
-    
+
     function count_all() {
         $table = $this->get_table();
         $query = $this->db->get($table);
         $num_rows = $query->num_rows();
         return $num_rows;
     }
-    
+
     function get_max() {
         $table = $this->get_table();
         $this->db->select_max('id');
@@ -531,10 +527,10 @@ class Mdl_players_phases extends CI_Model {
         $id = $row->id;
         return $id;
     }
-    
+
     function _custom_query($mysql_query) {
         $query = $this->db->query($mysql_query);
         return $query;
     }
-    
+
 }

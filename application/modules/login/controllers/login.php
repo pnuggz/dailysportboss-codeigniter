@@ -27,12 +27,12 @@ class Login extends MX_Controller {
                if($user_id){
                    $user_data = array('userid'    =>      $user_id,
                                       'username'   =>      $username,
-                                      'logged_in'  =>      TRUE,
-                                      'token'      =>  $this->generate_token()
+                                      'logged_in'  =>      TRUE
                                       );
 
                    $this->session->set_userdata($user_data);
-                   $this->output->set_output(json_encode(array('token'=>$user_data['token'])), 200);
+                   $this->session->set_userdata('token',$this->generate_token());
+                   $this->output->set_output(json_encode(array('token'=>$this->session->userdata['token'])), 200);
 
                } else {
                    $this->output->set_output(json_encode('0'), 200);

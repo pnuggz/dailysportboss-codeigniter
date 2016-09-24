@@ -84,9 +84,18 @@ class Draft extends Secure_area
 
     }
 
-    function lobby()
+    function leagues()
     {
-        $league_id = 1;
+        $this->load->model('mdl_draft');
+        $data = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $this->mdl_draft->get_league()
+        );
+        $this->output->set_output(json_encode($data), 200);
+    }
+
+    function contests($league_id)
+    {
         $this->load->model('mdl_draft');
         $data = array(
           'token' => $this->session->userdata['token'],
@@ -98,18 +107,17 @@ class Draft extends Secure_area
         $this->output->set_output(json_encode($data), 200);
     }
 
-    function details($contest_id)
+    function games($contest_id)
     {
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('userid');
 
         $this->load->model('mdl_draft');
-        $data['users_details'] = $this->mdl_draft->get_users_list($contest_id, $user_id);
-
-        $data['contest_id'] = $contest_id;
-
-        $data['view_file'] = 'details';
-        $this->load->module('template');
-        $this->template->lobbylayout($data);
+        $details = $this->mdl_draft->get_users_list($contest_id, $user_id);
+        $data = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $details
+        );
+        $this->output->set_output(json_encode($data), 200);
     }
 
     function add()
@@ -175,12 +183,10 @@ class Draft extends Secure_area
 
     }
 
-    function get_contest_details() {
-        $league_id = 1;
-        $contest_id = $this->uri->segment(3);
+    function contestdetails($league_id,$contest_id) {
 
         if($this->session->userdata('logged_in')) {
-            $user_id = $this->session->userdata('user_id');
+            $user_id = $this->session->userdata('userid');
             $user_entry_count = 0;
 
             $this->load->model('mdl_draft');
@@ -197,7 +203,7 @@ class Draft extends Secure_area
         $data = $this->mdl_draft->get_contest_details($league_id, $contest_id);
         foreach ($data->result() as $row){
 
-            $array[] = array(
+            $array = array(
                 'contest_id'            =>  $row->contests_id,
                 'league_id'             =>  $row->leagues_id,
                 'contest_name'          =>  $row->contest_name,
@@ -205,13 +211,13 @@ class Draft extends Secure_area
                 'sponsors_id'           =>  $row->sponsors_id,
                 'league_name'           =>  $row->league_name,
                 'league_shorthand'      =>  $row->league_shorthand,
-                'start_date'            =>  $row->start_date,
+                'start_date'            =>  date('d-m-Y',strtotime($row->start_date)),
                 'start_time'            =>  $row->start_time,
                 'entry_count'           =>  $row->entry_count,
                 'user_entry_count'      =>  $user_entry_count
             );
         }
-        echo json_encode( $array );
+        $this->output->set_output(json_encode($array), 200);
     }
 
     function roster() {
@@ -387,6 +393,7 @@ class Draft extends Secure_area
 
         $this->load->module('players_phases');
         $player_stats = $this->players_phases->get_player_stats_individual_trial($contest_id, $player_id);
+
         $array_stat_individual = array();
         foreach ($player_stats->result() as $row) {
             $fp_goals = $row->goals * 5;
@@ -417,8 +424,10 @@ class Draft extends Secure_area
             );
         }
 
+
         $this->load->module('players_phases');
         $data = $this->players_phases->get_players_list_contest_individual($contest_id, $player_id);
+
         foreach ($data->result() as $row) {
             $from = new DateTime($row->dob);
             $to = new DateTime('today');
@@ -442,6 +451,8 @@ class Draft extends Secure_area
         }
 
 
+
+
         $result = array();
         foreach( $array_player_individual as $keyA => $valA ) {
             foreach( $array_stat_individual as $keyB => $valB ) {
@@ -450,6 +461,8 @@ class Draft extends Secure_area
                 }
             }
         }
+
+
 
         $datas = array(
           'token' => $this->session->userdata['token'],

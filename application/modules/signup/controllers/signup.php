@@ -22,6 +22,9 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[30]|xss_clean|is_unique[users.username]');
            $this->form_validation->set_rules('password', 'Password', 'required|max_length[30]|xss_clean');
            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|max_length[30]|xss_clean|matches[password]');
+           $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
+           $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
+           $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|regex_match[/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/]');
            if($this->form_validation->run() == FALSE)
            {
                $this->output->set_output(json_encode(validation_errors()), 200);
@@ -46,6 +49,10 @@ class Signup extends MX_Controller {
                              'email'    =>      $this->input->post('email'),
                              'username'     =>      $this->input->post('username'),
                              'password'     =>      $enc_password,
+                             'address'    =>      $this->input->post('address'),
+                             'phonenumber'     =>      $this->input->post('mobilephone'),
+                             'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
+                             'subscribe'     =>      $this->input->post('subscribe')
                             );
 
                $this->_insert($data);

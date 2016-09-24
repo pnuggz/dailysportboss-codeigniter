@@ -94,6 +94,14 @@ class Mdl_users extends CI_Model {
         return $id;
     }
 
+    function check_email($email) {
+
+        $this->db->where('email', $email);
+
+        $query = $this->db->get('users');
+        return $query->num_rows();
+    }
+
     function _custom_query($mysql_query) {
         $query = $this->db->query($mysql_query);
         return $query;

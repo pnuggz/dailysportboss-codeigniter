@@ -63,6 +63,7 @@ class Mdl_users extends CI_Model {
         $this->db->insert($table, $data);
     }
 
+
     function _update($id, $data) {
         $table = $this->get_table();
         $this->db->where('id', $id);

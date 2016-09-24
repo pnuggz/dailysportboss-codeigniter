@@ -1,112 +1,117 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('ROOT', dirname(dirname(__FILE__)));
+define('DS', DIRECTORY_SEPARATOR);
+require_once(APPPATH.DS."modules/secure_area.php");
 
-class Users extends MX_Controller {
+class Users extends Secure_area {
 
     function __construct() {
-        parent::__construct();
+        parent::__construct($this->input->request_headers());
     }
 
-     function loginsubmit()
+    function index()
     {
-            $this->load->helper('security');
-            $this->load->model('mdl_users');
-            if($this->input->post('username') == '' && $this->input->post('password') == '')
-            {
-                $this->output->set_output(json_encode('0'), 200);
+      $this->load->model('mdl_users');
+      $query = $this->mdl_users->get_where($this->session->userdata['userid']);
+      $data = array();
+      foreach($query->result() as $row)
+      {
+        $birthday = '';
+        if($row->birthday && $row->birthday != '0000-00-00')$birthday =date('d-m-Y',strtotime($row->birthday));
 
-            } else {
-
-                $username = $this->input->post('username');
-                $password = $this->input->post('password');
-
-                $user_id = $this->mdl_users->login_users($username, $password);
-                if($user_id){
-                    $user_data = array('userid'    =>      $user_id,
-                                       'username'   =>      $username,
-                                       'logged_in'  =>      TRUE,
-                                       'token'      =>  $this->generate_token()
-                                       );
-
-                    $this->session->set_userdata($user_data);
-                    $this->output->set_output(json_encode(array('api'=>$user_data['token'])), 200);
-
-                } else {
-                    $this->output->set_output(json_encode('0'), 200);
-                }
-            }
-        }
-
-
-        function registrationsubmit()
-        {
-            $this->load->helper('security');
-            $this->load->library('form_validation');
-
-            $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[30]|xss_clean');
-            $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
-            $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|is_unique[users.email]');
-            $this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[30]|xss_clean|is_unique[users.username]');
-            $this->form_validation->set_rules('password', 'Password', 'required|max_length[30]|xss_clean');
-            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|max_length[30]|xss_clean|matches[password]');
-
-            if ($this->form_validation->run() == FALSE) {
-                $this->register();
-
-            } else {
-
-                $enc_password = md5($this->input->post('password'));
-
-                $data = array('first_name'      =>       $this->input->post('first_name'),
-                              'last_name'    =>      $this->input->post('last_name'),
-                              'email'    =>      $this->input->post('email'),
-                              'username'     =>      $this->input->post('username'),
-                              'password'     =>      $enc_password,
-                             );
-
-                $this->_insert($data);
-                $this->session->set_flashdata('registered', 'You are now registered. Please Login');
-                redirect('/cmshome/');
-            }
-        }
+        $data = array(
+          'id'=> $row->id,
+          'email' => $row->email,
+          'username' => $row->username,
+          'firstname' => $row->first_name,
+          'lastname' => $row->last_name,
+          'registerdate' => date('d-m-Y H:i',strtotime($row->register_date)),
+          'address' => $row->address,
+          'mobilephone' => $row->phonenumber,
+          'birthday' => $birthday,
+          'subscribe' => $row->subscribe
+        );
+      }
+      $this->output->set_output(json_encode($data), 200);
+    }
 
     function logout() {
         $this->session->unset_userdata('logged_in');
-        $this->session->unset_userdata('user_id');
+        $this->session->unset_userdata('userid');
         $this->session->unset_userdata('username');
+        $this->session->unset_userdata('token');
         $this->session->sess_destroy();
-
-        redirect ('/draft/lobby/');
+        $this->output->set_output(json_encode(1), 200);
     }
 
-    function login() {
-        $data['view_file'] = "loginform";
-        $this->load->module('template');
-        $this->template->cmslayout($data);
-    }
+    function edit() {
+      $this->load->model('mdl_users');
+      $id = $this->session->userdata['userid'];
+      $this->load->library('form_validation');
+      $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email');
+      $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
+      $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
+      $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|regex_match[/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/]');
+      if($this->form_validation->run() == FALSE)
+      {
+          $this->output->set_output(json_encode(validation_errors()), 200);
 
-    function register() {
-        $data['view_file'] = "registrationform";
-        $this->load->module('template');
-        $this->template->cmslayout($data);
-    }
-
-    function get($order_by) {
+      }else {
         $this->load->model('mdl_users');
-        $query = $this->mdl_users->get($order_by);
-        return $query;
+
+        $cekemail = $this->mdl_users->check_email($this->input->post('email'),$id);
+        if($cekemail > 0)
+        {
+          $this->output->set_output(json_encode("Email Already Exists"), 200);
+        }else{
+          $enc_password = md5($this->input->post('password'));
+
+          $data = array('first_name'      =>       $this->input->post('first_name'),
+                        'last_name'    =>      $this->input->post('last_name'),
+                        'email'    =>      $this->input->post('email'),
+                        'address'    =>      $this->input->post('address'),
+                        'phonenumber'     =>      $this->input->post('mobilephone'),
+                        'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
+                        'subscribe'     =>      $this->input->post('subscribe')
+                       );
+
+          $this->mdl_users->_update($id,$data);
+          $this->output->set_output(json_encode("1"), 200);
+        }
+      }
     }
 
-    function get_with_limit($limit, $offset, $order_by) {
-        $this->load->model('mdl_users');
-        $query = $this->mdl_users->get_with_limit($limit, $offset, $order_by);
-        return $query;
-    }
+    function resetpassword() {
+      $this->load->model('mdl_users');
+      $id = $this->session->userdata['userid'];
+      $this->load->library('form_validation');
+      $this->form_validation->set_rules('oldpassword', 'Old Password', 'required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('newpassword', 'New Password', 'required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('newpassword2', 'Confirm New Password', 'required|max_length[30]|xss_clean|matches[newpassword]');
+      if($this->form_validation->run() == FALSE)
+      {
+          $this->output->set_output(json_encode(validation_errors()), 200);
 
-    function get_where($id) {
+      }else {
         $this->load->model('mdl_users');
-        $query = $this->mdl_users->get_where($id);
-        return $query;
+        $oldpassword = md5($this->input->post('oldpassword'));
+        $cekpassword = $this->mdl_users->check_password($oldpassword,$id);
+        if($cekpassword == 0)
+        {
+          $this->output->set_output(json_encode("Invalid Password"), 200);
+        }else{
+          $enc_password = md5($this->input->post('newpassword'));
+
+          $data = array('password'      =>       $enc_password,
+                       );
+
+          $this->mdl_users->_update($id,$data);
+          $this->output->set_output(json_encode("1"), 200);
+        }
+      }
     }
 
     function generate_token() {
