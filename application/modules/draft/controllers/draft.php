@@ -184,7 +184,7 @@ class Draft extends Secure_area
     }
 
     function contestdetails($league_id,$contest_id) {
-
+        $array = array();
         if($this->session->userdata('logged_in')) {
             $user_id = $this->session->userdata('userid');
             $user_entry_count = 0;
@@ -208,13 +208,15 @@ class Draft extends Secure_area
                 'league_id'             =>  $row->leagues_id,
                 'contest_name'          =>  $row->contest_name,
                 'entry_max'             =>  $row->entry_max,
+                'entry_fee'             =>  $row->entry_fee,
                 'sponsors_id'           =>  $row->sponsors_id,
                 'league_name'           =>  $row->league_name,
                 'league_shorthand'      =>  $row->league_shorthand,
                 'start_date'            =>  date('d-m-Y',strtotime($row->start_date)),
                 'start_time'            =>  $row->start_time,
                 'entry_count'           =>  $row->entry_count,
-                'user_entry_count'      =>  $user_entry_count
+                'user_entry_count'      =>  $user_entry_count,
+                "prize" => $row->currency.' '.number_format($row->prize).$row->upto
             );
         }
         $this->output->set_output(json_encode($array), 200);

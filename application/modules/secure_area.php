@@ -25,10 +25,10 @@ class Secure_area extends MX_Controller
 					echo json_encode("0");exit;
 				}
 			}else{
-				echo json_encode("0");exit;
+				//echo json_encode("0");exit;
 			}
     }else{
-      exit('No direct script access allowed');
+      //exit('No direct script access allowed');
     }
 
 	}

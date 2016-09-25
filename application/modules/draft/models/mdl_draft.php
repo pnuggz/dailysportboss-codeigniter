@@ -18,6 +18,7 @@ class Mdl_draft extends CI_Model
           contests.leagues_id,
           contests.contest_name,
           contests.entry_max,
+          contests.entry_fee,
           contests.sponsors_id,
           contests.contest_status,
           leagues.id as leagues_id,
@@ -25,8 +26,12 @@ class Mdl_draft extends CI_Model
           leagues.league_shorthand,
           t1.start_date,
           t1.start_time,
+          contests_prize.prize,
+          contests_prize.upto,
+          contests_prize.currency,
           COALESCE(t2.entry, 0 ) as entry_count
           FROM contests
+          LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
           JOIN leagues ON leagues.id = contests.leagues_id
           JOIN (
                 SELECT tt1.contests_id, tt1.start_date, tt1.start_time
@@ -56,9 +61,11 @@ class Mdl_draft extends CI_Model
              "start_date" => $row->start_date,
              "start_time" => $row->start_time,
              "entry_max" => $row->entry_max,
+             "entry_fee" => $row->entry_fee,
              "entry_count" => $row->entry_count,
              "sponsor_id" => $row->sponsors_id,
-             "leagues_id" => $row->leagues_id
+             "leagues_id" => $row->leagues_id,
+             "prize" => $row->currency.' '.number_format($row->prize).$row->upto
            );
          }
          return $result;
@@ -100,6 +107,7 @@ class Mdl_draft extends CI_Model
           contests.leagues_id,
           contests.contest_name,
           contests.entry_max,
+          contests.entry_fee,
           contests.sponsors_id,
           contests.contest_status,
           leagues.id as leagues_id,
@@ -107,8 +115,12 @@ class Mdl_draft extends CI_Model
           leagues.league_shorthand,
           t1.start_date,
           t1.start_time,
+          contests_prize.prize,
+          contests_prize.upto,
+          contests_prize.currency,
           COALESCE(t2.entry, 0 ) as entry_count
           FROM contests
+          LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
           JOIN leagues ON leagues.id = contests.leagues_id
           JOIN (
                 SELECT tt1.contests_id, tt1.start_date, tt1.start_time

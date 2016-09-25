@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2016 at 10:33 AM
+-- Generation Time: Sep 25, 2016 at 10:57 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `contests` (
   `id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
+  `entry_fee` int(11) NOT NULL,
   `contest_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
   `start_date` date NOT NULL,
   `start_time` time NOT NULL,
@@ -44,15 +45,15 @@ CREATE TABLE IF NOT EXISTS `contests` (
 -- Dumping data for table `contests`
 --
 
-INSERT INTO `contests` (`id`, `leagues_id`, `contest_name`, `start_date`, `start_time`, `entry_max`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
-(1, 1, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(2, 1, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(3, 1, 'Weekend EPL Smash', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(11, 1, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1),
-(14, 1, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1),
-(15, 1, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1),
-(16, 1, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0),
-(17, 1, 'Weekend EPL Special', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0);
+INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
+(1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
+(2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
+(3, 1, 0, 'Weekend EPL Smash', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
+(11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1),
+(14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1),
+(15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1),
+(16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0),
+(17, 1, 0, 'Weekend EPL Special', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -120,6 +121,27 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 (47, 17, 19),
 (48, 17, 20),
 (49, 17, 21);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contests_prize`
+--
+
+CREATE TABLE IF NOT EXISTS `contests_prize` (
+  `id` int(22) NOT NULL,
+  `prize` int(22) NOT NULL,
+  `upto` varchar(100) NOT NULL,
+  `currency` varchar(100) NOT NULL,
+  `status` int(22) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `contests_prize`
+--
+
+INSERT INTO `contests_prize` (`id`, `prize`, `upto`, `currency`, `status`) VALUES
+(1, 10000000, '*', 'Rp.', 1);
 
 -- --------------------------------------------------------
 
@@ -16924,6 +16946,12 @@ ALTER TABLE `contests_has_sports_events`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `contests_prize`
+--
+ALTER TABLE `contests_prize`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `contests_rosters`
 --
 ALTER TABLE `contests_rosters`
@@ -17031,6 +17059,11 @@ ALTER TABLE `contests`
 --
 ALTER TABLE `contests_has_sports_events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+--
+-- AUTO_INCREMENT for table `contests_prize`
+--
+ALTER TABLE `contests_prize`
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `contests_rosters`
 --
