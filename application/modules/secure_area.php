@@ -12,7 +12,7 @@ class Secure_area extends MX_Controller
 	{
 		parent::__construct();
 		$this->load->library('jwt');
-   if(array_key_exists('Authorization',$token))
+   if(array_key_exists('Authorization',$token) && array_key_exists('token',$this->session->userdata))
 		{
 			if($token['Authorization'] == $this->session->userdata['token'])
 			{
