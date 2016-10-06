@@ -94,6 +94,17 @@ class Draft extends Secure_area
         $this->output->set_output(json_encode($data), 200);
     }
 
+    function join($contest_id)
+    {
+        $this->load->model('mdl_draft');
+        $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+        $data = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $cekContest
+        );
+        $this->output->set_output(json_encode($data), 200);
+    }
+
     function contests($league_id)
     {
         $this->load->model('mdl_draft');

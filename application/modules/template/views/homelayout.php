@@ -1,126 +1,119 @@
 <html>
 <head>
     <title>DailyFantasy - CMS</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Daily Sport Boss</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/dom.js"></script>
+    <script type="text/javascript" src="js/countries.js"></script>
+
     <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>css/homelayout.css"/>
-    <script type="text/javascript" src="<?php echo base_url(); ?>js/javascript.js"></script>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.3/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
-
-    <!--         DataTables Codes-->
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11,r-2.0.2,rr-1.1.1/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11,r-2.0.2,rr-1.1.1/datatables.min.js"></script>
-
-
 </head>
 
-<header class="clearfix">
-
-    <!-- Header Divider -->
-    <div class="header">
-
-        <div id="sse1">
-            <div class="logo"><h1><a href="<?php echo base_url() ?>draft/lobby/"><img src="<?php echo base_url(); ?>img/dsblogo.png" alt=""></a></h1></div>
-            <div id="sses1">
-                <ul>
-                    <li><a href="<?php echo base_url() ?>draft/lobby/">LOBBY</a></li>
-                    <li><a href="<?php echo base_url() ?>games/">GAMES</a></li>
-                    <li><a href="<?php echo base_url() ?>help/">HELP</a></li>
-                </ul>
-            </div>
-
-            <!-- Login Divider -->
-            <div class="emptyrightnav"></div>
-            <?php
-            if($this->session->userdata('logged_in')) : ?>
-            <div class="login-nav">
-                <?php $this->load->module('users'); $this->load->view('users/loginform'); ?>
-                <?php else : ?>
-                <div class="loginNav">
-                    <a href="<?php echo base_url(); ?>login/">LOGIN</a>
-                    <?php endif; ?>
-            </div>
-        </div>
-    </div>
-</header>
-
 <body class="body">
+  <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top affix-top">
+      <div class="container">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header page-scroll">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                  <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+              </button>
+              <a class="navbar-brand page-scroll" href="/"><img src="img/home/logo.png" class="img-responsive logo" alt=""></a>
+          </div>
 
-<div class="container">
-        <?php
-        $first_bit = $this->uri->segment(1);
-        $second_bit = $this->uri->segment(2);
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+              <ul class="nav navbar-nav navbar-right">
+                  <li class="hidden">
+                      <a href="#page-top"></a>
+                  </li>
+                  <li>
+                      <a class="page-scroll" href="#">ABOUT US</a>
+                  </li>
+                  <li>
+                      <a class="page-scroll" href="#">PARTNERSHIP</a>
+                  </li>
+              </ul>
+          </div>
+          <!-- /.navbar-collapse -->
+      </div>
+      <!-- /.container-fluid -->
+  </nav>
 
-        if($first_bit==('home') && $second_bit==('')) {
-            $this->load->module('home');
-            $this->load->view('home/home');
-        } else {
+  <?php
+    $first_bit = $this->uri->segment(1);
+    $second_bit = $this->uri->segment(2);
 
-        }
-        ?>
-        <?php
-        $first_bit = $this->uri->segment(1);
-        $second_bit = $this->uri->segment(2);
+    if($first_bit==('home') && $second_bit==('')) {
+        $this->load->module('home');
+        $this->load->view('home/home');
+    } else {
 
-        if($first_bit==('login') && $second_bit==('')) {
-            $this->load->module('login');
-            $this->load->view('login/login');
-        } else {
+    }
+    ?>
+    <?php
+    $first_bit = $this->uri->segment(1);
+    $second_bit = $this->uri->segment(2);
 
-        }
-        ?>
-	<?php 
-	$first_bit = $this->uri->segment(1);
-	$second_bit = $this->uri->segment(2);
+    if($first_bit==('login') && $second_bit==('')) {
+        $this->load->module('login');
+        $this->load->view('login/login');
+    } else {
 
-	if($first_bit==('') && $second_bit==('')) {
-	    $this->load->module('home');
-	    $this->load->view('home/home');
-	} else {
+    }
+  ?>
+	<?php
+  	$first_bit = $this->uri->segment(1);
+  	$second_bit = $this->uri->segment(2);
 
-	}
+  	if($first_bit==('') && $second_bit==('')) {
+  	    $this->load->module('home');
+  	    $this->load->view('home/home');
+  	} else {
+
+  	}
 	?>
-
-</div>
-
-<div id="global-footer-wrapper">&nbsp;
-</div>
-
-<div id="global-footer">
-    <div class="footer-links-block-1">
-        <ul class="footer-links-about">
-            <li class="footer-title"><b>About</b></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>dsb/about/" title="About DSB">Daily Sport Boss</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>dsb/sponsor/" title="DSB Sponsoring Opportunities">Sponsor a Contest</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>dsb/careers/" title="DSB Career Opportunities">Careers</a></li>
-        </ul>
-
-        <ul class="footer-links-help">
-            <li class="footer-title"><b>Help</b></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>help/FAQ/" title="Frequently Asked Questions">FAQ</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>help/howtoplay/" title="Learn how DSB works">How To Play</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>help/rules/" title="DSB Rules &amp; Scoring">Rules &amp; Scoring</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>help/support/" title="Find support at DSB">Support</a></li>
-        </ul>
-
-        <ul class="footer-links-more">
-            <li class="footer-title"><b>More</b></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>info/partners/" title="Partners &amp; Affiliates">Partners &amp; Affiliates</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>info/termsofuse/" title="Terms of Use">Terms of Use</a></li>
-            <li class="footer-link"><a href="<?php echo base_url()?>info/privacy/" title="Privacy Policy">Privacy Policy</a></li>
-        </ul>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="dsb-footer-about-title">About</div>
+          <ul class="dsb-footer-about-ul">
+            <li><a href="/#">Daily Sport Boss</a></li>
+            <li><a href="/#">Sponsor a Contest</a></li>
+            <li><a href="/#">ABOUT</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+          <div class="dsb-footer-support-title">More</div>
+          <ul class="dsb-footer-about-ul">
+            <li><a href="/#">Partners &amp; Affiliates</a></li>
+            <li><a href="/#">Terms of Use</a></li>
+            <li><a href="/#">Privacy Policy</a></li>
+          </ul>
+        </div>
+        <div class="col-md-3">
+        </div>
+        <div class="col-md-3">
+          <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+          <div class="dsb-footer-getintouch-description">
+            <span class="orange-text">Jakarta, Indonesia</span><br>
+            <a href="/#" class="text-gray">Facebook</a><br>
+            <a href="/#" class="text-gray">Twitter</a><br>
+            <a href="/#" class="text-gray">Instagram</a><br><br>
+          </div>
+        </div>
+      </div>
+      <br>
     </div>
-
-    <div class="footer-links-block-2">
-        <ul class="footer-company-location">
-            <li class="footer-company-title"><b>PT Daily Sport Boss</b></li>
-            <li class="footer-company-subtitle">Jakarta, Indonesia</li>
-            <li class="footer-social-links"><a href="#" target="_blank">FACEBOOK</a></li>
-            <li class="footer-social-links"><a href="#" target="_blank">TWITTER</a></li>
-            <li class="footer-social-links"><a href="#" target="_blank">INSTAGRAM</a></li>
-        </ul>
+    <div class="col-md-12 col-lg-12 box-copyright">
+      <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
     </div>
-</div>
-
+  </footer>
 </body>
 </html>

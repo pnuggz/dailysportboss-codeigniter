@@ -71,6 +71,34 @@ class Mdl_draft extends CI_Model
          return $result;
     }
 
+    function check_contest_start($contest_id)
+    {
+      $result = 0;
+      $today = date('Y-m-d');
+      $now = date('H:i:s');
+      $query = $this->db->query("
+        SELECT *
+        FROM contests
+        WHERE start_date > '".$today."' AND id = '".$contest_id."'
+        ");
+       $query;
+
+       if($query->num_rows() > 0)
+       {
+          $result = $query->num_rows();
+       }else{
+         $query1 = $this->db->query("
+           SELECT *
+           FROM contests
+           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$contest_id."'
+           ");
+          $query1;
+          $result = $query1->num_rows();
+       }
+
+       return $result;
+    }
+
     function get_league()
     {
       $result = array();
