@@ -29,10 +29,12 @@ class Mdl_draft extends CI_Model
           contests_prize.prize,
           contests_prize.upto,
           contests_prize.currency,
+          sponsors.sponsor,
           COALESCE(t2.entry, 0 ) as entry_count
           FROM contests
           LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
           JOIN leagues ON leagues.id = contests.leagues_id
+          JOIN sponsors ON sponsors.id = contests.sponsors_id
           JOIN (
                 SELECT tt1.contests_id, tt1.start_date, tt1.start_time
                 FROM (
@@ -64,6 +66,7 @@ class Mdl_draft extends CI_Model
              "entry_fee" => $row->entry_fee,
              "entry_count" => $row->entry_count,
              "sponsor_id" => $row->sponsors_id,
+             "sponsorname"  => $row->sponsor,
              "leagues_id" => $row->leagues_id,
              "prize" => $row->currency.' '.number_format($row->prize).$row->upto
            );
