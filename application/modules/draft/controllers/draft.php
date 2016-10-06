@@ -221,6 +221,7 @@ class Draft extends Secure_area
                 'entry_max'             =>  $row->entry_max,
                 'entry_fee'             =>  $row->entry_fee,
                 'sponsors_id'           =>  $row->sponsors_id,
+                'sponsorname'           =>  $row->sponsor,
                 'league_name'           =>  $row->league_name,
                 'league_shorthand'      =>  $row->league_shorthand,
                 'start_date'            =>  date('d-m-Y',strtotime($row->start_date)),
