@@ -19,7 +19,6 @@ class Template extends MX_Controller {
         $this->load->view('aboutlayout', $data);
     }
 
-
     function lobbylayout($data) {
         $this->load->view('lobbylayout', $data);
     }

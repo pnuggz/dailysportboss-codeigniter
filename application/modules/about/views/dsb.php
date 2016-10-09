@@ -27,10 +27,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="/about/dsb/">About Us</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">About Us</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="/about/partnership/">Partnership</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">Partnership</a>
                 </li>
             </ul>
         </div>
@@ -385,5 +385,3 @@
 </footer>
 
 </body>
-
-
