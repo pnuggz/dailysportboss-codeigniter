@@ -108,8 +108,8 @@
             <div class="col-md-3">
                 <div class="partnership-footer-about-title">About</div>
                 <ul class="partnership-footer-about-ul">
-                    <li><a href="/about/dsb/">Daily Sport Boss</a></li>
-                    <li><a href="/about/partnership/">Partnership Opportunities</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
