@@ -2,11 +2,11 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Template extends MX_Controller {
-    
+
     function __construct() {
         parent::__construct();
     }
-    
+
     function cmslayout($data) {
         $this->load->view('cmslayout', $data);
     }
@@ -14,6 +14,11 @@ class Template extends MX_Controller {
     function lobby($data) {
         $this->load->view('lobby', $data);
     }
+
+    function aboutlayout($data) {
+        $this->load->view('aboutlayout', $data);
+    }
+
 
     function lobbylayout($data) {
         $this->load->view('lobbylayout', $data);

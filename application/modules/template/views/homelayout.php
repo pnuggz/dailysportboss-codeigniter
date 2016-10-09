@@ -32,10 +32,10 @@
                       <a href="#page-top"></a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="/about/dsb/">ABOUT US</a>
+                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">ABOUT US</a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="/about/partnership/">PARTNERSHIP</a>
+                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">PARTNERSHIP</a>
                   </li>
               </ul>
           </div>
