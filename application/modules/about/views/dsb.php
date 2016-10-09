@@ -17,7 +17,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="/"><img src="/img/dsb/logo.png" class="img-responsive logo" alt=""></a>
+            <a class="navbar-brand page-scroll" href="/"><img src="<?php echo  base_url(); ?>img/dsb/logo.png" class="img-responsive logo" alt=""></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="container container-2">
-            <img src="/img/dsb/dsbbanner.png">
+            <img src="<?php echo  base_url(); ?>img/dsb/dsbbanner.png">
         </div>
         <div class="container container-3">
             Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn’t an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
@@ -64,7 +64,7 @@
         </div>
 
         <div class="container container-4">
-            <img src="/img/dsb/sportlist.png">
+            <img src="<?php echo  base_url(); ?>img/dsb/sportlist.png">
         </div>
 
         <div class="container container-5">
