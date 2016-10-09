@@ -1,6 +1,5 @@
 <html>
 <head>
-    <title>DailyFantasy - CMS</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Daily Sport Boss</title>
@@ -33,10 +32,10 @@
                       <a href="#page-top"></a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="#">ABOUT US</a>
+                      <a class="page-scroll" href="/about/dsb/">ABOUT US</a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="#">PARTNERSHIP</a>
+                      <a class="page-scroll" href="/about/partnership/">PARTNERSHIP</a>
                   </li>
               </ul>
           </div>
@@ -84,17 +83,15 @@
         <div class="col-md-3">
           <div class="dsb-footer-about-title">About</div>
           <ul class="dsb-footer-about-ul">
-            <li><a href="/#">Daily Sport Boss</a></li>
-            <li><a href="/#">Sponsor a Contest</a></li>
-            <li><a href="/#">ABOUT</a></li>
+            <li><a href="/about/dsb/">Daily Sport Boss</a></li>
+            <li><a href="/about/partnership/">Partnership Opportunities</a></li>
           </ul>
         </div>
         <div class="col-md-3">
           <div class="dsb-footer-support-title">More</div>
           <ul class="dsb-footer-about-ul">
-            <li><a href="/#">Partners &amp; Affiliates</a></li>
-            <li><a href="/#">Terms of Use</a></li>
-            <li><a href="/#">Privacy Policy</a></li>
+            <li><a href="/info/termsofuse/">Terms of Use</a></li>
+            <li><a href="/info/privacy/">Privacy Policy</a></li>
           </ul>
         </div>
         <div class="col-md-3">
@@ -103,9 +100,9 @@
           <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
           <div class="dsb-footer-getintouch-description">
             <span class="orange-text">Jakarta, Indonesia</span><br>
-            <a href="/#" class="text-gray">Facebook</a><br>
-            <a href="/#" class="text-gray">Twitter</a><br>
-            <a href="/#" class="text-gray">Instagram</a><br><br>
+            <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+            <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+            <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
           </div>
         </div>
       </div>

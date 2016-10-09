@@ -11,7 +11,13 @@
     <header class="section-1">
         <div class="container">
             <div class="intro-text">
-                <div class="intro-lead-in"><img src="img/home/keepupdate.png" alt="" /></div>
+                <div class="intro-lead-in">
+                    THINK YOU KNOW SPORTS?
+                    <br/>
+                    <br/>
+                    PROVE IT!
+                </div>
+<!--                <img src="img/home/keepuptodate.png" alt="" />-->
                 <div class="col-md-8 text-center box-center box-subscribe">
                     <?php
                     $attributes = array('id'  =>   'subscribe');
@@ -277,6 +283,7 @@
                           <option value="Yugoslavia">Yugoslavia</option>
                           <option value="Zambia">Zambia</option>
                           <option value="Zimbabwe">Zimbabwe</option>
+                          <option value="Other">Other</option>
                         </select>
                       </div>
                       <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
@@ -306,11 +313,11 @@
                 <img src="img/home/event.png" class="features-img">
               </span>
               <div class="row text-title">
-                <h3 class="gray-text text-center">PICK EVENT</h3>
+                <h3 class="gray-text text-center">PICK CONTEST</h3>
                 <hr>
                 <span class="number-features">1<span>
               </span></span></div>
-							<p class="gray-text text-center">Choose and Enter a Free Event</p>
+							<p class="gray-text text-center">Choose and enter a FREE contest.</p>
 						</div>
 						<div class="col-md-4 col-md-12 col-sm-12 features-grid">
 							<span class="t-icon2">
@@ -321,7 +328,7 @@
                 <hr>
                 <span class="number-features">2<span>
               </span></span></div>
-							<p class="gray-text text-center">Draft Your Best Team</p>
+							<p class="gray-text text-center">Draft your best team.</p>
 						</div>
 						<div class="col-md-4 col-md-12 col-sm-12 features-grid">
 							<span class="t-icon3">
@@ -332,11 +339,12 @@
                 <hr>
                 <span class="number-features">3<span>
               </span></span></div>
-							<p class="gray-text text-center">Complete againts other top manager and friends</p>
+							<p class="gray-text text-center">Compete against other top managers and friends, and Win!</p>
 						</div>
 						<div class="clearfix"> </div>
 					</div>
         </div>
+          <br/>
       </div>
       <img src="img/home/keyvisual2.png" class="side-features-1 visible-md visible-lg">
       <img src="img/home/keyvisual1.png" class="side-features-2 visible-md  visible-lg">
@@ -347,16 +355,18 @@
         <img src="img/home/winrealcash.png" class="win-real-cash-img">
         <div class="row">
         </div>
+          <br/>
+          <br/>
         <div class="col-md-12 no-padding text-center ">
-          <h3 class="visible-md visible-lg">Awarding millions in <span class="orange-text">real cash </span>prizes to event winners thanks to our sponsors.</h3>
-          <h3 class="visible-xs visible-sm">Awarding millions in <span class="orange-text">real cash </span>prizes to event winners thanks to our sponsors.</h3>
+          <h3 class="visible-md visible-lg">Awarding <span class="orange-text">real cash </span>prizes to contest winners thanks to our sponsors.</h3>
+          <h3 class="visible-xs visible-sm">Awarding <span class="orange-text">real cash </span>prizes to contest winners thanks to our sponsors.</h3>
         </div>
       </div>
     </div>
     <div class="container-fluid section-4">
       <div class="container">
-        <h4 class="text-center visible-md visible-lg">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play !</h4>
-        <h4 class="text-center visible-xs visible-sm">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play !</h4>
+        <h4 class="text-center visible-md visible-lg">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play!</h4>
+        <h4 class="text-center visible-xs visible-sm">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play!</h4>
         <div class="col-md-12 no-padding">
           <div class="intro-text">
               <div class="col-md-8 text-center box-center box-subscribe">
@@ -624,6 +634,7 @@
                         <option value="Yugoslavia">Yugoslavia</option>
                         <option value="Zambia">Zambia</option>
                         <option value="Zimbabwe">Zimbabwe</option>
+                        <option value="Other">Other</option>
                       </select>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
