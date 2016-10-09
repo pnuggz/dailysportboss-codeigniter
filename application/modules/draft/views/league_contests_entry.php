@@ -328,10 +328,8 @@
 $league_id = $row->leagues_id;
 $league_name = $row->league_name;
 ?>
-    <div id="mainLeague"><?php echo $league_name;  break; ?></div>
-        <?php } else : ?>
+    <div id="mainLeague"><?php echo $league_name;  break; } ?></div>
 
-        <?php endif; ?>
 <div id="lobby-table">&nbsp;
     <table class="game-table">
         <tr>
@@ -346,9 +344,34 @@ $league_name = $row->league_name;
             <th class="game-container-data-9"></th>
             <th class="game-container-data-10"></th>
         </tr>
+        <?php
+        foreach($active_contests->result() as $row) {
+        $contest_id = $row->contests_id;
+        $contest_name = $row->contest_name;
+        $league_shorthand = $row->league_shorthand;
+        $start_date = $row->start_date;
+        $start_time = $row->start_time;
+        $entry_max = $row->entry_max;
+        $entry_count = $row->entry_count;
+        $sponsor_id = $row->sponsors_id;
+        ?>
+        <tr>
+            <td></td>
+            <td><img src="<?php echo base_url(); ?>img/tablesporttype.png"></td>
+            <td class="game-container-data-4" cid="<?php echo $contest_id; ?>"><?php echo $contest_name; ?></td>
+            <td><?php echo $entry_count; ?> / <?php echo $entry_max?></td>
+            <td>FREE</td>
+            <td><b>DJARUM</b></td>
+            <td><b>RP 10,000,000*</b></td>
+            <td><b><?php echo $start_date; ?>  <?php echo $start_time; ?></b></td>
+            <td>&nbsp;</td>
+            <td><a href="<?php echo base_url(); ?>draft/add/<?php echo $contest_id; ?>/">ENTER</a></td>
+        </tr>
+        <?php } else : ?>
+
+        <?php endif; ?>
     </table>
 </div>
-
 
 
 <div class="contestInfoBg" id="contestInfoBg"></div>
@@ -358,58 +381,6 @@ $league_name = $row->league_name;
 
 <script type="text/javascript">
     $(function () {
-        const baseurl = "<?php echo base_url(); ?>";
-        const url = $(location).attr('href')
-        const segments = url.split('/');
-        const user_id = "<?php echo $this->session->userdata('user_id'); ?>"
-        const friends_leagues_id = segments[5];
-
-        $.ajax({
-            type: "GET",
-            url: baseurl + "index.php/draft/get_contest_status/",
-            dataType: "json",
-            tryCount: 0,
-            retryLimit: 3,
-            success: function(contests) {
-
-                if(contests == 'null') {
-                    $('.game-table').hide()
-                    TESTING
-                } else {
-
-                $.each(contests, function(i, contest) {
-                    $('.game-table').append('' +
-                        '<tr>' +
-                        '<td></td>' +
-                        '<td><img src="' + baseurl + 'img/tablesporttype.png"></td>' +
-                        '<td class="game-container-data-4" cid="' + contest.contest_id + '">' + contest.contest_name + '</td>' +
-                        '<td>' + contest.entry_count + ' / ' + contest.entry_max + '</td>' +
-                        '<td>FREE</td>' +
-                        '<td><b>DJARUM</b></td>' +
-                        '<td><b>RP 10,000,000*</b></td>' +
-                        '<td><b>' + contest.start_date + '  ' + contest.start_time + '</b></td>' +
-                        '<td>&nbsp;</td>' +
-                        '<td><a href="' + baseurl + 'draft/add/' + contest.contest_id + '">ENTER</a></td>' +
-                        '</tr>')
-                })
-                }
-            },
-            error: function (xhr, textStatus, errorThrown) {
-                if (textStatus == 'timeout') {
-                    this.tryCount++
-                    if (this.tryCount <= this.retryLimit) {
-                        $.ajax(this);
-                        return;
-                    }
-                    return
-                }
-                if (xhr.status == 500) {
-                    //handle error
-                } else {
-                    //handle error
-                }
-            }
-        })
 
         const onClickPopUp = function () {
             const url = $(location).attr('href')
@@ -417,6 +388,8 @@ $league_name = $row->league_name;
             const contest = segments[6];
             const baseurl = "<?php echo base_url(); ?>";
             const cid = $(this).attr('cid')
+
+            console.log(cid)
 
             $('.contestInfoBoxContainer').empty()
 

@@ -1030,68 +1030,10 @@
             complete: function () {
 
 
-//                 //Get Player List
-//                $.ajax({
-//                    type: "GET",
-//                    url: baseurl + "index.php/games/get_players/" + contest + "/" + user_id + "/" + user_entry_number,
-//                    dataType: "json",
-//                    tryCount: 0,
-//                    retryLimit: 3,
-//                    success: function (players) {
-//
-//                        $.each(players, function (i, player) {
-//
-//
-//                            $('#draftPanel').append('' +
-//                                '<div class="playerDraft" tid="' + player.team_phase_id + '" ' +
-//                                'pid ="' + player.player_phase_id + '">' +
-//                                '<div class="draftPosBox">' +
-//                                '<div class="c0d" pos="' + player.pos + '">' +
-//                                (player.pos == "Defender" ? 'DEF' : (player.pos == "Midfielder" ? 'MID' : (player.pos == "Forward" ? 'FOR' : (player.pos == "Substitute" ? 'SUB' : '')))) +
-//                                '</div>' +
-//                                '</div><div class="draftPlayerBox">' +
-//                                '<div class="c1d">' +
-//                                '<a class="playerInfoBtn" href="JavaScript:void(0);">' + player.first_name + ' ' + player.last_name + '</a>' +
-//                                '<div class="c1dTeam">(' + player.team_shorthand + ')</div>' +
-//                                '</div> ' +
-//                                '<div class="c2d">' +
-//                                '<div class="c1dImg"><img src="<?php //echo base_url(); ?>//img/' + (player.role == "Starter" ? 'starter' : (player.role == "Bench" ? 'bench' : (player.role == "Reserve" ? 'reserve' : ''))) +
-//                                '.png" title="' + (player.role == "Starter" ? 'Starting Player' : (player.role == "Bench" ? 'Bench Player' : (player.role == "Reserve" ? 'Reserve Player' : ''))) + '">&nbsp;</div>' +
-//                                '' + ($('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').attr('tidh') == player.oppid ? $('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').find('.homeTeam').text() : ($('li.eventFilter').siblings('[tida="' + player.oppid + '"]').attr('tida') == player.oppid ? $('li.eventFilter').siblings('[tida="' + player.oppid + '"]').find('.awayTeam').text() : 'error' )) +
-//                                '</div>' +
-//                                '</div><div class="draftInfoBox">' +
-//                                '<div class="c3d"><b>Avg. FP</b><br>' + player.fp_avg + '</div>' +
-//                                '<div class="c4d"><b>Form</b><br>' + player.fp_form + '</div>' +
-//                                '</div><div class="draftSalaryBox">' +
-//                                '<div class="c5d">$' + currencyFormat(parseFloat(player.salary)) + '</div>' +
-//                                '</div>' +
-//                                '</div>')
-//                        });
-//
-//
-//                        $(document).on('click', 'a.playerInfoBtn', onClickPopUp);
-//
-//                    },
-//                    error: function (xhr, textStatus, errorThrown) {
-//                        if (textStatus == 'timeout') {
-//                            this.tryCount++
-//                            if (this.tryCount <= this.retryLimit) {
-//                                $.ajax(this);
-//                                return;
-//                            }
-//                            return
-//                        }
-//                        if (xhr.status == 500) {
-//                            //handle error
-//                        } else {
-//                            //handle error
-//                        }
-//                    }
-//                })
-
+                 //Get Player List
                 $.ajax({
                     type: "GET",
-                    url: baseurl + "index.php/games/simulate_player_fp/" + contest + "/" + user_id + "/" + user_entry_number,
+                    url: baseurl + "index.php/games/get_players/" + contest + "/" + user_id + "/" + user_entry_number,
                     dataType: "json",
                     tryCount: 0,
                     retryLimit: 3,
@@ -1109,19 +1051,23 @@
                                 '</div>' +
                                 '</div><div class="draftPlayerBox">' +
                                 '<div class="c1d">' +
-                                '<a class="playerInfoBtn" href="JavaScript:void(0);">' + player.first_name + ' ' + player.last_name + '</a>' + ' (' + player.team_shorthand + ')' +
+                                '<a class="playerInfoBtn" href="JavaScript:void(0);">' + player.first_name + ' ' + player.last_name + '</a>' +
+                                '<div class="c1dTeam">(' + player.team_shorthand + ')</div>' +
                                 '</div> ' +
                                 '<div class="c2d">' +
+                                '<div class="c1dImg"><img src="<?php echo base_url(); ?>img/' + (player.role == "Starter" ? 'starter' : (player.role == "Bench" ? 'bench' : (player.role == "Reserve" ? 'reserve' : ''))) +
+                                '.png" title="' + (player.role == "Starter" ? 'Starting Player' : (player.role == "Bench" ? 'Bench Player' : (player.role == "Reserve" ? 'Reserve Player' : ''))) + '">&nbsp;</div>' +
                                 '' + ($('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').attr('tidh') == player.oppid ? $('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').find('.homeTeam').text() : ($('li.eventFilter').siblings('[tida="' + player.oppid + '"]').attr('tida') == player.oppid ? $('li.eventFilter').siblings('[tida="' + player.oppid + '"]').find('.awayTeam').text() : 'error' )) +
                                 '</div>' +
                                 '</div><div class="draftInfoBox">' +
-                                '<div class="c3d">&nbsp;</div>' +
-                                '<div class="c4d">&nbsp;</div>' +
+                                '<div class="c3d"><b>Avg. FP</b><br>' + player.fp_avg + '</div>' +
+                                '<div class="c4d"><b>Form</b><br>' + player.fp_form + '</div>' +
                                 '</div><div class="draftSalaryBox">' +
-                                '<div class="c5d">' + player.player_fp + '</div>' +
+                                '<div class="c5d">$' + currencyFormat(parseFloat(player.salary)) + '</div>' +
                                 '</div>' +
                                 '</div>')
                         });
+
 
                         $(document).on('click', 'a.playerInfoBtn', onClickPopUp);
 
@@ -1141,7 +1087,61 @@
                             //handle error
                         }
                     }
-                });
+                })
+
+//                $.ajax({
+//                    type: "GET",
+//                    url: baseurl + "index.php/games/simulate_player_fp/" + contest + "/" + user_id + "/" + user_entry_number,
+//                    dataType: "json",
+//                    tryCount: 0,
+//                    retryLimit: 3,
+//                    success: function (players) {
+//
+//                        $.each(players, function (i, player) {
+//
+//
+//                            $('#draftPanel').append('' +
+//                                '<div class="playerDraft" tid="' + player.team_phase_id + '" ' +
+//                                'pid ="' + player.player_phase_id + '">' +
+//                                '<div class="draftPosBox">' +
+//                                '<div class="c0d" pos="' + player.pos + '">' +
+//                                (player.pos == "Defender" ? 'DEF' : (player.pos == "Midfielder" ? 'MID' : (player.pos == "Forward" ? 'FOR' : (player.pos == "Substitute" ? 'SUB' : '')))) +
+//                                '</div>' +
+//                                '</div><div class="draftPlayerBox">' +
+//                                '<div class="c1d">' +
+//                                '<a class="playerInfoBtn" href="JavaScript:void(0);">' + player.first_name + ' ' + player.last_name + '</a>' + ' (' + player.team_shorthand + ')' +
+//                                '</div> ' +
+//                                '<div class="c2d">' +
+//                                '' + ($('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').attr('tidh') == player.oppid ? $('li.eventFilter').siblings('[tidh="' + player.oppid + '"]').find('.homeTeam').text() : ($('li.eventFilter').siblings('[tida="' + player.oppid + '"]').attr('tida') == player.oppid ? $('li.eventFilter').siblings('[tida="' + player.oppid + '"]').find('.awayTeam').text() : 'error' )) +
+//                                '</div>' +
+//                                '</div><div class="draftInfoBox">' +
+//                                '<div class="c3d">&nbsp;</div>' +
+//                                '<div class="c4d">&nbsp;</div>' +
+//                                '</div><div class="draftSalaryBox">' +
+//                                '<div class="c5d">' + player.player_fp + '</div>' +
+//                                '</div>' +
+//                                '</div>')
+//                        });
+//
+//                        $(document).on('click', 'a.playerInfoBtn', onClickPopUp);
+//
+//                    },
+//                    error: function (xhr, textStatus, errorThrown) {
+//                        if (textStatus == 'timeout') {
+//                            this.tryCount++
+//                            if (this.tryCount <= this.retryLimit) {
+//                                $.ajax(this);
+//                                return;
+//                            }
+//                            return
+//                        }
+//                        if (xhr.status == 500) {
+//                            //handle error
+//                        } else {
+//                            //handle error
+//                        }
+//                    }
+//                });
 
             }
 

@@ -457,23 +457,20 @@
         text-align: center;
         float: right;
         color: #E66117;
-        font-size: 20px;
+        font-size: 14px;
         text-decoration: none;
-        margin-top: -6px;
     }
 
     .draft a:link {
         color: #E66117;
-        font-size: 20px;
+        font-size: 14px;
         text-decoration: none;
-        margin-top: -6px;
     }
 
     .draft a:visited {
         color: #E66117;
-        font-size: 20px;
+        font-size: 14px;
         text-decoration: none;
-        margin-top: -6px;
     }
 
     #search {
@@ -1134,7 +1131,6 @@
         'id'    =>      'rosterName',
         'placeholder'   =>      'Roster Name',
         'value'         =>      set_value('roster_name'),
-        'class'         =>      'roster_input'
     );
     echo form_input($data);
     echo "<br /><br />";
@@ -2561,9 +2557,6 @@ echo form_close();
 <div class="overlayVideoBox" id="overlayVideoBox" style="display:none;"></div>
 <div class="containerVideoBox" id="containerVideoBox">
     <div class="sponsorHeading">This Contest is Sponsored By:</div>
-    <div class="sponsorHeading" style="font-size: 12px;">
-        Please look out for the keyword at the top of the page, required to commence to the next page.
-    </div>
     <div class="sponsorVideo">
         <video id="video" class="video-js vjs-default-skin" preload="auto" width="640" height="360" onclick="playVideo()">
             <source src="<?php echo base_url(); ?>video/djarum-super.webm" type='video/webm'>
@@ -2576,67 +2569,62 @@ echo form_close();
 
     $(function() {
         $('#activatorVideoBox').click(function(){
-            if (!$('.roster_input').val()) {
-                alert("Please Input Roster Name")
-            } else if ($("#draftTeamDef").children().length != 4 && $("#draftTeamMid").children().length != 4 && $("#draftTeamFor").children().length != 2) {
-                alert("Please Complete Your Team")
-            } else {
-                $('#overlayVideoBox').fadeIn('fast', function () {
-                    $('#containerVideoBox').animate({'top': '200px'}, 500);
-                });
+            $('#overlayVideoBox').fadeIn('fast',function(){
+                $('#containerVideoBox').animate({'top':'200px'},500);
+            });
 
 
-                const baseurl = "<?php echo base_url(); ?>";
+            const baseurl = "<?php echo base_url(); ?>";
 
-                $.ajax({
-                    type: "GET",
-                    url: baseurl + "index.php/draft/get_words/",
-                    dataType: "json",
-                    success: function (words) {
-                        var number = Math.floor(Math.random() * 2) + 1
+            $.ajax({
+                type: "GET",
+                url: baseurl + "index.php/draft/get_words/",
+                dataType: "json",
+                success: function (words) {
+                    var number = Math.floor(Math.random() * 2) + 1
 
-                        $.each(words, function (i, word) {
-                            if (word.word_id == number) {
-                                $('.messagepopp').children('.word').append(word.word)
-                            }
-                        });
+                    $.each(words, function (i, word) {
+                        if (word.word_id == number) {
+                            $('.messagepopp').children('.word').append(word.word)
+                        }
+                    });
+                }
+            })
+
+
+            var video = document.getElementById("video");
+            $('#video').get(0).play();
+            $('#containerVideoBox').unbind('click');
+            video.addEventListener("ended",function(){
+                $('.pop').animate({'top':'45%'},500);
+
+                //  Bind the event handler to the "submit" JavaScript event
+                $('form').submit(function (e) {
+                    // Get the Login Name value and trim it
+                    var name = $.trim($('#log').val());
+
+                    var answer = $.trim($('.messagepopp').children('.word').text())
+
+                    // Check if empty of not
+                    if (name  === answer) {
+                        $('.submit-btn').click()
+                    } else {
+                        alert('Incorrect!')
+                        return false
                     }
                 })
 
-
-                var video = document.getElementById("video");
-                $('#video').get(0).play();
-                $('#containerVideoBox').unbind('click');
-                video.addEventListener("ended", function () {
-                    $('.pop').animate({'top': '45%'}, 500);
-
-                    //  Bind the event handler to the "submit" JavaScript event
-                    $('form').submit(function (e) {
-                        // Get the Login Name value and trim it
-                        var name = $.trim($('#log').val());
-
-                        var answer = $.trim($('.messagepopp').children('.word').text())
-
-                        // Check if empty of not
-                        if (name === answer) {
-                            $('.submit-btn').click()
-                        } else {
-                            alert('Incorrect!')
-                            return false
-                        }
-                    })
-
-                });
+            });
 
 
-                setTimeout(function () {   //calls click event after a certain time
-                    $('.messagepopp').animate({'top': '0px'}, 500);
-                }, Math.floor(Math.random() * 20000) + 10000);
+            setTimeout(function() {   //calls click event after a certain time
+                $('.messagepopp').animate({'top':'0px'},500);
+            }, Math.floor(Math.random() * 20000) + 10000);
 
-                setTimeout(function () {   //calls click event after a certain time
-                    $('.messagepopp').animate({'top': '-120%'}, 500);
-                }, 55000);
-            }
+            setTimeout(function() {   //calls click event after a certain time
+                $('.messagepopp').animate({'top':'-120%'},500);
+            }, 55000);
+
         });
 
     });

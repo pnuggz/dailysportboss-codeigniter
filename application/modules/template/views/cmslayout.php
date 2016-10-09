@@ -10,7 +10,7 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/t/dt/dt-1.10.11,r-2.0.2,rr-1.1.1/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/t/dt/dt-1.10.11,r-2.0.2,rr-1.1.1/datatables.min.js"></script>
 
-        
+
     </head>
     <body class="body">
         <div class="navbar">
@@ -87,12 +87,12 @@
                 <?php
                     $first_bit = $this->uri->segment(1);
                     $second_bit = $this->uri->segment(2);
-                    
+
                     if($first_bit==('teams') && $second_bit==('')) {
                         $this->load->module('teams');
                         $this->load->view('teams/manage');
                     } else {
-                        
+
                     }
                 ?>
                 <?php

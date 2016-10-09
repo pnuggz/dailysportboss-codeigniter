@@ -44,31 +44,21 @@ class Mdl_games extends CI_Model
     function get_games_status_inactive($league_id, $current_date, $user_id)
     {
         $query = $this->db->query('
-            SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
-            FROM ( 
-                    SELECT contests.id, contests.contest_name, contests.sponsors_id, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name, leagues.league_shorthand
-                    FROM `contests`
-                    JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
-                    JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
-                    JOIN leagues ON leagues.id = sports_events_end.leagues_id
-                    WHERE contests.contest_status = 1 AND sports_events_end.leagues_id = '.$league_id.' AND sports_events_end.start_date > \''.$current_date.'\'
-                    GROUP BY contests.id
-                    ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
-                ) as t1
-            JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
-            JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
-            JOIN (
-                SELECT *
-                FROM (
-                SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
-                FROM `contests_has_sports_events`
-                JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
-                ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
-                    ) tt1
-                    GROUP BY tt1.contests_id
-                ) t2 ON t2.contests_id = t1.id
-                WHERE contests_users_entries.user_id = '.$user_id.'
-        ORDER BY t2.start_date ASC, t2.start_time ASC, t1.contest_name ASC, contests_rosters.roster_name ASC, contests_users_entries.user_entry_count ASC
+        SELECT t1.id, t1.contest_name, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_name
+        FROM ( 
+                SELECT contests.id, contests.contest_name, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name
+                FROM `contests`
+                JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+                JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
+                JOIN leagues ON leagues.id = sports_events_end.leagues_id
+                WHERE sports_events_end.leagues_id = ' . $league_id . ' AND sports_events_end.start_date < \'' . $current_date . '\'
+                GROUP BY contests.id
+                ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
+            ) as t1
+        JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
+        JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
+            WHERE contests_users_entries.user_id = \'' . $user_id . '\'
+        ORDER BY t1.id, contests_users_entries.user_entry_count ASC
         ');
         return $query;
     }

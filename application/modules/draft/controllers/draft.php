@@ -6,10 +6,6 @@ class Draft extends MX_Controller
 
     function __construct() {
         parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_flashdata('noaccess', 'Sorry, you are not logged in');
-            redirect('login/');
-        }
         }
 
     function index($contest_id)
@@ -100,26 +96,6 @@ class Draft extends MX_Controller
         $data['view_file'] = 'league_contests_entry';
         $this->load->module('template');
         $this->template->lobbylayout($data);
-    }
-
-    function get_contest_status() {
-        $league_id = 1;
-
-        $this->load->model('mdl_draft');
-        $data = $this->mdl_draft->get_contest_status($league_id, TRUE);
-        foreach ($data->result() as $row) {
-            $array[] = array(
-                'contest_id' => $row->contests_id,
-                'contest_name' => $row->contest_name,
-                'league_shorthand' => $row->league_shorthand,
-                'start_date' => $row->start_date,
-                'start_time' => $row->start_time,
-                'entry_max' => $row->entry_max,
-                'entry_count' => $row->entry_count,
-                'sponsor_id' => $row->sponsors_id
-            );
-        }
-        echo json_encode($array);
     }
 
     function details($contest_id)

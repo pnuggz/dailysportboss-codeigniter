@@ -6,7 +6,7 @@ echo validation_errors("<p style='color: red;'>", "</p>");
 <?php echo form_open('users/logout');
     ?>
 
-    <?php echo $this->session->userdata('username'); ?><br>
+    <?php echo $this->session->userdata('username'); ?>    <br><br>
     <?php
 $data = array('value'   =>      'Logout',
               'name'    =>      'submit',
@@ -17,7 +17,6 @@ echo form_submit($data);
 
 echo form_close();
 ?>
-
 
 <?php else : ?>
 

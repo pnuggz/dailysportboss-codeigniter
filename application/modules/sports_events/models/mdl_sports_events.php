@@ -122,7 +122,7 @@ class Mdl_sports_events extends CI_Model {
         JOIN teams_phases as away_teams_phases on sports_events.away_team_phase_id = away_teams_phases.id
         JOIN teams as home_teams ON home_teams_phases.teams_id  = home_teams.id
         JOIN teams as away_teams ON away_teams_phases.teams_id = away_teams.id
-        WHERE sports_events.leagues_id = '.$value.' AND sports_events.event_status = 0
+        WHERE sports_events.leagues_id = '.$value.' AND home_teams_phases.phase_status = 0 AND away_teams_phases.phase_status = 0
         ORDER BY sports_events.start_date, sports_events.start_time, home_teams.team_shorthand
         ');
         return $query;

@@ -7,34 +7,22 @@ class Info extends MX_Controller {
         parent::__construct();
     }
 
-//    function index() {
-//        $data['view_file'] = 'info';
-//        $this->load->module('template');
-//        $this->template->pagelayout($data);
-//    }
-//
-//    function termsofuse() {
-//        $data['view_file'] = 'termsofuse';
-//        $this->load->module('template');
-//        $this->template->pagelayout($data);
-//    }
-//
-//    function privacy() {
-//        $data['view_file'] = 'privacy';
-//        $this->load->module('template');
-//        $this->template->pagelayout($data);
-//    }
+    function index() {
+        $data['view_file'] = 'info';
+        $this->load->module('template');
+        $this->template->pagelayout($data);
+    }
 
     function termsofuse() {
         $data['view_file'] = 'termsofuse';
         $this->load->module('template');
-        $this->template->infolayout($data);
+        $this->template->pagelayout($data);
     }
 
     function privacy() {
         $data['view_file'] = 'privacy';
         $this->load->module('template');
-        $this->template->infolayout($data);
+        $this->template->pagelayout($data);
     }
     
 

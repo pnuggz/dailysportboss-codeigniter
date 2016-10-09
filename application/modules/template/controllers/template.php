@@ -42,12 +42,4 @@ class Template extends MX_Controller {
     function none($data) {
         $this->load->view('none', $data);
     }
-
-    function friendslayout($data) {
-        $this->load->view('friendslayout', $data);
-    }
-
-    function subscribelayout($data) {
-        $this->load->view('subscribelayout', $data);
-    }
 }

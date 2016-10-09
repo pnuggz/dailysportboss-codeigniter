@@ -42,7 +42,7 @@ class Mdl_draft extends CI_Model
                 FROM contests_users_entries
                 GROUP BY contest_id
           ) t2 ON t2.contest_id = contests.id
-          WHERE leagues.id = '.$league_id.' AND contests.contest_status = 0 AND t1.start_date > \'2016-09-05\'
+          WHERE leagues.id = '.$league_id.' and contests.contest_status = 0
           ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
         ');
         return $query;

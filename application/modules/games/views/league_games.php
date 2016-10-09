@@ -763,6 +763,7 @@
 <div id="mainHeading">GAMES PAGE</div>
 <br>
 <div id="mainLeague">Active Games</div>
+<br>
 <!--<table id="datatables" class="display">-->
 <!--    <thead>-->
 <!--    <tr>-->
@@ -811,42 +812,6 @@
         </tr>
         <?php
         foreach($active_contests->result() as $row) {
-            $contest_id = $row->id;
-            $contest_name = $row->contest_name;
-            $user_id = $row->user_id;
-            $user_entry_count = $row->user_entry_count;
-            $roster_name = $row->roster_name;
-            $sponsor_id = $row->sponsors_id;
-            $start_date = $row->start_date;
-            $start_time = $row->start_time;
-            ?>
-            <tr>
-                <td><?php echo $roster_name; ?></td>
-                <td><?php echo $contest_name; ?></td>
-                <td><b>DJARUM</b></td>
-                <td>RP 10,000,000</td>
-                <td><?php echo $start_date; ?><br><?php echo $start_time; ?></td>
-                <td>
-                    <a href="<?php echo base_url(); ?>games/details/<?php echo $contest_id; ?>/<?php echo $user_id; ?>/<?php echo $user_entry_count; ?>/">VIEW</a>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
-</div>
-<br/>
-<div id="mainLeague">Past Games</div>
-<div id="lobby-table">&nbsp;
-    <table class="game-table">
-        <tr>
-            <th class="game-container-data-1">ROSTER NAME</th>
-            <th class="game-container-data-2">CONTEST NAME</th>
-            <th class="game-container-data-3">SPONSOR</th>
-            <th class="game-container-data-4">PRIZE POOL</th>
-            <th class="game-container-data-5">START</th>
-            <th class="game-container-data-6"></th>
-        </tr>
-        <?php
-        foreach($inactive_contests->result() as $row) {
             $contest_id = $row->id;
             $contest_name = $row->contest_name;
             $user_id = $row->user_id;
