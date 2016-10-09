@@ -339,13 +339,14 @@ img.img-responsive.logo {
 #home div.container-fluid.section-2 h3 {
     font-size: 2em;
     color: #ddd;
-    font-family: DejaVuSansCondensed-Bold;
+    font-family: "Century Gothic";
+    font-weight: bold;
 }
 
 #home div.container-fluid.section-2 p.gray-text.text-center {
     font-size: 1.6em;
     color: #ddd;
-    font-family: DejaVuSansCondensed;
+    font-family: "Century Gothic";
 }
 
 #home div.container-fluid.section-2 span.number-features {
@@ -360,7 +361,7 @@ img.img-responsive.logo {
     bottom: 0;
     margin-top: auto;
     color: #FBB03B;
-    font-family: DejaVuSans-Bold;
+    font-family: "Century Gothic";
 }
 
 #home div.container-fluid.section-2 .side-features-1 {
@@ -435,7 +436,7 @@ img.img-responsive.logo {
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 30px;
-    font-family: DejaVuSansCondensed;
+    font-family: "Century Gothic";
 }
 
 #home div.container-fluid.section-3 h3.visible-xs {
@@ -464,6 +465,7 @@ img.img-responsive.logo {
     background: url('../img/home/homepage_04.png') no-repeat center;
     background-size: cover;
     background-position: center center;
+    background-attachment: fixed;
 }
 
 #home div.container-fluid.section-4 h4 {
@@ -471,7 +473,7 @@ img.img-responsive.logo {
     line-height: 1.5;
     color: white;
     margin-top: 40px;
-    font-family: DejaVuSansCondensed;
+    font-family: "Century Gothic";
     margin-bottom: 40px;
 }
 
@@ -509,7 +511,7 @@ img.img-responsive.logo {
 #home header {
     background-image: url('../img/home/background-home-section-1.gif');
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-position: center center;
     text-align: center;
     color: white;
@@ -781,7 +783,7 @@ div.clear {
 div.dsb-footer-support-title,
 div.dsb-footer-about-title,
 div.dsb-footer-getintouch-title {
-    font-family: DejaVuSansCondensed;
+    font-family: "Century Gothic";
     font-weight: bold;
     font-size: 18px;
     margin-left: 0px;
@@ -799,7 +801,7 @@ ul.dsb-footer-about-ul li a {
 }
 
 ul.dsb-footer-about-ul li {
-    font-family: DejaVuSans-ExtraLight;
+    font-family: "Century Gothic";
     list-style-type: none;
     margin-bottom: 5px;
 }
@@ -859,5 +861,5 @@ footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
     background: #121819;
-    font-family: DejaVuSans-ExtraLight;
+    font-family: "Century Gothic";
 }
