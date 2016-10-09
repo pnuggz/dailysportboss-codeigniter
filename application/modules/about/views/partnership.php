@@ -115,8 +115,8 @@
             <div class="col-md-3">
                 <div class="partnership-footer-support-title">More</div>
                 <ul class="partnership-footer-about-ul">
-                    <li><a href="/info/termsofuse/">Terms of Use</a></li>
-                    <li><a href="/info/privacy/">Privacy Policy</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/termsofuse/">Terms of Use</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/privacy/">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="col-md-3">

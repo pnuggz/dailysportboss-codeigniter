@@ -17,7 +17,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="/"><img src="/img/dsb/logo.png" class="img-responsive logo" alt=""></a>
+            <a class="navbar-brand page-scroll" href="/"><img src="<?php echo  base_url(); ?>img/dsb/logo.png" class="img-responsive logo" alt=""></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -27,10 +27,10 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="/about/dsb/">DSB</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">DSB</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="/about/partnership/">Partnership</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">Partnership</a>
                 </li>
             </ul>
         </div>
@@ -341,15 +341,15 @@
             <div class="col-md-3">
                 <div class="termsofuse-footer-about-title">About</div>
                 <ul class="termsofuse-footer-about-ul">
-                    <li><a href="/about/dsb/">Daily Sport Boss</a></li>
-                    <li><a href="/about/partnership/">Partnership Opportunities</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <div class="termsofuse-footer-support-title">More</div>
                 <ul class="termsofuse-footer-about-ul">
-                    <li><a href="/info/termsofuse/">Terms of Use</a></li>
-                    <li><a href="/info/privacy/">Privacy Policy</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/termsofuse/">Terms of Use</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/privacy/">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
@@ -370,5 +370,3 @@
 </footer>
 
 </body>
-
-
