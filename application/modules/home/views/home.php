@@ -15,7 +15,7 @@
                     THINK YOU KNOW SPORTS?
                     <br/>
                     <br/>
-                    PROVE IT!
+                    <div class="intro-heading">PROVE IT</div>
                 </div>
 <!--                <img src="img/home/keepuptodate.png" alt="" />-->
                 <div class="col-md-8 text-center box-center box-subscribe">

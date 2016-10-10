@@ -16,14 +16,17 @@
 </head>
 
 <body class="body">
-  <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top affix-top">
+  <nav id="mainNavHome" class="navbar navbar-default navbar-custom navbar-fixed-top">
       <div class="container">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header page-scroll">
               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                   <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
               </button>
-              <a class="navbar-brand page-scroll" href="/"><img src="img/home/logo.png" class="img-responsive logo" alt=""></a>
+              <a class="navbar-brand page-scroll" href="<?php echo  base_url(); ?>">
+                <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-md visible-lg" alt="">
+                <img src="<?php echo  base_url(); ?>/img/dsb/logomobile.png" class="img-responsive logo visible-sm visible-xs" alt="">
+              </a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -33,10 +36,10 @@
                       <a href="#page-top"></a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">ABOUT US</a>
+                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">About Us</a>
                   </li>
                   <li>
-                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">PARTNERSHIP</a>
+                      <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">Partnership</a>
                   </li>
               </ul>
           </div>

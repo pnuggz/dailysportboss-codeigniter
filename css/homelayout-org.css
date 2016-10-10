@@ -225,7 +225,7 @@
 
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #121819;
+        background-color: #00252C;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -235,7 +235,7 @@
 
 @media (max-width: 400px) {
     .navbar-custom {
-        background-color: #121819;
+        background-color: #00252C;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -547,11 +547,13 @@ img.img-responsive.logo {
 }
 
 #home .box-subscribe select {
-    border-radius: 5px;
-    -webkit-appearance: none;
-    background: url("../img/home/button_dropdown.png") no-repeat right #ddd;
-    padding-right: 33%;
-    -moz-appearance: none;
+  border-radius: 5px;
+  -webkit-appearance: none;
+  background: url('../img/home/button_dropdown.png') no-repeat right #ddd;
+  padding-right: 29%;
+  -moz-appearance: none;
+  text-align-last: center;
+  background-color: white;
 }
 
 #home .padding-5 {
@@ -764,7 +766,7 @@ footer {
     color: #fff;
     padding-top: 60px;
     padding-bottom: 35px;
-    background: #121819;
+    background: #00252C;
 }
 
 footer .copy-left {
@@ -860,12 +862,12 @@ a.social-link {
 }
 
 footer .box-copyright {
-    background: #121819;
+    background: #00252C;
 }
 
 footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
-    background: #121819;
+    background: #00252C;
     font-family: DejaVuSans-ExtraLight;
 }

@@ -35,8 +35,10 @@ img.img-responsive.logo {
     padding: 6px 12px;
     margin-top: 8px;
 }
-.navbar-custom .nav li a:hover, .navbar-custom .nav li a:focus {
+.navbar-custom .nav li a:hover,
+.navbar-custom .nav li a:focus {
     color: #fed136;
+    border-color: #fed136;
     outline: none;
 }
 .navbar-custom .navbar-nav > .active > a {
@@ -75,7 +77,7 @@ img.img-responsive.logo {
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #121819;
+        background-color: #00252C;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -85,10 +87,12 @@ img.img-responsive.logo {
 
 
 #termsofuse .container-fluid.section-1{
-    background: url("/img/dsb/background-home-section-1.gif") top no-repeat;
-    background-color: #00252C;
-    background-size: 100%;
-    min-height: 100vh;
+  background: url('../img/dsb/background-home-section-1.gif') top no-repeat;
+  background-color: #00252C;
+  background-size: 100%;
+  min-height: 100vh;
+  font-size: 16px;
+  font-family: Calibri;
 }
 #termsofuse .container-fluid .container.container-1 .row.row-1{
     margin-top: 70px;
@@ -105,20 +109,25 @@ img.img-responsive.logo {
     color: white;
     line-height: 1.7;
     border-bottom: 2px solid #0F4852;
-    font-family: "Century Gothic";
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    opacity: 0.8;
 }
 
 body.termsofuse .navbar-custom {
-    background-color: #121819;
+    background-color: #00252C;
     border-color: transparent;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
 }
 body.termsofuse footer, body.termsofuse footer h5.text-center, body.termsofuse footer .box-copyright {
-    background: #121819;
+  background: #00252C;
+  border-top: 1px solid #0F4852;
+  border-bottom: 0px;
+  margin-top: 0px;
 }
 
 
 #privacy .container-fluid.section-1{
-    background: url("/img/dsb/background-home-section-1.gif") top no-repeat;
+    background: url("../img/dsb/background-home-section-1.gif") top no-repeat;
     background-size: 100%;
     background-color: #00252C;
     min-height: 100vh;
@@ -139,14 +148,15 @@ body.termsofuse footer, body.termsofuse footer h5.text-center, body.termsofuse f
     line-height: 1.7;
     border-bottom: 2px solid #0F4852;
     font-family: "Century Gothic";
+    opacity: 0.8
 }
 
 body.privacy .navbar-custom {
-    background-color: #121819;
+    background-color: #00252C;
     border-color: transparent;
 }
 body.privacy footer, body.privacy footer h5.text-center, body.privacy footer .box-copyright {
-    background: #121819;
+    background: #00252C;
 }
 
 
@@ -166,14 +176,34 @@ ul { margin-top: 0px; margin-bottom: 10px; }
 .container::before,.container::after,.row::before,.row::after { display: table; content: " "; }
 .container::after,.row::after { clear: both; }
 .pull-right { float: right !important; }
-footer { color: #fff; padding-top: 60px; padding-bottom: 35px; background: #121819;}
+footer { color: #fff; padding-top: 60px; padding-bottom: 35px; background: #00252C;}
 footer .copy-left { font-size: 12px; padding-top: 15px; margin-top: 15px; border-top: 1px solid #fff; }
 div.clear { clear: both; }
 div.termsofuse-footer-support-title,div.termsofuse-footer-about-title,div.termsofuse-footer-getintouch-title { font-weight: bold; font-size: 18px; margin-left: 0px; color: #FDB03C;}
 div.termsofuse-footer-getintouch-title { text-align: right; margin-right: 0px; }
-ul.termsofuse-footer-about-ul li a { text-decoration: none; color: #d2d2d3; }
-ul.termsofuse-footer-about-ul li { list-style-type: none; margin-bottom: 5px; }
-ul.termsofuse-footer-about-ul { margin-left: -40px; margin-top: 15px; }
+ul.dsb-footer-about-ul li a {
+    text-decoration: none;
+    color: #d2d2d3;
+}
+
+ul.dsb-footer-about-ul li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+ul.dsb-footer-about-ul {
+    margin-left: -40px;
+    margin-top: 15px;
+}
+footer .box-copyright {
+    background: #00252C;
+}
+
+footer h5.text-center {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    background: #00252C;
+}
 div.termsofuse-footer-getintouch-description { color: #d2d2d3; text-align: right; margin-right: 0px; margin-top: 15px; }
 a.footer-mailto-termsofusepos { text-decoration: none; color: #d2d2d3; }
 
@@ -191,11 +221,3 @@ div.copy-left { padding-bottom: 10px; border-top: 1px solid #8f969f; color: #8f9
 img.social-icon { width: 40px; }
 a.social-link { margin-left: 5px; }
 .element-non-mobi { display: block; }
-footer .box-copyright{
-    background: #121819;
-}
-footer h5.text-center {
-    border-top: 1px solid #eee;
-    padding-top: 10px;
-    background: #121819;
-}

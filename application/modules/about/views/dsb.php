@@ -93,34 +93,36 @@
         <div class="container container-4">
           <div class="col-md-10 col-xs-12 box-center">
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
               <span class="ball-description">EPL</span>
             </div>
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
               <span class="ball-description">Champions Leagua</span>
             </div>
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
               <span class="ball-description opacity">Series A</span>
             </div>
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
               <span class="ball-description opacity">LA LIGA</span>
             </div>
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
               <span class="ball-description opacity">NBA</span>
             </div>
             <div class="col-md-2 col-xs-8 ball-img">
-              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/more.png">
+              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/more.png">
               <span class="ball-description opacity">MORE</span>
             </div>
           </div>
         </div>
 
         <div class="container container-5">
-            <h3>Subscribe now!</h3>
+            <div class="col-md-12 col-xs-12">
+              <h3>Subscribe now!</h3>
+            </div>
             <br/>
             <div class="col-md-9 text-center box-center box-subscribe">
                 <?php

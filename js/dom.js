@@ -21,7 +21,7 @@ $(document).ready(function(){
   });
 
   // Offset for Main Navigation
-  $('body #mainNav').affix({
+  $('body #mainNavHome').affix({
       offset: {
           top: 200
       }

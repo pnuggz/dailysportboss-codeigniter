@@ -27,7 +27,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">DSB</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">About</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">Partnership</a>
@@ -557,37 +557,66 @@
     </div>
 </div>
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="termsofuse-footer-about-title">About</div>
-                <ul class="termsofuse-footer-about-ul">
-                    <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
-                    <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <div class="termsofuse-footer-support-title">More</div>
-                <ul class="termsofuse-footer-about-ul">
-                    <li><a href="<?php echo  base_url(); ?>info/termsofuse/">Terms of Use</a></li>
-                    <li><a href="<?php echo  base_url(); ?>info/privacy/">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <div class="termsofuse-footer-getintouch-title">PT Daily Sport Boss</div>
-                <div class="termsofuse-footer-getintouch-description">
-                    <span class="orange-text">Jakarta, Indonesia</span><br>
-                    <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
-                    <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
-                    <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row visible-md visible-lg">
+      <div class="col-md-3">
+        <div class="dsb-footer-about-title">About</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+          <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="dsb-footer-support-title">More</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo  base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+          <li><a href="<?php echo  base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+        <div class="dsb-footer-getintouch-description">
+          <span class="orange-text">Jakarta, Indonesia</span><br>
+          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
         </div>
-        <br/>
+      </div>
     </div>
-    <div class="col-md-12 col-lg-12 box-copyright">
-        <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
+    <div class="row visible-xs visible-sm">
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-about-title">About</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+          <li><a href="<?php echo base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-support-title">More</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+          <li><a href="<?php echo base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+        <div class="dsb-footer-getintouch-description">
+          <span class="orange-text">Jakarta, Indonesia</span><br>
+          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+        </div>
+      </div>
     </div>
+
+    <br>
+  </div>
+  <div class="col-md-12 col-lg-12 box-copyright">
+    <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
+  </div>
 </footer>
+
 
 </body>

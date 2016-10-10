@@ -19,7 +19,7 @@ img.img-responsive.logo.visible-xs {
 }
 
 body.dsb ul.nav.navbar-nav.navbar-right {
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px) {
@@ -40,6 +40,19 @@ body.dsb ul.nav.navbar-nav.navbar-right {
       background: black;
       text-align: center;
       padding: 20px;
+    }
+    #partnership .bs-example{
+      margin-top: 20px !important;
+    }
+    #dsb .img-ball{
+      width: 80%;
+      margin: auto;
+    }
+    #dsb .ball-description{
+      padding-top: 0px !important;
+    }
+    img.img-responsive.img-ads{
+      width: 65%;
     }
 }
 
@@ -128,7 +141,7 @@ body.dsb ul.nav.navbar-nav.navbar-right {
     }
 }
 nav#mainNav.affix {
-  background: #121819;
+  background: #00252C;
   height: 80px;
 }
 nav#mainNav.affix img.img-responsive.logo.visible-md {
@@ -141,7 +154,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #121819;
+        background-color: #00252C;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -149,14 +162,14 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     }
 }
 
-#dsb .table-header {
+#dsb .table-header, #partnership .table-header {
     width: 100%;
     font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-weight: bold;
 }
 
 
-#dsb .ball-description {
+#dsb .ball-description{
     text-align: center;
     display: block;
     padding-top: 20px;
@@ -170,35 +183,58 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     color: white;
     opacity: 0.5;
 }
-#dsb .table-header tbody{
+#dsb .table-header tbody , #partnership .table-header tbody {
   width: 100%;
   display: flex;
 }
-#dsb .table-header tr {
+#dsb .table-header tr, #partnership .table-header tr {
     width: 100%;
     display: flex;
 }
 
 #dsb .table-header td:first-child,
-#dsb .table-header td:last-child {
+#dsb .table-header td:last-child,#partnership .table-header td:first-child,
+#partnership .table-header td:last-child {
     width: 37%;
 }
 
-#dsb .table-header td:nth-child(2) {
+#dsb .table-header td:nth-child(2), #partnership .table-header td:nth-child(2) {
     width: 37%;
 }
-#dsb .table-header.mobile td:first-child{
+#dsb .table-header.mobile td:first-child, #partnership .table-header.mobile td:first-child{
   width: 100%;
 }
-#dsb .table-header td:nth-child(2) h1 {
+#dsb .table-header td:nth-child(2) h1, #partnership .table-header td:nth-child(2) h1 {
     font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-weight: bold;
 }
-
+#partnership .width-100{
+  width: 100%;
+}
+#partnership .bs-example {
+    margin-top: 105px;
+}
+#partnership .well.center-block {
+    background: none;
+}
+#partnership img.img-responsive.img-ads{
+  margin: 0 auto;
+}
+#partnership .box-ads{
+  color: white;
+  line-height: 1.2;
+  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+}
+#partnership .box-ads span{
+  font-size: 17px;
+  color: white;
+  line-height: 1.7;
+  font-family: "Century Gothic";
+  opacity: 0.8;
+}
 #dsb .container-fluid.section-1 {
-    background: url('../img/home/background-home-section-1.gif') center no-repeat;
+    background: url('../img/home/background-home-section-1.gif') top no-repeat;
     background-color: #00252C;
-    background-size: cover;
     min-height: 100vh;
     padding-top: 55px;
 }
@@ -231,8 +267,9 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     color: white;
     line-height: 1.7;
     font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-    font-size: 20px;
+    font-size: 19px;
 }
+
 
 #dsb .container-fluid.section-1 .container.container-4 {
     background: #012329;
@@ -246,7 +283,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 
 #dsb .container-fluid.section-1 .container.container-5 {
     background: #012329;
-    padding: 50px;
+    padding: 20px;
     opacity: 0.8;
     color: white;
     line-height: 1.7;
@@ -281,9 +318,10 @@ body.dsb footer .box-copyright {
 #dsb .box-subscribe select {
     border-radius: 5px;
     -webkit-appearance: none;
-    background: url("../img/dsb/button_dropdown.png") no-repeat right white;
-    padding-right: 33%;
+    background: url(../img/dsb/button_dropdown.png) no-repeat right white;
+    padding-right: 25%;
     -moz-appearance: none;
+    text-align-last: center;
 }
 
 #dsb .padding-5 {
@@ -310,13 +348,15 @@ body.dsb footer .box-copyright {
     background-image: url('../img/dsb/SubscribeButtonHover2.png');
 }
 
+
 #partnership .container-fluid.section-1 {
-    background: url("/img/dsb/background-home-section-1.gif") center no-repeat;
+    background: url(../img/dsb/background-home-section-1.gif) top no-repeat;
     background-color: #00252C;
-    background-size: cover;
     min-height: 100vh;
 }
-
+#partnership .container.container-1.partnership{
+  padding-top: 60px;
+}
 #partnership .container-fluid .container.container-1 .row.row-1 {
     margin-top: 70px;
     padding-left: 35px;
@@ -330,6 +370,7 @@ body.dsb footer .box-copyright {
 #partnership .container-fluid.section-1 .container.container-2 {
     background: #012329;
     color: #F7E1C8;
+    opacity: 0.8;
     line-height: 1.7;
     font-family: "Century Gothic";
     padding-top: 25px;
@@ -340,15 +381,19 @@ body.dsb footer .box-copyright {
 #partnership .container-fluid.section-1 .container.container-3 {
     background: #012329;
     padding: 50px;
+    opacity: 0.8;
     color: white;
     line-height: 1.7;
     font-family: "Century Gothic";
     font-size: 20px;
+    padding-left: 20px;
+    padding-right: 15px;
 }
 
 #partnership .container-fluid.section-1 .container.container-4 {
     background: #012329;
     color: #F7E1C8;
+    opacity: 0.8;
     line-height: 1.7;
     font-family: "Century Gothic";
     padding-left: 0px;
@@ -357,7 +402,8 @@ body.dsb footer .box-copyright {
 
 #partnership .container-fluid.section-1 .container.container-5 {
     background: #012329;
-    padding: 50px;
+    padding: 20px;
+    opacity: 0.8;
     color: white;
     line-height: 1.7;
     border-bottom: 2px solid #0F4852;
@@ -461,7 +507,7 @@ footer {
     color: #fff;
     padding-top: 60px;
     padding-bottom: 35px;
-    background: #121819;
+    background: #00252C;
 }
 
 footer .copy-left {
@@ -606,13 +652,15 @@ a.social-link {
 .element-non-mobi {
     display: block;
 }
-
+.box-contact h3 {
+    margin-bottom: 20px;
+}
 footer .box-copyright {
-    background: #121819;
+    background: #00252C;
 }
 
 footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
-    background: #121819;
+    background: #00252C;
 }
