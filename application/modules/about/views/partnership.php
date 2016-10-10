@@ -18,6 +18,7 @@
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="<?php echo  base_url(); ?>"><img src="<?php echo  base_url(); ?>/img/partnership/logo.png" class="img-responsive logo" alt=""></a>
+
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
