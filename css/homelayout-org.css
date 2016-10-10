@@ -788,9 +788,17 @@ div.dsb-footer-getintouch-title {
     color: #FDB03C;
 }
 
-div.dsb-footer-getintouch-title {
+div.visible-xs{
+  div.dsb-footer-getintouch-title {
+      text-align: center;
+      margin-right: 0px;
+  }
+}
+div.visible-md{
+  div.dsb-footer-getintouch-title {
     text-align: right;
     margin-right: 0px;
+  }
 }
 
 ul.dsb-footer-about-ul li a {

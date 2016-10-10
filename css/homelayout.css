@@ -174,11 +174,18 @@
     color: white;
     border: 1px solid white;
     margin-right: 16px;
+    margin-left: 16px;
     border-radius: 51px;
     padding: 6px 12px;
     margin-top: 8px;
     font-family: Quicksand-Regular;
 }
+@media (max-width: 768px) {
+  .navbar-custom .nav li a {
+    text-align: center;
+  }
+}
+
 
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus {
@@ -392,7 +399,7 @@ img.img-responsive.logo {
     width: auto;
     padding-bottom: 20px;
     padding-top: 55px;
-    max-height: 384px;
+    max-height: 354px;
 }
 
 #home div.container-fluid.section-3 {
@@ -527,6 +534,12 @@ img.img-responsive.logo {
 #home header .intro-text {
     padding-top: 100px;
     padding-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  #home header .intro-text {
+      padding-top: 150px;
+  }
 }
 
 #home header .intro-text .intro-lead-in {
@@ -790,10 +803,29 @@ div.dsb-footer-getintouch-title {
     color: #FDB03C;
 }
 
-div.dsb-footer-getintouch-title {
-    text-align: right;
-    margin-right: 0px;
+div.visible-xs div.dsb-footer-getintouch-title {
+      text-align: center;
+      margin-right: 0px;
+      margin-top: 15px;
+  }
+div.visible-xs div.dsb-footer-getintouch-description {
+      color: #d2d2d3;
+      text-align: center;
+      margin-right: 0px;
+      margin-top: 15px;
+  }
+
+div.visible-md div.dsb-footer-getintouch-title {
+  text-align: right;
+  margin-right: 0px;
 }
+div.visible-md div.dsb-footer-getintouch-description {
+  color: #d2d2d3;
+  text-align: right;
+  margin-right: 0px;
+  margin-top: 15px;
+}
+
 
 ul.dsb-footer-about-ul li a {
     text-decoration: none;
@@ -810,14 +842,6 @@ ul.dsb-footer-about-ul {
     margin-left: -40px;
     margin-top: 15px;
 }
-
-div.dsb-footer-getintouch-description {
-    color: #d2d2d3;
-    text-align: right;
-    margin-right: 0px;
-    margin-top: 15px;
-}
-
 a.footer-mailto-dsbpos {
     text-decoration: none;
     color: #d2d2d3;

@@ -17,7 +17,10 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="/"><img src="/img/dsb/logo.png" class="img-responsive logo" alt=""></a>
+            <a class="navbar-brand page-scroll" href="<?php echo  base_url(); ?>">
+              <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-md visible-lg" alt="">
+              <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-sm visible-xs" alt="">
+            </a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -43,11 +46,37 @@
     <div class="container-fluid section-1">
         <div class="container container-1">
             <div class="row row-1">
-                <h1>Daily Sport Boss</h1>
+              <table class="table-header visible-md visible-lg">
+                <tbody>
+                  <tr>
+                    <td>
+                      <br>
+                      <hr>
+                    </td>
+                    <td>
+                      <h1 class="orange-text text-center">ABOUT US</h1>
+                    </td>
+                    <td>
+                      <br>
+                      <hr>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table style="width: 100%;" class="table-header mobile visible-xs visible-sm">
+                <tbody>
+                  <tr>
+                    <td>
+                      <h1 class="orange-text text-center">ABOUT US</h1>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
         <div class="container container-2">
-            <img src="/img/dsb/dsbbanner.png">
+            <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/dsbbanner.png">
         </div>
         <div class="container container-3">
             Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn’t an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
@@ -60,18 +89,40 @@
             <br/>
             <br/>
             Come and play on the Daily Sport Boss application today and show to them who's Boss.
-
         </div>
-
         <div class="container container-4">
-            <img src="/img/dsb/sportlist.png">
+          <div class="col-md-10 col-xs-12 box-center">
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
+              <span class="ball-description">EPL</span>
+            </div>
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
+              <span class="ball-description">Champions Leagua</span>
+            </div>
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
+              <span class="ball-description opacity">Series A</span>
+            </div>
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
+              <span class="ball-description opacity">LA LIGA</span>
+            </div>
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
+              <span class="ball-description opacity">NBA</span>
+            </div>
+            <div class="col-md-2 col-xs-8 ball-img">
+              <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/more.png">
+              <span class="ball-description opacity">MORE</span>
+            </div>
+          </div>
         </div>
 
         <div class="container container-5">
             <h3>Subscribe now!</h3>
             <br/>
-            <br/>
-            <div class="col-md-8 text-center box-center box-subscribe">
+            <div class="col-md-9 text-center box-center box-subscribe">
                 <?php
                 $attributes = array('id'  =>   'subscribe');
 
@@ -351,37 +402,64 @@
     </div>
 </div>
 <footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="dsb-footer-about-title">About</div>
-                <ul class="dsb-footer-about-ul">
-                    <li><a href="/about/dsb/">Daily Sport Boss</a></li>
-                    <li><a href="/about/partnership/">Partnership Opportunities</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <div class="dsb-footer-support-title">More</div>
-                <ul class="dsb-footer-about-ul">
-                    <li><a href="/info/termsofuse/">Terms of Use</a></li>
-                    <li><a href="/info/privacy/">Privacy Policy</a></li>
-                </ul>
-            </div>
-            <div class="col-md-3">
-                <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
-                <div class="dsb-footer-getintouch-description">
-                    <span class="orange-text">Jakarta, Indonesia</span><br>
-                    <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
-                    <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
-                    <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row visible-md visible-lg">
+      <div class="col-md-3">
+        <div class="dsb-footer-about-title">About</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+          <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <div class="dsb-footer-support-title">More</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo  base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+          <li><a href="<?php echo  base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-3">
+        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+        <div class="dsb-footer-getintouch-description">
+          <span class="orange-text">Jakarta, Indonesia</span><br>
+          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
         </div>
-        <br/>
+      </div>
     </div>
-    <div class="col-md-12 col-lg-12 box-copyright">
-        <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
+    <div class="row visible-xs visible-sm">
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-about-title">About</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+          <li><a href="<?php echo base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-support-title">More</div>
+        <ul class="dsb-footer-about-ul">
+          <li><a href="<?php echo base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+          <li><a href="<?php echo base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="col-xs-12 col-sm-12 text-center">
+        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+        <div class="dsb-footer-getintouch-description">
+          <span class="orange-text">Jakarta, Indonesia</span><br>
+          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+        </div>
+      </div>
     </div>
-</footer>
 
+    <br>
+  </div>
+  <div class="col-md-12 col-lg-12 box-copyright">
+    <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
+  </div>
+</footer>
 </body>

@@ -17,7 +17,7 @@
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
-            <a class="navbar-brand page-scroll" href="/"><img src="/img/partnership/logo.png" class="img-responsive logo" alt=""></a>
+            <a class="navbar-brand page-scroll" href="<?php echo  base_url(); ?>"><img src="<?php echo  base_url(); ?>/img/partnership/logo.png" class="img-responsive logo" alt=""></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -47,7 +47,7 @@
             </div>
         </div>
         <div class="container container-2">
-            <img src="/img/partnership/adheading.png">
+            <img src="<?php echo  base_url(); ?>/img/partnership/adheading.png">
         </div>
         <div class="container container-3">
             With millions of sport fans around Indonesia watching each and every week, why shouldn't they be watching
@@ -56,7 +56,7 @@
         </div>
 
         <div class="container container-4">
-            <img src="/img/partnership/adlist.png">
+            <img src="<?php echo  base_url(); ?>/img/partnership/adlist.png">
         </div>
 
         <div class="container container-5">
@@ -108,15 +108,15 @@
             <div class="col-md-3">
                 <div class="partnership-footer-about-title">About</div>
                 <ul class="partnership-footer-about-ul">
-                    <li><a href="/about/dsb/">Daily Sport Boss</a></li>
-                    <li><a href="/about/partnership/">Partnership Opportunities</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
                 <div class="partnership-footer-support-title">More</div>
                 <ul class="partnership-footer-about-ul">
-                    <li><a href="/info/termsofuse/">Terms of Use</a></li>
-                    <li><a href="/info/privacy/">Privacy Policy</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/termsofuse/">Terms of Use</a></li>
+                    <li><a href="<?php echo  base_url(); ?>info/privacy/">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="col-md-3">
