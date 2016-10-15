@@ -82,37 +82,37 @@
             Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn’t an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
             <br/>
             <br/>
-            Through partnerships with sponsors, Daily Sport Boss will provide weekly contests that run over a short period of time. All contests will be free to enter but Daily Sport Boss will still provide an opportunity for users to win real cash prizes!
+            Through partnerships with sponsors, Daily Sport Boss will provide weekly contests that run over a short period of time. All contests will be free to enter but Daily Sport Boss will still provide an opportunity for users to win real cash prizes!.
             <br/>
             <br/>
             The Daily Sport Boss platform allows users to experience more flexibility with no long-term commitment, and more excitement with better sport statistics used.
-            <br/>
-            <br/>
-            Come and play on the Daily Sport Boss application today and show to them who's Boss.
         </div>
         <div class="container container-4">
           <div class="col-md-10 col-xs-12 box-center">
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-12 col-xs-12">
+              <h2>All Leagues & Sports</h2>
+            </div>
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
               <span class="ball-description">EPL</span>
             </div>
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
               <span class="ball-description">Champions Leagua</span>
             </div>
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
               <span class="ball-description opacity">Series A</span>
             </div>
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
               <span class="ball-description opacity">LA LIGA</span>
             </div>
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
               <span class="ball-description opacity">NBA</span>
             </div>
-            <div class="col-md-2 col-xs-8 ball-img">
+            <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/more.png">
               <span class="ball-description opacity">MORE</span>
             </div>
@@ -392,7 +392,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
-                        <input type="submit" class="btn btn-secondary subscribe" value="" ></input>
+                        <input type="submit" class="btn btn-secondary subscribe" value="" data-toggle="modal" data-target="#modal-subscribe-success"></input>
                     </div>
                     <?php echo $this->session->flashdata('subscribe_success'); ?>
                 </div>
@@ -464,4 +464,78 @@
     <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
   </div>
 </footer>
+<div id="modal-subscribe-success" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body row">
+        <div class="col-md-12 col-xs-12 no-padding">
+          <div class="block-success">
+            <img src="img/dsb/notificationsuccess.png" alt="" class="alert-img"/>
+            <span class="alert-notif">Success!</span>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12">
+          <div class="block-content">
+            Thanks you for subscribing! We'll keep you posted through email on any new update may we have.
+          </div>
+          <div class="block-social">
+            <ul class="list-inline">
+              <li>Follow up on</li>
+              <li><img src="img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+              <li><img src="img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+              <li><img src="img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+            </ul>
+          </div>
+          <div class="block-link">
+            <ul class="list-inline">
+              <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
+              <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
+              <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="modal-subscribe-error" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-body row">
+        <div class="col-md-12 col-xs-12 no-padding">
+          <div class="block-success">
+            <img src="img/dsb/notificationalert.png" alt="" class="alert-img"/>
+            <span class="alert-notif">Already Subscribed!</span>
+          </div>
+        </div>
+
+        <div class="col-md-12 col-xs-12">
+          <div class="block-content">
+            Your email is already registered. We'll keep you updated through email on any new information
+          </div>
+          <div class="block-social">
+            <ul class="list-inline">
+              <li>Follow up on</li>
+              <li><img src="img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+              <li><img src="img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+              <li><img src="img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+            </ul>
+          </div>
+          <div class="block-link">
+            <ul class="list-inline">
+              <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
+              <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
+              <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 </body>

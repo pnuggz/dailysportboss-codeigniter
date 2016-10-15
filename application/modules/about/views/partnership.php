@@ -76,29 +76,35 @@
           </div>
       </div>
         <div class="container container-2">
+          <img class="img-responsive" src="<?php echo  base_url(); ?>img/partnership/adheading.png">
 
+        </div>
         <div class="container container-3">
             With millions of sport fans around Indonesia watching each and every week, why shouldn't they be watching
             your product as well? Daily Sport Boss is now providing companies the opportunity to directly market and
             advertise their brand and product.
         </div>
 
-        <div class="col-md-12 text-center box-ads">
-          <div class="col-md-3 col-xs-12 col-sm-6">
-            <img src="<?php echo  base_url(); ?>/img/partnership/adlist1.png" class="img-responsive img-ads">
-            <span>Pay only when a user choses to watch your advertisement. Don't let your money fall on deaf ears again</span>
-          </div>
-          <div class="col-md-3 col-xs-12 col-sm-6">
-            <img src="<?php echo  base_url(); ?>/img/partnership/adlist2.png" class="img-responsive img-ads">
-            <span>A happy and excited user is a more engaged one. associate positive feelings to your brand.</span>
-          </div>
-          <div class="col-md-3 col-xs-12 col-sm-6">
-            <img src="<?php echo  base_url(); ?>/img/partnership/adlist3.png" class="img-responsive img-ads">
-            <span>Sport has been around for thousands of years, and will be around for thousands more. brand association with sport will always be successful.</span>
-          </div>
-          <div class="col-md-3 col-xs-12 col-sm-6">
-            <img src="<?php echo  base_url(); ?>/img/partnership/adlist4.png" class="img-responsive img-ads">
-            <span>As your ads will be shown before the matches, our users will be focused on your product.</span>
+
+      <div class="container container-4">
+        <div class="col-md-10 col-xs-12 box-center">
+          <div class="col-md-12 text-center box-ads">
+            <div class="col-md-3 col-xs-12 col-sm-6">
+              <img src="<?php echo  base_url(); ?>img/partnership/adlist1.png" class="img-responsive img-ads">
+              <span>Pay only when a user choses to watch your advertisement. Don't let your money fall on deaf ears again</span>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+              <img src="<?php echo  base_url(); ?>img/partnership/adlist2.png" class="img-responsive img-ads">
+              <span>A happy and excited user is a more engaged one. associate positive feelings to your brand.</span>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+              <img src="<?php echo  base_url(); ?>img/partnership/adlist3.png" class="img-responsive img-ads">
+              <span>Sport has been around for thousands of years, and will be around for thousands more. brand association with sport will always be successful.</span>
+            </div>
+            <div class="col-md-3 col-xs-12 col-sm-6">
+              <img src="<?php echo  base_url(); ?>img/partnership/adlist4.png" class="img-responsive img-ads">
+              <span>As your ads will be shown before the matches, our users will be focused on your product.</span>
+            </div>
           </div>
         </div>
       </div>

@@ -311,7 +311,7 @@ body.dsb footer .box-copyright {
     border: none;
     outline: none;
     color: #848d95;
-    text-align: center;
+    text-align: left;
     font-size: 18px;
 }
 
@@ -321,7 +321,7 @@ body.dsb footer .box-copyright {
     background: url(../img/dsb/button_dropdown.png) no-repeat right white;
     padding-right: 25%;
     -moz-appearance: none;
-    text-align-last: center;
+    text-align-last: left;
 }
 
 #dsb .padding-5 {
@@ -347,7 +347,9 @@ body.dsb footer .box-copyright {
 #dsb input.subscribe:hover {
     background-image: url('../img/dsb/SubscribeButtonHover2.png');
 }
-
+#dsb img.img-responsive.img-ball {
+    margin: auto;
+}
 
 #partnership .container-fluid.section-1 {
     background: url(../img/dsb/background-home-section-1.gif) top no-repeat;
@@ -663,4 +665,79 @@ footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
     background: #00252C;
+}
+
+div#modal-subscribe-success, #modal-subscribe-error{
+  margin-top: 14%;
+  font-family: "Century Gothic";
+}
+div#modal-subscribe-success .modal-dialog, #modal-subscribe-error .modal-dialog{
+  background: #02232A;
+  color: white;
+  line-height: 2;
+  border-radius: 6px;
+  border: 10px solid #03363A;
+}
+div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
+    background: transparent;
+    color: white;
+    line-height: 2;
+    padding: 14px;
+    position: relative;
+    top: -19px;
+}
+div#modal-subscribe-success .modal-content, #modal-subscribe-error .modal-content{
+  background: transparent;
+}
+div#modal-subscribe .modal-body .block-success, #modal-subscribe-error .modal-body .block-success {
+    background: #20B115;
+    padding: 15px;
+    font-size: 22px;
+    font-family: "Century Gothic";
+}
+img.social-notification{
+  width: 25px;
+  position: relative;
+  top: -7px;
+}
+.block-content {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  color: #ddd;
+}
+.block-social {
+  font-size: 20px;
+  padding-bottom: 10px;
+  color: #ddd;
+}
+.no-padding{
+  padding: 0px;
+}
+.block-link{
+  text-align: center;
+}
+.block-link ul.list-inline {
+  display: inline-block;
+  margin: 5px auto;
+}
+.block-link li a {
+  font-size: 18px;
+  text-decoration: none;
+}
+.block-link li:nth-child(2) {
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+}
+.block-link li:last-child a {
+  color: red;
+}
+img.alert-img{
+  position: absolute;
+  width: 88px;
+  top: -6px;
+}
+span.alert-notif {
+    margin-left: 100px;
+    font-size: 23px;
 }

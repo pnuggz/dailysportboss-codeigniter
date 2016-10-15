@@ -89,24 +89,13 @@
 }
 
 ::-webkit-input-placeholder {
-    text-align: center;
+    text-align: left;
     color: #9199a1;
 }
 
 :-moz-placeholder {
     /* Firefox 18- */
-    text-align: center;
-    color: #9199a1;
-}
-
-::-moz-placeholder {
-    /* Firefox 19+ */
-    text-align: center;
-    color: #9199a1;
-}
-
-:-ms-input-placeholder {
-    text-align: center;
+    text-align: left;
     color: #9199a1;
 }
 
@@ -141,7 +130,7 @@ nav#mainNavHome {
 }
 nav#mainNavHome img.img-responsive.logo.visible-md{
   height: auto;
-  width: 325px;
+  width: 385px;
   margin-top: -2px;
 }
 nav#mainNavHome img.img-responsive.logo.visible-xs {
@@ -575,7 +564,7 @@ img.img-responsive.logo {
     border: none;
     outline: none;
     color: #848d95;
-    text-align: center;
+    text-align: lef;
     font-size: 18px;
 }
 
@@ -585,7 +574,7 @@ img.img-responsive.logo {
     background: url(../img/dsb/button_dropdown.png) no-repeat right #ddd;
     padding-right: 25%;
     -moz-appearance: none;
-    text-align-last: center;
+    text-align-last: left;
 }
 
 #home .padding-5 {
@@ -905,4 +894,78 @@ footer h5.text-center {
     padding-top: 10px;
     background: #00252C;
     font-family: "Century Gothic";
+}
+div#modal-subscribe-success, #modal-subscribe-error{
+  margin-top: 14%;
+  font-family: "Century Gothic";
+}
+div#modal-subscribe-success .modal-dialog, #modal-subscribe-error .modal-dialog{
+  background: #02232A;
+  color: white;
+  line-height: 2;
+  border-radius: 6px;
+  border: 10px solid #03363A;
+}
+div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
+    background: transparent;
+    color: white;
+    line-height: 2;
+    padding: 14px;
+    position: relative;
+    top: -19px;
+}
+div#modal-subscribe-success .modal-content, #modal-subscribe-error .modal-content{
+  background: transparent;
+}
+div#modal-subscribe-success .modal-body .block-success, #modal-subscribe-error .modal-body .block-success {
+    background: #20B115;
+    padding: 15px;
+    font-size: 22px;
+    font-family: "Century Gothic";
+}
+img.social-notification{
+  width: 25px;
+  position: relative;
+  top: -7px;
+}
+.block-content {
+  padding-top: 30px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  color: #ddd;
+}
+.block-social {
+  font-size: 20px;
+  padding-bottom: 10px;
+  color: #ddd;
+}
+.no-padding{
+  padding: 0px;
+}
+.block-link{
+  text-align: center;
+}
+.block-link ul.list-inline {
+  display: inline-block;
+  margin: 5px auto;
+}
+.block-link li a {
+  font-size: 18px;
+  text-decoration: none;
+}
+.block-link li:nth-child(2) {
+    border-left: 3px solid white;
+    border-right: 3px solid white;
+}
+.block-link li:last-child a {
+  color: red;
+}
+img.alert-img{
+  position: absolute;
+  width: 88px;
+  top: -6px;
+}
+span.alert-notif {
+    margin-left: 100px;
+    font-size: 23px;
 }
