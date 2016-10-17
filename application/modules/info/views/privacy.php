@@ -27,7 +27,7 @@
                     <a href="#page-top"></a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">ABOUT</a>
+                    <a class="page-scroll" href="<?php echo  base_url(); ?>about/dsb/">About Us</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="<?php echo  base_url(); ?>about/partnership/">Partnership</a>
@@ -43,7 +43,33 @@
     <div class="container-fluid section-1">
         <div class="container container-1">
             <div class="row row-1">
-                <h1>Privacy Policy</h1>
+              <table class="table-header visible-md visible-lg">
+                <tbody>
+                  <tr>
+                    <td>
+                      <br>
+                      <hr>
+                    </td>
+                    <td>
+                      <h1 class="orange-text text-center">PRIVACY POLICY</h1>
+                    </td>
+                    <td>
+                      <br>
+                      <hr>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <table style="width: 100%;" class="table-header mobile visible-xs visible-sm">
+                <tbody>
+                  <tr>
+                    <td>
+                      <h1 class="orange-text text-center">PRIVACY POLICY</h1>
+                    </td>
+
+                  </tr>
+                </tbody>
+              </table>
             </div>
         </div>
         <div class="container container-2">

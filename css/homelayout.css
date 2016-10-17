@@ -226,7 +226,7 @@ ul.nav.navbar-nav.navbar-right {
   margin-top: 20px;
 }
 nav#mainNavHome.affix {
-  background: #00252C;
+  background: #000000;
   height: 80px;
 }
 nav#mainNavHome.affix img.img-responsive.logo.visible-md {
@@ -239,7 +239,7 @@ nav#mainNavHome.affix ul.nav.navbar-nav.navbar-right {
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #00252C;
+        background-color: #000000;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -408,6 +408,23 @@ img.img-responsive.logo {
       padding-top: 55px;
       max-height: 200px;
   }
+  nav#mainNavHome {
+    background: #000000;
+    height: 70px;
+    text-align: center;
+  }
+  nav#mainNavHome .container{
+    background: black;
+    border-top: 0px;
+  }
+  div#bs-example-navbar-collapse-1.navbar-collapse.collapse.in {
+      padding-top: 0px;
+      padding-bottom: 15px;
+      margin-top: 10px;
+  }
+  .navbar-default .navbar-collapse, .navbar-default .navbar-form{
+    border: none;
+  }
 }
 #home div.container-fluid.section-3 {
     background: #00252C;
@@ -523,15 +540,16 @@ img.img-responsive.logo {
 }
 
 #home header {
-    background-image: url('../img/home/background-home-section-1.gif');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center center;
-    text-align: center;
-    color: white;
-    background-position-y: -60px;
-    height: 100vh;
-    background-size: cover;
+  background-image: url('../img/home/background-home-section-1.gif');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center center;
+  text-align: center;
+  color: white;
+  background-position-y: -60px;
+  height: 100vh;
+  min-height: 700px;
+  background-size: cover;
 }
 
 #home .features-grids {
@@ -895,18 +913,18 @@ footer h5.text-center {
     background: #00252C;
     font-family: "Century Gothic";
 }
-div#modal-subscribe-success, #modal-subscribe-error{
+div#modal-subscribe-success, modal-subscribe-error{
   margin-top: 14%;
   font-family: "Century Gothic";
 }
-div#modal-subscribe-success .modal-dialog, #modal-subscribe-error .modal-dialog{
+div#modal-subscribe .modal-dialog{
   background: #02232A;
   color: white;
   line-height: 2;
   border-radius: 6px;
   border: 10px solid #03363A;
 }
-div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
+div#modal-subscribe .modal-body {
     background: transparent;
     color: white;
     line-height: 2;
@@ -914,10 +932,10 @@ div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
     position: relative;
     top: -19px;
 }
-div#modal-subscribe-success .modal-content, #modal-subscribe-error .modal-content{
+div#modal-subscribe .modal-content{
   background: transparent;
 }
-div#modal-subscribe-success .modal-body .block-success, #modal-subscribe-error .modal-body .block-success {
+div#modal-subscribe .modal-body .block-success {
     background: #20B115;
     padding: 15px;
     font-size: 22px;

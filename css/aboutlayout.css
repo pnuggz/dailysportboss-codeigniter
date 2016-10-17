@@ -1,4 +1,4 @@
-img.img-responsive.logo.visible-md {
+t diimg.img-responsive.logo.visible-md {
     height: auto;
     width: 325px;
     margin-top: -2px;
@@ -53,6 +53,32 @@ body.dsb ul.nav.navbar-nav.navbar-right {
     }
     img.img-responsive.img-ads{
       width: 65%;
+    }
+    #mainNav button.navbar-toggle {
+        margin-top: 15px;
+    }
+    #home div.container-fluid.section-2 img.features-img {
+        width: auto;
+        padding-bottom: 20px;
+        padding-top: 55px;
+        max-height: 200px;
+    }
+    nav#mainNav {
+      background: #000000;
+      height: 70px;
+      text-align: center;
+    }
+    nav#mainNav .container{
+      background: black;
+      border-top: 0px;
+    }
+    div#bs-example-navbar-collapse-1.navbar-collapse.collapse.in {
+        padding-top: 0px;
+        padding-bottom: 15px;
+        padding-top: 25px;
+    }
+    .navbar-default .navbar-collapse, .navbar-default .navbar-form{
+      border: none;
     }
 }
 
@@ -141,7 +167,7 @@ body.dsb ul.nav.navbar-nav.navbar-right {
     }
 }
 nav#mainNav.affix {
-  background: #00252C;
+  background: #000000;
   height: 80px;
 }
 nav#mainNav.affix img.img-responsive.logo.visible-md {
@@ -154,7 +180,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #00252C;
+        background-color: #000000;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -164,7 +190,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 
 #dsb .table-header, #partnership .table-header {
     width: 100%;
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    font-family: "Century Gothic";
     font-weight: bold;
 }
 
@@ -175,7 +201,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     padding-top: 20px;
     font-size: 20px;
     color: white;
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    font-family: "Century Gothic";
     font-weight: bold;
 }
 
@@ -205,12 +231,11 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
   width: 100%;
 }
 #dsb .table-header td:nth-child(2) h1, #partnership .table-header td:nth-child(2) h1 {
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    font-family: "Century Gothic";
     font-weight: bold;
 }
 #partnership .width-100{
   width: 100%;
-  color: #848d95;
 }
 #partnership .bs-example {
     margin-top: 105px;
@@ -224,7 +249,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 #partnership .box-advs{
   color: white;
   line-height: 1.2;
-  font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+  font-family: "Century Gothic";
 }
 #partnership .box-advs span{
   font-size: 17px;
@@ -233,11 +258,17 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
   font-family: "Century Gothic";
   opacity: 0.8;
 }
+nav#mainNav img.img-responsive.logo.visible-md{
+  height: auto;
+  width: 385px;
+  margin-top: -2px;
+}
 #dsb .container-fluid.section-1 {
     background: url('../img/home/background-home-section-1.gif') top no-repeat;
     background-color: #00252C;
     min-height: 100vh;
     padding-top: 55px;
+    background-size: cover;
 }
 
 #dsb .container-fluid .container.container-1 .row.row-1 {
@@ -267,7 +298,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     padding: 50px;
     color: white;
     line-height: 1.7;
-    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
+    font-family: "Century Gothic";
     font-size: 19px;
 }
 
@@ -308,12 +339,16 @@ body.dsb footer .box-copyright {
 #dsb .box-subscribe select {
     height: 50px;
     box-shadow: inset 0 0 6px 2px #00252C;
-    background: white;
+    background: #ddd;
     border: none;
     outline: none;
     color: #848d95;
     text-align: left;
     font-size: 18px;
+}
+
+#partnership input[type='text'], #partnership textarea{
+  background: #ddd;
 }
 
 #dsb .box-subscribe select {
@@ -356,6 +391,7 @@ body.dsb footer .box-copyright {
     background: url(../img/dsb/background-home-section-1.gif) top no-repeat;
     background-color: #00252C;
     min-height: 100vh;
+    background-size: cover;
 }
 #partnership .container.container-1.partnership{
   padding-top: 60px;
@@ -426,6 +462,7 @@ body.partnership footer .box-copyright {
 
 footer {
     display: block;
+    font-family: "Century Gothic";
 }
 
 a {

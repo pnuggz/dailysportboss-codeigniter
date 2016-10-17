@@ -138,7 +138,7 @@
                     <?php echo form_error('subject'); ?>
                   </div>
                   <div class="form-group col-md-12 col-xs-12 col-sm-12 padding-5 text-left">
-                    <textarea class="width-100" name="message" rows="8"  value="<?php echo set_value('message'); ?>" required></textarea>
+                    <textarea class="width-100 form-control" name="message" rows="8"  value="<?php echo set_value('message'); ?>" required></textarea>
                     <?php echo form_error('message'); ?>
                   </div>
                   <div class="col-md-6 col-xs-12 col-sm-12 padding-5 text-left">

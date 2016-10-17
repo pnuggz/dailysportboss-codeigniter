@@ -225,7 +225,7 @@
 
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #00252C;
+        background-color: #a9a9a9;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -235,7 +235,7 @@
 
 @media (max-width: 400px) {
     .navbar-custom {
-        background-color: #00252C;
+        background-color: #a9a9a9;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
