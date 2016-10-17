@@ -88,7 +88,7 @@
 
       <div class="container container-4">
         <div class="col-md-10 col-xs-12 box-center">
-          <div class="col-md-12 text-center box-ads">
+          <div class="col-md-12 text-center box-advs">
             <div class="col-md-3 col-xs-12 col-sm-6">
               <img src="<?php echo  base_url(); ?>img/partnership/adlist1.png" class="img-responsive img-ads">
               <span>Pay only when a user choses to watch your advertisement. Don't let your money fall on deaf ears again.</span>
