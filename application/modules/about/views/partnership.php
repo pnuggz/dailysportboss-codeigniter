@@ -54,7 +54,7 @@
                     <hr>
                   </td>
                   <td>
-                    <h1 class="orange-text text-center">Partnership</h1>
+                    <h1 class="orange-text text-center">PARTNERSHIP</h1>
                   </td>
                   <td>
                     <br>
@@ -91,7 +91,7 @@
           <div class="col-md-12 text-center box-ads">
             <div class="col-md-3 col-xs-12 col-sm-6">
               <img src="<?php echo  base_url(); ?>img/partnership/adlist1.png" class="img-responsive img-ads">
-              <span>Pay only when a user choses to watch your advertisement. Don't let your money fall on deaf ears again</span>
+              <span>Pay only when a user choses to watch your advertisement. Don't let your money fall on deaf ears again.</span>
             </div>
             <div class="col-md-3 col-xs-12 col-sm-6">
               <img src="<?php echo  base_url(); ?>img/partnership/adlist2.png" class="img-responsive img-ads">

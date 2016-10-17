@@ -82,7 +82,7 @@
             Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn’t an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
             <br/>
             <br/>
-            Through partnerships with sponsors, Daily Sport Boss will provide weekly contests that run over a short period of time. All contests will be free to enter but Daily Sport Boss will still provide an opportunity for users to win real cash prizes!.
+            Through partnerships with sponsors, Daily Sport Boss will provide weekly contests that run over a short period of time. All contests will be free to enter but Daily Sport Boss will still provide an opportunity for users to win real cash prizes!
             <br/>
             <br/>
             The Daily Sport Boss platform allows users to experience more flexibility with no long-term commitment, and more excitement with better sport statistics used.
@@ -98,15 +98,15 @@
             </div>
             <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
-              <span class="ball-description">Champions Leagua</span>
+              <span class="ball-description">Champions League</span>
             </div>
             <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
-              <span class="ball-description opacity">Series A</span>
+              <span class="ball-description opacity">Serie A</span>
             </div>
             <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
-              <span class="ball-description opacity">LA LIGA</span>
+              <span class="ball-description opacity">La Liga</span>
             </div>
             <div class="col-md-2 col-xs-12 text-center ball-img">
               <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
