@@ -19,7 +19,7 @@
               </div>
               <div class="col-md-8 text-center box-center box-subscribe">
                   <?php
-                  $attributes = array('id'  =>   'subscribe');
+                  $attributes = array('id'  =>   'subscribe','class'=>'sbh');
 
                   echo form_open('home/subscribe', $attributes);
                   ?>
@@ -286,7 +286,7 @@
                       </select>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
-                      <input type="submit" class="btn btn-secondary subscribe" value="" data-toggle="modal" data-target="#modal-subscribe-success"></input>
+                      <input type="submit" class="btn btn-secondary subscribe" value=""></input>
                     </div>
                     <?php echo $this->session->flashdata('subscribe_success'); ?>
                   </div>
@@ -370,7 +370,7 @@
         <div class="intro-text">
             <div class="col-md-8 text-center box-center box-subscribe">
               <?php
-              $attributes = array('id'  =>   'subscribe');
+              $attributes = array('id'  =>   'subscribe','class'=>'sbh');
 
               echo form_open('home/subscribe', $attributes);
               ?>
@@ -637,7 +637,7 @@
                     </select>
                   </div>
                   <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
-                    <input type="submit" class="btn btn-secondary subscribe" value="" data-toggle="modal" data-target="#modal-subscribe-success"></input>
+                    <input type="submit" class="btn btn-secondary subscribe" value=""></input>
                   </div>
                   <?php echo $this->session->flashdata('subscribe_success'); ?>
                 </div>

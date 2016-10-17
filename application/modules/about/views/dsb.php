@@ -126,7 +126,7 @@
             <br/>
             <div class="col-md-9 text-center box-center box-subscribe">
                 <?php
-                $attributes = array('id'  =>   'subscribe');
+                $attributes = array('id'  =>   'subscribe','class'=>'sbh');
 
                 echo form_open('about/subscribe', $attributes);
                 ?>
@@ -392,7 +392,7 @@
                         </select>
                     </div>
                     <div class="col-md-2 col-xs-12 col-sm-12 padding-5">
-                        <input type="submit" class="btn btn-secondary subscribe" value="" data-toggle="modal" data-target="#modal-subscribe-success"></input>
+                        <input type="submit" class="btn btn-secondary subscribe" value=""></input>
                     </div>
                     <?php echo $this->session->flashdata('subscribe_success'); ?>
                 </div>
@@ -471,7 +471,7 @@
       <div class="modal-body row">
         <div class="col-md-12 col-xs-12 no-padding">
           <div class="block-success">
-            <img src="img/dsb/notificationsuccess.png" alt="" class="alert-img"/>
+            <img src="<?php echo base_url(); ?>img/dsb/notificationsuccess.png" alt="" class="alert-img"/>
             <span class="alert-notif">Success!</span>
           </div>
         </div>
@@ -483,9 +483,9 @@
           <div class="block-social">
             <ul class="list-inline">
               <li>Follow up on</li>
-              <li><img src="img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
-              <li><img src="img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
-              <li><img src="img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
             </ul>
           </div>
           <div class="block-link">
@@ -508,7 +508,7 @@
       <div class="modal-body row">
         <div class="col-md-12 col-xs-12 no-padding">
           <div class="block-success">
-            <img src="img/dsb/notificationalert.png" alt="" class="alert-img"/>
+            <img src="<?php echo base_url(); ?>img/dsb/notificationalert.png" alt="" class="alert-img"/>
             <span class="alert-notif">Already Subscribed!</span>
           </div>
         </div>
@@ -520,9 +520,9 @@
           <div class="block-social">
             <ul class="list-inline">
               <li>Follow up on</li>
-              <li><img src="img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
-              <li><img src="img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
-              <li><img src="img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+              <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
             </ul>
           </div>
           <div class="block-link">

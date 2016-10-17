@@ -22,28 +22,29 @@ class About extends MX_Controller {
 
     function subscribe()
     {
-        $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('country', 'Country', 'required|xss_clean');
-        if($this->form_validation->run() == FALSE)
+      $this->load->library('form_validation');
+      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|is_unique[users.email]');
+      $this->form_validation->set_rules('country', 'Country', 'required|xss_clean');
+      if($this->form_validation->run() == FALSE)
+      {
+          redirect('/');
+      }else{
+        $this->load->model('mdl_about');
+        $check = $this->mdl_about->checksubscribe($this->input->post('email'));
+        if($check == 0)
         {
-            redirect('/');
+          $data = array(
+            'email'      => $this->input->post('email'),
+            'country'    => $this->input->post('country'),
+            'submitdate' => date('Y-m-d H:i:s'),
+            'statusid'   => 1,
+          );
+          $this->mdl_about->subscribe($data);
+          echo json_encode(0);
         }else{
-            $this->load->model('mdl_about');
-            $check = $this->mdl_home->checksubscribe($this->input->post('email'));
-            if($check == 0)
-            {
-                $data = array(
-                    'email'      => $this->input->post('email'),
-                    'country'    => $this->input->post('country'),
-                    'submitdate' => date('Y-m-d H:i:s'),
-                    'statusid'   => 1,
-                );
-                $this->mdl_home->subscribe($data);
-            }
-            $this->session->set_flashdata('subscribe_success', 'Thanks for Subscribing');
-            redirect('/');
+          echo json_encode(1);
         }
+      }
     }
 
 
