@@ -302,7 +302,7 @@
     <div class="container">
       <div class="row easy">
         <h2 class="text-center gray-text">
-          <br/>ITS <span class="orange-text">EASY</span> TO PLAY
+          ITS <span class="orange-text">EASY</span> TO PLAY
         </h2>
       </div>
       <div class="row">
@@ -312,7 +312,7 @@
               <img src="img/home/event.png" class="features-img">
             </span>
             <div class="row text-title">
-              <h3 class="gray-text text-center">PICK CONTEST<br/></h3>
+              <h3 class="gray-text text-center">PICK CONTEST</h3>
               <hr>
               <span class="number-features">1<span>
             </span></span></div>
@@ -323,7 +323,7 @@
               <img src="img/home/team.png" class="features-img team">
             </span>
             <div class="row text-title">
-              <h3 class="gray-text text-center">BUILD TEAM<br/></h3>
+              <h3 class="gray-text text-center">BUILD TEAM</h3>
               <hr>
               <span class="number-features">2<span>
             </span></span></div>
@@ -334,7 +334,7 @@
               <img src="img/home/win.png" class="features-img">
             </span>
             <div class="row text-title">
-              <h3 class="gray-text text-center">LET'S PLAY<br/></h3>
+              <h3 class="gray-text text-center">LET'S PLAY</h3>
               <hr>
               <span class="number-features">3<span>
             </span></span></div>
@@ -351,13 +351,10 @@
   <div class="container-fluid section-3">
     <div class="container">
       <br>
-      <br/><br/>
       <img src="img/home/winrealcash.png" class="win-real-cash-img">
       <br/>
       <div class="row">
       </div>
-      <br/>
-      <br/>
       <div class="col-md-12 no-padding text-center ">
         <h3 class="visible-md visible-lg">Awarding <span class="orange-text">real cash </span>prizes to contest winners thanks to our sponsors.</h3>
         <h3 class="visible-xs visible-sm">Awarding <span class="orange-text">real cash </span>prizes to contest winners thanks to our sponsors.</h3>

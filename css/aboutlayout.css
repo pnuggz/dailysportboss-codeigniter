@@ -1,4 +1,4 @@
-t diimg.img-responsive.logo.visible-md {
+img.img-responsive.logo.visible-md {
     height: auto;
     width: 325px;
     margin-top: -2px;
@@ -27,58 +27,35 @@ body.dsb ul.nav.navbar-nav.navbar-right {
         margin-top: -10;
     }
     .ball-img{
-      float: none;
-      margin: auto;
+        float: none;
+        margin: auto;
     }
     body.dsb img.img-responsive.logo.visible-xs{
-      margin-top: 0px;
+        margin-top: 0px;
     }
     body.dsb button.navbar-toggle {
-      margin-top: 25px;
+        margin-top: 25px;
     }
     body.dsb div#bs-example-navbar-collapse-1 {
-      background: black;
-      text-align: center;
-      padding: 20px;
+        background: black;
+        text-align: center;
+        padding: 20px;
     }
     #partnership .bs-example{
-      margin-top: 20px !important;
+        margin-top: 20px !important;
     }
     #dsb .img-ball{
-      width: 80%;
-      margin: auto;
+        width: 50%;
+        margin: auto;
     }
     #dsb .ball-description{
-      padding-top: 0px !important;
+        padding-top: 0px !important;
     }
     img.img-responsive.img-ads{
-      width: 65%;
+        width: 45%;
     }
-    #mainNav button.navbar-toggle {
-        margin-top: 15px;
-    }
-    #home div.container-fluid.section-2 img.features-img {
-        width: auto;
-        padding-bottom: 20px;
-        padding-top: 55px;
-        max-height: 200px;
-    }
-    nav#mainNav {
-      background: #000000;
-      height: 70px;
-      text-align: center;
-    }
-    nav#mainNav .container{
-      background: black;
-      border-top: 0px;
-    }
-    div#bs-example-navbar-collapse-1.navbar-collapse.collapse.in {
-        padding-top: 0px;
-        padding-bottom: 15px;
-        padding-top: 25px;
-    }
-    .navbar-default .navbar-collapse, .navbar-default .navbar-form{
-      border: none;
+    #partnership div.col-md-3.col-xs-12.col-sm-6 {
+        padding-bottom: 50px;
     }
 }
 
@@ -167,20 +144,20 @@ body.dsb ul.nav.navbar-nav.navbar-right {
     }
 }
 nav#mainNav.affix {
-  background: #000000;
-  height: 80px;
+    background: #000000;
+    height: 80px;
 }
 nav#mainNav.affix img.img-responsive.logo.visible-md {
-  height: auto;
-  width: 200px;
-  margin-top: -7px;
+    height: auto;
+    width: 200px;
+    margin-top: -7px;
 }
 nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
-  margin-top: 5px;
+    margin-top: 5px;
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #000000;
+        background-color: #00252C;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -190,7 +167,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 
 #dsb .table-header, #partnership .table-header {
     width: 100%;
-    font-family: "Century Gothic";
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-weight: bold;
 }
 
@@ -201,7 +178,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     padding-top: 20px;
     font-size: 20px;
     color: white;
-    font-family: "Century Gothic";
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-weight: bold;
 }
 
@@ -210,8 +187,8 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     opacity: 0.5;
 }
 #dsb .table-header tbody , #partnership .table-header tbody {
-  width: 100%;
-  display: flex;
+    width: 100%;
+    display: flex;
 }
 #dsb .table-header tr, #partnership .table-header tr {
     width: 100%;
@@ -228,14 +205,15 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     width: 37%;
 }
 #dsb .table-header.mobile td:first-child, #partnership .table-header.mobile td:first-child{
-  width: 100%;
+    width: 100%;
 }
 #dsb .table-header td:nth-child(2) h1, #partnership .table-header td:nth-child(2) h1 {
-    font-family: "Century Gothic";
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-weight: bold;
 }
 #partnership .width-100{
-  width: 100%;
+    width: 100%;
+    color: #848d95;
 }
 #partnership .bs-example {
     margin-top: 105px;
@@ -244,31 +222,25 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     background: none;
 }
 #partnership img.img-responsive.img-ads{
-  margin: 0 auto;
+    margin: 0 auto;
 }
 #partnership .box-advs{
-  color: white;
-  line-height: 1.2;
-  font-family: "Century Gothic";
+    color: white;
+    line-height: 1.2;
+    font-family: Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
 }
 #partnership .box-advs span{
-  font-size: 17px;
-  color: white;
-  line-height: 1.7;
-  font-family: "Century Gothic";
-  opacity: 0.8;
-}
-nav#mainNav img.img-responsive.logo.visible-md{
-  height: auto;
-  width: 385px;
-  margin-top: -2px;
+    font-size: 17px;
+    color: white;
+    line-height: 1.7;
+    font-family: "Century Gothic";
+    opacity: 0.8;
 }
 #dsb .container-fluid.section-1 {
     background: url('../img/home/background-home-section-1.gif') top no-repeat;
     background-color: #00252C;
     min-height: 100vh;
     padding-top: 55px;
-    background-size: cover;
 }
 
 #dsb .container-fluid .container.container-1 .row.row-1 {
@@ -298,24 +270,28 @@ nav#mainNav img.img-responsive.logo.visible-md{
     padding: 50px;
     color: white;
     line-height: 1.7;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
     font-size: 19px;
+    text-align: justify;
 }
 
 
 #dsb .container-fluid.section-1 .container.container-4 {
     background: #012329;
-    color: #F7E1C8;
+    color: white;
     opacity: 0.8;
     line-height: 1.7;
     font-family: "Century Gothic";
     padding-left: 0px;
     padding-right: 0px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
 }
 
 #dsb .container-fluid.section-1 .container.container-5 {
     background: #012329;
-    padding: 20px;
+    padding: 50px;
     opacity: 0.8;
     color: white;
     line-height: 1.7;
@@ -333,22 +309,19 @@ body.dsb footer,
 body.dsb footer h5.text-center,
 body.dsb footer .box-copyright {
     background: #012329;
+    font-family: Century Gothic;
 }
 
 #dsb .box-subscribe input,
 #dsb .box-subscribe select {
     height: 50px;
     box-shadow: inset 0 0 6px 2px #00252C;
-    background: #ddd;
+    background: white;
     border: none;
     outline: none;
     color: #848d95;
     text-align: left;
     font-size: 18px;
-}
-
-#partnership input[type='text'], #partnership textarea{
-  background: #ddd;
 }
 
 #dsb .box-subscribe select {
@@ -391,10 +364,9 @@ body.dsb footer .box-copyright {
     background: url(../img/dsb/background-home-section-1.gif) top no-repeat;
     background-color: #00252C;
     min-height: 100vh;
-    background-size: cover;
 }
 #partnership .container.container-1.partnership{
-  padding-top: 60px;
+    padding-top: 60px;
 }
 #partnership .container-fluid .container.container-1 .row.row-1 {
     margin-top: 70px;
@@ -431,12 +403,15 @@ body.dsb footer .box-copyright {
 
 #partnership .container-fluid.section-1 .container.container-4 {
     background: #012329;
-    color: #F7E1C8;
+    color: white;
     opacity: 0.8;
     line-height: 1.7;
     font-family: "Century Gothic";
     padding-left: 0px;
     padding-right: 0px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
 }
 
 #partnership .container-fluid.section-1 .container.container-5 {
@@ -447,6 +422,7 @@ body.dsb footer .box-copyright {
     line-height: 1.7;
     border-bottom: 2px solid #0F4852;
     font-family: "Century Gothic";
+    text-align: center;
 }
 
 body.partnership .navbar-custom {
@@ -462,7 +438,6 @@ body.partnership footer .box-copyright {
 
 footer {
     display: block;
-    font-family: "Century Gothic";
 }
 
 a {
@@ -706,15 +681,15 @@ footer h5.text-center {
 }
 
 div#modal-subscribe-success, #modal-subscribe-error{
-  margin-top: 14%;
-  font-family: "Century Gothic";
+    margin-top: 14%;
+    font-family: "Century Gothic";
 }
 div#modal-subscribe-success .modal-dialog, #modal-subscribe-error .modal-dialog{
-  background: #02232A;
-  color: white;
-  line-height: 2;
-  border-radius: 6px;
-  border: 10px solid #03363A;
+    background: #02232A;
+    color: white;
+    line-height: 2;
+    border-radius: 6px;
+    border: 10px solid #03363A;
 }
 div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
     background: transparent;
@@ -725,7 +700,7 @@ div#modal-subscribe-success .modal-body, #modal-subscribe-error .modal-body {
     top: -19px;
 }
 div#modal-subscribe-success .modal-content, #modal-subscribe-error .modal-content{
-  background: transparent;
+    background: transparent;
 }
 div#modal-subscribe .modal-body .block-success, #modal-subscribe-error .modal-body .block-success {
     background: #20B115;
@@ -734,46 +709,46 @@ div#modal-subscribe .modal-body .block-success, #modal-subscribe-error .modal-bo
     font-family: "Century Gothic";
 }
 img.social-notification{
-  width: 25px;
-  position: relative;
-  top: -7px;
+    width: 25px;
+    position: relative;
+    top: -7px;
 }
 .block-content {
-  padding-top: 30px;
-  padding-bottom: 10px;
-  font-size: 20px;
-  color: #ddd;
+    padding-top: 30px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    color: #ddd;
 }
 .block-social {
-  font-size: 20px;
-  padding-bottom: 10px;
-  color: #ddd;
+    font-size: 20px;
+    padding-bottom: 10px;
+    color: #ddd;
 }
 .no-padding{
-  padding: 0px;
+    padding: 0px;
 }
 .block-link{
-  text-align: center;
+    text-align: center;
 }
 .block-link ul.list-inline {
-  display: inline-block;
-  margin: 5px auto;
+    display: inline-block;
+    margin: 5px auto;
 }
 .block-link li a {
-  font-size: 18px;
-  text-decoration: none;
+    font-size: 18px;
+    text-decoration: none;
 }
 .block-link li:nth-child(2) {
     border-left: 3px solid white;
     border-right: 3px solid white;
 }
 .block-link li:last-child a {
-  color: red;
+    color: red;
 }
 img.alert-img{
-  position: absolute;
-  width: 88px;
-  top: -6px;
+    position: absolute;
+    width: 88px;
+    top: -6px;
 }
 span.alert-notif {
     margin-left: 100px;

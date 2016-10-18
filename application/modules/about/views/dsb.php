@@ -18,8 +18,8 @@
                 <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
             </button>
             <a class="navbar-brand page-scroll" href="<?php echo  base_url(); ?>">
-              <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-md visible-lg" alt="">
-              <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-sm visible-xs" alt="">
+                <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-md visible-lg" alt="">
+                <img src="<?php echo  base_url(); ?>/img/dsb/logo.png" class="img-responsive logo visible-sm visible-xs" alt="">
             </a>
         </div>
 
@@ -46,40 +46,40 @@
     <div class="container-fluid section-1">
         <div class="container container-1">
             <div class="row row-1">
-              <table class="table-header visible-md visible-lg">
-                <tbody>
-                  <tr>
-                    <td>
-                      <br>
-                      <hr>
-                    </td>
-                    <td>
-                      <h1 class="orange-text text-center">ABOUT US</h1>
-                    </td>
-                    <td>
-                      <br>
-                      <hr>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <table style="width: 100%;" class="table-header mobile visible-xs visible-sm">
-                <tbody>
-                  <tr>
-                    <td>
-                      <h1 class="orange-text text-center">ABOUT US</h1>
-                    </td>
+                <table class="table-header visible-md visible-lg">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <br>
+                            <hr>
+                        </td>
+                        <td>
+                            <h1 class="orange-text text-center">ABOUT US</h1>
+                        </td>
+                        <td>
+                            <br>
+                            <hr>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" class="table-header mobile visible-xs visible-sm">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <h1 class="orange-text text-center">ABOUT US</h1>
+                        </td>
 
-                  </tr>
-                </tbody>
-              </table>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div class="container container-2">
             <img class="img-responsive" src="<?php echo  base_url(); ?>/img/dsb/dsbbanner.png">
         </div>
         <div class="container container-3">
-            Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn’t an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
+            Daily Sport Boss is a small team of friends who share a passion for sports. Based in Jakarta, the team came together and realized there wasn't an existing Fantasy Sport platform that was engaging or rewarding for sport lovers. Thus, Daily Sport Boss was formed with a vision to introduce and provide the first game-changing, free-to-play Daily Fantasy Sport application in Indonesia.
             <br/>
             <br/>
             Through partnerships with sponsors, Daily Sport Boss will provide weekly contests that run over a short period of time. All contests will be free to enter but Daily Sport Boss will still provide an opportunity for users to win real cash prizes!
@@ -88,40 +88,40 @@
             The Daily Sport Boss platform allows users to experience more flexibility with no long-term commitment, and more excitement with better sport statistics used.
         </div>
         <div class="container container-4">
-          <div class="col-md-10 col-xs-12 box-center">
-            <div class="col-md-12 col-xs-12">
-              <h2>All Leagues & Sports</h2>
+            <div class="col-md-10 col-xs-12 box-center">
+                <div class="col-md-12 col-xs-12">
+                    <h2>All Leagues & Sports</h2>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
+                    <span class="ball-description">EPL</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
+                    <span class="ball-description">Champions League</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
+                    <span class="ball-description opacity">Serie A</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
+                    <span class="ball-description opacity">La Liga</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
+                    <span class="ball-description opacity">NBA</span>
+                </div>
+                <div class="col-md-2 col-xs-12 text-center ball-img">
+                    <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/more.png">
+                    <span class="ball-description opacity">MORE</span>
+                </div>
             </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball1.png">
-              <span class="ball-description">EPL</span>
-            </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball2.png">
-              <span class="ball-description">Champions League</span>
-            </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball3.png">
-              <span class="ball-description opacity">Serie A</span>
-            </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball4.png">
-              <span class="ball-description opacity">La Liga</span>
-            </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/ball5.png">
-              <span class="ball-description opacity">NBA</span>
-            </div>
-            <div class="col-md-2 col-xs-12 text-center ball-img">
-              <img class="img-responsive img-ball" src="<?php echo  base_url(); ?>/img/dsb/more.png">
-              <span class="ball-description opacity">MORE</span>
-            </div>
-          </div>
         </div>
 
         <div class="container container-5">
             <div class="col-md-12 col-xs-12">
-              <h3>Subscribe now!</h3>
+                <h3>Subscribe now!</h3>
             </div>
             <br/>
             <div class="col-md-9 text-center box-center box-subscribe">
@@ -404,138 +404,138 @@
     </div>
 </div>
 <footer class="footer">
-  <div class="container">
-    <div class="row visible-md visible-lg">
-      <div class="col-md-3">
-        <div class="dsb-footer-about-title">About</div>
-        <ul class="dsb-footer-about-ul">
-          <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
-          <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-        <div class="dsb-footer-support-title">More</div>
-        <ul class="dsb-footer-about-ul">
-          <li><a href="<?php echo  base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
-          <li><a href="<?php echo  base_url(); ?>/info/privacy/">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="col-md-3">
-      </div>
-      <div class="col-md-3">
-        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
-        <div class="dsb-footer-getintouch-description">
-          <span class="orange-text">Jakarta, Indonesia</span><br>
-          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
-          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
-          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+    <div class="container">
+        <div class="row visible-md visible-lg">
+            <div class="col-md-3">
+                <div class="dsb-footer-about-title">About</div>
+                <ul class="dsb-footer-about-ul">
+                    <li><a href="<?php echo  base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+                    <li><a href="<?php echo  base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <div class="dsb-footer-support-title">More</div>
+                <ul class="dsb-footer-about-ul">
+                    <li><a href="<?php echo  base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+                    <li><a href="<?php echo  base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+                <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+                <div class="dsb-footer-getintouch-description">
+                    <span class="orange-text">Jakarta, Indonesia</span><br>
+                    <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+                    <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+                    <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row visible-xs visible-sm">
-      <div class="col-xs-12 col-sm-12 text-center">
-        <div class="dsb-footer-about-title">About</div>
-        <ul class="dsb-footer-about-ul">
-          <li><a href="<?php echo base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
-          <li><a href="<?php echo base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
-        </ul>
-      </div>
-      <div class="col-xs-12 col-sm-12 text-center">
-        <div class="dsb-footer-support-title">More</div>
-        <ul class="dsb-footer-about-ul">
-          <li><a href="<?php echo base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
-          <li><a href="<?php echo base_url(); ?>/info/privacy/">Privacy Policy</a></li>
-        </ul>
-      </div>
-      <div class="col-xs-12 col-sm-12 text-center">
-        <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
-        <div class="dsb-footer-getintouch-description">
-          <span class="orange-text">Jakarta, Indonesia</span><br>
-          <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
-          <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
-          <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+        <div class="row visible-xs visible-sm">
+            <div class="col-xs-12 col-sm-12 text-center">
+                <div class="dsb-footer-about-title">About</div>
+                <ul class="dsb-footer-about-ul">
+                    <li><a href="<?php echo base_url(); ?>about/dsb/">Daily Sport Boss</a></li>
+                    <li><a href="<?php echo base_url(); ?>about/partnership/">Partnership Opportunities</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 text-center">
+                <div class="dsb-footer-support-title">More</div>
+                <ul class="dsb-footer-about-ul">
+                    <li><a href="<?php echo base_url(); ?>/info/termsofuse/">Terms of Use</a></li>
+                    <li><a href="<?php echo base_url(); ?>/info/privacy/">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-12 text-center">
+                <div class="dsb-footer-getintouch-title">PT Daily Sport Boss</div>
+                <div class="dsb-footer-getintouch-description">
+                    <span class="orange-text">Jakarta, Indonesia</span><br>
+                    <a href="http://www.facebook.com/dailysportboss" class="text-gray">Facebook</a><br>
+                    <a href="http://www.twitter.com/dailysportboss" class="text-gray">Twitter</a><br>
+                    <a href="http://www.instagram.com/dailysportboss" class="text-gray">Instagram</a><br><br>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <br>
-  </div>
-  <div class="col-md-12 col-lg-12 box-copyright">
-    <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
-  </div>
+        <br>
+    </div>
+    <div class="col-md-12 col-lg-12 box-copyright">
+        <h5 class="text-center">Copyright Daily Sport Boss 2016</h5>
+    </div>
 </footer>
 <div id="modal-subscribe-success" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body row">
-        <div class="col-md-12 col-xs-12 no-padding">
-          <div class="block-success">
-            <img src="<?php echo base_url(); ?>img/dsb/notificationsuccess.png" alt="" class="alert-img"/>
-            <span class="alert-notif">Success!</span>
-          </div>
-        </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body row">
+                <div class="col-md-12 col-xs-12 no-padding">
+                    <div class="block-success">
+                        <img src="<?php echo base_url(); ?>img/dsb/notificationsuccess.png" alt="" class="alert-img"/>
+                        <span class="alert-notif">Success!</span>
+                    </div>
+                </div>
 
-        <div class="col-md-12 col-xs-12">
-          <div class="block-content">
-            Thanks you for subscribing! We'll keep you posted through email on any new update may we have.
-          </div>
-          <div class="block-social">
-            <ul class="list-inline">
-              <li>Follow up on</li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
-            </ul>
-          </div>
-          <div class="block-link">
-            <ul class="list-inline">
-              <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
-              <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
-              <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
-            </ul>
-          </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="block-content">
+                        Thanks you for subscribing! We'll keep you posted through email on any new update may we have.
+                    </div>
+                    <div class="block-social">
+                        <ul class="list-inline">
+                            <li>Follow up on</li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+                        </ul>
+                    </div>
+                    <div class="block-link">
+                        <ul class="list-inline">
+                            <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
+                            <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
+                            <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 <div id="modal-subscribe-error" class="modal fade" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-body row">
-        <div class="col-md-12 col-xs-12 no-padding">
-          <div class="block-success">
-            <img src="<?php echo base_url(); ?>img/dsb/notificationalert.png" alt="" class="alert-img"/>
-            <span class="alert-notif">Already Subscribed!</span>
-          </div>
-        </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body row">
+                <div class="col-md-12 col-xs-12 no-padding">
+                    <div class="block-success">
+                        <img src="<?php echo base_url(); ?>img/dsb/notificationalert.png" alt="" class="alert-img"/>
+                        <span class="alert-notif">Already Subscribed!</span>
+                    </div>
+                </div>
 
-        <div class="col-md-12 col-xs-12">
-          <div class="block-content">
-            Your email is already registered. We'll keep you updated through email on any new information
-          </div>
-          <div class="block-social">
-            <ul class="list-inline">
-              <li>Follow up on</li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
-              <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
-            </ul>
-          </div>
-          <div class="block-link">
-            <ul class="list-inline">
-              <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
-              <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
-              <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
-            </ul>
-          </div>
+                <div class="col-md-12 col-xs-12">
+                    <div class="block-content">
+                        Your email is already registered. We'll keep you updated through email on any new information
+                    </div>
+                    <div class="block-social">
+                        <ul class="list-inline">
+                            <li>Follow up on</li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationfb.png" alt="" class="social-notification" /></li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationinsta.png" alt="" class="social-notification" /></li>
+                            <li><img src="<?php echo base_url(); ?>img/dsb/notificationtwitter.png" alt="" class="social-notification" /></li>
+                        </ul>
+                    </div>
+                    <div class="block-link">
+                        <ul class="list-inline">
+                            <li class="text-right"><a href="#" class="orange-text">About Us</a></li>
+                            <li class="text-center"><a href="#" class="orange-text">Partnership</a></li>
+                            <li class="text-left"><a href="#" data-dismiss="modal">Close</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 </body>
