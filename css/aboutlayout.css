@@ -37,7 +37,7 @@ body.dsb ul.nav.navbar-nav.navbar-right {
         margin-top: 25px;
     }
     body.dsb div#bs-example-navbar-collapse-1 {
-        background: black;
+        background: #001A1F;
         text-align: center;
         padding: 20px;
     }
@@ -144,20 +144,20 @@ body.dsb ul.nav.navbar-nav.navbar-right {
     }
 }
 nav#mainNav.affix {
-    background: #000000;
+    background: #001A1F;
     height: 80px;
 }
 nav#mainNav.affix img.img-responsive.logo.visible-md {
     height: auto;
     width: 200px;
-    margin-top: -7px;
+    margin-top: -9px;
 }
 nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     margin-top: 5px;
 }
 @media (min-width: 768px) {
     .navbar-custom.affix {
-        background-color: #00252C;
+        background-color: #001A1F;
         padding: 10px 0;
     }
     .navbar-custom.affix .navbar-brand {
@@ -295,7 +295,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     opacity: 0.8;
     color: white;
     line-height: 1.7;
-    border-bottom: 2px solid #0F4852;
+//    border-bottom: 2px solid #0F4852;
     font-family: "Century Gothic";
 }
 
@@ -308,8 +308,12 @@ body.dsb .navbar-custom {
 body.dsb footer,
 body.dsb footer h5.text-center,
 body.dsb footer .box-copyright {
-    background: #012329;
+    background: #001A1F;
     font-family: Century Gothic;
+}
+
+body.dsb footer {
+    border-top: 2px solid #0F4852;
 }
 
 #dsb .box-subscribe input,
@@ -420,7 +424,7 @@ body.dsb footer .box-copyright {
     opacity: 0.8;
     color: white;
     line-height: 1.7;
-    border-bottom: 2px solid #0F4852;
+//    border-bottom: 2px solid #0F4852;
     font-family: "Century Gothic";
     text-align: center;
 }
@@ -433,7 +437,7 @@ body.partnership .navbar-custom {
 body.partnership footer,
 body.partnership footer h5.text-center,
 body.partnership footer .box-copyright {
-    background: #012329;
+    background: #001A1F;
 }
 
 footer {
@@ -522,7 +526,7 @@ footer {
     color: #fff;
     padding-top: 60px;
     padding-bottom: 35px;
-    background: #00252C;
+    background: #001A1F;
 }
 
 footer .copy-left {
@@ -671,13 +675,13 @@ a.social-link {
     margin-bottom: 20px;
 }
 footer .box-copyright {
-    background: #00252C;
+    background: #001A1F;
 }
 
 footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
-    background: #00252C;
+    background: #001A1F;
 }
 
 div#modal-subscribe-success, #modal-subscribe-error{

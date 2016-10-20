@@ -302,7 +302,7 @@
     <div class="container">
       <div class="row easy">
         <h2 class="text-center gray-text">
-          ITS <span class="orange-text">EASY</span> TO PLAY
+          IT'S <span class="orange-text">EASY</span> TO PLAY
         </h2>
       </div>
       <div class="row">
@@ -350,10 +350,10 @@
   </div>
   <div class="container-fluid section-3">
     <div class="container">
-      <br>
-      <img src="img/home/winrealcash.png" class="win-real-cash-img">
-      <br/>
       <div class="row">
+        <br>
+        <img src="img/home/winrealcash.png" class="win-real-cash-img">
+        <br/>
       </div>
       <div class="col-md-12 no-padding text-center ">
         <h3 class="visible-md visible-lg">Awarding <span class="orange-text">real cash </span>prizes to contest winners thanks to our sponsors.</h3>
@@ -363,8 +363,8 @@
   </div>
   <div class="container-fluid section-4">
     <div class="container">
-      <h4 class="text-center visible-md visible-lg">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play!</h4>
-      <h4 class="text-center visible-xs visible-sm">With millions of users enjoying Daily Fantasy Sport<br> around the world, don't be the last to play!</h4>
+      <h4 class="text-center visible-md visible-lg">With millions of users enjoying Daily Fantasy Sport around the world, don't be the last to play!</h4>
+      <h4 class="text-center visible-xs visible-sm">With millions of users enjoying Daily Fantasy Sport around the world, don't be the last to play!</h4>
       <div class="col-md-12 no-padding">
         <div class="intro-text">
           <div class="col-md-8 text-center box-center box-subscribe">

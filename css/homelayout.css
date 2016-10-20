@@ -131,12 +131,12 @@ nav#mainNavHome {
 nav#mainNavHome img.img-responsive.logo.visible-md{
     height: auto;
     width: 385px;
-    margin-top: -2px;
+    margin-top: -4px;
 }
 nav#mainNavHome img.img-responsive.logo.visible-xs {
     height: auto;
     width: 220px;
-    margin-top: -2px;
+    margin-top: -4px;
 }
 .navbar-custom {
     background-color: #222222;
@@ -156,7 +156,7 @@ nav#mainNavHome img.img-responsive.logo.visible-xs {
 
 .navbar-custom .navbar-collapse {
     border-color: rgba(255, 255, 255, 0.98);
-    background-color: #000000;
+    background-color: #001A1F;
 }
 
 .navbar-custom .navbar-toggle {
@@ -201,56 +201,31 @@ nav#mainNavHome img.img-responsive.logo.visible-xs {
     background-color: #fec503;
 }
 
-@media (min-width: 768px) {
-    .home .navbar-custom {
-        background-color: transparent;
-        -webkit-transition: padding 0.3s;
-        -moz-transition: padding 0.3s;
-        transition: padding 0.3s;
-        border: none;
-    }
-    .navbar-custom {
-        padding: 10px 0;
-        margin: '0px;'
-    }
-    .navbar-custom .navbar-brand {
-        font-size: 2em;
-        -webkit-transition: all 0.3s;
-        -moz-transition: all 0.3s;
-        transition: all 0.3s;
-    }
-    .navbar-custom .navbar-nav > .active > a {
-        border-radius: 3px;
-    }
-}
 ul.nav.navbar-nav.navbar-right {
-    margin-top: -10;
+    margin-top: 20px;
+}
+nav#manNavHome.navbar.navbar-default.navbar-custom.navbar-fixed-top.affix-top ul.nav.navbar.navbar-right {
+    margin-top: 20px;
+}
+nav#manNavHome.navbar.navbar-default.navbar-custom.navbar-fixed-top.affix ul.nav.navbar.navbar-right {
+    margin-top: 10px;
 }
 nav#mainNavHome.affix {
-    background: #000000;
+    background: #001A1F;
     height: 80px;
 }
 nav#mainNavHome.affix img.img-responsive.logo.visible-md {
     height: auto;
     width: 220px;
-    margin-top: -7px;
+    margin-top: -9px;
 }
 nav#mainNavHome.affix ul.nav.navbar-nav.navbar-right {
     margin-top: 5px;
 }
-@media (min-width: 768px) {
-    .navbar-custom.affix {
-        background-color: #000000;
-        padding: 10px 0;
-    }
-    .navbar-custom.affix .navbar-brand {
-        font-size: 1.5em;
-    }
-}
 
 img.img-responsive.logo {
     height: inherit;
-    margin-top: -16px;
+    margin-top: -9px;
 }
 
 #videoModal .modal-dialog {
@@ -325,13 +300,14 @@ img.img-responsive.logo {
 }
 
 #home div.container-fluid.section-2 {
-    background: #00252C;
+    position: relative;
+    box-shadow: rgb(0, 37, 44) 0px 0px 24px 20px;
+    background: rgb(0, 37, 44);
+
 }
 
 #home div.container-fluid.section-2 {
-    background: url('../img/home/how-to-play.gif') center no-repeat #00252C;
-    position: relative;
-    margin-top: -60px;
+    background-color: #00252C;
 }
 
 #home div.container-fluid.section-2 h2 {
@@ -344,14 +320,14 @@ img.img-responsive.logo {
 #home div.container-fluid.section-2 h3 {
     font-size: 2em;
     color: #ddd;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
     font-weight: bold;
 }
 
 #home div.container-fluid.section-2 p.gray-text.text-center {
     font-size: 1.6em;
     color: #ddd;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 
 #home div.container-fluid.section-2 span.number-features {
@@ -366,7 +342,7 @@ img.img-responsive.logo {
     bottom: 0;
     margin-top: auto;
     color: #FBB03B;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 
 #home div.container-fluid.section-2 .side-features-1 {
@@ -404,7 +380,7 @@ img.img-responsive.logo {
         margin-top: 22.5px;
     }
     #mainNavHome div#bs-example-navbar-collapse-1 {
-        background: black;
+        background: #001A1F;
         text-align: center;
         padding: 20px;
     }
@@ -413,6 +389,29 @@ img.img-responsive.logo {
         padding-bottom: 20px;
         padding-top: 55px;
         max-height: 200px;
+    }
+    ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+    #home .box-subscribe input,
+    #home .box-subscribe select {
+        height: 30px;
+        box-shadow: inset 0 0 6px 2px #00252C;
+        background: #ddd;
+        border: none;
+        outline: none;
+        color: #848d95;
+        text-align: left;
+        font-size: 14px;
+    }
+
+    #home .box-subscribe select {
+        border-radius: 5px;
+        -webkit-appearance: none;
+        background: url(../img/dsb/button_dropdown.png) no-repeat right #ddd;
+        padding-right: 25%;
+        -moz-appearance: none;
+        text-align-last: left;
     }
 }
 #home div.container-fluid.section-3 {
@@ -456,7 +455,7 @@ img.img-responsive.logo {
     padding-left: 10%;
     padding-right: 10%;
     padding-bottom: 30px;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
     font-size: 34px;
 }
 
@@ -495,7 +494,7 @@ img.img-responsive.logo {
     line-height: 1.5;
     color: white;
     margin-top: 40px;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
     margin-bottom: 40px;
 }
 
@@ -538,9 +537,10 @@ img.img-responsive.logo {
     background-position: center center;
     text-align: center;
     color: white;
-    background-position-y: -60px;
-    height: 100vh;
+    background-position-y: 0px;
+    height: 110vh;
     background-size: cover;
+    padding-top: 100px;
 }
 
 #home .features-grids {
@@ -555,7 +555,7 @@ img.img-responsive.logo {
 
 @media (max-width: 768px) {
     #home header .intro-text {
-        padding-top: 150px;
+        padding-top: 50px;
     }
 }
 
@@ -566,26 +566,7 @@ img.img-responsive.logo {
     color: #ddd;
 }
 
-#home .box-subscribe input,
-#home .box-subscribe select {
-    height: 50px;
-    box-shadow: inset 0 0 6px 2px #00252C;
-    background: #ddd;
-    border: none;
-    outline: none;
-    color: #848d95;
-    text-align: lef;
-    font-size: 18px;
-}
 
-#home .box-subscribe select {
-    border-radius: 5px;
-    -webkit-appearance: none;
-    background: url(../img/dsb/button_dropdown.png) no-repeat right #ddd;
-    padding-right: 25%;
-    -moz-appearance: none;
-    text-align-last: left;
-}
 
 #home .padding-5 {
     padding: 1px;
@@ -621,24 +602,6 @@ img.img-responsive.logo {
     line-height: 50px;
     margin-bottom: 25px;
     color: #FF931E;
-}
-
-@media (min-width: 768px) {
-    #home header .intro-text {
-        padding-top: 300px;
-        padding-bottom: 200px;
-    }
-    #home header .intro-text .intro-lead-in {
-        font-size: 40px;
-        line-height: 40px;
-        margin-bottom: 25px;
-    }
-    #home header .intro-text .intro-heading {
-        font-weight: 700;
-        font-size: 75px;
-        line-height: 75px;
-        margin-bottom: 50px;
-    }
 }
 
 #home .black {
@@ -713,7 +676,7 @@ img.img-responsive.logo {
 
 footer {
     display: block;
-    font-family: Century Gothic;
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 
 a {
@@ -798,14 +761,14 @@ footer {
     color: #fff;
     padding-top: 60px;
     padding-bottom: 35px;
-    background: #00252C;
+    background: #001A1F;
+    border-top: 1px solid #0F4852;
 }
 
 footer .copy-left {
     font-size: 12px;
     padding-top: 15px;
     margin-top: 15px;
-    border-top: 1px solid #fff;
 }
 
 div.clear {
@@ -815,7 +778,7 @@ div.clear {
 div.dsb-footer-support-title,
 div.dsb-footer-about-title,
 div.dsb-footer-getintouch-title {
-    font-family: "Century Gothic";
+    font-family: Century Gothic;
     font-weight: bold;
     font-size: 18px;
     margin-left: 0px;
@@ -852,7 +815,7 @@ ul.dsb-footer-about-ul li a {
 }
 
 ul.dsb-footer-about-ul li {
-    font-family: "Century Gothic";
+    font-family: Century Gothic;
     list-style-type: none;
     margin-bottom: 5px;
 }
@@ -897,18 +860,18 @@ a.social-link {
 }
 
 footer .box-copyright {
-    background: #00252C;
+    background: #001A1F;
 }
 
 footer h5.text-center {
     border-top: 1px solid #eee;
     padding-top: 10px;
-    background: #00252C;
-    font-family: "Century Gothic";
+    background: #001A1F;
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 div#modal-subscribe-success, #modal-subscribe-error{
     margin-top: 14%;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 div#modal-subscribe-success .modal-dialog, #modal-subscribe-error .modal-dialog{
     background: #02232A;
@@ -932,7 +895,7 @@ div#modal-subscribe-success .modal-body .block-success, #modal-subscribe-error .
     background: #20B115;
     padding: 15px;
     font-size: 22px;
-    font-family: "Century Gothic";
+    font-family: Century Gothic, 'Muli', sans-serif;
 }
 img.social-notification{
     width: 25px;
@@ -980,3 +943,634 @@ span.alert-notif {
     margin-left: 100px;
     font-size: 23px;
 }
+
+@media (max-width: 399px) {
+    #mainNavHome button.navbar-toggle {
+        margin-top: 15px;
+    }
+
+    nav#mainNavHome img.img-responsive.logo.visible-xs {
+        width: 220px;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #home header .intro-text .intro-lead-in {
+        font-size: 15px;
+        line-height: 15px;
+        margin-bottom: 5px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 30px;
+        margin-bottom: 30px;
+    }
+
+    #home header {
+        padding-top: 15vh;
+    }
+
+    #home input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    nav#mainNavHome.affix {
+        height: 72px;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNavHome div#bs-example-navbar-collapse-1 {
+        margin-top: 12.5px;
+        padding: 15px 0px 0px 0px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    #home div.container-fluid.section-2 h2 {
+        font-size: 40px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-weight: bold;
+
+    }
+
+    #home div.container-fluid.section-3 h3.visible-xs {
+        font-size: 16px;
+        margin-top: 0px;
+    }
+
+    #home div.container-fluid.section-4 {
+        height: 400px;
+    }
+
+    #home div.container-fluid.section-4 h4.visible-xs {
+        font-size: 16px;
+        margin-top: 30px;
+    }
+
+}
+
+
+@media (min-width: 400px) and (max-width: 540px){
+    #mainNavHome button.navbar-toggle {
+        margin-top: 15px;
+    }
+
+    nav#mainNavHome img.img-responsive.logo.visible-xs {
+        width: 220px;
+    }
+
+
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #home header .intro-text .intro-lead-in {
+        font-size: 18px;
+        line-height: 18px;
+        margin-bottom: 5px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 34px;
+        line-height: 34px;
+        margin-bottom: 30px;
+    }
+
+    #home header {
+        padding-top: 15vh;
+    }
+
+    #home input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    nav#mainNavHome.affix {
+        height: 72px;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNavHome div#bs-example-navbar-collapse-1 {
+        margin-top: 12.5px;
+        padding: 15px 0px 0px 0px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    #home div.container-fluid.section-2 h2 {
+        font-size: 40px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-weight: bold;
+
+    }
+
+    #home div.container-fluid.section-3 h3.visible-xs {
+        font-size: 20px;
+        margin-top: 30px;
+    }
+
+    #home div.container-fluid.section-4 {
+        height: 400px;
+    }
+
+    #home div.container-fluid.section-4 h4.visible-xs {
+        font-size: 20px;
+        margin-top: 30px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.intro-text {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+}
+
+@media (min-width: 541px) and (max-width: 767px){
+    #mainNavHome button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNavHome img.img-responsive.logo.visible-xs {
+        margin-top: 0px;
+        width: 300px;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #home header .intro-text .intro-lead-in {
+        font-size: 28px;
+        line-height: 28px;
+        margin-bottom: 5px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 55px;
+        line-height: 55px;
+        margin-bottom: 30px;
+    }
+
+    #home header {
+        padding-top: 15vh;
+    }
+
+    #home input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    nav#mainNavHome.affix {
+        height: 100px;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNavHome div#bs-example-navbar-collapse-1 {
+        margin-top: 20px;
+        padding: 15px 0px 0px 0px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    #home div.container-fluid.section-2 {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.container-fluid.section-2 h2 {
+        font-size: 40px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-weight: bold;
+
+    }
+
+    #home div.container-fluid.section-3 h3.visible-xs {
+        font-size: 1.6em;
+        margin-top: 50px;
+    }
+
+    #home div.container-fluid.section-4 {
+        height: 400px;
+    }
+
+    #home div.container-fluid.section-4 h4.visible-xs {
+        font-size: 20px;
+        margin-top: 30px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.intro-text {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 959px){
+    #mainNavHome button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNavHome img.img-responsive.logo.visible-xs {
+        margin-top: 0px;
+        width: 380px;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #home header .intro-text .intro-lead-in {
+        font-size: 36px;
+        line-height: 36px;
+        margin-bottom: 5px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 70px;
+        margin-bottom: 30px;
+    }
+
+    #home header {
+        padding-top: 20vh;
+    }
+
+    #home input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 160px;
+    }
+
+    nav#mainNavHome.affix {
+        height: 115px;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNavHome div#bs-example-navbar-collapse-1 {
+        margin-top: 30px;
+        padding: 15px 0px 0px 0px;
+        background: none;
+        font-size: 24px;
+    }
+
+    nav#mainNavHome.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    #home div.container-fluid.section-2 {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.container-fluid.section-2 h2 {
+        font-size: 65px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-weight: bold;
+    }
+
+    #home div.container-fluid.section-2 img.features-img {
+        max-height: none;
+        width: 50%;
+    }
+
+    #home div.container-fluid.section-2 h3 {
+        color: #FC9320;
+        font-size: 40px;
+    }
+
+    #home div.container-fluid.section-2 p.gray-text.text-center {
+        font-size: 24px;
+    }
+
+    #home div.container-fluid.section-3 {
+        height: 80vh;
+        padding-top: 400px;
+    }
+
+    #home div.container-fluid.section-3 .container {
+        padding-top: 0px;
+        margin-top: -50px;
+    }
+
+    #home div.container-fluid.section-3 h3.visible-xs {
+        font-size: 28px;
+    }
+
+    #home div.container-fluid.section-3 h3 {
+        padding-top: 0px;
+    }
+
+    #home div.container-fluid.section-4 {
+        height: 600px;
+        padding-top: 110px;
+    }
+
+    #home div.container-fluid.section-4 h4.visible-xs {
+        font-size: 28px;
+        margin-top: 30px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.intro-text {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    .container {
+        width: 100%;
+    }
+
+    #home .box-subscribe input, #home .box-subscribe select {
+        height: 50px;
+        font-size: 20px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    footer {
+        font-size: 18px;
+    }
+
+}
+
+@media (min-width: 960px) {
+    .container {
+        width: 1170px;
+    }
+
+    #mainNavHome button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNavHome img.img-responsive.logo.visible-md {
+        margin-top: 0px;
+        width: 450px;
+    }
+
+    nav#mainNavHome.affix img.img-responsive.logo.visible-md {
+        margin-top: 0px;
+        width: 300px;
+    }
+
+    nav#mainNavHome.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -15px;
+    }
+
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+    }
+
+    #home header .intro-text .intro-lead-in {
+        font-size: 36px;
+        line-height: 36px;
+        margin-bottom: 5px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 70px;
+        line-height: 70px;
+        margin-bottom: 30px;
+    }
+
+    #home header {
+        padding-top: 20vh;
+    }
+
+    nav#mainNavHome.affix {
+        height: 95px;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNavHome div#bs-example-navbar-collapse-1 {
+        margin-top: 30px;
+        padding: 15px 0px 0px 0px;
+        background: none;
+        font-size: 24px;
+    }
+
+    ul.nav.navbar-nav.navbar-right {
+        padding: 0px;
+        margin-top: -5px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+    }
+
+    #home div.container-fluid.section-2 {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.container-fluid.section-2 h2 {
+        font-size: 80px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-weight: bold;
+    }
+
+    #home div.container-fluid.section-2 img.features-img {
+        max-height: none;
+        width: 80%;
+    }
+
+    #home div.container-fluid.section-2 h3 {
+        color: #FC9320;
+        font-size: 40px;
+    }
+
+    #home div.container-fluid.section-2 p.gray-text.text-center {
+        font-size: 24px;
+    }
+
+    #home div.container-fluid.section-3 img.win-real-cash-img {
+        width: 80%;
+        margin-top: 15vh;
+    }
+
+    #home div.container-fluid.section-3 {
+        height: 90vh;
+    }
+
+    #home div.container-fluid.section-3 .container {
+        padding-top: 0px;
+    }
+
+    #home div.container-fluid.section-3 h3.visible-md {
+        font-size: 32px;
+        margin-top: 50vh;
+    }
+
+    #home div.container-fluid.section-3 h3 {
+        padding-top: 0px;
+    }
+
+    #home div.container-fluid.section-4 {
+        height: 600px;
+        padding-top: 110px;
+    }
+
+    #home div.container-fluid.section-4 h4.visible-md {
+        font-size: 32px;
+        margin-top: 80px;
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home div.intro-text {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    #home .box-subscribe {
+        margin-left: 120px;
+    }
+
+    #home .box-subscribe input,
+    #home .box-subscribe select {
+        height: 50px;
+        font-size: 20px;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        box-shadow: inset 0 0 6px 2px #00252C;
+        background: #ddd;
+        border: none;
+        outline: none;
+        color: #848d95;
+        text-align: left;
+    }
+
+    #home .box-subscribe select {
+        border-radius: 5px;
+        -webkit-appearance: none;
+        background: url(../img/dsb/button_dropdown.png) no-repeat right #ddd;
+        padding-right: 25%;
+        -moz-appearance: none;
+        text-align-last: left;
+    }
+
+    #home input.subscribe {
+        margin-left: 2px;
+        height: 50px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 160px;
+    }
+
+    #home input.subscribe:hover {
+        background-image: url('../img/home/SubscribeButtonHover2.png');
+    }
+
+    footer {
+        font-size: 18px;
+    }
+
+    #home header .intro-text {
+        padding-top: 15vh;
+        padding-bottom: 200px;
+    }
+    #home header .intro-text .intro-lead-in {
+        font-size: 40px;
+        line-height: 40px;
+        margin-bottom: 25px;
+    }
+    #home header .intro-text .intro-heading {
+        font-weight: 700;
+        font-size: 75px;
+        line-height: 75px;
+        margin-bottom: 50px;
+    }
+}
+
+
+
