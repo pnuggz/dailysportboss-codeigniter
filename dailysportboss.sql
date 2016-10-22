@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 25, 2016 at 10:57 AM
+-- Generation Time: Oct 22, 2016 at 10:23 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `contests` (
 INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
 (1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
 (2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(3, 1, 0, 'Weekend EPL Smash', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
+(3, 1, 0, 'Weekend EPL Smash', '2016-10-07', '01:00:00', 5000, 1, 1, 1, 1, 1),
 (11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1),
 (14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1),
 (15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1),
@@ -134,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `contests_prize` (
   `upto` varchar(100) NOT NULL,
   `currency` varchar(100) NOT NULL,
   `status` int(22) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contests_prize`
@@ -16732,6 +16732,31 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `subscribe`
+--
+
+CREATE TABLE IF NOT EXISTS `subscribe` (
+  `id` int(22) NOT NULL,
+  `email` varchar(512) NOT NULL,
+  `country` varchar(100) NOT NULL,
+  `submitdate` datetime(6) NOT NULL,
+  `statusid` int(1) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subscribe`
+--
+
+INSERT INTO `subscribe` (`id`, `email`, `country`, `submitdate`, `statusid`) VALUES
+(5, 'adith92@yahoo.com', 'Indonesia', '2016-10-05 20:48:19.000000', 1),
+(6, 'aditdwiputranto@gmail.com', 'Austria', '2016-10-17 14:51:00.000000', 1),
+(7, 'aditdwipsadasutranto@gasdmail.com', 'Ashmore and Cartier Island', '2016-10-17 15:02:36.000000', 1),
+(8, 'sadsasa2353sd@dsfds.com', 'Australia', '2016-10-17 15:04:03.000000', 1),
+(9, 'adit@gmail.com', 'Ashmore and Cartier Island', '2016-10-17 15:13:43.000000', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `teams`
 --
 
@@ -16913,6 +16938,27 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `video`
+--
+
+CREATE TABLE IF NOT EXISTS `video` (
+  `id` int(22) NOT NULL,
+  `video` varchar(512) NOT NULL,
+  `sponsorsid` int(11) NOT NULL,
+  `statusid` int(11) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `video`
+--
+
+INSERT INTO `video` (`id`, `video`, `sponsorsid`, `statusid`) VALUES
+(1, 'video/1/commDaily-Sport-Manager-revA.mp4', 1, 1),
+(2, 'video/1/Daily-Sport-Manager-revA.mp4', 2, 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `video_tests`
 --
 
@@ -17019,6 +17065,12 @@ ALTER TABLE `sports_events`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `subscribe`
+--
+ALTER TABLE `subscribe`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `teams`
 --
 ALTER TABLE `teams`
@@ -17037,6 +17089,12 @@ ALTER TABLE `teams_phases`
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `video`
+--
+ALTER TABLE `video`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -17063,7 +17121,7 @@ ALTER TABLE `contests_has_sports_events`
 -- AUTO_INCREMENT for table `contests_prize`
 --
 ALTER TABLE `contests_prize`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `contests_rosters`
 --
@@ -17120,6 +17178,11 @@ ALTER TABLE `sports`
 ALTER TABLE `sports_events`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
 --
+-- AUTO_INCREMENT for table `subscribe`
+--
+ALTER TABLE `subscribe`
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
@@ -17134,6 +17197,11 @@ ALTER TABLE `teams_phases`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT for table `video`
+--
+ALTER TABLE `video`
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `video_tests`
 --

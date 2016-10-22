@@ -25,7 +25,7 @@
         margin-left: 10px;
         float: left;
     }
-    
+
     ul {
         padding: 0px;
     }
@@ -1320,7 +1320,7 @@
                         '<div class="homeTeam">@ ' + event.team_name_home + '</div>' +
                         '<br/><br/>' + event.start_date + '  ' + event.start_time)
 
-                    
+
                 });
 
                 //assigns an onclick function on the list of events
@@ -1434,7 +1434,7 @@
             } else {
                 var pid = $(this).parent(this).parent(this).parent(this).attr('pid')
             }
-            
+
             $('.playerInfoBoxContainer').empty()
 //            $('.playerInfoBoxContainer').append('<div class="playerInfoBoxContainerLoading">Loading...</div>')
 //            $('.playerInfoBoxContainerLoading').show()

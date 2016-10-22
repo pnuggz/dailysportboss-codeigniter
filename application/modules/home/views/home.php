@@ -13,11 +13,7 @@
             <div class="intro-text">
                 <div class="intro-lead-in"><img src="img/home/keepupdate.png" alt="" /></div>
                 <div class="col-md-8 text-center box-center box-subscribe">
-                    <?php
-                    $attributes = array('id'  =>   'subscribe');
-
-                    echo form_open('home/subscribe', $attributes);
-                    ?>
+                    <form id="subscribe" enctype="multipart/form-data">
                     <div class="input-group">
                       <div class="col-md-6 col-xs-12 col-sm-12 padding-5">
                         <input type="text" class="form-control" name="email" placeholder="ENTER YOUR EMAIL" required>
@@ -284,10 +280,7 @@
                       </div>
                       <?php echo $this->session->flashdata('subscribe_success'); ?>
                     </div>
-                    <?php
-                      echo form_close();
-
-                    ?>
+                  </form>
                 </div>
             </div>
         </div>
