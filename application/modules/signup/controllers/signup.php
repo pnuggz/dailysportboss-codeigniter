@@ -24,7 +24,7 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|max_length[30]|xss_clean|matches[password]');
            $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
            $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
-           $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|regex_match[/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/]');
+           $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|regex_match[/^[0-9]{1,2}\/[0-9]{1,2}\/[0-9]{4}$/]');
            if($this->form_validation->run() == FALSE)
            {
                $this->output->set_output(json_encode(validation_errors()), 200);
