@@ -43,10 +43,10 @@ class Signup extends MX_Controller {
 
              if($cekusername > 0)
              {
-               $this->output->set_output(json_encode(array('error'=>array('message'=>"Username Already Exists"))), 200);
+               $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, there is already an account registered with the same username."))), 200);
              }else if($cekemail > 0)
              {
-               $this->output->set_output(json_encode(array('error'=>array('message'=>"Email Already Exists"))), 200);
+               $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, there is already an account registered with the same email address."))), 200);
              }else{
                $enc_password = md5($this->input->post('password'));
                $sub = $this->input->post('subscribe');
@@ -63,7 +63,7 @@ class Signup extends MX_Controller {
                             );
 
                $this->_insert($data);
-               $this->output->set_output(json_encode(array('success'=>array('message'=>"Registration Success"))), 200);
+               $this->output->set_output(json_encode(array('success'=>array('message'=>"Registration success, Enjoy your game."))), 200);
              }
            }
        }

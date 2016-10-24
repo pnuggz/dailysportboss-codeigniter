@@ -19,6 +19,14 @@ class Mdl_users extends CI_Model {
         }
     }
 
+    function check_users($username) {
+
+        $this->db->where('username', $username);
+
+        $query = $this->db->get('users');
+        return $query->num_rows();
+    }
+
     function get_table() {
         $table = "users";
         return $table;
