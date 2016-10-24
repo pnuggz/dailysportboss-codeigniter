@@ -14,7 +14,7 @@ class Login extends MX_Controller {
    {
            $this->load->helper('security');
            $this->load->model('mdl_users');
-           if($this->input->post('username') == '' && $this->input->post('password') == '')
+           if($this->input->post('username') == '' || $this->input->post('password') == '')
            {
                $this->output->set_output(json_encode(array('error'=>array(
                  'message' => 'username and password must be filled',
