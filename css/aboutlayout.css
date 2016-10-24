@@ -6,7 +6,7 @@ img.img-responsive.logo.visible-md {
 
 img.img-responsive.logo.visible-xs {
     height: inherit;
-    margin-top: -16px;
+    margin-top: 8px;
 }
 
 .orange-text {
@@ -21,6 +21,8 @@ img.img-responsive.logo.visible-xs {
 body.dsb ul.nav.navbar-nav.navbar-right {
     margin-top: 20px;
 }
+
+
 
 @media (max-width: 768px) {
     body.dsb ul.nav.navbar-nav.navbar-right {
@@ -37,7 +39,6 @@ body.dsb ul.nav.navbar-nav.navbar-right {
         margin-top: 25px;
     }
     body.dsb div#bs-example-navbar-collapse-1 {
-        background: #001A1F;
         text-align: center;
         padding: 20px;
     }
@@ -65,60 +66,50 @@ body.dsb ul.nav.navbar-nav.navbar-right {
 }
 
 .navbar-custom .navbar-brand {
-    color: #fed136;
+    color: #ff921e;
 }
 
 .navbar-custom .navbar-brand:hover,
 .navbar-custom .navbar-brand:focus,
 .navbar-custom .navbar-brand:active,
 .navbar-custom .navbar-brand.active {
-    color: #fec503;
+    color: #ff921e;
 }
 
 .navbar-custom .navbar-collapse {
     border-color: rgba(255, 255, 255, 0.98);
 }
 
-.navbar-custom .navbar-toggle {
-    background-color: #fed136;
-    border-color: #fed136;
-    color: white;
-    font-size: 12px;
-}
 
 .navbar-custom .navbar-toggle:hover,
 .navbar-custom .navbar-toggle:focus {
-    background-color: #fed136;
+    background-color: #ff921e;
 }
 
 .navbar-custom .nav li a {
     font-weight: 400;
     letter-spacing: 1px;
     color: white;
-    border: 1px solid #ddd;
-    margin-right: 16px;
-    border-radius: 51px;
     padding: 6px 12px;
-    margin-top: 8px;
 }
 
 .navbar-custom .nav li a:hover,
 .navbar-custom .nav li a:focus {
     color: #fed136;
-    border-color: #fed136;
+    border-color: #ff921e;
     outline: none;
 }
 
 .navbar-custom .navbar-nav > .active > a {
     border-radius: 0;
     color: white;
-    background-color: #fed136;
+    background-color: #ff921e;
 }
 
 .navbar-custom .navbar-nav > .active > a:hover,
 .navbar-custom .navbar-nav > .active > a:focus {
     color: white;
-    background-color: #fec503;
+    background-color: #ff921e;
 }
 
 @media (min-width: 768px) {
@@ -145,16 +136,12 @@ body.dsb ul.nav.navbar-nav.navbar-right {
 }
 nav#mainNav.affix {
     background: #001A1F;
-    height: 80px;
+
 }
 nav#mainNav.affix img.img-responsive.logo.visible-md {
     height: auto;
-    width: 200px;
-    margin-top: -9px;
 }
-nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
-    margin-top: 5px;
-}
+
 @media (min-width: 768px) {
     .navbar-custom.affix {
         background-color: #001A1F;
@@ -241,6 +228,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     background-color: #00252C;
     min-height: 100vh;
     padding-top: 55px;
+    background-size: contain;
 }
 
 #dsb .container-fluid .container.container-1 .row.row-1 {
@@ -271,7 +259,6 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
     color: white;
     line-height: 1.7;
     font-family: Century Gothic, Calibri, Candara, Segoe, Segoe UI, Optima, Arial, sans-serif;
-    font-size: 19px;
     text-align: justify;
 }
 
@@ -291,7 +278,7 @@ nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
 
 #dsb .container-fluid.section-1 .container.container-5 {
     background: #012329;
-    padding: 50px;
+    padding-bottom: 50px;
     opacity: 0.8;
     color: white;
     line-height: 1.7;
@@ -318,14 +305,12 @@ body.dsb footer {
 
 #dsb .box-subscribe input,
 #dsb .box-subscribe select {
-    height: 50px;
     box-shadow: inset 0 0 6px 2px #00252C;
     background: white;
     border: none;
     outline: none;
     color: #848d95;
     text-align: left;
-    font-size: 18px;
 }
 
 #dsb .box-subscribe select {
@@ -368,6 +353,7 @@ body.dsb footer {
     background: url(../img/dsb/background-home-section-1.gif) top no-repeat;
     background-color: #00252C;
     min-height: 100vh;
+    background-size: contain;
 }
 #partnership .container.container-1.partnership{
     padding-top: 60px;
@@ -401,8 +387,6 @@ body.dsb footer {
     line-height: 1.7;
     font-family: "Century Gothic";
     font-size: 20px;
-    padding-left: 20px;
-    padding-right: 15px;
 }
 
 #partnership .container-fluid.section-1 .container.container-4 {
@@ -757,4 +741,672 @@ img.alert-img{
 span.alert-notif {
     margin-left: 100px;
     font-size: 23px;
+}
+
+
+@media (max-width: 399px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-xs {
+        width: 220px;
+        height: auto;
+        margin-top: -4px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 12.5px;
+        padding: 15px 0px 0px 0px;
+        background-color: #001A1F;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 13px;
+        padding: 25px 10px 0px 10px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 30px;
+        font-size: 14px;
+
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 100%;
+        padding: 1px;
+    }
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 72.5px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 13px;
+        padding: 25px 10px 0px 10px;
+        text-align: justify;
+    }
+
+    #partnership .box-advs span {
+        font-size: 13px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width: 400px) and (max-width: 540px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-xs {
+        width: 220px;
+        height: auto;
+        margin-top: -4px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 12.5px;
+        padding: 15px 0px 0px 0px;
+        background-color: #001A1F;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 12px;
+        padding: 25px 10px 0px 10px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 30px;
+        font-size: 14px;
+
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 100%;
+        padding: 1px;
+    }
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 72.5px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 12px;
+        padding: 25px 10px 0px 10px;
+        text-align: justify;
+    }
+
+    #partnership .box-advs span {
+        font-size: 12px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 20px;
+    }
+
+
+}
+
+@media (min-width: 541px) and (max-width: 767px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-xs {
+        width: 300px;
+        height: auto;
+        margin-top: 0px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 20px;
+        padding: 15px 0px 0px 0px;
+        background-color: #001A1F;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 16px;
+        padding: 25px 10px 10px 10px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 105px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 30px;
+        font-size: 14px;
+
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 100%;
+        padding: 1px;
+    }
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 100px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 16px;
+        padding: 25px 10px 0px 10px;
+        text-align: justify;
+    }
+
+    #partnership .box-advs span {
+        font-size: 16px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 20px;
+    }
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-xs {
+        width: 380px;
+        height: auto;
+        margin-top: -10px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 20px;
+        padding: 15px 0px 0px 0px;
+        font-size: 20px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    body.dsb ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 18px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 155px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 50px;
+        font-size: 20px;
+
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 100%;
+        padding: 1px;
+    }
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 115px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    .container {
+        width: auto;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 18px;
+        text-align: justify;
+        padding-bottom: 25px;
+    }
+
+    #partnership div.col-md-3.col-xs-12.col-sm-6 {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    #partnership .box-advs span {
+        font-size: 16px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 24px;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1169px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-md {
+        width: 450px;
+        margin-top: -10px;
+    }
+
+    nav#mainNav.affix img.img-responsive.logo.visible-md {
+        width: 300px;
+        margin-top: -10px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 24px;
+        padding: 15px 0px 0px 0px;
+        font-size: 24px;
+    }
+
+    nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -19px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    body.dsb ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 20px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 155px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 50px;
+        font-size: 20px;
+
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 100%;
+        padding: 1px;
+    }
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 95px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    .container {
+        width: auto;
+    }
+
+    #dsb div.col-md-12.col-xs-12 h2 {
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 20px;
+        text-align: justify;
+        padding-bottom: 25px;
+    }
+
+    #partnership div.col-md-3.col-xs-12.col-sm-6 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #partnership .box-advs span {
+        font-size: 18px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 28px;
+    }
+
+    #partnership .col-md-10 {
+        width: 90%;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-md.visible-lg {
+        color: #ff921e;
+        font-size: 24px;
+    }
+
+}
+
+@media (min-width: 1170px) {
+    .navbar-custom .navbar-toggle {
+        background-color: #ff921e;
+        border: 1px solid #ff921e;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        font-size: 11px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .navbar-custom .navbar-toggle:hover, .navbar-custom .navbar-toggle:focus {
+        background-color: #ff921e;
+    }
+
+    #mainNav button.navbar-toggle {
+        margin-top: 27.5px;
+        font-size: 15px;
+    }
+
+    nav#mainNav img.img-responsive.logo.visible-md {
+        width: 450px;
+        margin-top: -10px;
+    }
+
+    nav#mainNav.affix img.img-responsive.logo.visible-md {
+        width: 300px;
+        margin-top: -10px;
+    }
+
+    #mainNav div#bs-example-navbar-collapse-1 {
+        margin-top: 24px;
+        padding: 15px 0px 0px 0px;
+        font-size: 24px;
+    }
+
+    nav#mainNav.affix ul.nav.navbar-nav.navbar-right {
+        margin-top: -19px;
+    }
+
+    .navbar-custom .nav li a {
+        margin: auto;
+        border: none;
+        font-family: Century Gothic, 'Muli', sans-serif;
+        border: none;
+    }
+
+    body.dsb ul.nav.navbar-nav.navbar-right {
+        margin-top: -10px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-3 {
+        font-size: 20px;
+    }
+
+    #dsb input.subscribe {
+        margin-left: 2px;
+        height: 30px;
+        box-shadow: inset 0 0 4px 1px #00252C;
+        border: none;
+        background-image: url('../img/home/SubscribeButtonIddle.png');
+        outline: none;
+        background-size: cover;
+        min-width: 155px;
+    }
+
+    #dsb .box-subscribe input, #dsb .box-subscribe select {
+        height: 50px;
+        font-size: 20px;
+    }
+
+    #dsb .container-fluid.section-1 .container.container-5 {
+        width: 1170px;
+    }
+
+    #dsb .container.container-5 div.col-md-12.
+
+    .col-md-3, .col-md-12 {
+        padding: 0px;
+    }
+
+    nav#mainNav.affix {
+        height: 95px;
+    }
+
+    #dsb div.input-group {
+        padding-left: 10%;
+        padding-right: 10%;
+        padding-bottom: 50px;
+    }
+
+    .container {
+        width: 1170px;
+    }
+
+    #dsb div.col-md-12.col-xs-12 h2 {
+        font-size: 40px;
+        margin-bottom: 25px;
+    }
+
+    #partnership .col-md-10 {
+        width: 90%;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-3 {
+        font-size: 20px;
+        text-align: justify;
+        padding-bottom: 25px;
+    }
+
+    #partnership div.col-md-3.col-xs-12.col-sm-6 {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    #partnership .box-advs span {
+        font-size: 18px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-xs.visible-sm.text-center {
+        color: #ff921e;
+        font-size: 28px;
+    }
+
+    #partnership .container-fluid.section-1 .container.container-5 h3.visible-md.visible-lg {
+        color: #ff921e;
+        font-size: 24px;
+    }
+
 }
