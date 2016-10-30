@@ -24,12 +24,9 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('password2', 'Confirm Password', 'required|max_length[30]|xss_clean|matches[password]');
            $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
            $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
-           $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required');
-           if($this->checkDateFormat($this->input->post('birthday')) == false){
-             return $this->output->set_output(json_encode(array('error'=>array('birthday'=>"Invalid format birthday date"))), 200);
-           }
+           $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
 
-           if($this->form_validation->run() == FALSE)
+           if($this->form_validation->run($this) == FALSE)
            {
 
               $data = array('error'=>$this->form_validation->error_array());
@@ -68,14 +65,15 @@ class Signup extends MX_Controller {
            }
        }
 
-       function checkDateFormat($date) {
+       public function checkdateformat($date) {
           if (preg_match('/^\d{2}\-\d{2}\-\d{4}$/', $date)) {
               if(checkdate(substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4)))
-                  return true;
+                  {return TRUE;}
               else
-                  return false;
+                  {$this->form_validation->set_message('checkdateformat', 'Invalid format birthday date.'); return FALSE;}
           } else {
-              return false;
+              $this->form_validation->set_message('checkdateformat', 'Invalid format birthday date.');
+              return FALSE;
           }
       }
 
