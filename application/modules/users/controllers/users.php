@@ -84,7 +84,7 @@ class Users extends Secure_area {
       }
     }
 
-    function resetpassword() {
+    function changepassword() {
       $this->load->model('mdl_users');
       $id = $this->session->userdata['userid'];
       $this->load->library('form_validation');

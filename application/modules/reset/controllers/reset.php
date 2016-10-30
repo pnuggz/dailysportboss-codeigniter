@@ -84,7 +84,7 @@ class Reset extends MX_Controller {
                          );
 
             $this->mdl_users->_update($id,$data);
-            $this->output->set_output(json_encode(array('success'=>array('message'=>"Your password has change"))), 200);
+            $this->output->set_output(json_encode(array('success'=>array('message'=>"Your password has change."))), 200);
           }
        }else{
          $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, your form already expired."))), 200);
