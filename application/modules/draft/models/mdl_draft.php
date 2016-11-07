@@ -11,6 +11,11 @@ class Mdl_draft extends CI_Model
 
     function get_contest_status($league_id, $active = TRUE)
     {
+        $whereleague = '';
+        if($league_id){
+          $whereleague = " and leagues.id = '.$league_id.'";
+        }
+
         $result = array();
         $query = $this->db->query('
           SELECT
@@ -50,7 +55,7 @@ class Mdl_draft extends CI_Model
                 FROM contests_users_entries
                 GROUP BY contest_id
           ) t2 ON t2.contest_id = contests.id
-          WHERE leagues.id = '.$league_id.' and contests.contest_status = 0
+          WHERE  contests.contest_status = 0 '.$whereleague.'
           ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
         ');
          $query;

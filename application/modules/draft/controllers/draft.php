@@ -105,7 +105,7 @@ class Draft extends Secure_area
         $this->output->set_output(json_encode($data), 200);
     }
 
-    function contests($league_id)
+    function contests($league_id=null)
     {
         $this->load->model('mdl_draft');
         $data = array(

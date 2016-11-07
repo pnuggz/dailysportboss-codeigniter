@@ -61,6 +61,8 @@ class Mdl_users extends CI_Model {
     function _insert($data) {
         $table = $this->get_table();
         $this->db->insert($table, $data);
+        $userid = $this->db->insert_id();
+        return $userid;
     }
 
 

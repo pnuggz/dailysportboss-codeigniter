@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 22, 2016 at 10:23 PM
+-- Generation Time: Nov 07, 2016 at 09:44 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -16917,23 +16917,27 @@ CREATE TABLE IF NOT EXISTS `users` (
   `birthday` date NOT NULL,
   `subscribe` int(22) NOT NULL,
   `dob` date NOT NULL,
-  `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+  `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `activation` int(22) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_name`, `phonenumber`, `address`, `birthday`, `subscribe`, `dob`, `register_date`) VALUES
-(1, 'pnugraha89@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'admin', 'Ryan', 'Nugraha', '', '', '0000-00-00', 0, '0000-00-00', '2016-04-15 07:44:58'),
-(2, 'pnugraha891@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'pnuggz', 'Ryan', 'Nug', '08745455', 'Jl. Testing No 99', '2016-09-01', 1, '0000-00-00', '2016-04-15 07:44:58'),
-(3, 'pnugraha89@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'mjscar', 'Ryan', 'Nugraha', '', '', '0000-00-00', 0, '0000-00-00', '2016-04-15 07:44:58'),
-(4, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester1', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23'),
-(5, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester2', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23'),
-(6, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester3', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23'),
-(7, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'matt_ritchie', 'Matthew', 'Ritchie', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23'),
-(8, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'dicky_suria', 'Dicky', 'Suriakusumah', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23'),
-(9, 'testertes@tester.com', 'e2f9f842fd8e1ae90dc428d39cab7167', 'cleopatra', 'tester', 'tester', '', '', '0000-00-00', 0, '0000-00-00', '2016-09-23 16:32:40');
+INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_name`, `phonenumber`, `address`, `birthday`, `subscribe`, `dob`, `register_date`, `activation`) VALUES
+(1, 'pnugraha89@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'admin', 'Ryan', 'Nugraha', '', '', '0000-00-00', 0, '0000-00-00', '2016-04-15 07:44:58', 1),
+(2, 'pnugraha891@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'pnuggz', 'Ryan', 'Nug', '08745455', 'Jl. Testing No 99', '2016-09-01', 1, '0000-00-00', '2016-04-15 07:44:58', 1),
+(3, 'pnugraha89@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'mjscar', 'Ryan', 'Nugraha', '', '', '0000-00-00', 0, '0000-00-00', '2016-04-15 07:44:58', 1),
+(4, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester1', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23', 1),
+(5, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester2', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23', 1),
+(6, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'tester3', 'Test', 'Test', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23', 1),
+(7, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'matt_ritchie', 'Matthew', 'Ritchie', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23', 1),
+(8, 'test@test.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'dicky_suria', 'Dicky', 'Suriakusumah', '', '', '0000-00-00', 0, '2016-07-01', '2016-07-22 02:21:23', 1),
+(9, 'testertes@tester.com', 'e2f9f842fd8e1ae90dc428d39cab7167', 'cleopatra', 'tester', 'tester', '', '', '0000-00-00', 0, '0000-00-00', '2016-09-23 16:32:40', 1),
+(10, 'asasas@gmail.com', '942656fd05b5b2da42ef45433ac64f1d', 'rttess', 'asdasdsa', 'asdsadsa', '3535353', 'sadsadsa', '1970-01-01', 0, '0000-00-00', '2016-10-24 18:37:45', 1),
+(11, 'teasasdo@gmail.com', 'b93939873fd4923043b9dec975811f66', 'asdadsadasdsa3242', 'asdasdsa', 'asdsadsa', '3535353', 'sadsadsa', '2016-10-10', 0, '0000-00-00', '2016-10-26 23:52:42', 1),
+(17, 'aditdwiputranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsy', 'Aditya', 'Dwi Putranto', '6346464', 'tesss', '1991-06-13', 0, '0000-00-00', '2016-11-07 20:21:23', 1);
 
 -- --------------------------------------------------------
 
@@ -17196,7 +17200,7 @@ ALTER TABLE `teams_phases`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `video`
 --

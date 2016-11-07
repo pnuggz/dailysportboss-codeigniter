@@ -7,27 +7,26 @@ class Mdl_users extends CI_Model {
         parent::__construct();
     }
 
-    function login_users($username, $password) {
-        $enc_password = md5($password);
-
-        $this->db->where('username', $username);
-        $this->db->where('password', $enc_password);
-
-        $query = $this->db->get('users');
-        if($query->num_rows() == 1) {
-            return $query->row()->id;
-        }
-    }
-
     function check_users($username) {
 
         $this->db->where('username', $username);
 
         $query = $this->db->get('users');
-        if($query->num_rows() > 0) {
-            return $query->row();
-        }
+        return $query->num_rows();
     }
+
+    function check_email($email) {
+        $data = '';
+        $this->db->where('email', $email);
+
+        $query = $this->db->get('users');
+        foreach($query->result() as $row)
+        {
+          $data= $row->id;
+        }
+        return $data;
+    }
+
 
     function get_table() {
         $table = "users";
@@ -68,6 +67,7 @@ class Mdl_users extends CI_Model {
         $this->db->insert($table, $data);
     }
 
+
     function _update($id, $data) {
         $table = $this->get_table();
         $this->db->where('id', $id);
@@ -102,14 +102,6 @@ class Mdl_users extends CI_Model {
         $row = $query->row();
         $id = $row->id;
         return $id;
-    }
-
-    function check_email($email) {
-
-        $this->db->where('email', $email);
-
-        $query = $this->db->get('users');
-        return $query->num_rows();
     }
 
     function _custom_query($mysql_query) {

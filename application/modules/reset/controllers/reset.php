@@ -74,8 +74,11 @@ class Reset extends MX_Controller {
           $this->form_validation->set_rules('newpassword2', 'Confirm New Password', 'required|max_length[30]|xss_clean|matches[newpassword]');
           if($this->form_validation->run() == FALSE)
           {
-            $data = array('error'=>$this->form_validation->error_array());
-            $this->output->set_output(json_encode($data), 200);
+            $new=array();
+            foreach( $this->form_validation->error_array() as $key=>$value) {
+               $new['message'][]= $this->form_validation->error_array()[$key];
+             }
+              $this->output->set_output(json_encode(array('error'=>$new)), 200);
           }else {
             $this->load->model('mdl_users');
             $enc_password = md5($this->input->post('newpassword'));

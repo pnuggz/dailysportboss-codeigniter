@@ -25,40 +25,49 @@ class Login extends MX_Controller {
                $username = $this->input->post('username');
                $password = $this->input->post('password');
                $cekusername = $this->mdl_users->check_users($username);
-               if($cekusername > 0)
+               if($cekusername)
                {
-                 $user_id = $this->mdl_users->login_users($username, $password);
-                 if($user_id){
-                     $user_data = array('userid'    =>      $user_id,
-                                        'username'   =>      $username,
-                                        'logged_in'  =>      TRUE
-                                        );
 
-                     $this->session->set_userdata($user_data);
-                     $this->session->set_userdata('token',$this->generate_token());
-                     $query = $this->mdl_users->get_where($this->session->userdata['userid']);
-                     $data = array();
-                     foreach($query->result() as $row)
-                     {
-                       $birthday = '';
-                       if($row->birthday && $row->birthday != '0000-00-00')$birthday =date('d-m-Y',strtotime($row->birthday));
+                    $user_id = $this->mdl_users->login_users($username, $password);
+                   if($user_id){
+                     if($cekusername->activation == 1)
+                      {
+                       $user_data = array('userid'    =>      $user_id,
+                                          'username'   =>      $username,
+                                          'logged_in'  =>      TRUE
+                                          );
 
-                       $data = array(
-                         'id'=> $row->id,
-                         'email' => $row->email,
-                         'username' => $row->username,
-                         'firstname' => $row->first_name,
-                         'lastname' => $row->last_name,
-                         'registerdate' => date('d-m-Y H:i',strtotime($row->register_date)),
-                       );
+                       $this->session->set_userdata($user_data);
+                       $this->session->set_userdata('token',$this->generate_token());
+                       $query = $this->mdl_users->get_where($this->session->userdata['userid']);
+                       $data = array();
+                       foreach($query->result() as $row)
+                       {
+                         $birthday = '';
+                         if($row->birthday && $row->birthday != '0000-00-00')$birthday =date('d-m-Y',strtotime($row->birthday));
+
+                         $data = array(
+                           'id'=> $row->id,
+                           'email' => $row->email,
+                           'username' => $row->username,
+                           'firstname' => $row->first_name,
+                           'lastname' => $row->last_name,
+                           'registerdate' => date('d-m-Y H:i',strtotime($row->register_date)),
+                         );
+                       }
+                       $this->output->set_output(json_encode(array('token'=>$this->session->userdata['token'],'data'=>$data)), 200);
+                     }else{
+                       $this->output->set_output(json_encode(array('error'=>array(
+                         'message' => 'Sorry, you need activate your account first, please check your email for verification.',
+                       ))), 200);
                      }
-                     $this->output->set_output(json_encode(array('token'=>$this->session->userdata['token'],'data'=>$data)), 200);
 
-                 } else {
-                   $this->output->set_output(json_encode(array('error'=>array(
-                     'message' => 'Sorry, incorrect password entered.',
-                   ))), 200);
-                 }
+                   } else {
+                     $this->output->set_output(json_encode(array('error'=>array(
+                       'message' => 'Sorry, incorrect password entered.',
+                     ))), 200);
+                   }
+
                }else {
                  $this->output->set_output(json_encode(array('error'=>array(
                    'message' => 'Sorry, entered username does not exist. please register first.',
