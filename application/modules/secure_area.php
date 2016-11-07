@@ -12,9 +12,9 @@ class Secure_area extends MX_Controller
 	{
 		parent::__construct();
 		$this->load->library('jwt');
-   if(array_key_exists('Authorization',$token) && array_key_exists('token',$this->session->userdata))
+   if(array_key_exists('Authorization',$token))
 		{
-			if($token['Authorization'] == $this->session->userdata['token'])
+			if($token['Authorization'])
 			{
 				$decode_token = $this->decode_token($token['Authorization']);
 	      if($decode_token->exp > time() && $decode_token->data->userid == $this->session->userdata['userid'] && $decode_token->data->username == $this->session->userdata['username'])
@@ -22,10 +22,10 @@ class Secure_area extends MX_Controller
 
 					$this->session->set_userdata('token',$this->generate_token());
 	  		}else{
-					echo json_encode("0");exit;
+					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
 				}
 			}else{
-				echo json_encode("0");exit;
+				echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
 			}
     }else{
       exit('No direct script access allowed');

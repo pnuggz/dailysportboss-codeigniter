@@ -28,7 +28,7 @@ class Signup extends MX_Controller {
 
            if($this->form_validation->run($this) == FALSE)
            {
-
+             print_r($this->form_validation->error_array());exit;
               $data = array('error'=>$this->form_validation->error_array());
                $this->output->set_output(json_encode($data), 200);
 
