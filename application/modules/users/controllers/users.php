@@ -29,6 +29,7 @@ class Users extends Secure_area {
           'lastname' => $row->last_name,
           'registerdate' => date('d-m-Y H:i',strtotime($row->register_date)),
           'address' => $row->address,
+          'zipcode' => $row->zipcode,
           'mobilephone' => $row->phonenumber,
           'birthday' => $birthday,
           'subscribe' => $row->subscribe
