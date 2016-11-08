@@ -42,6 +42,38 @@ class Reset extends MX_Controller {
      }
    }
 
+   function resend()
+   {
+     $this->load->helper('security');
+     $this->load->model('mdl_users');
+     $this->load->library('form_validation');
+     $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email');
+     if($this->form_validation->run($this) == FALSE)
+     {
+
+        $data = array('error'=>$this->form_validation->error_array());
+         $this->output->set_output(json_encode($data), 200);
+
+     } else {
+       $this->load->model('mdl_users');
+
+       $cekemail = $this->mdl_users->check_email($this->input->post('email'));
+
+       if($cekemail)
+       {
+         $this->load->library('Mail');
+         $this->load->library('jwt');
+         $token = $this->generate_token($cekemail);
+         $send = new Mail();
+         $message = 'http://localhost:3000/account/#/forgotpassword/'.$token;
+         $send->sendMail($this->input->post('email'),'Reset Password',$message);
+         $this->output->set_output(json_encode(array('success'=>array('message'=>"Request reset password has been send to your email, please check your email."))), 200);
+       }else{
+         $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, this email address not available."))), 200);
+       }
+     }
+   }
+
    function form($token)
    {
      if($token)
