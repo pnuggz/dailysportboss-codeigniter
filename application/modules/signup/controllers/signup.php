@@ -20,9 +20,10 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
            $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|callback_cekemails');
            $this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[30]|xss_clean|callback_cekusernames');
-           $this->form_validation->set_rules('password', 'Password', 'required|max_length[30]|xss_clean');
-           $this->form_validation->set_rules('password2', 'Confirm Password', 'required|max_length[30]|xss_clean|matches[password]');
+           $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]|max_length[30]|xss_clean');
+           $this->form_validation->set_rules('password2', 'Confirm Password', 'required|min_length[6]|max_length[30]|xss_clean|matches[password]');
            $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
+           $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
            $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
            $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
 
@@ -45,6 +46,7 @@ class Signup extends MX_Controller {
                              'username'     =>      $this->input->post('username'),
                              'password'     =>      $enc_password,
                              'address'    =>      $this->input->post('address'),
+                             'zipcode'    =>      $this->input->post('zipcode'),
                              'phonenumber'     =>      $this->input->post('mobilephone'),
                              'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
                              'subscribe'     => $sub,
@@ -56,7 +58,7 @@ class Signup extends MX_Controller {
                $this->load->library('jwt');
                $token = $this->generate_token($id);
                $send = new Mail();
-               $message = base_url().'activation/v1/'.$token;
+               $message = 'http://localhost:3000/account/#/signup_complete/'.$token;
                $send->sendMail($this->input->post('email'),'Email Verification',$message);
                $this->output->set_output(json_encode(array('success'=>array('message'=>"Registration success, please check your email for verification."))), 200);
            }

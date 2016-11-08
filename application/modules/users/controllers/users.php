@@ -19,7 +19,8 @@ class Users extends Secure_area {
       {
         $birthday = '';
         if($row->birthday && $row->birthday != '0000-00-00')$birthday =date('d-m-Y',strtotime($row->birthday));
-
+        $this->load->library('jwt');
+        $token = $this->generate_token($row->id);
         $data = array(
           'id'=> $row->id,
           'email' => $row->email,
@@ -33,7 +34,7 @@ class Users extends Secure_area {
           'subscribe' => $row->subscribe
         );
       }
-      $this->output->set_output(json_encode($data), 200);
+      $this->output->set_output(json_encode(array('token'=>$token,'data'=>$data)), 200);
     }
 
     function logout() {
@@ -42,7 +43,7 @@ class Users extends Secure_area {
         $this->session->unset_userdata('username');
         $this->session->unset_userdata('token');
         $this->session->sess_destroy();
-        $this->output->set_output(json_encode(1), 200);
+        $this->output->set_output(json_encode(array('success'=>array('message'=>'Success log out'))), 200);
     }
 
     function edit() {
@@ -179,5 +180,6 @@ class Users extends Secure_area {
         $query = $this->mdl_users->_custom_query($mysql_query);
         return $query;
     }
+
 
 }

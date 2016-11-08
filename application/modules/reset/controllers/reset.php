@@ -33,7 +33,7 @@ class Reset extends MX_Controller {
          $this->load->library('jwt');
          $token = $this->generate_token($cekemail);
          $send = new Mail();
-         $message = base_url().'reset/form/'.$token;
+         $message = 'http://localhost:3000/account/#/forgotpassword/'.$token;
          $send->sendMail($this->input->post('email'),'Reset Password',$message);
          $this->output->set_output(json_encode(array('success'=>array('message'=>"Request reset password has been send to your email, please check your email."))), 200);
        }else{
