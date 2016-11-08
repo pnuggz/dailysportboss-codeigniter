@@ -17,6 +17,8 @@ class Activation extends MX_Controller {
       {
         $this->load->library('jwt');
         $decode_token = $this->decode_token($token);
+        if($decode_token->exp > time())
+        {
           $id = $decode_token->data->userid;
           $this->load->model('mdl_users');
 
@@ -24,6 +26,10 @@ class Activation extends MX_Controller {
                        );
           $this->mdl_users->_update($id,$data);
           $this->output->set_output(json_encode(array('success'=>array('message'=>"Your account has activate."))), 200);
+        }else{
+          $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, your activation has expired please resend your activation."))), 200);
+        }
+
       }else{
         $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, your form invalid token."))), 200);
       }
