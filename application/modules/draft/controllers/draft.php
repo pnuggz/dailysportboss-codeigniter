@@ -84,39 +84,56 @@ class Draft extends Secure_area
 
     }
 
-    function leagues()
-    {
-        $this->load->model('mdl_draft');
-        $data = array(
-          'token' => $this->session->userdata['token'],
-          'data'  => $this->mdl_draft->get_league()
-        );
-        $this->output->set_output(json_encode($data), 200);
-    }
+
 
     function join($contest_id)
     {
-        $this->load->model('mdl_draft');
-        $cekContest = $this->mdl_draft->check_contest_start($contest_id);
-        $data = array(
-          'token' => $this->session->userdata['token'],
-          'data'  => $cekContest
-        );
-        $this->output->set_output(json_encode($data), 200);
+        if(array_key_exists('userid',$this->session->userdata))
+        {
+          $userid = $this->session->userdata('userid');
+        }else{
+          $userid = '';
+        }
+
+        if($userid)
+        {
+          $this->load->model('mdl_draft');
+          $err = array();
+          $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+          $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+          $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
+          if($cekContest==0)
+          {
+            $err['message'][] = 'Sorry, Contests already start.';
+          }
+
+          if($cekCount)
+          {
+            $err['message'][] = 'Sorry, cannot join contests because reach limit registered team.';
+          }
+
+          if($cekmaxCount)
+          {
+            $err['message'][] = 'Sorry, cannot join contests because reach maximum entry.';
+          }
+
+          if(!array_key_exists('message',$err))
+          {
+            $data = array(
+              'token' => $this->session->userdata['token']
+            );
+            $this->output->set_output(json_encode($data), 200);
+          }else{
+            $this->output->set_output(json_encode(array('error'=>$err)), 200);
+          }
+
+        }else{
+          echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+        }
+
     }
 
-    function contests($league_id=null)
-    {
-        $this->load->model('mdl_draft');
-        $data = array(
-          'token' => $this->session->userdata['token'],
-          'data'  => array(
-              'active_contests' => $this->mdl_draft->get_contest_status($league_id, TRUE),
-              'inactive_contests' => $this->mdl_draft->get_contest_status($league_id, FALSE)
-          )
-        );
-        $this->output->set_output(json_encode($data), 200);
-    }
+
 
     function games($contest_id)
     {
@@ -194,45 +211,7 @@ class Draft extends Secure_area
 
     }
 
-    function contestdetails($league_id,$contest_id) {
-        $array = array();
-        if($this->session->userdata('logged_in')) {
-            $user_id = $this->session->userdata('userid');
-            $user_entry_count = 0;
 
-            $this->load->model('mdl_draft');
-            $data1 = $this->mdl_draft->get_user_entry_count($contest_id, $user_id);
-                foreach ($data1->result() as $row) {
-                    $user_entry_count = $row->user_entry_count;
-                }
-        } else {
-            $user_entry_count = '-';
-        }
-
-
-        $this->load->model('mdl_draft');
-        $data = $this->mdl_draft->get_contest_details($league_id, $contest_id);
-        foreach ($data->result() as $row){
-
-            $array = array(
-                'contest_id'            =>  $row->contests_id,
-                'league_id'             =>  $row->leagues_id,
-                'contest_name'          =>  $row->contest_name,
-                'entry_max'             =>  $row->entry_max,
-                'entry_fee'             =>  $row->entry_fee,
-                'sponsors_id'           =>  $row->sponsors_id,
-                'sponsorname'           =>  $row->sponsor,
-                'league_name'           =>  $row->league_name,
-                'league_shorthand'      =>  $row->league_shorthand,
-                'start_date'            =>  date('d-m-Y',strtotime($row->start_date)),
-                'start_time'            =>  $row->start_time,
-                'entry_count'           =>  $row->entry_count,
-                'user_entry_count'      =>  $user_entry_count,
-                "prize" => $row->currency.' '.number_format($row->prize).$row->upto
-            );
-        }
-        $this->output->set_output(json_encode($array), 200);
-    }
 
     function roster() {
         $contest_id = $this->uri->segment(3);

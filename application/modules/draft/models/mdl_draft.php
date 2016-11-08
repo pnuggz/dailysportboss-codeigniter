@@ -107,6 +107,124 @@ class Mdl_draft extends CI_Model
        return $result;
     }
 
+    function check_contest_count($contest_id,$userid)
+    {
+      $result =0;
+      $query = $this->db->query('
+        SELECT
+        contests.id as contests_id,
+        contests.leagues_id,
+        contests.contest_name,
+        contests.entry_max,
+        contests.entry_fee,
+        contests.entry_limit_register,
+        contests.sponsors_id,
+        contests.contest_status,
+        leagues.id as leagues_id,
+        leagues.league_name,
+        leagues.league_shorthand,
+        t1.start_date,
+        t1.start_time,
+        contests_prize.prize,
+        contests_prize.upto,
+        contests_prize.currency,
+        sponsors.sponsor,
+        COALESCE(t2.entry, 0 ) as entry_count
+        FROM contests
+        LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
+        JOIN leagues ON leagues.id = contests.leagues_id
+        JOIN sponsors ON sponsors.id = contests.sponsors_id
+        JOIN (
+              SELECT tt1.contests_id, tt1.start_date, tt1.start_time
+              FROM (
+              SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+              FROM `contests_has_sports_events`
+              JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+              ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
+                  ) tt1
+                  GROUP BY tt1.contests_id
+        ) t1 ON t1.contests_id = contests.id
+        LEFT JOIN (
+              SELECT contests_users_entries.contest_id, COUNT(*) as entry
+              FROM contests_users_entries
+              GROUP BY contest_id
+        ) t2 ON t2.contest_id = contests.id
+        WHERE contests.contest_status = 0 AND contests.id = '.$contest_id.'
+        ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
+      ');
+
+      foreach($query->result() as $row)
+      {
+        $user_entry_count = 0;
+        if($userid) {
+
+            $data1 = $this->get_user_entry_count($row->contests_id, $userid);
+                foreach ($data1->result() as $rows) {
+                    $user_entry_count = $rows->user_entry_count;
+                }
+        }
+        
+        if($row->entry_limit_register <= $user_entry_count)
+        {$result=1;}
+
+      }
+
+      return $result;
+    }
+
+    function check_register_contest_count($contest_id,$userid)
+    {
+      $result =0;
+      $query = $this->db->query('
+        SELECT
+        contests.id as contests_id,
+        contests.leagues_id,
+        contests.contest_name,
+        contests.entry_max,
+        contests.entry_fee,
+        contests.sponsors_id,
+        contests.contest_status,
+        leagues.id as leagues_id,
+        leagues.league_name,
+        leagues.league_shorthand,
+        t1.start_date,
+        t1.start_time,
+        contests_prize.prize,
+        contests_prize.upto,
+        contests_prize.currency,
+        sponsors.sponsor,
+        COALESCE(t2.entry, 0 ) as entry_count
+        FROM contests
+        LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
+        JOIN leagues ON leagues.id = contests.leagues_id
+        JOIN sponsors ON sponsors.id = contests.sponsors_id
+        JOIN (
+              SELECT tt1.contests_id, tt1.start_date, tt1.start_time
+              FROM (
+              SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+              FROM `contests_has_sports_events`
+              JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+              ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
+                  ) tt1
+                  GROUP BY tt1.contests_id
+        ) t1 ON t1.contests_id = contests.id
+        LEFT JOIN (
+              SELECT contests_users_entries.contest_id, COUNT(*) as entry
+              FROM contests_users_entries
+              GROUP BY contest_id
+        ) t2 ON t2.contest_id = contests.id
+        WHERE contests.contest_status = 0 AND contests.id = '.$contest_id.'
+        ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
+      ');
+
+      foreach($query->result() as $row)
+      {
+        if($row->entry_max <= $row->entry_count)
+        {$result=1;}
+      }
+      return $result;
+    }
+
     function get_league()
     {
       $result = array();
@@ -188,6 +306,19 @@ class Mdl_draft extends CI_Model
                   SELECT contests_users_entries.contest_id, contests_users_entries.user_id, count(*) as user_entry
                   FROM contests_users_entries
                   WHERE contests_users_entries.contest_id = '.$contest_id.' AND contests_users_entries.user_id = '.$user_id.'
+                  GROUP BY contests_users_entries.contest_id, contests_users_entries.user_id
+                ) t1
+        ');
+        return $result;
+    }
+
+    function get_register_user_entry_count($contest_id) {
+        $result = $this->db->query('
+                  SELECT COALESCE(t1.user_entry, 0 ) as user_entry_count
+                  FROM (
+                  SELECT contests_users_entries.contest_id, contests_users_entries.user_id, count(*) as user_entry
+                  FROM contests_users_entries
+                  WHERE contests_users_entries.contest_id = '.$contest_id.'
                   GROUP BY contests_users_entries.contest_id, contests_users_entries.user_id
                 ) t1
         ');
