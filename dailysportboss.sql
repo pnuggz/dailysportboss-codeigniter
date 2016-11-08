@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2016 at 12:55 PM
+-- Generation Time: Nov 08, 2016 at 02:52 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -34,6 +34,7 @@ CREATE TABLE IF NOT EXISTS `contests` (
   `start_date` date NOT NULL,
   `start_time` time NOT NULL,
   `entry_max` int(11) NOT NULL,
+  `entry_limit_register` int(22) NOT NULL,
   `guarantee_type_id` int(11) NOT NULL DEFAULT '1',
   `multi_type_id` int(11) NOT NULL DEFAULT '1',
   `contests_prizes_id` int(11) NOT NULL DEFAULT '1',
@@ -45,15 +46,15 @@ CREATE TABLE IF NOT EXISTS `contests` (
 -- Dumping data for table `contests`
 --
 
-INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
-(1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1),
-(3, 1, 0, 'Weekend EPL Smash', '2016-10-07', '01:00:00', 5000, 1, 1, 1, 1, 1),
-(11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1),
-(14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1),
-(15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1),
-(16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0),
-(17, 1, 0, 'Weekend EPL Special', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 0);
+INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `entry_limit_register`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
+(1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 1),
+(2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 1),
+(3, 1, 0, 'Weekend EPL Smash', '2016-10-07', '01:00:00', 5000, 1, 1, 1, 1, 1, 1),
+(11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1, 1),
+(14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1, 1),
+(15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 1),
+(16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -233,11 +234,11 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 (19, 1, 1, '2016-06-04 02:23:16', 4),
 (20, 1, 1, '2016-06-04 02:23:16', 5),
 (21, 1, 1, '2016-06-04 02:23:16', 6),
-(23, 1, 2, '2016-06-04 07:52:29', 1),
-(24, 1, 2, '2016-06-04 07:52:31', 2),
-(25, 3, 2, '2016-07-22 02:07:02', 1),
-(26, 3, 2, '2016-07-22 02:09:45', 2),
-(27, 3, 2, '2016-07-22 02:11:21', 3),
+(23, 1, 1, '2016-11-08 13:46:48', 1),
+(24, 1, 1, '2016-11-08 13:46:50', 2),
+(25, 3, 1, '2016-11-08 13:46:51', 1),
+(26, 3, 1, '2016-11-08 13:46:23', 2),
+(27, 3, 1, '2016-11-08 13:46:30', 3),
 (28, 3, 1, '2016-07-22 02:16:13', 1),
 (29, 3, 1, '2016-07-22 02:18:01', 2),
 (30, 3, 3, '2016-07-22 02:26:43', 1),
@@ -258,8 +259,8 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 (45, 1, 1, '2016-08-15 13:47:53', 7),
 (46, 3, 1, '2016-08-21 07:40:52', 11),
 (47, 17, 1, '2016-08-23 09:22:00', 1),
-(48, 17, 2, '2016-08-24 09:45:44', 1),
-(49, 17, 2, '2016-08-24 12:16:52', 2);
+(48, 17, 2, '2016-11-08 13:48:33', 1),
+(49, 17, 2, '2016-11-08 13:48:31', 2);
 
 -- --------------------------------------------------------
 
