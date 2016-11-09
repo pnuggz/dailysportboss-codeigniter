@@ -30,7 +30,7 @@ class Lobby extends MX_Controller {
     function leagues()
     {
         $cektoken = $this->cekToken($this->input->request_headers());
-        $this->load->model('mdl_draft');
+        $this->load->model('Mdl_draft');
         if($cektoken)
         {
           $token = $this->generate_token($cektoken);
@@ -40,7 +40,7 @@ class Lobby extends MX_Controller {
 
         $data = array(
           'token' => $token,
-          'data'  => $this->mdl_draft->get_league()
+          'data'  => $this->Mdl_draft->get_league()
         );
         $this->output->set_output(json_encode($data), 200);
     }
@@ -48,7 +48,7 @@ class Lobby extends MX_Controller {
     function contests($league_id=null)
     {
         $cektoken = $this->cekToken($this->input->request_headers());
-        $this->load->model('mdl_draft');
+        $this->load->model('Mdl_draft');
         if($cektoken)
         {
           $token = $this->generate_token($cektoken);
@@ -58,8 +58,8 @@ class Lobby extends MX_Controller {
         $data = array(
           'token' => $token,
           'data'  => array(
-              'active_contests' => $this->mdl_draft->get_contest_status($league_id, TRUE,$cektoken),
-              'inactive_contests' => $this->mdl_draft->get_contest_status($league_id, FALSE,$cektoken)
+              'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,$cektoken),
+              'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,$cektoken)
           )
         );
         $this->output->set_output(json_encode($data), 200);
@@ -72,8 +72,8 @@ class Lobby extends MX_Controller {
             $user_id = $cektoken;
             $user_entry_count = 0;
 
-            $this->load->model('mdl_draft');
-            $data1 = $this->mdl_draft->get_user_entry_count($contest_id, $user_id);
+            $this->load->model('Mdl_draft');
+            $data1 = $this->Mdl_draft->get_user_entry_count($contest_id, $user_id);
                 foreach ($data1->result() as $row) {
                     $user_entry_count = $row->user_entry_count;
                 }
@@ -84,8 +84,8 @@ class Lobby extends MX_Controller {
         }
 
 
-        $this->load->model('mdl_draft');
-        $data = $this->mdl_draft->get_contest_details($league_id, $contest_id);
+        $this->load->model('Mdl_draft');
+        $data = $this->Mdl_draft->get_contest_details($league_id, $contest_id);
         foreach ($data->result() as $row){
 
             $array = array(
