@@ -145,7 +145,8 @@ class Mdl_draft extends CI_Model
            'sports_id' => $row->sports_id,
            'league_name' => $row->league_name,
            'league_shorthand' => $row->league_shorthand,
-           'league_country' => $row->league_country
+           'league_country' => $row->league_country,
+           'league_logo'   =>  base_url().'viewimage/logo/leagues/'.$row->id,
          );
        }
 

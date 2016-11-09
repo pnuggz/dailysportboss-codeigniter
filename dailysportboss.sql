@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 08, 2016 at 02:52 PM
+-- Generation Time: Nov 09, 2016 at 07:36 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -273,17 +273,18 @@ CREATE TABLE IF NOT EXISTS `leagues` (
   `sports_id` int(11) NOT NULL,
   `league_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `league_shorthand` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
-  `league_country` varchar(25) COLLATE utf8_unicode_ci NOT NULL
+  `league_country` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
+  `logo` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `leagues`
 --
 
-INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `league_country`) VALUES
-(1, 1, 'Barclays Premier League', 'BPL', 'United Kingdom'),
-(2, 2, 'NBA', 'NBA', 'USA'),
-(3, 1, 'Champions League', 'CL', 'Europe');
+INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `league_country`, `logo`) VALUES
+(1, 1, 'Barclays Premier League', 'BPL', 'United Kingdom', 'leagues/logo/1/bpl.jpg'),
+(2, 2, 'NBA', 'NBA', 'USA', 'leagues/logo/2/logo-nba.jpg'),
+(3, 1, 'Champions League', 'CL', 'Europe', 'leagues/logo/3/uefacl.png');
 
 -- --------------------------------------------------------
 

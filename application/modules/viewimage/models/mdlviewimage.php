@@ -17,6 +17,13 @@ class Mdlviewimage extends CI_Model {
                   WHERE sponsors.id = '.$id.'
           ');
           break;
+          case 'leagues':
+          $query = $this->db->query('
+                  SELECT leagues.logo
+                  FROM leagues
+                  WHERE leagues.id = '.$id.'
+          ');
+          break;
         }
 
         foreach($query->result() as $row)
