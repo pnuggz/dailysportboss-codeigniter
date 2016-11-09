@@ -48,43 +48,66 @@ class Users extends Secure_area {
     }
 
     function edit() {
-      $this->load->model('mdl_users');
+      $this->load->helper('security');
       $id = $this->session->userdata['userid'];
       $this->load->library('form_validation');
+
       $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[30]|xss_clean');
       $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
-      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email');
+      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|callback_cekemails');
       $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
+      $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
       $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
-      $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|regex_match[/^(19|20)\d\d[- /.](0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])$/]');
+      $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
       if($this->form_validation->run() == FALSE)
       {
-          $this->output->set_output(json_encode(validation_errors()), 200);
-
+        $new=array();
+        foreach( $this->form_validation->error_array() as $key=>$value) {
+           $new['message'][]= $this->form_validation->error_array()[$key];
+         }
+          $this->output->set_output(json_encode(array('error'=>$new)), 200);
       }else {
         $this->load->model('mdl_users');
-
-        $cekemail = $this->mdl_users->check_email($this->input->post('email'),$id);
-        if($cekemail > 0)
-        {
-          $this->output->set_output(json_encode("Email Already Exists"), 200);
-        }else{
-          $enc_password = md5($this->input->post('password'));
 
           $data = array('first_name'      =>       $this->input->post('first_name'),
                         'last_name'    =>      $this->input->post('last_name'),
                         'email'    =>      $this->input->post('email'),
                         'address'    =>      $this->input->post('address'),
                         'phonenumber'     =>      $this->input->post('mobilephone'),
+                        'zipcode'    =>      $this->input->post('zipcode'),
                         'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
                         'subscribe'     =>      $this->input->post('subscribe')
                        );
 
           $this->mdl_users->_update($id,$data);
-          $this->output->set_output(json_encode($this->session->userdata['token']), 200);
-        }
+          $this->output->set_output(json_encode(array('success'=>array('message'=>"Edit profile success.",'token'=>$this->session->userdata['token']))), 200);
       }
     }
+
+    public function checkdateformat($date) {
+       if (preg_match('/^\d{2}\-\d{2}\-\d{4}$/', $date)) {
+           if(checkdate(substr($date, 3, 2), substr($date, 0, 2), substr($date, 6, 4)))
+               {return TRUE;}
+           else
+               {$this->form_validation->set_message('checkdateformat', 'Invalid format birthday date.'); return FALSE;}
+       } else {
+           $this->form_validation->set_message('checkdateformat', 'Invalid format birthday date.');
+           return FALSE;
+       }
+   }
+
+   public function cekemails($email) {
+     $id = $this->session->userdata['userid'];
+     $this->load->model('mdl_users');
+     $cekemail = $this->mdl_users->check_email($email,$id);
+     if($cekemail > 0)
+     {
+       $this->form_validation->set_message('cekemails', 'The Email field is already registered.');
+       return FALSE;
+     }else{
+       return TRUE;
+     }
+  }
 
     function changepassword() {
       $this->load->model('mdl_users');
@@ -95,7 +118,11 @@ class Users extends Secure_area {
       $this->form_validation->set_rules('newpassword2', 'Confirm New Password', 'required|max_length[30]|xss_clean|matches[newpassword]');
       if($this->form_validation->run() == FALSE)
       {
-          $this->output->set_output(json_encode(validation_errors()), 200);
+        $new=array();
+        foreach( $this->form_validation->error_array() as $key=>$value) {
+           $new['message'][]= $this->form_validation->error_array()[$key];
+         }
+          $this->output->set_output(json_encode(array('error'=>$new)), 200);
 
       }else {
         $this->load->model('mdl_users');

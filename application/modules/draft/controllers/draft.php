@@ -148,67 +148,118 @@ class Draft extends Secure_area
         $this->output->set_output(json_encode($data), 200);
     }
 
-    function add()
+    function add($contest_id)
     {
-        $user_id_count_entry = 1;
-        $user_id = $this->session->userdata('userid');
+      if(array_key_exists('userid',$this->session->userdata))
+      {
+        $userid = $this->session->userdata('userid');
+      }else{
+        $userid = '';
+      }
 
+      if($userid)
+      {
+        $this->load->model('mdl_draft');
+        $err = array();
+        $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+        $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+        $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
+        if($cekContest==0)
+        {
+          $err['message'][] = 'Sorry, Contests already start.';
+        }
 
-        $this->load->module('contests');
-            $user_id = $this->session->userdata('userid');
-            $contest_id = $this->input->post('contest_id');
+        if($cekCount)
+        {
+          $err['message'][] = 'Sorry, cannot join contests because reach limit registered team.';
+        }
 
-            $this->load->module('contests_users_entries');
-            $user_id_count =  $this->contests_users_entries->get_user_entry_count($user_id, $contest_id);
-            foreach ($user_id_count->result() as $row) {
-                $user_id_count = $row->user_entry_count;
-                $user_id_count_entry = $user_id_count + 1;
-            }
+        if($cekmaxCount)
+        {
+          $err['message'][] = 'Sorry, cannot join contests because reach maximum entry.';
+        }
 
+        if(!array_key_exists('message',$err))
+        {
+          $user_id_count_entry = 1;
+          $user_id = $this->session->userdata('userid');
+          $this->load->helper('security');
+          $this->load->library('form_validation');
+          $this->form_validation->set_rules('roster_name', 'Roster Name', 'trim|required|max_length[512]|xss_clean');
+          $this->form_validation->set_rules('forwards', 'Forwards', 'required');
+          $this->form_validation->set_rules('midfielders', 'Midfielders', 'required');
+          $this->form_validation->set_rules('defenders', 'Defender', 'required');
+          if($this->form_validation->run($this) == FALSE)
+          {
+            $new=array();
+            foreach( $this->form_validation->error_array() as $key=>$value) {
+               $new['message'][]= $this->form_validation->error_array()[$key];
+             }
+              $this->output->set_output(json_encode(array('error'=>$new)), 200);
+
+          }else{
             $this->load->module('contests');
-            $data['contest_details'] = $this->contests->get_where_custom('id', $contest_id);
+              $user_id = $this->session->userdata('userid');
 
-            $user_contest_data = array(
-                'contest_id'            =>      $this->input->post('contest_id'),
-                'user_id'               =>      $this->input->post('user_id'),
-                'user_entry_count'      =>      $user_id_count_entry
-            );
+              $this->load->module('contests_users_entries');
+              $user_id_count =  $this->contests_users_entries->get_user_entry_count($user_id, $contest_id);
+              foreach ($user_id_count->result() as $row) {
+                  $user_id_count = $row->user_entry_count;
+                  $user_id_count_entry = $user_id_count + 1;
+              }
 
-            $roster_name = array(
-                'roster_name'       =>      $this->input->post('roster_name')
-            );
+              $this->load->module('contests');
+              $data['contest_details'] = $this->contests->get_where_custom('id', $contest_id);
 
-            $forwards_post = $this->input->post('forwards');
-            $midfielders_post = $this->input->post('midfielders');
-            $defenders_post = $this->input->post('defenders');
+              $user_contest_data = array(
+                  'contest_id'            =>      $contest_id,
+                  'user_id'               =>      $user_id,
+                  'user_entry_count'      =>      $user_id_count_entry
+              );
 
-            $defenders = array(
-                'player1'       =>      $defenders_post[0],
-                'player2'       =>      $defenders_post[1],
-                'player3'       =>      $defenders_post[2],
-                'player4'       =>      $defenders_post[3]
-            );
+              $roster_name = array(
+                  'roster_name'       =>      $this->input->post('roster_name')
+              );
 
-            $midfielders = array(
-                'player5'       =>      $midfielders_post[0],
-                'player6'       =>      $midfielders_post[1],
-                'player7'       =>      $midfielders_post[2],
-                'player8'       =>      $midfielders_post[3]
-            );
+              $forwards_post = $this->input->post('forwards');
+              $midfielders_post = $this->input->post('midfielders');
+              $defenders_post = $this->input->post('defenders');
 
-            $forwards = array(
-                'player9'       =>      $forwards_post[0],
-                'player10'       =>      $forwards_post[1]
-            );
+              $defenders = array(
+                  'player1'       =>      $defenders_post[0],
+                  'player2'       =>      $defenders_post[1],
+                  'player3'       =>      $defenders_post[2],
+                  'player4'       =>      $defenders_post[3]
+              );
 
-            $contest_roster_data = array_merge($roster_name, $forwards, $midfielders, $defenders);
+              $midfielders = array(
+                  'player5'       =>      $midfielders_post[0],
+                  'player6'       =>      $midfielders_post[1],
+                  'player7'       =>      $midfielders_post[2],
+                  'player8'       =>      $midfielders_post[3]
+              );
 
-            if ($this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data)) {
-                $this->output->set_output(json_encode("The team phase has been set"), 200);
-            }else{
-              $this->output->set_output(json_encode("0"), 200);
-            }
+              $forwards = array(
+                  'player9'       =>      $forwards_post[0],
+                  'player10'       =>      $forwards_post[1]
+              );
 
+              $contest_roster_data = array_merge($roster_name, $forwards, $midfielders, $defenders);
+
+              if ($this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data)) {
+                  $this->output->set_output(json_encode(array("success"=>array("message"=>"The team phase has been set"))), 200);
+              }else{
+                $this->output->set_output(json_encode(array("error"=>array("message"=>"Setting team phase failed"))), 200);
+              }
+          }
+
+        }else{
+          $this->output->set_output(json_encode(array('error'=>$err)), 200);
+        }
+
+      }else{
+        echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+      }
     }
 
 
