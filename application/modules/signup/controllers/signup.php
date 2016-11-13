@@ -10,11 +10,20 @@ class Signup extends MX_Controller {
     function index() {
     }
 
+    function captcha() {
+      $this->load->library(array('form_validation', 'Recaptcha'));
+      $data = array(
+            'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
+            'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
+        );
+       $this->output->set_output(json_encode(array('data'=>$data)), 200);
+    }
+
     function register()
    {
            $this->load->helper('security');
            $this->load->model('mdl_users');
-           $this->load->library('form_validation');
+           $this->load->library(array('form_validation', 'Recaptcha'));
 
            $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[30]|xss_clean');
            $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
@@ -26,10 +35,16 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
            $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
            $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
-
-           if($this->form_validation->run($this) == FALSE)
+           $recaptcha = $this->input->post('g-recaptcha-response');
+           $response = $this->recaptcha->verifyResponse($recaptcha);
+           if($this->form_validation->run($this) == FALSE  || !isset($response['success']))
            {
              $new=array();
+             if(!isset($response['success']))
+             {
+               $new['message'][]= "Captcha must check";
+             }
+
              foreach( $this->form_validation->error_array() as $key=>$value) {
               	$new['message'][]= $this->form_validation->error_array()[$key];
               }

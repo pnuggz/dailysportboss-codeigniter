@@ -13,7 +13,7 @@ class Lobby extends MX_Controller {
     function cekToken($token){
       if(array_key_exists('Authorization',$token))
    		{
-   			if($token['Authorization'])
+   			if($token['Authorization'] && substr($token['Authorization'],0,5) != "Basic")
    			{
    				$decode_token = $this->decode_token($token['Authorization']);
    	      if($decode_token->exp > time())

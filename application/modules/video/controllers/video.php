@@ -10,6 +10,7 @@ class Video extends MX_Controller {
     function index() {
 
     }
+    
 
     function ads($id)
     {
