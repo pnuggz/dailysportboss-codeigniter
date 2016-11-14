@@ -48,7 +48,7 @@ class Signup extends MX_Controller {
              foreach( $this->form_validation->error_array() as $key=>$value) {
               	$new['message'][]= $this->form_validation->error_array()[$key];
               }
-               $this->output->set_output(json_encode(array('error'=>$new)), 200);
+               $this->output->set_output(json_encode(array('error'=>$new)), 400);http_response_code(400);
 
            } else {
              $this->load->model('mdl_users');
@@ -89,7 +89,7 @@ class Signup extends MX_Controller {
          {
 
             $data = array('error'=>$this->form_validation->error_array());
-             $this->output->set_output(json_encode($data), 200);
+             $this->output->set_output(json_encode($data), 400);http_response_code(400);
 
          } else {
            $this->load->model('mdl_users');
@@ -106,7 +106,7 @@ class Signup extends MX_Controller {
              $send->sendMail($this->input->post('email'),'Email Verification',$message);
              $this->output->set_output(json_encode(array('success'=>array('message'=>"Activation link has been send to your email, please check your email."))), 200);
            }else{
-             $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, this email address not available."))), 200);
+             $this->output->set_output(json_encode(array('error'=>array('message'=>"Sorry, this email address not available."))), 400);http_response_code(400);
            }
          }
        }

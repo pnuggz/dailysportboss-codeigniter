@@ -122,7 +122,7 @@ class Users extends Secure_area {
         foreach( $this->form_validation->error_array() as $key=>$value) {
            $new['message'][]= $this->form_validation->error_array()[$key];
          }
-          $this->output->set_output(json_encode(array('error'=>$new)), 200);
+          $this->output->set_output(json_encode(array('error'=>$new)), 400);http_response_code(400);
 
       }else {
         $this->load->model('mdl_users');
@@ -130,7 +130,7 @@ class Users extends Secure_area {
         $cekpassword = $this->mdl_users->check_password($oldpassword,$id);
         if($cekpassword == 0)
         {
-          $this->output->set_output(json_encode("Invalid Password"), 200);
+          $this->output->set_output(json_encode("Invalid Password"), 400);http_response_code(400);
         }else{
           $enc_password = md5($this->input->post('newpassword'));
 

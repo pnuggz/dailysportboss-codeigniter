@@ -21,7 +21,7 @@ class Lobby extends MX_Controller {
 
             return $decode_token->data->userid;
    	  		}else{
-   					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+   					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
    				}
    			}
        }

@@ -18,7 +18,7 @@ class Login extends MX_Controller {
            {
                $this->output->set_output(json_encode(array('error'=>array(
                  'message' => 'Sorry, username and password must be filled.',
-               ))), 200);
+               ))), 400);
 
            } else {
 
@@ -59,19 +59,19 @@ class Login extends MX_Controller {
                      }else{
                        $this->output->set_output(json_encode(array('error'=>array(
                          'message' => 'Sorry, you need activate your account first, please check your email for verification.',
-                       ))), 200);
+                       ))), 400);http_response_code(400);
                      }
 
                    } else {
                      $this->output->set_output(json_encode(array('error'=>array(
                        'message' => 'Sorry, incorrect password entered.',
-                     ))), 200);
+                     ))), 400);http_response_code(400);
                    }
 
                }else {
                  $this->output->set_output(json_encode(array('error'=>array(
                    'message' => 'Sorry, entered username does not exist. please register first.',
-                 ))), 200);
+                 ))), 400);http_response_code(400);
                }
            }
        }

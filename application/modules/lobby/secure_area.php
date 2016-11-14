@@ -17,15 +17,15 @@ class Secure_area extends MX_Controller
 			if($token['Authorization'])
 			{
 				$decode_token = $this->decode_token($token['Authorization']);
-	      if($decode_token->exp > time())
+	      if($decode_token->exp > time() && $decode_token->data->userid == $this->session->userdata['userid'] && $decode_token->data->username == $this->session->userdata['username'])
 	  		{
 
 					$this->session->set_userdata('token',$this->generate_token());
 	  		}else{
-					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
 				}
 			}else{
-				echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+				echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
 			}
     }else{
 
@@ -61,7 +61,7 @@ class Secure_area extends MX_Controller
 	}
 
 	function decode_token($jwt) {
-		$this->load->library('jwt');
+
 		$key = base64_encode('dailysportboss');
 		$jwtdec = $this->jwt->decode($jwt, $key);
 		return $jwtdec;

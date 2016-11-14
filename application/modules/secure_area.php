@@ -24,16 +24,16 @@ class Secure_area extends MX_Controller
 
 						$this->session->set_userdata('token',$this->generate_token());
 		  		}else{
-						echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+						echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
 					}
 				}else{
-					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
 				}
 			}else{
-				echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+				echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
 			}
     }else{
-      exit('No direct script access allowed');
+    http_response_code(403);exit('No direct script access allowed');
     }
 
 	}

@@ -1,29 +1,30 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('ROOT', dirname(dirname(__FILE__)));
+define('DS', DIRECTORY_SEPARATOR);
+require_once(APPPATH.DS."modules/secure_area.php");
 
-class Games extends MX_Controller {
-    
-    function __construct() {
-        parent::__construct();
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_flashdata('noaccess', 'Sorry, you are not logged in');
-            redirect('login/');
-        }
-    }
+class Games extends Secure_area {
+
+  function __construct() {
+      parent::__construct($this->input->request_headers());
+      }
 
     function index()
     {
         $current_date = '2016-03-18';
-        $user_id = $this->session->userdata('user_id');
+        $user_id = $this->session->userdata('userid');
         $league_id = 1;
 
         $this->load->model('mdl_games');
         $data['active_contests'] = $this->mdl_games->get_games_status_active($league_id, $current_date, $user_id);
         $data['inactive_contests'] = $this->mdl_games->get_games_status_inactive($league_id, $current_date, $user_id);
 
-        $data['view_file'] = 'league_games';
-        $this->load->module('template');
-        $this->template->gameslayout($data);
+        $result = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $data
+        );
+        $this->output->set_output(json_encode($result), 200);
     }
 
     function league($league_id)
@@ -46,11 +47,13 @@ class Games extends MX_Controller {
         $user_id = $this->uri->segment(4);
         $user_entry_number = $this->uri->segment(5);
 
-        $data['entry_data'] = $this->get_contest_players($contest_id, $user_id, $user_entry_number);
+        $data = $this->get_contest_players($contest_id, $user_id, $user_entry_number);
 
-        $data['view_file'] = 'details';
-        $this->load->module('template');
-        $this->template->gameslayout($data);
+        $result = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $data
+        );
+        $this->output->set_output(json_encode($result), 200);
     }
 
     function get_players()
@@ -411,56 +414,56 @@ class Games extends MX_Controller {
         $query = $this->mdl_games->get_with_limit($limit, $offset, $order_by);
         return $query;
     }
-    
+
     function get_where($id) {
         $this->load->model('mdl_games');
         $query = $this->mdl_games->get_where($id);
         return $query;
     }
-    
+
     function get_where_custom($col, $value) {
         $this->load->model('mdl_games');
         $query = $this->mdl_games->get_where_custom($col, $value);
         return $query;
     }
-    
+
     function get_where_custom_ordered($col, $value, $order_by) {
         $this->load->model('mdl_games');
         $query = $this->mdl_games->get_where_custom_ordered($col, $value, $order_by);
         return $query;
     }
-    
+
     function _insert($data) {
         $this->load->model('mdl_games');
         $this->mdl_games->_insert($data);
     }
-    
+
     function _update($id, $data) {
         $this->load->model('mdl_games');
         $this->mdl_games->_update($id, $data);
     }
-    
+
     function _delete($id) {
         $this->load->model('mdl_games');
         $this->mdl_games->_delete($id);
     }
-    
+
     function count_where($column, $value) {
         $this->load->model('mdl_games');
         $count = $this->mdl_games->count_where($column, $value);
         return $count;
     }
-    
+
     function get_max() {
         $this->load->model('mdl_games');
         $max_id = $this->mdl_games->get_max();
         return $max_id;
     }
-    
+
     function _custom_query($mysql_query) {
         $this->load->model('mdl_games');
         $query = $this->mdl_games->_custom_query($mysql_query);
         return $query;
     }
-    
+
 }

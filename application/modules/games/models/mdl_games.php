@@ -11,15 +11,62 @@ class Mdl_games extends CI_Model
 
     function get_games_status_active($league_id, $current_date, $user_id)
     {
+        $query = $this->db->query("
+        SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
+            FROM (
+                    SELECT contests.id, contests.contest_name, contests.sponsors_id, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name, leagues.league_shorthand
+                    FROM contests
+                    JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+                    JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
+                    JOIN leagues ON leagues.id = sports_events_end.leagues_id
+                    WHERE contests.contest_status = 0 AND sports_events_end.leagues_id = ".$league_id." AND sports_events_end.start_date > '".$current_date."'
+                    GROUP BY contests.id
+                    ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
+                ) as t1
+            JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
+            JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
+            JOIN (
+                SELECT *
+                FROM (
+                SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                FROM contests_has_sports_events
+                JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
+                    ) tt1
+                    GROUP BY tt1.contests_id
+                ) t2 ON t2.contests_id = t1.id
+                WHERE contests_users_entries.user_id = '".$user_id."'
+        ORDER BY t2.start_date, t2.start_time, t1.contest_name, contests_rosters.roster_name, contests_users_entries.user_entry_count ASC
+        ");
+        foreach($query->result() as $row)
+        {
+          $result[] = array(
+            "contest_id" => $row->id,
+            "contest_name" => $row->contest_name,
+            "sponsor_id" => $row->sponsors_id,
+            "userid"  => $row->user_id,
+            "user_entry_count" => $row->user_entry_count,
+            "roster_name"  => $row->roster_name,
+            "leagues_id" => $row->leagues_id,
+            "league_shorthand" => $row->league_shorthand,
+            "start_date"  => date("d-m-Y",strtotime($row->start_date)),
+            "start_time"  => $row->start_time
+          );
+        }
+        return $result;
+    }
+
+    function get_games_status_inactive($league_id, $current_date, $user_id)
+    {
         $query = $this->db->query('
             SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
-            FROM ( 
+            FROM (
                     SELECT contests.id, contests.contest_name, contests.sponsors_id, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name, leagues.league_shorthand
                     FROM `contests`
                     JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
                     JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
                     JOIN leagues ON leagues.id = sports_events_end.leagues_id
-                    WHERE contests.contest_status = 0 AND sports_events_end.leagues_id = '.$league_id.' AND sports_events_end.start_date > \''.$current_date.'\'
+                    WHERE contests.contest_status = 1 AND sports_events_end.leagues_id = '.$league_id.' AND sports_events_end.start_date > \''.$current_date.'\'
                     GROUP BY contests.id
                     ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
                 ) as t1
@@ -38,47 +85,64 @@ class Mdl_games extends CI_Model
                 WHERE contests_users_entries.user_id = '.$user_id.'
         ORDER BY t2.start_date ASC, t2.start_time ASC, t1.contest_name ASC, contests_rosters.roster_name ASC, contests_users_entries.user_entry_count ASC
         ');
-        return $query;
-    }
-
-    function get_games_status_inactive($league_id, $current_date, $user_id)
-    {
-        $query = $this->db->query('
-        SELECT t1.id, t1.contest_name, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_name
-        FROM ( 
-                SELECT contests.id, contests.contest_name, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name
-                FROM `contests`
-                JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
-                JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
-                JOIN leagues ON leagues.id = sports_events_end.leagues_id
-                WHERE sports_events_end.leagues_id = ' . $league_id . ' AND sports_events_end.start_date < \'' . $current_date . '\'
-                GROUP BY contests.id
-                ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
-            ) as t1
-        JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
-        JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
-            WHERE contests_users_entries.user_id = \'' . $user_id . '\'
-        ORDER BY t1.id, contests_users_entries.user_entry_count ASC
-        ');
-        return $query;
+        foreach($query->result() as $row)
+        {
+          $result[] = array(
+            "contest_id" => $row->id,
+            "contest_name" => $row->contest_name,
+            "sponsor_id" => $row->sponsors_id,
+            "userid"  => $row->user_id,
+            "user_entry_count" => $row->user_entry_count,
+            "roster_name"  => $row->roster_name,
+            "leagues_id" => $row->leagues_id,
+            "league_shorthand" => $row->league_shorthand,
+            "start_date"  => date("d-m-Y",strtotime($row->start_date)),
+            "start_time"  => $row->start_time
+          );
+        }
+        return $result;
     }
 
     function get_contest_players($contest_id, $user_id, $user_entry_number)
     {
         $query = $this->db->query('
-        SELECT * 
-        FROM `contests_users_entries` 
+        SELECT *
+        FROM `contests_users_entries`
         JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
         WHERE contests_users_entries.contest_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
         ');
-        return $query;
+        foreach($query->result() as $row)
+        {
+          $result[] = array(
+              "id" => $row->id,
+              "contest_id" => $row->contest_id,
+              "userid" => $row->user_id,
+              "entry_date_time" => $row->entry_date_time,
+              "user_entry_count" => $row->user_entry_count,
+              "contests_users_entry_id" => $row->contests_users_entry_id,
+              "roster_name" => $row->roster_name,
+              "creation_date_time" => $row->creation_date_time,
+              "player1" => $row->player1,
+              "player2" => $row->player2,
+              "player3" => $row->player3,
+              "player4" => $row->player4,
+              "player5" => $row->player5,
+              "player6" => $row->player6,
+              "player7" => $row->player7,
+              "player8" => $row->player8,
+              "player9" => $row->player9,
+              "player10" => $row->player10,
+          );
+        }
+
+        return $result;
     }
 
     function get_all_players_list_contest($contest_id, $user_id, $user_entry_number)
     {
         $contest_user_entry = $this->db->query('
-        SELECT contests_users_entries.id 
-        FROM `contests_users_entries` 
+        SELECT contests_users_entries.id
+        FROM `contests_users_entries`
         JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
         WHERE contests_users_entries.contest_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
         ');
@@ -154,7 +218,7 @@ class Mdl_games extends CI_Model
     {
         $contest_user_info = $this->db->query('
             SELECT DISTINCT sports_events.start_date, contests_has_sports_events.contests_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_users_entries.id as contests_users_entries_id
-            FROM `contests_has_sports_events` 
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN contests_users_entries ON contests_users_entries.contest_id = contests_has_sports_events.contests_id
             WHERE contests_has_sports_events.contests_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
@@ -216,9 +280,9 @@ class Mdl_games extends CI_Model
                     SELECT contests_rosters.contests_users_entry_id, contests_rosters.player10, \'p10\' descrip
                     FROM contests_rosters
                     WHERE contests_rosters.contests_users_entry_id = ' . $contest_user_entry_id . '
-                            ) T1 ON soccer_stats.players_phases_id = T1.player    
+                            ) T1 ON soccer_stats.players_phases_id = T1.player
                 WHERE soccer_stats.date < \'' . $event_date . '\'
-                GROUP BY soccer_stats.players_phases_id  
+                GROUP BY soccer_stats.players_phases_id
                 ORDER BY `soccer_stats`.`players_phases_id` ASC
                 ');
         };
@@ -229,7 +293,7 @@ class Mdl_games extends CI_Model
     {
         $contest_user_info = $this->db->query('
             SELECT DISTINCT sports_events.start_date, contests_has_sports_events.contests_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_users_entries.id as contests_users_entries_id
-            FROM `contests_has_sports_events` 
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN contests_users_entries ON contests_users_entries.contest_id = contests_has_sports_events.contests_id
             WHERE contests_has_sports_events.contests_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
@@ -239,7 +303,7 @@ class Mdl_games extends CI_Model
             $event_date = $row->start_date;
             $contest_user_entry_id = $row->contests_users_entries_id;
             $query = $this->db->query('
-                SELECT 
+                SELECT
                 i3.players_phases_id,
                 COUNT(i3.players_phases_id) as counting,
                 SUM(i3.goals) as total_goals,
@@ -256,7 +320,7 @@ class Mdl_games extends CI_Model
                 FROM soccer_stats i1
                 LEFT OUTER JOIN soccer_stats i2 ON (i1.players_phases_id = i2.players_phases_id and i1.id > i2.id)
                 WHERE i1.date < \'' . $event_date . '\'
-                GROUP BY i1.id  
+                GROUP BY i1.id
                 HAVING COUNT(*) < 4
                 ) as i3
                 JOIN (
@@ -299,9 +363,9 @@ class Mdl_games extends CI_Model
                     SELECT contests_rosters.contests_users_entry_id, contests_rosters.player10, \'p10\' descrip
                     FROM contests_rosters
                     WHERE contests_rosters.contests_users_entry_id = ' . $contest_user_entry_id . '
-                            ) T1 ON i3.players_phases_id = T1.player    
+                            ) T1 ON i3.players_phases_id = T1.player
                 GROUP BY i3.players_phases_id
-                ORDER BY i3.players_phases_id ASC, i3.date DESC 
+                ORDER BY i3.players_phases_id ASC, i3.date DESC
                 ');
         };
         return $query;
@@ -311,7 +375,7 @@ class Mdl_games extends CI_Model
     {
         $contest_user_info = $this->db->query('
             SELECT DISTINCT sports_events.start_date, contests_has_sports_events.contests_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_users_entries.id as contests_users_entries_id
-            FROM `contests_has_sports_events` 
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN contests_users_entries ON contests_users_entries.contest_id = contests_has_sports_events.contests_id
             WHERE contests_has_sports_events.contests_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
@@ -368,7 +432,7 @@ class Mdl_games extends CI_Model
                             ) T1 ON soccer_stats.players_phases_id = T1.player
                      WHERE soccer_stats.id IN (
                         SELECT MAX(soccer_stats.id)
-                        FROM soccer_stats 
+                        FROM soccer_stats
                     	WHERE soccer_stats.date <= DATE_ADD(\'' . $event_date . '\',INTERVAL 5 DAY)
                         GROUP BY soccer_stats.players_phases_id
                     ) ORDER BY `players_phases_id` ASC
@@ -381,8 +445,8 @@ class Mdl_games extends CI_Model
     {
         $query_start = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date ASC
@@ -394,8 +458,8 @@ class Mdl_games extends CI_Model
 
         $query_end = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date DESC
@@ -419,7 +483,7 @@ class Mdl_games extends CI_Model
                     ((P1.passes + P2.passes + P3.passes + P4.passes + P5.passes + P6.passes + P7.passes + P8.passes + P9.passes + P10.passes)*0.02) AS total_passes,
                     ((P1.crosses + P2.crosses + P3.crosses + P4.crosses + P5.crosses + P6.crosses + P7.crosses + P8.crosses + P9.crosses + P10.crosses)*0.4) AS total_crosses,
                     ((P1.accurate_crosses + P2.accurate_crosses + P3.accurate_crosses + P4.accurate_crosses + P5.accurate_crosses + P6.accurate_crosses + P7.accurate_crosses + P8.accurate_crosses + P9.accurate_crosses + P10.accurate_crosses)*1) AS total_accurate_crosses
-                FROM `contests_users_entries` 
+                FROM `contests_users_entries`
                 JOIN users ON contests_users_entries.user_id = users.id
                 JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
                 JOIN soccer_stats AS P1 ON P1.players_phases_id = contests_rosters.player1
@@ -432,7 +496,7 @@ class Mdl_games extends CI_Model
                 JOIN soccer_stats AS P8 ON P8.players_phases_id = contests_rosters.player8
                 JOIN soccer_stats AS P9 ON P9.players_phases_id = contests_rosters.player9
                 JOIN soccer_stats AS P10 ON P10.players_phases_id = contests_rosters.player10
-                WHERE (P1.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P3.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P4.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P5.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P6.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P7.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P8.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P9.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P10.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") 
+                WHERE (P1.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P3.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P4.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P5.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P6.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P7.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P8.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P9.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P10.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'")
             ) T1
             WHERE T1.contest_id = ' . $contest_id . '
             ORDER BY T1.username ASC, T1.roster_name ASC
@@ -444,8 +508,8 @@ class Mdl_games extends CI_Model
     {
         $query_start = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date ASC
@@ -457,8 +521,8 @@ class Mdl_games extends CI_Model
 
         $query_end = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date DESC
@@ -482,7 +546,7 @@ class Mdl_games extends CI_Model
                     ((P1.passes + P2.passes + P3.passes + P4.passes + P5.passes + P6.passes + P7.passes + P8.passes + P9.passes + P10.passes)*0.02) AS total_passes,
                     ((P1.crosses + P2.crosses + P3.crosses + P4.crosses + P5.crosses + P6.crosses + P7.crosses + P8.crosses + P9.crosses + P10.crosses)*0.4) AS total_crosses,
                     ((P1.accurate_crosses + P2.accurate_crosses + P3.accurate_crosses + P4.accurate_crosses + P5.accurate_crosses + P6.accurate_crosses + P7.accurate_crosses + P8.accurate_crosses + P9.accurate_crosses + P10.accurate_crosses)*1) AS total_accurate_crosses
-                FROM `contests_users_entries` 
+                FROM `contests_users_entries`
                 JOIN users ON contests_users_entries.user_id = users.id
                 JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
                 JOIN soccer_stats AS P1 ON P1.players_phases_id = contests_rosters.player1
@@ -495,7 +559,7 @@ class Mdl_games extends CI_Model
                 JOIN soccer_stats AS P8 ON P8.players_phases_id = contests_rosters.player8
                 JOIN soccer_stats AS P9 ON P9.players_phases_id = contests_rosters.player9
                 JOIN soccer_stats AS P10 ON P10.players_phases_id = contests_rosters.player10
-                WHERE (P1.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P3.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P4.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P5.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P6.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P7.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P8.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P9.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P10.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") 
+                WHERE (P1.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P3.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P4.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P5.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P6.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P7.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P8.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P9.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'") AND (P10.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'")
             ) T1
             WHERE T1.contest_id = ' . $contest_id . '
             ORDER BY total_team_fp DESC
@@ -507,7 +571,7 @@ class Mdl_games extends CI_Model
     {
         $contest_user_info = $this->db->query('
             SELECT DISTINCT sports_events.start_date, contests_has_sports_events.contests_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_users_entries.id as contests_users_entries_id
-            FROM `contests_has_sports_events` 
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             JOIN contests_users_entries ON contests_users_entries.contest_id = contests_has_sports_events.contests_id
             WHERE contests_has_sports_events.contests_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
@@ -519,8 +583,8 @@ class Mdl_games extends CI_Model
 
         $query_start = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date ASC
@@ -532,8 +596,8 @@ class Mdl_games extends CI_Model
 
         $query_end = $this->db->query('
             SELECT
-            sports_events.start_date 
-            FROM `contests_has_sports_events` 
+            sports_events.start_date
+            FROM `contests_has_sports_events`
             JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
             WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
             ORDER BY sports_events.start_date DESC
@@ -593,7 +657,7 @@ class Mdl_games extends CI_Model
                     ) T1 ON contests_users_entries.id = T1.contests_users_entry_id
                 JOIN soccer_stats ON soccer_stats.players_phases_id = T1.player
                 ) T2
-            WHERE T2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'" 
+            WHERE T2.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'"
             ORDER BY T2.entry_id
             ');
             return $query;
