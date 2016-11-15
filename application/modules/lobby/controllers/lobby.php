@@ -18,7 +18,6 @@ class Lobby extends MX_Controller {
    				$decode_token = $this->decode_token($token['Authorization']);
    	      if($decode_token->exp > time())
    	  		{
-http_response_code(400);
             return $decode_token->data->userid;
    	  		}else{
    					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
@@ -71,6 +70,7 @@ http_response_code(400);
         }else{
           $token = '';
         }
+
         $data = array(
           'token' => $token,
           'data'  => array(
