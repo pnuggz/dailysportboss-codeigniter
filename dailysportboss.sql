@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.4.15.8
--- https://www.phpmyadmin.net
+-- version 4.5.4.1deb2ubuntu2
+-- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Nov 09, 2016 at 07:36 PM
--- Server version: 10.1.13-MariaDB
--- PHP Version: 5.4.45
+-- Host: localhost
+-- Generation Time: Nov 15, 2016 at 05:20 PM
+-- Server version: 5.7.13-0ubuntu0.16.04.2
+-- PHP Version: 7.0.8-0ubuntu0.16.04.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dailysportboss`
+-- Database: `api`
 --
 
 -- --------------------------------------------------------
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `contests`
 --
 
-CREATE TABLE IF NOT EXISTS `contests` (
+CREATE TABLE `contests` (
   `id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
   `entry_fee` int(11) NOT NULL,
@@ -40,21 +40,22 @@ CREATE TABLE IF NOT EXISTS `contests` (
   `contests_prizes_id` int(11) NOT NULL DEFAULT '1',
   `sponsors_id` int(11) NOT NULL DEFAULT '1',
   `contest_status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests`
 --
 
 INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `entry_limit_register`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
-(1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 1),
-(2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 1),
-(3, 1, 0, 'Weekend EPL Smash', '2016-10-07', '01:00:00', 5000, 1, 1, 1, 1, 1, 1),
-(11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1, 1),
-(14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1, 1),
-(15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 1),
+(1, 1, 0, 'Saturday EPL Galore', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(2, 1, 0, 'Sunday EPL Craze', '2016-04-27', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(3, 1, 0, 'Weekend EPL Smash', '2016-10-07', '01:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(11, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 25, 1, 1, 1, 1, 1, 0),
+(14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1, 0),
+(15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0);
+(17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -62,11 +63,11 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 -- Table structure for table `contests_has_sports_events`
 --
 
-CREATE TABLE IF NOT EXISTS `contests_has_sports_events` (
+CREATE TABLE `contests_has_sports_events` (
   `id` int(11) NOT NULL,
   `contests_id` int(11) NOT NULL,
   `sports_events_id` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_has_sports_events`
@@ -121,7 +122,12 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 (46, 17, 18),
 (47, 17, 19),
 (48, 17, 20),
-(49, 17, 21);
+(49, 17, 21),
+(50, 18, 12),
+(51, 19, 1),
+(52, 20, 1),
+(53, 21, 1),
+(54, 22, 1);
 
 -- --------------------------------------------------------
 
@@ -129,13 +135,13 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 -- Table structure for table `contests_prize`
 --
 
-CREATE TABLE IF NOT EXISTS `contests_prize` (
+CREATE TABLE `contests_prize` (
   `id` int(22) NOT NULL,
   `prize` int(22) NOT NULL,
   `upto` varchar(100) NOT NULL,
   `currency` varchar(100) NOT NULL,
   `status` int(22) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contests_prize`
@@ -150,7 +156,7 @@ INSERT INTO `contests_prize` (`id`, `prize`, `upto`, `currency`, `status`) VALUE
 -- Table structure for table `contests_rosters`
 --
 
-CREATE TABLE IF NOT EXISTS `contests_rosters` (
+CREATE TABLE `contests_rosters` (
   `id` int(11) NOT NULL,
   `contests_users_entry_id` int(11) NOT NULL,
   `roster_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -165,7 +171,7 @@ CREATE TABLE IF NOT EXISTS `contests_rosters` (
   `player8` int(11) DEFAULT NULL,
   `player9` int(11) DEFAULT NULL,
   `player10` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_rosters`
@@ -213,13 +219,13 @@ INSERT INTO `contests_rosters` (`id`, `contests_users_entry_id`, `roster_name`, 
 -- Table structure for table `contests_users_entries`
 --
 
-CREATE TABLE IF NOT EXISTS `contests_users_entries` (
+CREATE TABLE `contests_users_entries` (
   `id` int(11) NOT NULL,
   `contest_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `entry_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_entry_count` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_users_entries`
@@ -268,14 +274,14 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 -- Table structure for table `leagues`
 --
 
-CREATE TABLE IF NOT EXISTS `leagues` (
+CREATE TABLE `leagues` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `league_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `league_shorthand` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `league_country` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `logo` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `leagues`
@@ -292,7 +298,7 @@ INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `le
 -- Table structure for table `players`
 --
 
-CREATE TABLE IF NOT EXISTS `players` (
+CREATE TABLE `players` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `first_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
@@ -300,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `nickname` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `nationality` varchar(50) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `players`
@@ -465,7 +471,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (156, 1, '', 'Jurado', 'Jurado', '0000-00-00', '0'),
 (157, 1, 'Younes', 'Kaboul', '0', '0000-00-00', '0'),
 (158, 1, 'Harry', 'Kane', '0', '0000-00-00', '0'),
-(159, 1, 'N''Golo', 'Kante', '0', '0000-00-00', '0'),
+(159, 1, 'N\'Golo', 'Kante', '0', '0000-00-00', '0'),
 (160, 1, 'Martin', 'Kelly', '0', '0000-00-00', '0'),
 (161, 1, '', 'Kenedy', 'Kenedy', '0000-00-00', '0'),
 (162, 1, 'Wahbi', 'Khazri', '0', '0000-00-00', '0'),
@@ -514,31 +520,31 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (205, 1, 'Wes', 'Morgan', '0', '0000-00-00', '0'),
 (206, 1, 'Marc', 'Muniesa', '0', '0000-00-00', '0'),
 (207, 1, 'Jordon', 'Mutch', '0', '0000-00-00', '0'),
-(208, 1, 'Yann', 'M''Vila', '0', '0000-00-00', '0'),
+(208, 1, 'Yann', 'M\'Vila', '0', '0000-00-00', '0'),
 (209, 1, 'Boaz', 'Myhill', '0', '0000-00-00', '0'),
 (210, 1, 'Steven', 'Naismith', '0', '0000-00-00', '0'),
 (211, 1, 'Kyle', 'Naughton', '0', '0000-00-00', '0'),
 (212, 1, 'Jesus', 'Navas', '0', '0000-00-00', '0'),
-(213, 1, 'Dame', 'N''Doye', '0', '0000-00-00', '0'),
+(213, 1, 'Dame', 'N\'Doye', '0', '0000-00-00', '0'),
 (214, 1, 'Oumar', 'Niasse', '0', '0000-00-00', '0'),
 (215, 1, 'Mark', 'Noble', '0', '0000-00-00', '0'),
 (216, 1, 'Kristoffer', 'Nordfeldt', '0', '0000-00-00', '0'),
 (217, 1, '', 'Nyom', 'Nyom', '0000-00-00', '0'),
 (218, 1, 'John', 'Obi Mikel', '0', '0000-00-00', '0'),
 (219, 1, 'Pedro', 'Obiang', '0', '0000-00-00', '0'),
-(220, 1, 'Joey', 'O''Brien', '0', '0000-00-00', '0'),
+(220, 1, 'Joey', 'O\'Brien', '0', '0000-00-00', '0'),
 (221, 1, 'Vadis', 'Odjidja-Ofoe', '0', '0000-00-00', '0'),
 (222, 1, 'Angelo', 'Ogbonna', '0', '0000-00-00', '0'),
 (223, 1, 'Sheyi', 'Ojo', '0', '0000-00-00', '0'),
-(224, 1, 'Eunan', 'O''Kane', '0', '0000-00-00', '0'),
+(224, 1, 'Eunan', 'O\'Kane', '0', '0000-00-00', '0'),
 (225, 1, 'Shinji', 'Okazaki', '0', '0000-00-00', '0'),
 (226, 1, 'Jores', 'Okore', '0', '0000-00-00', '0'),
 (227, 1, 'Martin', 'Olsson', '0', '0000-00-00', '0'),
 (228, 1, 'Jonas', 'Olsson', '0', '0000-00-00', '0'),
-(229, 1, 'Gary', 'O''Neil', '0', '0000-00-00', '0'),
+(229, 1, 'Gary', 'O\'Neil', '0', '0000-00-00', '0'),
 (230, 1, 'Divock', 'Origi', '0', '0000-00-00', '0'),
 (231, 1, '', 'Oscar', 'Oscar', '0000-00-00', '0'),
-(232, 1, 'John', 'O''Shea', '0', '0000-00-00', '0'),
+(232, 1, 'John', 'O\'Shea', '0', '0000-00-00', '0'),
 (233, 1, 'Leon', 'Osman', '0', '0000-00-00', '0'),
 (234, 1, 'Reece', 'Oxford', '0', '0000-00-00', '0'),
 (235, 1, 'Mesut', 'Ozil', '0', '2016-04-01', '0'),
@@ -835,7 +841,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (526, 1, 'Axel', 'Tuanzebe', '0', '0000-00-00', '0'),
 (527, 1, 'Serge', 'Gnabry', '0', '0000-00-00', '0'),
 (528, 1, 'Tiago', 'Ilori', '0', '0000-00-00', '0'),
-(529, 1, 'Clinton', 'N''Jie', '0', '0000-00-00', '0'),
+(529, 1, 'Clinton', 'N\'Jie', '0', '0000-00-00', '0'),
 (530, 1, 'Ryan', 'Allsop', '0', '0000-00-00', '0'),
 (531, 1, 'Baily', 'Cargill', '0', '0000-00-00', '0'),
 (532, 1, 'Matt', 'Butcher', '0', '0000-00-00', '0'),
@@ -845,7 +851,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (537, 1, 'Santiago', 'Cazorla', '0', '0000-00-00', '0'),
 (538, 1, 'Sean', 'Goss', '0', '0000-00-00', '0'),
 (539, 1, 'Jamal', 'Blackman', '0', '0000-00-00', '0'),
-(540, 1, 'Charles', 'N''Zogbia', '0', '0000-00-00', '0'),
+(540, 1, 'Charles', 'N\'Zogbia', '0', '0000-00-00', '0'),
 (541, 1, 'Freddie', 'Woodman', '0', '0000-00-00', '0'),
 (542, 1, 'Gerhard', 'Tremmel', '0', '0000-00-00', '0'),
 (543, 1, 'Artur', 'Boruc', '0', '0000-00-00', '0'),
@@ -997,13 +1003,13 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (689, 1, 'Lewis', 'Grabban', '', '1988-01-12', 'ENG'),
 (690, 1, 'Rhoys', 'Wiggins', '', '1987-11-04', 'WAL'),
 (691, 1, 'Lys', 'Mousset', '', '1996-02-08', 'FRA'),
-(692, 1, 'Eunan', 'O''Kane', '', '1990-07-10', 'IRL'),
+(692, 1, 'Eunan', 'O\'Kane', '', '1990-07-10', 'IRL'),
 (693, 1, 'Jordon', 'Ibe', '', '1995-12-08', 'ENG'),
 (694, 1, 'Corey', 'Jordan', '', '1999-03-04', 'ENG'),
 (695, 1, 'Baily', 'Cargill', '', '1995-10-13', 'ENG'),
 (696, 1, 'Ben', 'Whitfield', '', '1996-02-28', 'ENG'),
 (697, 1, 'Ollie', 'Harfield', '', '1998-01-09', 'ENG'),
-(698, 1, 'Pat', 'O''Flaherty', '', '1997-05-08', 'ENG'),
+(698, 1, 'Pat', 'O\'Flaherty', '', '1997-05-08', 'ENG'),
 (699, 1, 'Jack', 'Simpson', '', '1997-01-08', 'ENG'),
 (700, 1, 'Callum', 'Buckley', '', '1996-01-12', 'ENG'),
 (701, 1, 'Sam', 'Surridge', '', '1998-07-28', 'ENG'),
@@ -1038,7 +1044,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (730, 1, 'Conor', 'Mitchell', '', '1996-05-09', 'NIR'),
 (731, 1, 'Scott', 'Arfield', '', '1988-11-01', 'CAN'),
 (732, 1, 'Cameron', 'Dummigan', '', '1996-06-02', 'NIR'),
-(733, 1, 'Aiden', 'O''Neill', '', '1998-07-04', 'AUS'),
+(733, 1, 'Aiden', 'O\'Neill', '', '1998-07-04', 'AUS'),
 (734, 1, 'Asmir', 'Begovic', '', '1987-06-20', 'BIH'),
 (735, 1, 'Branislav', 'Ivanovic', '', '1984-02-22', 'SRB'),
 (736, 1, 'Cesc', 'Fàbregas', '', '1987-05-04', 'ESP'),
@@ -1253,7 +1259,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (946, 1, 'Kjetil', 'Haug', '', '1998-06-12', 'NOR'),
 (947, 1, 'James', 'Horsfield', '', '1995-11-30', 'ENG'),
 (948, 1, 'Sinan', 'Bytyqi', '', '1995-01-15', 'AUT'),
-(949, 1, 'Billy', 'O''Brien', '', '1995-11-21', 'WAL'),
+(949, 1, 'Billy', 'O\'Brien', '', '1995-11-21', 'WAL'),
 (950, 1, 'Lukas', 'Nmecha', '', '1998-12-12', 'ENG'),
 (951, 1, 'Zackarias', 'Faour', '', '1998-01-30', 'SWE'),
 (952, 1, 'Paolo', 'Fernandes', '', '1998-08-19', 'ESP'),
@@ -1378,16 +1384,16 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (1070, 1, 'Dominic', 'Gape', '', '1994-09-09', 'ENG'),
 (1071, 1, 'Richard', 'Bakary', '', '1997-10-17', 'BEN'),
 (1072, 1, 'Ollie', 'Cook', '', '1997-11-25', 'ENG'),
-(1073, 1, 'Thomas', 'O''Connor', '', '1999-04-21', 'IRL'),
+(1073, 1, 'Thomas', 'O\'Connor', '', '1999-04-21', 'IRL'),
 (1074, 1, 'Ben', 'Rowthorn', '', '1998-11-21', 'ENG'),
 (1075, 1, 'Tyreke', 'Johnson', '', '1998-11-03', 'ENG'),
-(1076, 1, 'Dan', 'N''Lundulu', '', '1999-02-05', 'ENG'),
+(1076, 1, 'Dan', 'N\'Lundulu', '', '1999-02-05', 'ENG'),
 (1077, 1, 'Archie', 'Thomas', '', '1999-07-12', 'ENG'),
 (1078, 1, 'Siph', 'Mdlalose', '', '1999-01-28', 'RSA'),
 (1079, 1, 'Callum', 'Slattery', '', '1999-02-08', 'ENG'),
 (1080, 1, 'Adam', 'Parkes', '', '1999-11-30', 'ENG'),
 (1081, 1, 'Jake', 'Vokins', '', '2000-03-17', 'ENG'),
-(1082, 1, 'Aaron', 'O''Driscoll', '', '1999-04-04', 'IRL'),
+(1082, 1, 'Aaron', 'O\'Driscoll', '', '1999-04-04', 'IRL'),
 (1083, 1, 'Jack', 'Butland', '', '1993-03-10', 'ENG'),
 (1084, 1, 'Phillip', 'Bardsley', '', '1985-06-28', 'SCO'),
 (1085, 1, 'Erik', 'Pieters', '', '1988-08-07', 'NED'),
@@ -1432,7 +1438,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (1124, 1, 'Wahbi', 'Khazri', '', '1991-02-08', 'TUN'),
 (1125, 1, 'Jordan', 'Pickford', '', '1994-03-07', 'ENG'),
 (1126, 1, 'Duncan', 'Watmore', '', '1994-03-08', 'ENG'),
-(1127, 1, 'John', 'O''Shea', '', '1981-04-30', 'IRL'),
+(1127, 1, 'John', 'O\'Shea', '', '1981-04-30', 'IRL'),
 (1128, 1, 'Jeremain', 'Lens', '', '1987-11-24', 'NED'),
 (1129, 1, 'Jermain', 'Defoe', '', '1982-10-07', 'ENG'),
 (1130, 1, 'Paddy', 'McNair', '', '1995-04-27', 'NIR'),
@@ -1509,7 +1515,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 (1201, 1, 'Erik', 'Lamela', '', '1992-03-25', 'ARG'),
 (1202, 1, 'Victor', 'Wanyama', '', '1991-06-25', 'KEN'),
 (1203, 1, 'Michel', 'Vorm', '', '1983-10-20', 'NED'),
-(1204, 1, 'Clinton', 'N''Jie', '', '1993-08-15', 'CMR'),
+(1204, 1, 'Clinton', 'N\'Jie', '', '1993-08-15', 'CMR'),
 (1205, 1, 'Eric', 'Dier', '', '1994-01-15', 'ENG'),
 (1206, 1, 'Kieran', 'Trippier', '', '1990-09-19', 'ENG'),
 (1207, 1, 'Mousa', 'Dembélé', '', '1987-07-17', 'BEL'),
@@ -1631,7 +1637,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 -- Table structure for table `players_phases`
 --
 
-CREATE TABLE IF NOT EXISTS `players_phases` (
+CREATE TABLE `players_phases` (
   `id` int(11) NOT NULL,
   `players_id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
@@ -1644,7 +1650,7 @@ CREATE TABLE IF NOT EXISTS `players_phases` (
   `number` int(3) NOT NULL,
   `depth_chart` varchar(100) CHARACTER SET latin1 NOT NULL,
   `phase_status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=1319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `players_phases`
@@ -2893,7 +2899,7 @@ INSERT INTO `players_phases` (`id`, `players_id`, `leagues_id`, `teams_phases_id
 -- Table structure for table `points_formula`
 --
 
-CREATE TABLE IF NOT EXISTS `points_formula` (
+CREATE TABLE `points_formula` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `goals` decimal(11,2) NOT NULL,
@@ -2905,7 +2911,7 @@ CREATE TABLE IF NOT EXISTS `points_formula` (
   `passes` decimal(11,2) NOT NULL,
   `crosses` decimal(11,2) NOT NULL,
   `accurate_crosses` decimal(11,2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `points_formula`
@@ -2920,7 +2926,7 @@ INSERT INTO `points_formula` (`id`, `sports_id`, `goals`, `assists`, `key_passes
 -- Table structure for table `soccer_stats`
 --
 
-CREATE TABLE IF NOT EXISTS `soccer_stats` (
+CREATE TABLE `soccer_stats` (
   `id` int(11) NOT NULL,
   `players_phases_id` int(11) NOT NULL,
   `date` date NOT NULL,
@@ -2934,7 +2940,7 @@ CREATE TABLE IF NOT EXISTS `soccer_stats` (
   `passes` int(11) DEFAULT '0',
   `crosses` int(11) DEFAULT '0',
   `accurate_crosses` int(11) DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=14245 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `soccer_stats`
@@ -15405,12 +15411,12 @@ INSERT INTO `soccer_stats` (`id`, `players_phases_id`, `date`, `salary`, `goals`
 -- Table structure for table `soccer_stats_calcs`
 --
 
-CREATE TABLE IF NOT EXISTS `soccer_stats_calcs` (
+CREATE TABLE `soccer_stats_calcs` (
   `id` int(11) NOT NULL,
   `players_phases_id` int(11) NOT NULL,
   `avg_fp` decimal(11,2) NOT NULL,
   `form` decimal(11,2) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=1230 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `soccer_stats_calcs`
@@ -16653,13 +16659,13 @@ INSERT INTO `soccer_stats_calcs` (`id`, `players_phases_id`, `avg_fp`, `form`) V
 -- Table structure for table `sponsors`
 --
 
-CREATE TABLE IF NOT EXISTS `sponsors` (
+CREATE TABLE `sponsors` (
   `id` int(22) NOT NULL,
   `sponsor` varchar(255) NOT NULL,
   `logo` varchar(512) NOT NULL,
   `banner` varchar(512) NOT NULL,
   `status` int(22) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sponsors`
@@ -16674,10 +16680,10 @@ INSERT INTO `sponsors` (`id`, `sponsor`, `logo`, `banner`, `status`) VALUES
 -- Table structure for table `sports`
 --
 
-CREATE TABLE IF NOT EXISTS `sports` (
+CREATE TABLE `sports` (
   `id` int(11) NOT NULL,
   `sport_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sports`
@@ -16693,7 +16699,7 @@ INSERT INTO `sports` (`id`, `sport_name`) VALUES
 -- Table structure for table `sports_events`
 --
 
-CREATE TABLE IF NOT EXISTS `sports_events` (
+CREATE TABLE `sports_events` (
   `id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
   `home_team_phase_id` int(11) NOT NULL,
@@ -16703,7 +16709,7 @@ CREATE TABLE IF NOT EXISTS `sports_events` (
   `event_status` tinyint(4) NOT NULL DEFAULT '0',
   `weather_id` int(11) DEFAULT NULL,
   `soccer_live_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sports_events`
@@ -16737,13 +16743,13 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 -- Table structure for table `subscribe`
 --
 
-CREATE TABLE IF NOT EXISTS `subscribe` (
+CREATE TABLE `subscribe` (
   `id` int(22) NOT NULL,
   `email` varchar(512) NOT NULL,
   `country` varchar(100) NOT NULL,
   `submitdate` datetime(6) NOT NULL,
   `statusid` int(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subscribe`
@@ -16762,12 +16768,12 @@ INSERT INTO `subscribe` (`id`, `email`, `country`, `submitdate`, `statusid`) VAL
 -- Table structure for table `teams`
 --
 
-CREATE TABLE IF NOT EXISTS `teams` (
+CREATE TABLE `teams` (
   `id` int(11) NOT NULL,
   `team_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `team_nickname` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `team_shorthand` varchar(100) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `teams`
@@ -16804,7 +16810,7 @@ INSERT INTO `teams` (`id`, `team_name`, `team_nickname`, `team_shorthand`) VALUE
 -- Table structure for table `teams_phases`
 --
 
-CREATE TABLE IF NOT EXISTS `teams_phases` (
+CREATE TABLE `teams_phases` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
@@ -16815,7 +16821,7 @@ CREATE TABLE IF NOT EXISTS `teams_phases` (
   `stadium_city` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `stadium_country` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `phase_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `teams_phases`
@@ -16832,9 +16838,9 @@ INSERT INTO `teams_phases` (`id`, `sports_id`, `leagues_id`, `teams_id`, `start_
 (8, 1, 1, 8, '2015-08-08', '2016-05-15', 'Anfield', 'Liverpool', 'United Kingdom', 1),
 (9, 1, 1, 9, '2015-08-08', '2016-05-15', 'Etihad Stadium', 'Manchester', 'United Kingdom', 1),
 (10, 1, 1, 10, '2015-08-08', '2016-05-15', 'Old Trafford', 'Trafford', 'United Kingdom', 1),
-(11, 1, 1, 11, '2015-08-08', '2016-05-15', 'St. James'' Park', 'Newcastle upon Tyne', 'United Kingdom', 1),
+(11, 1, 1, 11, '2015-08-08', '2016-05-15', 'St. James\' Park', 'Newcastle upon Tyne', 'United Kingdom', 1),
 (12, 1, 1, 12, '2015-08-08', '2016-05-15', 'Carrow Road', 'Norwich', 'United Kingdom', 1),
-(13, 1, 1, 13, '2015-08-08', '2016-05-15', 'St. Mary''s Stadium', 'Southampton', 'United Kingdom', 1),
+(13, 1, 1, 13, '2015-08-08', '2016-05-15', 'St. Mary\'s Stadium', 'Southampton', 'United Kingdom', 1),
 (14, 1, 1, 14, '2015-08-08', '2016-05-15', 'Britannia Stadium', 'Stoke-on-Trent', 'United Kingdom', 1),
 (15, 1, 1, 15, '2015-08-08', '2016-05-15', 'Stadium of Light', 'Sunderland', 'United Kingdom', 1),
 (16, 1, 1, 16, '2015-08-08', '2016-05-15', 'Liberty Stadium', 'Swansea', 'United Kingdom', 1),
@@ -16851,7 +16857,7 @@ INSERT INTO `teams_phases` (`id`, `sports_id`, `leagues_id`, `teams_id`, `start_
 (27, 1, 1, 8, '2016-08-13', '2017-05-31', 'Anfield', 'Liverpool', 'United Kingdom', 0),
 (28, 1, 1, 9, '2016-08-13', '2017-05-31', 'Etihad Stadium', 'Manchester', 'United Kingdom', 0),
 (29, 1, 1, 10, '2016-08-13', '2017-05-31', 'Old Trafford', 'Trafford', 'United Kingdom', 0),
-(30, 1, 1, 13, '2016-08-13', '2017-05-31', 'St. Mary''s Stadium', 'Southampton', 'United Kingdom', 0),
+(30, 1, 1, 13, '2016-08-13', '2017-05-31', 'St. Mary\'s Stadium', 'Southampton', 'United Kingdom', 0),
 (31, 1, 1, 14, '2016-08-13', '2017-05-31', 'Britannia Stadium', 'Stoke-on-Trent', 'United Kingdom', 0),
 (32, 1, 1, 15, '2016-08-13', '2017-05-31', 'Stadium of Light', 'Sunderland', 'United Kingdom', 0),
 (33, 1, 1, 16, '2016-08-13', '2017-05-31', 'Liberty Stadium', 'Swansea', 'United Kingdom', 0),
@@ -16869,7 +16875,7 @@ INSERT INTO `teams_phases` (`id`, `sports_id`, `leagues_id`, `teams_id`, `start_
 -- Table structure for table `team_home_site`
 --
 
-CREATE TABLE IF NOT EXISTS `team_home_site` (
+CREATE TABLE `team_home_site` (
   `stadium_name` varchar(50) NOT NULL,
   `stadium_city` varchar(50) NOT NULL,
   `stadium_country` varchar(25) NOT NULL
@@ -16890,9 +16896,9 @@ INSERT INTO `team_home_site` (`stadium_name`, `stadium_city`, `stadium_country`)
 ('Anfield', 'Liverpool', 'United Kingdom'),
 ('Etihad Stadium', 'Manchester', 'United Kingdom'),
 ('Old Trafford', 'Trafford', 'United Kingdom'),
-('St. James'' Park', 'Newcastle upon Tyne', 'United Kingdom'),
+('St. James\' Park', 'Newcastle upon Tyne', 'United Kingdom'),
 ('Carrow Road', 'Norwich', 'United Kingdom'),
-('St Mary''s Stadium', 'Southampton', 'United Kingdom'),
+('St Mary\'s Stadium', 'Southampton', 'United Kingdom'),
 ('Britannia Stadium', 'Stoke-on-Trent', 'United Kingdom'),
 ('Stadium of Light', 'Sunderland', 'United Kingdom'),
 ('Liberty Stadium', 'Swansea', 'United Kingdom'),
@@ -16907,7 +16913,7 @@ INSERT INTO `team_home_site` (`stadium_name`, `stadium_city`, `stadium_country`)
 -- Table structure for table `users`
 --
 
-CREATE TABLE IF NOT EXISTS `users` (
+CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -16922,7 +16928,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `dob` date NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activation` int(22) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -16943,7 +16949,31 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 (17, 'sss@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsy', 'Aditya', 'Dwi Putranto', '6346464', 'tesss', '', '1991-06-13', 0, '0000-00-00', '2016-11-07 20:21:23', 1),
 (18, 'aditdwipssutranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyy', 'Aditya', 'Dwi Putranto', '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:36', 0),
 (19, 'aditdwiputput@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyy', 'Aditya', 'Dwi Putranto', '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:56', 0),
-(20, 'aditdwiputranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 0);
+(20, 'aditdwiputrantos@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 0),
+(21, 'aditdwiputranto@gmail.com', '7f2ababa423061c509f4923dd04b6cf1', 'testingserver', 'Aditya', 'Dwi Putranto', '087878787', 'tes123', '12410', '1991-06-13', 1, '0000-00-00', '2016-11-09 21:13:03', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `verificationads`
+--
+
+CREATE TABLE `verificationads` (
+  `id` int(22) NOT NULL,
+  `userid` int(22) NOT NULL,
+  `contestid` int(22) NOT NULL,
+  `recaptcha` varchar(512) NOT NULL,
+  `userinput` varchar(512) NOT NULL,
+  `verificationdate` datetime NOT NULL,
+  `statusid` int(22) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `verificationads`
+--
+
+INSERT INTO `verificationads` (`id`, `userid`, `contestid`, `recaptcha`, `userinput`, `verificationdate`, `statusid`) VALUES
+(4, 21, 1, '1', 'ztdcL', '2016-11-14 03:02:51', 1);
 
 -- --------------------------------------------------------
 
@@ -16951,20 +16981,20 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 -- Table structure for table `video`
 --
 
-CREATE TABLE IF NOT EXISTS `video` (
+CREATE TABLE `video` (
   `id` int(22) NOT NULL,
   `video` varchar(512) NOT NULL,
   `sponsorsid` int(11) NOT NULL,
   `statusid` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `video`
 --
 
 INSERT INTO `video` (`id`, `video`, `sponsorsid`, `statusid`) VALUES
-(1, 'video/1/commDaily-Sport-Manager-revA.mp4', 1, 1),
-(2, 'video/1/Daily-Sport-Manager-revA.mp4', 2, 1);
+(1, 'video/1/djarum-super.webm', 1, 1),
+(2, 'video/1/djarum-super.webm', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -16972,10 +17002,10 @@ INSERT INTO `video` (`id`, `video`, `sponsorsid`, `statusid`) VALUES
 -- Table structure for table `video_tests`
 --
 
-CREATE TABLE IF NOT EXISTS `video_tests` (
+CREATE TABLE `video_tests` (
   `id` int(11) NOT NULL,
   `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `video_tests`
@@ -17102,6 +17132,12 @@ ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `verificationads`
+--
+ALTER TABLE `verificationads`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `video`
 --
 ALTER TABLE `video`
@@ -17121,102 +17157,107 @@ ALTER TABLE `video_tests`
 -- AUTO_INCREMENT for table `contests`
 --
 ALTER TABLE `contests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `contests_has_sports_events`
 --
 ALTER TABLE `contests_has_sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 --
 -- AUTO_INCREMENT for table `contests_prize`
 --
 ALTER TABLE `contests_prize`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `contests_rosters`
 --
 ALTER TABLE `contests_rosters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `contests_users_entries`
 --
 ALTER TABLE `contests_users_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `leagues`
 --
 ALTER TABLE `leagues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1319;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
 --
 -- AUTO_INCREMENT for table `players_phases`
 --
 ALTER TABLE `players_phases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1319;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
 --
 -- AUTO_INCREMENT for table `points_formula`
 --
 ALTER TABLE `points_formula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `soccer_stats`
 --
 ALTER TABLE `soccer_stats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14245;
 --
 -- AUTO_INCREMENT for table `soccer_stats_calcs`
 --
 ALTER TABLE `soccer_stats_calcs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1230;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1230;
 --
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sports`
 --
 ALTER TABLE `sports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sports_events`
 --
 ALTER TABLE `sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --
 ALTER TABLE `subscribe`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `teams_phases`
 --
 ALTER TABLE `teams_phases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+--
+-- AUTO_INCREMENT for table `verificationads`
+--
+ALTER TABLE `verificationads`
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `video`
 --
 ALTER TABLE `video`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `video_tests`
 --
 ALTER TABLE `video_tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
