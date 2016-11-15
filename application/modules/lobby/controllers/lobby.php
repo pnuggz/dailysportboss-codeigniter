@@ -18,7 +18,7 @@ class Lobby extends MX_Controller {
    				$decode_token = $this->decode_token($token['Authorization']);
    	      if($decode_token->exp > time())
    	  		{
-
+http_response_code(400);
             return $decode_token->data->userid;
    	  		}else{
    					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
@@ -41,6 +41,22 @@ class Lobby extends MX_Controller {
         $data = array(
           'token' => $token,
           'data'  => $this->Mdl_draft->get_league()
+        );
+        $this->output->set_output(json_encode($data), 200);
+    }
+
+    function events($contest_id) {
+        $cektoken = $this->cekToken($this->input->request_headers());
+        $this->load->model('mdl_draft');
+        if($cektoken)
+        {
+          $token = $this->generate_token($cektoken);
+        }else{
+          $token = '';
+        }
+        $data = array(
+          "token" => $token,
+          "data" => $this->mdl_draft->get_events($contest_id),
         );
         $this->output->set_output(json_encode($data), 200);
     }

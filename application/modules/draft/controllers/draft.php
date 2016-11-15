@@ -332,15 +332,7 @@ class Draft extends Secure_area
         return $query;
     }
 
-    function events($contest_id) {
-
-        $this->load->model('mdl_draft');
-        $data = array(
-          "token" => $this->session->userdata['token'],
-          "data" => $this->mdl_draft->get_events($contest_id),
-        );
-        $this->output->set_output(json_encode($data), 200);
-    }
+    
 
     function get_events_id()
     {

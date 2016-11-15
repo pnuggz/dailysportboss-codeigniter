@@ -460,6 +460,7 @@ class Mdl_draft extends CI_Model
     function get_events($contest_id) {
         $query = $this->db->query('
         SELECT
+        sports_events.id as eventsid,
         sports_events.home_team_phase_id as team_id_home,
         sports_events.away_team_phase_id as team_id_away,
         teams_home.team_shorthand as team_name_home,
@@ -480,6 +481,7 @@ class Mdl_draft extends CI_Model
         $result = array();
         foreach ($query->result() as $row) {
             $result[] = array(
+                'eventsid'              =>      $row->eventsid,
                 'team_id_home'          =>      $row->team_id_home,
                 'team_name_home'        =>      $row->team_name_home,
                 'team_id_away'          =>      $row->team_id_away,

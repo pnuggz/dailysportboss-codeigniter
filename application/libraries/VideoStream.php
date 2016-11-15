@@ -1,6 +1,6 @@
 <?php
 
-class VideoStream
+class Videostream
 {
     private $path = "";
     private $stream = "";
@@ -31,10 +31,26 @@ class VideoStream
     private function setHeader()
     {
         ob_get_clean();
+        header('Content-Description: File Transfer');
+        $ext = strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
+        switch ($ext)
+        {
+        case "mp4":
         header("Content-Type: video/mp4");
-        header("Cache-Control: max-age=2592000, public");
-        header("Expires: ".gmdate('D, d M Y H:i:s', time()+2592000) . ' GMT');
-        header("Last-Modified: ".gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT' );
+        break;
+        case "webm":
+        header("Content-Type: video/webm");
+        break;
+        default:
+        header('Content-Type: application/octet-stream');
+        break;
+        }
+
+
+        header('Content-Disposition: attachment; filename='.basename($this->path));
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
         $this->start = 0;
         $this->size  = filesize($this->path);
         $this->end   = $this->size - 1;
@@ -103,9 +119,11 @@ class VideoStream
             }
             $data = fread($this->stream, $bytesToRead);
             echo $data;
-            flush();
+            flush_buffers();
             $i += $bytesToRead;
         }
+        fclose ($this->stream);
+        exit();
     }
 
     /**
