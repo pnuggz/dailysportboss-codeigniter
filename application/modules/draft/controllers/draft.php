@@ -268,7 +268,7 @@ class Draft extends Secure_area
     function cekforward()
     {
       $validforward = 2;
-      if(count($this->input->post('forwards')) < $validforward)
+      if(count($this->input->post('forwards')) < $validforward || count($this->input->post('forwards')) > $validforward)
       {
         $this->form_validation->set_message('cekforward', 'Forwards must have 2 players.');
         return FALSE;
@@ -280,7 +280,7 @@ class Draft extends Secure_area
     function cekmidfielders()
     {
       $validmidfielders = 4;
-      if(count($this->input->post('midfielders')) < $validmidfielders)
+      if(count($this->input->post('midfielders')) < $validmidfielders  || count($this->input->post('midfielders')) > $validmidfielders)
       {
         $this->form_validation->set_message('cekmidfielders', 'Mid Fielders must have 4 players.');
         return FALSE;
@@ -292,7 +292,7 @@ class Draft extends Secure_area
     function cekdefenders()
     {
       $validdefenders = 4;
-      if(count($this->input->post('defenders')) < $validdefenders)
+      if(count($this->input->post('defenders')) < $validdefenders  || count($this->input->post('defenders')) > $validdefenders)
       {
         $this->form_validation->set_message('cekdefenders', 'Defenders must have 4 players.');
         return FALSE;
