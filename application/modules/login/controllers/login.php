@@ -8,7 +8,50 @@ class Login extends MX_Controller {
     }
 
     function index() {
+      $data['view_file'] = 'login';
+        $this->load->module('template');
+        $this->template->loginlayout($data);
     }
+
+    function loginsubmit()
+        {
+            $this->load->helper('security');
+            $this->load->library('form_validation');
+            $this->load->model('mdl_users');
+
+            $this->form_validation->set_rules('username', 'Username', 'trim|required|max_length[30]|xss_clean');
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|max_length[30]|xss_clean');
+
+            if ($this->form_validation->run() == FALSE)
+            {
+                $this->login();
+
+            } else {
+
+                $username = $this->input->post('username');
+                $password = $this->input->post('password');
+
+                $user_id = $this->mdl_users->login_users($username, $password);
+            };
+
+            if($user_id){
+                $user_data = array('user_id'    =>      $user_id,
+                                   'username'   =>      $username,
+                                   'logged_in'  =>      TRUE,
+                                   );
+
+                $this->session->set_userdata($user_data);
+                $this->session->set_flashdata('login_success', 'You are now logged in');
+
+                redirect('/draft/lobby/');
+
+            } else {
+
+                $this->session->set_flashdata('login_failed', 'Sorry, the login info you entered is invalid.');
+
+                redirect('/login/');
+            }
+        }
 
     function submit()
    {

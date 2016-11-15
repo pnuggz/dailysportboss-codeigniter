@@ -166,7 +166,7 @@ class Draft extends Secure_area
         $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
         if($cekContest==0)
         {
-          $err['message'][] = 'Sorry, Contests already start.';
+          $err['message'][] = 'Sorry, contests already start.';
         }
 
         if($cekCount)
@@ -186,16 +186,18 @@ class Draft extends Secure_area
           $this->load->helper('security');
           $this->load->library('form_validation');
           $this->form_validation->set_rules('roster_name', 'Roster Name', 'trim|required|max_length[512]|xss_clean');
-          $this->form_validation->set_rules('forwards', 'Forwards', 'required');
-          $this->form_validation->set_rules('midfielders', 'Midfielders', 'required');
-          $this->form_validation->set_rules('defenders', 'Defender', 'required');
+          $this->form_validation->set_rules('forwards[]', 'Forwards', 'required|callback_cekforward');
+          $this->form_validation->set_rules('midfielders[]', 'Midfielders', 'required|callback_cekmidfielders');
+          $this->form_validation->set_rules('defenders[]', 'Defenders', 'required|callback_cekdefenders');
+
+
           if($this->form_validation->run($this) == FALSE)
           {
             $new=array();
             foreach( $this->form_validation->error_array() as $key=>$value) {
                $new['message'][]= $this->form_validation->error_array()[$key];
              }
-              $this->output->set_output(json_encode(array('error'=>$new)), 200);
+              $this->output->set_output(json_encode(array('error'=>$new)), 400);http_response_code(400);
 
           }else{
             $this->load->module('contests');
@@ -245,24 +247,59 @@ class Draft extends Secure_area
               );
 
               $contest_roster_data = array_merge($roster_name, $forwards, $midfielders, $defenders);
+              $insertentry = $this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data);
 
-              if ($this->_transactions_new_contest_entry($contest_roster_data, $user_contest_data)) {
+              if ($insertentry) {
                   $this->output->set_output(json_encode(array("success"=>array("message"=>"The team phase has been set"))), 200);
               }else{
-                $this->output->set_output(json_encode(array("error"=>array("message"=>"Setting team phase failed"))), 200);
+                $this->output->set_output(json_encode(array("error"=>array("message"=>"Setting team phase failed"))), 400);http_response_code(400);
               }
           }
 
         }else{
-          $this->output->set_output(json_encode(array('error'=>$err)), 200);
+          $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
         }
 
       }else{
-        echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+        echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
       }
     }
 
+    function cekforward()
+    {
+      $validforward = 2;
+      if(count($this->input->post('forwards')) < $validforward)
+      {
+        $this->form_validation->set_message('cekforward', 'Forwards must have 2 players.');
+        return FALSE;
+      }else{
+        return TRUE;
+      }
+    }
 
+    function cekmidfielders()
+    {
+      $validmidfielders = 4;
+      if(count($this->input->post('midfielders')) < $validmidfielders)
+      {
+        $this->form_validation->set_message('cekmidfielders', 'Mid Fielders must have 4 players.');
+        return FALSE;
+      }else{
+        return TRUE;
+      }
+    }
+
+    function cekdefenders()
+    {
+      $validdefenders = 4;
+      if(count($this->input->post('defenders')) < $validdefenders)
+      {
+        $this->form_validation->set_message('cekdefenders', 'Defenders must have 4 players.');
+        return FALSE;
+      }else{
+        return TRUE;
+      }
+    }
 
     function roster() {
         $contest_id = $this->uri->segment(3);
@@ -323,7 +360,7 @@ class Draft extends Secure_area
 
     function _transactions_new_contest_entry($contest_roster_data, $user_contest_data) {
         $this->load->model('mdl_draft');
-        $this->mdl_draft->_transactions_new_contest_entry($contest_roster_data, $user_contest_data);
+        return $this->mdl_draft->_transactions_new_contest_entry($contest_roster_data, $user_contest_data);
     }
 
     function get_db_selected_players($contest_id) {
@@ -332,7 +369,7 @@ class Draft extends Secure_area
         return $query;
     }
 
-    
+
 
     function get_events_id()
     {

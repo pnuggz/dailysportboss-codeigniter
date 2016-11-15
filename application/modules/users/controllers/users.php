@@ -38,6 +38,7 @@ class Users extends Secure_area {
       $this->output->set_output(json_encode(array('token'=>$token,'data'=>$data)), 200);
     }
 
+
     function logout() {
         $this->session->unset_userdata('logged_in');
         $this->session->unset_userdata('userid');

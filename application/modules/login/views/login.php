@@ -24,7 +24,7 @@
                 echo validation_errors("<p style='color: red;'>", "</p>");
                 ?>
                 <?php
-                echo form_open('users/loginsubmit');
+                echo form_open('login/loginsubmit');
                 ?>
                 <?php
                 $data = array('name'    =>      'username',
@@ -60,11 +60,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-

@@ -55,7 +55,7 @@
             <div class="register-btn">
                 <?php
                     if($this->session->userdata('logged_in')) : ?>
-                       <?php $this->load->module('users'); $this->load->view('users/loginform'); ?>
+                       <?php $this->load->module('cmshome'); $this->load->view('users/loginform'); ?>
                     <?php else : ?>
                 <?php endif; ?>
             </div>
@@ -76,8 +76,8 @@
                 <?php
                 $first_bit = $this->uri->segment(1);
                 $second_bit = $this->uri->segment(2);
-
                 if($first_bit==('cmshome') && $second_bit==('')) {
+
                     $this->load->module('cmshome');
                     $this->load->view('cmshome/cmshome');
                 } else {

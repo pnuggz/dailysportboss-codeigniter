@@ -163,7 +163,7 @@ class Mdl_draft extends CI_Model
                     $user_entry_count = $rows->user_entry_count;
                 }
         }
-        
+
         if($row->entry_limit_register <= $user_entry_count)
         {$result=1;}
 
@@ -335,7 +335,10 @@ class Mdl_draft extends CI_Model
             };
         $contest_roster_data_entry = array_merge($contest_roster_data, $array);
         $this->db->insert('contests_rosters', $contest_roster_data_entry);
+        $userid = $this->db->insert_id();
         $this->db->trans_complete();
+
+        return $userid;
     }
 
     function get_db_selected_players($contest_id) {
