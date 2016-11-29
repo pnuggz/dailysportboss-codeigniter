@@ -63,12 +63,14 @@ class Games extends Secure_area {
 
         $this->load->module('contests');
         $data = $this->contests->get_events_id($contest_id);
+
         foreach ($data->result() as $row) {
             $array_team_home[] = $row->team_id_home;
             $array_team_away[] = $row->team_id_away;
         }
 
         $data = $this->get_all_players_list_contest($contest_id, $user_id, $user_entry_number);
+
         foreach ($data->result() as $row){
             foreach ($array_team_home as $key => $tidh) {
                 if ($row->players_phases_teams_phases_id == $tidh) {

@@ -11,6 +11,7 @@ class Mdl_games extends CI_Model
 
     function get_games_status_active($league_id, $current_date, $user_id)
     {
+        $result = array();
         $query = $this->db->query("
         SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
@@ -58,6 +59,7 @@ class Mdl_games extends CI_Model
 
     function get_games_status_inactive($league_id, $current_date, $user_id)
     {
+        $result = array();
         $query = $this->db->query('
             SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
