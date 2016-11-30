@@ -12,6 +12,11 @@ class Mdl_games extends CI_Model
     function get_games_status_active($league_id, $current_date, $user_id)
     {
         $result = array();
+        $whereliga='';
+        if($league_id)
+        {
+          $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
+        }
         $query = $this->db->query("
         SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
@@ -20,7 +25,7 @@ class Mdl_games extends CI_Model
                     JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
                     JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
                     JOIN leagues ON leagues.id = sports_events_end.leagues_id
-                    WHERE contests.contest_status = 0 AND sports_events_end.leagues_id = ".$league_id." AND sports_events_end.start_date > '".$current_date."'
+                    WHERE contests.contest_status = 0 ".$whereliga." AND sports_events_end.start_date > '".$current_date."'
                     GROUP BY contests.id
                     ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
                 ) as t1
@@ -60,6 +65,11 @@ class Mdl_games extends CI_Model
     function get_games_status_inactive($league_id, $current_date, $user_id)
     {
         $result = array();
+        $whereliga='';
+        if($league_id)
+        {
+          $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
+        }
         $query = $this->db->query('
             SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
@@ -68,7 +78,7 @@ class Mdl_games extends CI_Model
                     JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
                     JOIN sports_events AS sports_events_end on contests_has_sports_events.sports_events_id = sports_events_end.id
                     JOIN leagues ON leagues.id = sports_events_end.leagues_id
-                    WHERE contests.contest_status = 1 AND sports_events_end.leagues_id = '.$league_id.' AND sports_events_end.start_date > \''.$current_date.'\'
+                    WHERE contests.contest_status = 1 '.$whereliga.' AND sports_events_end.start_date > \''.$current_date.'\'
                     GROUP BY contests.id
                     ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
                 ) as t1
