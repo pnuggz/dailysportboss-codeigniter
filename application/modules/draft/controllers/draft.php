@@ -3,8 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 define('ROOT', dirname(dirname(__FILE__)));
 define('DS', DIRECTORY_SEPARATOR);
 require_once(APPPATH.DS."modules/secure_area.php");
-class Draft extends Secure_area
-{
+
+class Draft extends Secure_area {
 
     function __construct() {
         parent::__construct($this->input->request_headers());

@@ -1,17 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once(APPPATH.DS."modules/secure_area.php");
 
-class Players_phases extends MX_Controller {
+class Players_phases extends Secure_area {
 
-    function __construct()
-    {
-        parent::__construct();
-
-        if (!$this->session->userdata('logged_in')) {
-            $this->session->set_flashdata('noaccess', 'Sorry, you are not logged in');
-            redirect('/cmshome/');
+    function __construct() {
+        parent::__construct($this->input->request_headers());
         }
-    }
 
     function index() {
         $this->load->module('sports');
