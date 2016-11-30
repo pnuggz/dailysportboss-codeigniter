@@ -55,7 +55,7 @@ class Lobby extends MX_Controller {
         }
 
         $opid = 0;
-
+        $array_players = array();
         $this->load->module('contestslobby');
         $data = $this->contestslobby->get_events_id($contest_id);
         foreach ($data->result() as $row) {

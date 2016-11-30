@@ -124,11 +124,11 @@ class Draft extends Secure_area {
             );
             $this->output->set_output(json_encode($data), 200);
           }else{
-            $this->output->set_output(json_encode(array('error'=>$err)), 200);
+            $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
           }
 
         }else{
-          echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));exit;
+          echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
         }
 
     }
