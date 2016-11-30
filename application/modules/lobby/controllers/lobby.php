@@ -18,7 +18,7 @@ class Lobby extends MX_Controller {
    				$decode_token = $this->decode_token($token['Authorization']);
    	      if($decode_token->exp > time())
    	  		{
-            return $decode_token->data->userid;
+            return array('userid'=>$decode_token->data->userid,'username'=>$decode_token->data->username);
    	  		}else{
    					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")));http_response_code(401);exit;
    				}
@@ -32,7 +32,7 @@ class Lobby extends MX_Controller {
         $this->load->model('Mdl_draft');
         if($cektoken)
         {
-          $token = $this->generate_token($cektoken);
+          $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
         }else{
           $token = '';
         }
@@ -49,7 +49,7 @@ class Lobby extends MX_Controller {
         $this->load->model('mdl_draft');
         if($cektoken)
         {
-          $token = $this->generate_token($cektoken);
+          $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
         }else{
           $token = '';
         }
@@ -66,7 +66,7 @@ class Lobby extends MX_Controller {
         $this->load->model('Mdl_draft');
         if($cektoken)
         {
-          $token = $this->generate_token($cektoken);
+          $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
         }else{
           $token = '';
         }
@@ -85,7 +85,7 @@ class Lobby extends MX_Controller {
         $cektoken = $this->cekToken($this->input->request_headers());
         $array = array();
         if($cektoken) {
-            $user_id = $cektoken;
+            $user_id = $cektoken['userid'];
             $user_entry_count = 0;
 
             $this->load->model('Mdl_draft');
@@ -93,7 +93,7 @@ class Lobby extends MX_Controller {
                 foreach ($data1->result() as $row) {
                     $user_entry_count = $row->user_entry_count;
                 }
-            $token = $this->generate_token($cektoken);
+            $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
         } else {
             $user_entry_count = '-';
             $token = '';
@@ -127,7 +127,7 @@ class Lobby extends MX_Controller {
         $this->output->set_output(json_encode(array('token'=>$token,'data'=>$array)), 200);
     }
 
-    function generate_token($userid) {
+    function generate_token($userid,$username) {
       $this->load->library('jwt');
   		$tokenId    = base64_encode(mcrypt_create_iv(32));
   		$issuedAt   = time();
@@ -146,6 +146,7 @@ class Lobby extends MX_Controller {
   				'exp'  => $expire,           // Expire
   				'data' => [                  // Data related to the signer user
   						'userid'   => $userid, // userid from the users table
+              'username' => $username,
   				]
   		];
   		$key = base64_encode('dailysportboss');
