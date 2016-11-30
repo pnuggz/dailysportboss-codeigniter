@@ -66,7 +66,8 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
-	header('Access-Control-Allow-Origin: *');
+	header('P3P: CP="IDC DSP COR CURa ADMa OUR IND PHY ONL COM STA"');
+	header("Access-Control-Allow-Origin: *");
 	header("Access-Control-Allow-Headers: authorization, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
 	header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
 	$method = $_SERVER['REQUEST_METHOD'];
