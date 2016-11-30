@@ -66,7 +66,7 @@ class Users extends Secure_area {
         foreach( $this->form_validation->error_array() as $key=>$value) {
            $new['message'][]= $this->form_validation->error_array()[$key];
          }
-          $this->output->set_output(json_encode(array('error'=>$new)), 200);
+          $this->output->set_output(json_encode(array('error'=>$new)), 200);http_response_code(400);
       }else {
         $this->load->model('mdl_users');
 

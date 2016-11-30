@@ -218,17 +218,25 @@ class Lobby extends MX_Controller {
         if($cektoken)
         {
           $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
+          $data = array(
+            'token' => $token,
+            'data'  => array(
+                'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,$cektoken['userid']),
+                'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,$cektoken['userid'])
+            )
+          );
         }else{
           $token = '';
+          $data = array(
+            'token' => $token,
+            'data'  => array(
+                'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,null),
+                'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,null)
+            )
+          );
         }
 
-        $data = array(
-          'token' => $token,
-          'data'  => array(
-              'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,$cektoken),
-              'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,$cektoken)
-          )
-        );
+
         $this->output->set_output(json_encode($data), 200);
     }
 
