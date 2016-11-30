@@ -17,9 +17,10 @@ class Secure_area extends MX_Controller
 			if($token['Authorization'])
 			{
 				$decode_token = $this->decode_token($token['Authorization']);
-	      if($decode_token->exp > time() && $decode_token->data->userid == $this->session->userdata['userid'] && $decode_token->data->username == $this->session->userdata['username'])
+	      if($decode_token->exp > time() && $decode_token->data->userid &&  $decode_token->data->username)
 	  		{
-
+					$this->session->set_userdata('username',$decode_token->data->username);
+					$this->session->set_userdata('userid',$decode_token->data->userid);
 					$this->session->set_userdata('token',$this->generate_token());
 	  		}else{
 					echo json_encode(array('error'=>array('message'=>"Sorry, your session has expired please login again.")),401);http_response_code(401);exit;
