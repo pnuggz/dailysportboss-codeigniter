@@ -148,7 +148,7 @@ class Draft extends Secure_area {
         $this->output->set_output(json_encode($data), 200);
     }
 
-    function add($contest_id)
+    function add($contest_id,$eventsid = null)
     {
       if(array_key_exists('userid',$this->session->userdata))
       {
@@ -157,11 +157,11 @@ class Draft extends Secure_area {
         $userid = '';
       }
 
-      if($userid)
+      if($userid && $eventsid && $contest_id)
       {
         $this->load->model('mdl_draft');
         $err = array();
-        $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+        $cekContest = $this->mdl_draft->check_events_start($eventsid);
         $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
         $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
         if($cekContest==0)

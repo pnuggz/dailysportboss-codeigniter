@@ -107,6 +107,34 @@ class Mdl_draft extends CI_Model
        return $result;
     }
 
+    function check_events_start($events_id)
+    {
+      $result = 0;
+      $today = date('Y-m-d');
+      $now = date('H:i:s');
+      $query = $this->db->query("
+        SELECT *
+        FROM sports_events
+        WHERE start_date > '".$today."' AND id = '".$events_id."'
+        ");
+       $query;
+
+       if($query->num_rows() > 0)
+       {
+          $result = $query->num_rows();
+       }else{
+         $query1 = $this->db->query("
+           SELECT *
+           FROM sports_events
+           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$events_id."'
+           ");
+          $query1;
+          $result = $query1->num_rows();
+       }
+
+       return $result;
+    }
+
     function check_contest_count($contest_id,$userid)
     {
       $result =0;

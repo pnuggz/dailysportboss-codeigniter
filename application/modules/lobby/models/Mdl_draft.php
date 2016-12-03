@@ -73,13 +73,15 @@ class Mdl_draft extends CI_Model
            }else{
              $user_entry_count = '-';
            }
-
+           $date = new DateTime($row->start_date.' '.$row->start_time);
            $result[] = array(
              "contest_id" => $row->contests_id,
              "contest_name" => $row->contest_name,
              "league_shorthand" => $row->league_shorthand,
              "start_date" => $row->start_date,
              "start_time" => $row->start_time,
+             'start_timestamp'       =>      $date->getTimestamp(),
+             'start_fulldate'        =>      date('D M j G:i:s T Y', $date->getTimestamp()),
              "entry_max" => $row->entry_max,
              "entry_fee" => $row->entry_fee,
              "entry_count" => $row->entry_count,
@@ -367,7 +369,25 @@ class Mdl_draft extends CI_Model
         return $query;
     }
 
-    function get_all_players_one($contest_id) {
+    function get_data_opp_one($teams_phasesid)
+    {
+        $result = array();
+        $query_start = $this->db->query('
+        SELECT teams.team_name,teams.team_shorthand
+        FROM teams_phases
+        JOIN teams ON teams_phases.teams_id = teams.id
+        WHERE teams_phases.id = '.$teams_phasesid.'
+        ');
+        foreach ($query_start->result() as $row) {
+          $result = array(
+            'team_name' => $row->team_name,
+            'team_shorthand' => $row->team_shorthand,
+          );
+        }
+        return $result;
+    }
+
+    function get_all_players_one($contest_id,$position) {
         $query_start = $this->db->query('
             SELECT
             sports_events.start_date
@@ -392,6 +412,14 @@ class Mdl_draft extends CI_Model
         ');
         foreach ($query_end->result() as $row) {
             $contest_end_date = $row->start_date;
+        }
+
+        $wherepos='';
+
+        if($position)
+        {
+
+          $wherepos = " AND players_phases.position ='".ucfirst(strtolower($position))."'";
         }
 
         $query = $this->db->query('
@@ -433,7 +461,7 @@ class Mdl_draft extends CI_Model
                         WHERE contests_has_sports_events.contests_id = '.$contest_id.'
                     ) teamsId
                     JOIN players_phases ON players_phases.teams_phases_id = teamsId.teams_phases_ids
-                    WHERE players_phases.phase_status = 0
+                    WHERE players_phases.phase_status = 0 '.$wherepos.'
                 ) i9
                 JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = i9.players_phases_id
                 JOIN (
@@ -480,6 +508,7 @@ class Mdl_draft extends CI_Model
 
         $result = array();
         foreach ($query->result() as $row) {
+          $date = new DateTime($row->start_date.' '.$row->start_time);
             $result[] = array(
                 'eventsid'              =>      $row->eventsid,
                 'team_id_home'          =>      $row->team_id_home,
@@ -488,6 +517,8 @@ class Mdl_draft extends CI_Model
                 'team_name_away'        =>      $row->team_name_away,
                 'start_date'            =>      $row->start_date,
                 'start_time'            =>      $row->start_time,
+                'start_timestamp'       =>      $date->getTimestamp(),
+                'start_fulldate'        =>      date('D M j G:i:s T Y', $date->getTimestamp()),
                 'home_ground'           =>      $row->home_ground
             );
         }

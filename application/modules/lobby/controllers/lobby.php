@@ -44,7 +44,7 @@ class Lobby extends MX_Controller {
         $this->output->set_output(json_encode($data), 200);
     }
 
-    function players($contest_id)
+    function players($contest_id,$position=null)
     {
         $cektoken = $this->cekToken($this->input->request_headers());
         if($cektoken)
@@ -64,7 +64,7 @@ class Lobby extends MX_Controller {
         }
 
         $this->load->model('mdl_draft');
-        $data = $this->mdl_draft->get_all_players_one($contest_id);
+        $data = $this->mdl_draft->get_all_players_one($contest_id,$position);
         foreach ($data->result() as $row){
             foreach ($array_team_home as $key => $tidh) {
                 if ($row->players_phases_teams_phases_id == $tidh) {
@@ -82,7 +82,7 @@ class Lobby extends MX_Controller {
                 }
             }
 
-
+            $opp = $this->mdl_draft->get_data_opp_one($oppid);
             $array_players[] = array(
                 'player_phase_id'   =>      $row->players_phases_id,
                 'first_name'   =>      $row->first_name,
@@ -93,6 +93,8 @@ class Lobby extends MX_Controller {
                 'pos'      =>      $row->position,
                 'role'     =>      $row->depth_chart,
                 'oppid'     =>      $oppid,
+                'opp_team_name' => $opp['team_name'],
+                'opp_team_shorthand' => $opp['team_shorthand'],
                 'fp_avg'    =>  $row->avg_fp,
                 'fp_form'    =>  $row->form,
                 'salary'    =>  $row->salary
@@ -262,7 +264,7 @@ class Lobby extends MX_Controller {
         $this->load->model('Mdl_draft');
         $data = $this->Mdl_draft->get_contest_details($league_id, $contest_id);
         foreach ($data->result() as $row){
-
+            $date = new DateTime($row->start_date.' '.$row->start_time);
             $array = array(
                 'contest_id'            =>  $row->contests_id,
                 'league_id'             =>  $row->leagues_id,
@@ -278,6 +280,8 @@ class Lobby extends MX_Controller {
                 'league_shorthand'      =>  $row->league_shorthand,
                 'start_date'            =>  date('d-m-Y',strtotime($row->start_date)),
                 'start_time'            =>  $row->start_time,
+                'start_timestamp'       =>      $date->getTimestamp(),
+                'start_fulldate'        =>      date('D M j G:i:s T Y', $date->getTimestamp()),
                 'entry_count'           =>  $row->entry_count,
                 'user_entry_count'      =>  $user_entry_count,
                 "prize" => $row->currency.' '.number_format($row->prize).$row->upto
