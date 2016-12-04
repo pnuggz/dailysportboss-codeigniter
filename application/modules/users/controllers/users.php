@@ -53,8 +53,8 @@ class Users extends Secure_area {
       $id = $this->session->userdata['userid'];
       $this->load->library('form_validation');
 
-      $this->form_validation->set_rules('first_name', 'First Name', 'trim|required|max_length[30]|xss_clean');
-      $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[30]|xss_clean');
+      $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[30]|xss_clean');
       $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|callback_cekemails');
       $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
       $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
@@ -70,8 +70,8 @@ class Users extends Secure_area {
       }else {
         $this->load->model('mdl_users');
 
-          $data = array('first_name'      =>       $this->input->post('first_name'),
-                        'last_name'    =>      $this->input->post('last_name'),
+          $data = array('first_name'      =>       $this->input->post('firstname'),
+                        'last_name'    =>      $this->input->post('lastname'),
                         'email'    =>      $this->input->post('email'),
                         'address'    =>      $this->input->post('address'),
                         'phonenumber'     =>      $this->input->post('mobilephone'),
