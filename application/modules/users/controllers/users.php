@@ -55,7 +55,7 @@ class Users extends Secure_area {
 
       $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[30]|xss_clean');
       $this->form_validation->set_rules('lastname', 'Last Name', 'trim|required|max_length[30]|xss_clean');
-      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email|callback_cekemails');
+      $this->form_validation->set_rules('email', 'Email', 'trim|required|max_length[50]|xss_clean|valid_email');
       $this->form_validation->set_rules('address', 'Address', 'trim|required|max_length[512]|xss_clean');
       $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
       $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
