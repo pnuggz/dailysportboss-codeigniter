@@ -51,7 +51,6 @@ class Users extends Secure_area {
     function edit() {
       $this->load->helper('security');
       $id = $this->session->userdata['userid'];
-      print_r($id);exit;
       $this->load->library('form_validation');
 
       $this->form_validation->set_rules('firstname', 'First Name', 'trim|required|max_length[30]|xss_clean');
