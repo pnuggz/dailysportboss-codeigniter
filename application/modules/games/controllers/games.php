@@ -14,7 +14,7 @@ class Games extends Secure_area {
       {
       }
 
-    function listgames($league_id)
+    function listgames($league_id=null)
     {
         $current_date = '2016-03-18';
         $user_id = $this->session->userdata('userid');
@@ -87,6 +87,9 @@ class Games extends Secure_area {
 
                 }
             }
+
+
+
 
             $array_players[] = array(
                 'player_phase_id'   =>      $row->players_phases_id,
@@ -162,7 +165,11 @@ class Games extends Secure_area {
         }
 
         $d = array();
+
+        $this->load->model('mdl_games');
         foreach ($array_players as $arr) {
+          $opp = $this->mdl_games->get_data_opp_one($arr['oppid']);
+
             $comb = array(
                 'player_phase_id'   =>      $arr['player_phase_id'],
                 'first_name'   =>     $arr['first_name'],
@@ -173,6 +180,8 @@ class Games extends Secure_area {
                 'pos'      =>      $arr['pos'],
                 'role'      =>      $arr['role'],
                 'oppid'      =>      $arr['oppid'],
+                'opp_team_name' => $opp['team_name'],
+                'opp_team_shorthand' => $opp['team_shorthand'],
                 'fp_avg'    =>  $arr['fp_avg'],
                 'fp_form'    =>  $arr['fp_form'],
                 'salary'   =>  ''
@@ -235,10 +244,7 @@ class Games extends Secure_area {
         echo json_encode($d);
     }
 
-    function simulate_player_fp() {
-        $contest_id = $this->uri->segment(3);
-        $user_id = $this->uri->segment(4);
-        $user_entry_number = $this->uri->segment(5);
+    function simulate_player_fp($contest_id,$user_id,$user_entry_number) {
 //        $contest_id = 2;
 //        $user_id = 1;
 //        $user_entry_number = 1;
@@ -327,8 +333,7 @@ class Games extends Secure_area {
         return $query;
     }
 
-    function get_events() {
-        $contest_id = $this->uri->segment(3);
+    function events($contest_id) {
 
         $this->load->module('contests');
         $data = $this->contests->get_events($contest_id);
@@ -363,7 +368,7 @@ class Games extends Secure_area {
         echo json_encode($array);
     }
 
-    function simulate_team_fp($contest_id) {
+    function ranking($contest_id) {
 
         $this->load->model('mdl_games');
         $query = $this->mdl_games->simulate_team_fp($contest_id);

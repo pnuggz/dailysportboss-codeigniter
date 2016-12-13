@@ -13,10 +13,8 @@ class Mdl_games extends CI_Model
     {
         $result = array();
         $whereliga='';
-        if($league_id)
-        {
-          $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
-        }
+        if($league_id)$whereliga = " AND sports_events_end.leagues_id = ".$league_id;
+
         $query = $this->db->query("
         SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
@@ -66,10 +64,7 @@ class Mdl_games extends CI_Model
     {
         $result = array();
         $whereliga='';
-        if($league_id)
-        {
-          $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
-        }
+        if($league_id) $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
         $query = $this->db->query('
             SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
@@ -121,6 +116,8 @@ class Mdl_games extends CI_Model
         SELECT *
         FROM `contests_users_entries`
         JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
+        JOIN contests on contests.id = contests_users_entries.contest_id
+        JOIN sponsors ON sponsors.id = contests.sponsors_id
         WHERE contests_users_entries.contest_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
         ');
         foreach($query->result() as $row)
@@ -134,19 +131,31 @@ class Mdl_games extends CI_Model
               "contests_users_entry_id" => $row->contests_users_entry_id,
               "roster_name" => $row->roster_name,
               "creation_date_time" => $row->creation_date_time,
-              "player1" => $row->player1,
-              "player2" => $row->player2,
-              "player3" => $row->player3,
-              "player4" => $row->player4,
-              "player5" => $row->player5,
-              "player6" => $row->player6,
-              "player7" => $row->player7,
-              "player8" => $row->player8,
-              "player9" => $row->player9,
-              "player10" => $row->player10,
+              "sponsor_id" => $row->sponsors_id,
+              "sponsorname"  => $row->sponsor,
+              'sponsorlogo'           =>  base_url().'viewimage/logo/sponsor/'.$row->sponsors_id,
+              'sponsorbanner'         =>  base_url().'viewimage/banner/sponsor/'.$row->sponsors_id,
           );
         }
 
+        return $result;
+    }
+
+    function get_data_opp_one($teams_phasesid)
+    {
+        $result = array();
+        $query_start = $this->db->query('
+        SELECT teams.team_name,teams.team_shorthand
+        FROM teams_phases
+        JOIN teams ON teams_phases.teams_id = teams.id
+        WHERE teams_phases.id = '.$teams_phasesid.'
+        ');
+        foreach ($query_start->result() as $row) {
+          $result = array(
+            'team_name' => $row->team_name,
+            'team_shorthand' => $row->team_shorthand,
+          );
+        }
         return $result;
     }
 
