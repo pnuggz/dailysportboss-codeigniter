@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2016 at 08:12 AM
+-- Generation Time: Dec 17, 2016 at 09:42 AM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -55,7 +55,8 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 (15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0);
+(18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(24, 1, 0, 'EPL Nov', '2016-12-17', '16:00:00', 1000, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -127,7 +128,10 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 (51, 19, 1),
 (52, 20, 1),
 (53, 21, 1),
-(54, 22, 1);
+(54, 22, 1),
+(55, 24, 22),
+(56, 24, 23),
+(57, 24, 24);
 
 -- --------------------------------------------------------
 
@@ -16735,7 +16739,10 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 (18, 1, 35, 21, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (19, 1, 38, 29, '2016-08-27', '23:30:00', 0, NULL, NULL),
 (20, 1, 36, 39, '2016-08-28', '19:30:00', 0, NULL, NULL),
-(21, 1, 28, 37, '2016-08-28', '22:00:00', 0, NULL, NULL);
+(21, 1, 28, 37, '2016-08-28', '22:00:00', 0, NULL, NULL),
+(22, 1, 38, 29, '2016-12-17', '16:00:00', 0, NULL, NULL),
+(23, 1, 36, 39, '2016-12-17', '16:30:00', 0, NULL, NULL),
+(24, 1, 28, 37, '2016-12-17', '17:00:00', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -16951,7 +16958,8 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 (18, 'aditdwipssutranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:36', 0),
 (19, 'aditdwiputput@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:56', 0),
 (20, 'aditdwiputrantos@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 0),
-(21, 'aditdwiputranto@gmail.com', '7f2ababa423061c509f4923dd04b6cf1', 'testingserver', 'Aditya', 'Dwi Putranto', 0, '087878787', 'tes123', '12410', '1991-06-13', 1, '0000-00-00', '2016-11-09 21:13:03', 1);
+(21, 'aditdwiputranto@gmail.com', '7f2ababa423061c509f4923dd04b6cf1', 'testingserver', 'Aditya', 'Dwi Putranto', 0, '087878787', 'tes123', '12410', '1991-06-13', 1, '0000-00-00', '2016-11-09 21:13:03', 1),
+(22, 'boo@test.com', '3b3915a32f903b718f6819480f60b5da', 'ptest', 'Ryan', 'Nug', 0, '081232141235', '123 AAA Street', '13256', '2016-01-01', 0, '0000-00-00', '2016-12-17 07:36:29', 0);
 
 -- --------------------------------------------------------
 
@@ -17158,12 +17166,12 @@ ALTER TABLE `video_tests`
 -- AUTO_INCREMENT for table `contests`
 --
 ALTER TABLE `contests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `contests_has_sports_events`
 --
 ALTER TABLE `contests_has_sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 --
 -- AUTO_INCREMENT for table `contests_prize`
 --
@@ -17223,7 +17231,7 @@ ALTER TABLE `sports`
 -- AUTO_INCREMENT for table `sports_events`
 --
 ALTER TABLE `sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --
@@ -17243,7 +17251,7 @@ ALTER TABLE `teams_phases`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `verificationads`
 --
