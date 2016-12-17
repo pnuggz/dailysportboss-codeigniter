@@ -57,7 +57,7 @@ class Mdl_draft extends CI_Model
                 GROUP BY contest_id
           ) t2 ON t2.contest_id = contests.id
           WHERE  contests.contest_status = 0 '.$whereleague.'
-          ORDER BY t1.start_date ASC, t1. start_time ASC, contests.contest_name DESC
+          ORDER BY t1.start_date DESC, t1.start_time DESC, contests.contest_name DESC
         ');
          $query;
          foreach($query->result() as $row)
