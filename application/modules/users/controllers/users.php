@@ -32,7 +32,8 @@ class Users extends Secure_area {
           'zipcode' => $row->zipcode,
           'mobilephone' => $row->phonenumber,
           'birthday' => $birthday,
-          'subscribe' => $row->subscribe
+          'subscribe' => $row->subscribe,
+          'gender' => $row->gender
         );
       }
       $this->output->set_output(json_encode(array('token'=>$token,'data'=>$data)), 200);
@@ -60,6 +61,7 @@ class Users extends Secure_area {
       $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
       $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
       $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
+      $this->form_validation->set_rules('gender', 'Gender', 'trim|required');
       if($this->form_validation->run() == FALSE)
       {
         $new=array();
@@ -75,6 +77,7 @@ class Users extends Secure_area {
                         'email'    =>      $this->input->post('email'),
                         'address'    =>      $this->input->post('address'),
                         'phonenumber'     =>      $this->input->post('mobilephone'),
+                        'gender'     =>      $this->input->post('gender'),
                         'zipcode'    =>      $this->input->post('zipcode'),
                         'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
                         'subscribe'     =>      $this->input->post('subscribe')

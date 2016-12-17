@@ -35,6 +35,7 @@ class Signup extends MX_Controller {
            $this->form_validation->set_rules('zipcode', 'Zip Code', 'numeric|trim|required|max_length[100]|xss_clean');
            $this->form_validation->set_rules('mobilephone', 'Mobile Phone', 'numeric|trim|required|max_length[512]|xss_clean');
            $this->form_validation->set_rules('birthday', 'Birthday', 'trim|required|callback_checkdateformat');
+           $this->form_validation->set_rules('gender', 'Gender', 'trim|required');
            $recaptcha = $this->input->post('g-recaptcha-response');
            $response = $this->recaptcha->verifyResponse($recaptcha);
            if($this->form_validation->run($this) == FALSE  || !isset($response['success']))
@@ -63,6 +64,7 @@ class Signup extends MX_Controller {
                              'address'    =>      $this->input->post('address'),
                              'zipcode'    =>      $this->input->post('zipcode'),
                              'phonenumber'     =>      $this->input->post('mobilephone'),
+                             'gender'     =>      $this->input->post('gender'),
                              'birthday'     =>      date('Y-m-d',strtotime($this->input->post('birthday'))),
                              'subscribe'     => $sub,
                              'activation'    => 0
