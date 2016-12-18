@@ -79,8 +79,7 @@ class Mdl_draft extends CI_Model
                     WHERE t31.event_status = 0
                     GROUP BY t31.contests_id
               ) t3 ON t3.contests_has_sports_events_contests_id = contests.id
-              WHERE  contests.contest_status = 0 AND ((CURRENT_DATE BETWEEN contests.start_date AND t3.sports_events_start_date) OR (CURRENT_DATE = t3.sports_events_start_date AND ADDTIME(CURRENT_TIME, \'-00:30:00\') <= t3.sports_events_start_time))
-              ORDER BY t1.start_date DESC, t1.start_time ASC, contests.contest_name DESC
+              WHERE  contests.contest_status = 0 AND ((CURRENT_DATE BETWEEN contests.start_date AND SUBDATE(t3.sports_events_start_date, INTERVAL 1 DAY)) OR (CURRENT_DATE = t3.sports_events_start_date AND CURRENT_TIME <= SUBTIME(t3.sports_events_start_time, \'00:30:00\')))              ORDER BY t1.start_date DESC, t1.start_time ASC, contests.contest_name DESC
         ');
          $query;
          foreach($query->result() as $row)
