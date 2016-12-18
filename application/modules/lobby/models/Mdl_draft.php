@@ -18,46 +18,69 @@ class Mdl_draft extends CI_Model
 
         $result = array();
         $query = $this->db->query('
-          SELECT
-          contests.id as contests_id,
-          contests.leagues_id,
-          contests.contest_name,
-          contests.entry_max,
-          contests.entry_fee,
-          contests.entry_limit_register,
-          contests.sponsors_id,
-          contests.contest_status,
-          leagues.id as leagues_id,
-          leagues.league_name,
-          leagues.league_shorthand,
-          t1.start_date,
-          t1.start_time,
-          contests_prize.prize,
-          contests_prize.upto,
-          contests_prize.currency,
-          sponsors.sponsor,
-          COALESCE(t2.entry, 0 ) as entry_count
-          FROM contests
-          LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
-          JOIN leagues ON leagues.id = contests.leagues_id
-          JOIN sponsors ON sponsors.id = contests.sponsors_id
-          JOIN (
-                SELECT tt1.contests_id, tt1.start_date, tt1.start_time
-                FROM (
-                SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
-                FROM `contests_has_sports_events`
-                JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
-                ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
-                    ) tt1
-                    GROUP BY tt1.contests_id
-          ) t1 ON t1.contests_id = contests.id
-          LEFT JOIN (
-                SELECT contests_users_entries.contest_id, COUNT(*) as entry
-                FROM contests_users_entries
-                GROUP BY contest_id
-          ) t2 ON t2.contest_id = contests.id
-          WHERE  contests.contest_status = 0 '.$whereleague.'
-          ORDER BY t1.start_date DESC, t1.start_time DESC, contests.contest_name DESC
+              SELECT
+              contests.id as contests_id,
+              contests.leagues_id,
+              contests.contest_name,
+              contests.entry_max,
+              contests.entry_fee,
+              contests.entry_limit_register,
+              contests.sponsors_id,
+              contests.contest_status,
+              leagues.id as leagues_id,
+              leagues.league_name,
+              leagues.league_shorthand,
+              t1.start_date,
+              t1.start_time,
+              contests_prize.prize,
+              contests_prize.upto,
+              contests_prize.currency,
+              sponsors.sponsor,
+              COALESCE(t2.entry, 0 ) as entry_count,
+              t3.sports_events_start_date,
+              t3.sports_events_start_time
+              FROM contests
+              LEFT JOIN contests_prize ON contests_prize.id = contests.contests_prizes_id
+              JOIN leagues ON leagues.id = contests.leagues_id
+              JOIN sponsors ON sponsors.id = contests.sponsors_id
+              JOIN (
+                    SELECT tt1.contests_id, tt1.start_date, tt1.start_time
+                    FROM (
+                    SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                    FROM `contests_has_sports_events`
+                    JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                    ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
+                        ) tt1
+                        GROUP BY tt1.contests_id
+              ) t1 ON t1.contests_id = contests.id
+              LEFT JOIN (
+                    SELECT contests_users_entries.contest_id, COUNT(*) as entry
+                    FROM contests_users_entries
+                    GROUP BY contest_id
+              ) t2 ON t2.contest_id = contests.id
+              JOIN (
+                    SELECT t31.contests_id AS contests_has_sports_events_contests_id,
+                           t31.sports_events_id,
+                           t31.start_date AS sports_events_start_date,
+                           t31.start_time AS sports_events_start_time,
+                           t31.event_status AS sports_events_event_status
+                    FROM (
+                        SELECT DISTINCT contests_has_sports_events.contests_id,
+                               contests_has_sports_events.id AS contests_has_sports_events_id,
+                               contests_has_sports_events.sports_events_id AS contests_has_sports_events_sports_events_id,
+                               sports_events.id AS sports_events_id,
+                               sports_events.start_date,
+                               sports_events.start_time,
+                               sports_events.event_status
+                        FROM contests_has_sports_events
+                        JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC 
+                    ) t31
+                    WHERE t31.event_status = 0
+                    GROUP BY t31.contests_id
+              ) t3 ON t3.contests_has_sports_events_contests_id = contests.id
+              WHERE  contests.contest_status = 0 AND ((CURRENT_DATE BETWEEN contests.start_date AND t3.sports_events_start_date) OR (CURRENT_DATE = t3.sports_events_start_date AND ADDTIME(CURRENT_TIME, \'-00:30:00\') <= t3.sports_events_start_time))
+              ORDER BY t1.start_date DESC, t1.start_time ASC, contests.contest_name DESC
         ');
          $query;
          foreach($query->result() as $row)
