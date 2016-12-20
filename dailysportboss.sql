@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2016 at 09:46 AM
+-- Generation Time: Dec 20, 2016 at 02:47 PM
 -- Server version: 10.1.9-MariaDB
 -- PHP Version: 5.6.15
 
@@ -56,8 +56,10 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 (16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(24, 1, 0, 'EPL Nov', '2016-12-17', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(25, 1, 0, 'EPL Nov', '2016-12-17', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
+(24, 1, 0, 'EPL Nov', '2016-12-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(25, 1, 0, 'EPL Nov', '2016-12-17', '12:30:00', 1000, 1, 1, 1, 1, 1, 0),
+(26, 1, 0, 'EPL Nov', '2016-12-17', '12:00:00', 1, 1, 1, 1, 1, 1, 0),
+(27, 1, 0, 'EPL Nov', '2016-12-19', '08:00:00', 1000, 2, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -135,7 +137,13 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 (57, 24, 24),
 (58, 25, 25),
 (59, 25, 26),
-(60, 25, 27);
+(60, 25, 27),
+(61, 26, 28),
+(62, 26, 29),
+(63, 26, 30),
+(64, 27, 31),
+(65, 27, 32),
+(66, 27, 33);
 
 -- --------------------------------------------------------
 
@@ -274,7 +282,8 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 (46, 3, 1, '2016-08-21 07:40:52', 11),
 (47, 17, 1, '2016-08-23 09:22:00', 1),
 (48, 17, 2, '2016-11-08 13:48:33', 1),
-(49, 17, 2, '2016-11-08 13:48:31', 2);
+(49, 17, 2, '2016-11-08 13:48:31', 2),
+(51, 26, 1, '2016-12-20 13:25:32', 1);
 
 -- --------------------------------------------------------
 
@@ -16744,12 +16753,18 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 (19, 1, 38, 29, '2016-08-27', '23:30:00', 0, NULL, NULL),
 (20, 1, 36, 39, '2016-08-28', '19:30:00', 0, NULL, NULL),
 (21, 1, 28, 37, '2016-08-28', '22:00:00', 0, NULL, NULL),
-(22, 1, 38, 29, '2016-12-17', '16:00:00', 0, NULL, NULL),
-(23, 1, 36, 39, '2016-12-17', '16:30:00', 0, NULL, NULL),
-(24, 1, 28, 37, '2016-12-17', '17:00:00', 0, NULL, NULL),
-(25, 1, 38, 29, '2016-12-17', '17:00:00', 0, NULL, NULL),
-(26, 1, 36, 39, '2016-12-17', '17:30:00', 0, NULL, NULL),
-(27, 1, 28, 37, '2016-12-17', '18:00:00', 0, NULL, NULL);
+(22, 1, 38, 29, '2016-12-20', '21:00:00', 0, NULL, NULL),
+(23, 1, 36, 39, '2016-12-20', '20:30:00', 0, NULL, NULL),
+(24, 1, 28, 37, '2016-12-20', '20:00:00', 0, NULL, NULL),
+(25, 1, 38, 29, '2016-12-20', '22:00:00', 0, NULL, NULL),
+(26, 1, 36, 39, '2016-12-20', '20:30:00', 0, NULL, NULL),
+(27, 1, 28, 37, '2016-12-20', '21:00:00', 0, NULL, NULL),
+(28, 1, 28, 37, '2016-12-20', '22:00:00', 0, NULL, NULL),
+(29, 1, 36, 39, '2016-12-20', '21:30:00', 0, NULL, NULL),
+(30, 1, 38, 29, '2016-12-20', '22:30:00', 0, NULL, NULL),
+(31, 1, 38, 29, '2016-12-20', '22:15:00', 0, NULL, NULL),
+(32, 1, 36, 39, '2016-12-20', '21:30:00', 0, NULL, NULL),
+(33, 1, 28, 37, '2016-12-20', '21:15:00', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -17173,12 +17188,12 @@ ALTER TABLE `video_tests`
 -- AUTO_INCREMENT for table `contests`
 --
 ALTER TABLE `contests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `contests_has_sports_events`
 --
 ALTER TABLE `contests_has_sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 --
 -- AUTO_INCREMENT for table `contests_prize`
 --
@@ -17193,7 +17208,7 @@ ALTER TABLE `contests_rosters`
 -- AUTO_INCREMENT for table `contests_users_entries`
 --
 ALTER TABLE `contests_users_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `leagues`
 --
@@ -17238,7 +17253,7 @@ ALTER TABLE `sports`
 -- AUTO_INCREMENT for table `sports_events`
 --
 ALTER TABLE `sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --
