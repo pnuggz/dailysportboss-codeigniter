@@ -74,7 +74,7 @@ class Mdl_draft extends CI_Model
                                sports_events.event_status
                         FROM contests_has_sports_events
                         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC 
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
                     ) t31
                     WHERE t31.event_status = 0
                     GROUP BY t31.contests_id
@@ -513,8 +513,10 @@ class Mdl_draft extends CI_Model
         sports_events.id as eventsid,
         sports_events.home_team_phase_id as team_id_home,
         sports_events.away_team_phase_id as team_id_away,
-        teams_home.team_shorthand as team_name_home,
-        teams_away.team_shorthand as team_name_away,
+        teams_home.team_shorthand as team_shorthand_home,
+        teams_away.team_shorthand as team_shorthand_away,
+        teams_home.team_name as team_name_home,
+        teams_away.team_name as team_name_away,
         sports_events.start_date,
         sports_events.start_time,
         teams_phases_home.stadium_name as home_ground
@@ -534,8 +536,10 @@ class Mdl_draft extends CI_Model
             $result[] = array(
                 'eventsid'              =>      $row->eventsid,
                 'team_id_home'          =>      $row->team_id_home,
+                'team_shorthand_home'   =>      $row->team_shorthand_home,
                 'team_name_home'        =>      $row->team_name_home,
                 'team_id_away'          =>      $row->team_id_away,
+                'team_shorthand_away'   =>      $row->team_shorthand_away,
                 'team_name_away'        =>      $row->team_name_away,
                 'start_date'            =>      $row->start_date,
                 'start_time'            =>      $row->start_time,

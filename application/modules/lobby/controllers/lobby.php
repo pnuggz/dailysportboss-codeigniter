@@ -224,7 +224,6 @@ class Lobby extends MX_Controller {
             'token' => $token,
             'data'  => array(
                 'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,$cektoken['userid'])
-//                'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,$cektoken['userid'])
             )
           );
         }else{
@@ -233,7 +232,6 @@ class Lobby extends MX_Controller {
             'token' => $token,
             'data'  => array(
                 'active_contests' => $this->Mdl_draft->get_contest_status($league_id, TRUE,null)
-//                'inactive_contests' => $this->Mdl_draft->get_contest_status($league_id, FALSE,null)
             )
           );
         }

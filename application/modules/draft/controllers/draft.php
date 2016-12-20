@@ -99,13 +99,8 @@ class Draft extends Secure_area {
         {
           $this->load->model('mdl_draft');
           $err = array();
-          $cekContest = $this->mdl_draft->check_contest_start($contest_id);
           $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
           $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
-          if($cekContest==0)
-          {
-            $err['message'][] = 'Sorry, Contests already start.';
-          }
 
           if($cekCount)
           {
