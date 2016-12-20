@@ -7,19 +7,19 @@ class Mdlviewimage extends CI_Model {
         parent::__construct();
     }
 
-    function get_logo($type,$id){
+    function get_logo($type,$device,$id){
         switch($type)
         {
           case 'sponsor':
           $query = $this->db->query('
-                  SELECT sponsors.logo
+                  SELECT *
                   FROM sponsors
                   WHERE sponsors.id = '.$id.'
           ');
           break;
           case 'leagues':
           $query = $this->db->query('
-                  SELECT leagues.logo
+                  SELECT *
                   FROM leagues
                   WHERE leagues.id = '.$id.'
           ');
@@ -28,7 +28,21 @@ class Mdlviewimage extends CI_Model {
 
         foreach($query->result() as $row)
         {
-          $file = $row->logo;
+          switch ($device) {
+            case 'desktop':
+              $file = $row->logodesktop;
+              break;
+              case 'tablet':
+                $file = $row->logotablet;
+                break;
+                case 'mobile':
+                  $file = $row->logomobile;
+                  break;
+                  default:
+                    $file = $row->logodesktop;
+                  break;
+          }
+
           if (file_exists($file)) {
       			$filename = basename($file);
       			$fnamearr = explode(".", $filename);
@@ -59,12 +73,12 @@ class Mdlviewimage extends CI_Model {
         }
     }
 
-    function get_banner($type,$id){
+    function get_banner($type,$device,$id){
         switch($type)
         {
           case 'sponsor':
           $query = $this->db->query('
-                  SELECT sponsors.banner
+                  SELECT *
                   FROM sponsors
                   WHERE sponsors.id = '.$id.'
           ');
@@ -73,7 +87,20 @@ class Mdlviewimage extends CI_Model {
 
         foreach($query->result() as $row)
         {
-          $file = $row->banner;
+          switch ($device) {
+            case 'desktop':
+              $file = $row->bannerdesktop;
+              break;
+              case 'tablet':
+                $file = $row->bannertablet;
+                break;
+                case 'mobile':
+                  $file = $row->bannermobile;
+                  break;
+                  default:
+                    $file = $row->bannerdesktop;
+                  break;
+          }
           if (file_exists($file)) {
       			$filename = basename($file);
       			$fnamearr = explode(".", $filename);

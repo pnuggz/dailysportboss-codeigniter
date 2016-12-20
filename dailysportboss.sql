@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.4.15.8
+-- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 17, 2016 at 09:46 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 5.6.15
+-- Generation Time: Dec 20, 2016 at 01:53 PM
+-- Server version: 10.1.13-MariaDB
+-- PHP Version: 5.4.45
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -26,7 +26,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `contests`
 --
 
-CREATE TABLE `contests` (
+CREATE TABLE IF NOT EXISTS `contests` (
   `id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
   `entry_fee` int(11) NOT NULL,
@@ -40,7 +40,7 @@ CREATE TABLE `contests` (
   `contests_prizes_id` int(11) NOT NULL DEFAULT '1',
   `sponsors_id` int(11) NOT NULL DEFAULT '1',
   `contest_status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests`
@@ -54,10 +54,10 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 (14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1, 0),
 (15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(17, 1, 0, 'Weekend EPL Special', '2016-11-17', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(17, 1, 0, 'Weekend EPL Special', '2016-12-21', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(24, 1, 0, 'EPL Nov', '2016-12-17', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(25, 1, 0, 'EPL Nov', '2016-12-17', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
+(24, 1, 0, 'EPL Nov', '2016-12-24', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(25, 1, 0, 'EPL Nov', '2016-12-21', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -65,11 +65,11 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 -- Table structure for table `contests_has_sports_events`
 --
 
-CREATE TABLE `contests_has_sports_events` (
+CREATE TABLE IF NOT EXISTS `contests_has_sports_events` (
   `id` int(11) NOT NULL,
   `contests_id` int(11) NOT NULL,
   `sports_events_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_has_sports_events`
@@ -143,13 +143,13 @@ INSERT INTO `contests_has_sports_events` (`id`, `contests_id`, `sports_events_id
 -- Table structure for table `contests_prize`
 --
 
-CREATE TABLE `contests_prize` (
+CREATE TABLE IF NOT EXISTS `contests_prize` (
   `id` int(22) NOT NULL,
   `prize` int(22) NOT NULL,
   `upto` varchar(100) NOT NULL,
   `currency` varchar(100) NOT NULL,
   `status` int(22) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `contests_prize`
@@ -164,7 +164,7 @@ INSERT INTO `contests_prize` (`id`, `prize`, `upto`, `currency`, `status`) VALUE
 -- Table structure for table `contests_rosters`
 --
 
-CREATE TABLE `contests_rosters` (
+CREATE TABLE IF NOT EXISTS `contests_rosters` (
   `id` int(11) NOT NULL,
   `contests_users_entry_id` int(11) NOT NULL,
   `roster_name` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
@@ -179,7 +179,7 @@ CREATE TABLE `contests_rosters` (
   `player8` int(11) DEFAULT NULL,
   `player9` int(11) DEFAULT NULL,
   `player10` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_rosters`
@@ -227,13 +227,13 @@ INSERT INTO `contests_rosters` (`id`, `contests_users_entry_id`, `roster_name`, 
 -- Table structure for table `contests_users_entries`
 --
 
-CREATE TABLE `contests_users_entries` (
+CREATE TABLE IF NOT EXISTS `contests_users_entries` (
   `id` int(11) NOT NULL,
   `contest_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `entry_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_entry_count` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_users_entries`
@@ -282,23 +282,25 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 -- Table structure for table `leagues`
 --
 
-CREATE TABLE `leagues` (
+CREATE TABLE IF NOT EXISTS `leagues` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `league_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `league_shorthand` varchar(5) COLLATE utf8_unicode_ci NOT NULL,
   `league_country` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
-  `logo` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `logodesktop` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `logotablet` varchar(1024) COLLATE utf8_unicode_ci NOT NULL,
+  `logomobile` varchar(1024) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `leagues`
 --
 
-INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `league_country`, `logo`) VALUES
-(1, 1, 'Barclays Premier League', 'BPL', 'United Kingdom', 'leagues/logo/1/bpl.jpg'),
-(2, 2, 'NBA', 'NBA', 'USA', 'leagues/logo/2/logo-nba.jpg'),
-(3, 1, 'Champions League', 'CL', 'Europe', 'leagues/logo/3/uefacl.png');
+INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `league_country`, `logodesktop`, `logotablet`, `logomobile`) VALUES
+(1, 1, 'Barclays Premier League', 'BPL', 'United Kingdom', 'leagues/logo/desktop/1/bpl.jpg', 'leagues/logo/tablet/1/bpl.jpg', 'leagues/logo/mobile/1/bpl.jpg'),
+(2, 2, 'NBA', 'NBA', 'USA', 'leagues/logo/desktop/2/logo-nba.jpg', 'leagues/logo/tablet/2/logo-nba.jpg', 'leagues/logo/mobile/2/logo-nba.jpg'),
+(3, 1, 'Champions League', 'CL', 'Europe', 'leagues/logo/desktop/3/uefacl.png', 'leagues/logo/tablet/3/uefacl.png', 'leagues/logo/mobile/3/uefacl.png');
 
 -- --------------------------------------------------------
 
@@ -306,7 +308,7 @@ INSERT INTO `leagues` (`id`, `sports_id`, `league_name`, `league_shorthand`, `le
 -- Table structure for table `players`
 --
 
-CREATE TABLE `players` (
+CREATE TABLE IF NOT EXISTS `players` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `first_name` varchar(50) CHARACTER SET latin1 DEFAULT NULL,
@@ -314,7 +316,7 @@ CREATE TABLE `players` (
   `nickname` varchar(25) CHARACTER SET latin1 DEFAULT NULL,
   `dob` date DEFAULT NULL,
   `nationality` varchar(50) CHARACTER SET latin1 DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `players`
@@ -1645,7 +1647,7 @@ INSERT INTO `players` (`id`, `sports_id`, `first_name`, `last_name`, `nickname`,
 -- Table structure for table `players_phases`
 --
 
-CREATE TABLE `players_phases` (
+CREATE TABLE IF NOT EXISTS `players_phases` (
   `id` int(11) NOT NULL,
   `players_id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
@@ -1658,7 +1660,7 @@ CREATE TABLE `players_phases` (
   `number` int(3) NOT NULL,
   `depth_chart` varchar(100) CHARACTER SET latin1 NOT NULL,
   `phase_status` tinyint(4) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1319 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `players_phases`
@@ -2907,7 +2909,7 @@ INSERT INTO `players_phases` (`id`, `players_id`, `leagues_id`, `teams_phases_id
 -- Table structure for table `points_formula`
 --
 
-CREATE TABLE `points_formula` (
+CREATE TABLE IF NOT EXISTS `points_formula` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `goals` decimal(11,2) NOT NULL,
@@ -2919,7 +2921,7 @@ CREATE TABLE `points_formula` (
   `passes` decimal(11,2) NOT NULL,
   `crosses` decimal(11,2) NOT NULL,
   `accurate_crosses` decimal(11,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `points_formula`
@@ -2934,7 +2936,7 @@ INSERT INTO `points_formula` (`id`, `sports_id`, `goals`, `assists`, `key_passes
 -- Table structure for table `soccer_stats`
 --
 
-CREATE TABLE `soccer_stats` (
+CREATE TABLE IF NOT EXISTS `soccer_stats` (
   `id` int(11) NOT NULL,
   `players_phases_id` int(11) NOT NULL,
   `date` date NOT NULL,
@@ -2948,7 +2950,7 @@ CREATE TABLE `soccer_stats` (
   `passes` int(11) DEFAULT '0',
   `crosses` int(11) DEFAULT '0',
   `accurate_crosses` int(11) DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14245 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `soccer_stats`
@@ -15419,12 +15421,12 @@ INSERT INTO `soccer_stats` (`id`, `players_phases_id`, `date`, `salary`, `goals`
 -- Table structure for table `soccer_stats_calcs`
 --
 
-CREATE TABLE `soccer_stats_calcs` (
+CREATE TABLE IF NOT EXISTS `soccer_stats_calcs` (
   `id` int(11) NOT NULL,
   `players_phases_id` int(11) NOT NULL,
   `avg_fp` decimal(11,2) NOT NULL,
   `form` decimal(11,2) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1230 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `soccer_stats_calcs`
@@ -16667,20 +16669,24 @@ INSERT INTO `soccer_stats_calcs` (`id`, `players_phases_id`, `avg_fp`, `form`) V
 -- Table structure for table `sponsors`
 --
 
-CREATE TABLE `sponsors` (
+CREATE TABLE IF NOT EXISTS `sponsors` (
   `id` int(22) NOT NULL,
   `sponsor` varchar(255) NOT NULL,
-  `logo` varchar(512) NOT NULL,
-  `banner` varchar(512) NOT NULL,
+  `logodesktop` varchar(512) NOT NULL,
+  `logotablet` varchar(512) NOT NULL,
+  `logomobile` varchar(512) NOT NULL,
+  `bannerdesktop` varchar(512) NOT NULL,
+  `bannertablet` varchar(512) NOT NULL,
+  `bannermobile` varchar(512) NOT NULL,
   `status` int(22) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `sponsors`
 --
 
-INSERT INTO `sponsors` (`id`, `sponsor`, `logo`, `banner`, `status`) VALUES
-(1, 'Djarum', 'sponsors/logo/1/djarum-logo-wallpaper.jpg', 'sponsors/banner/1/banner.jpg', 1);
+INSERT INTO `sponsors` (`id`, `sponsor`, `logodesktop`, `logotablet`, `logomobile`, `bannerdesktop`, `bannertablet`, `bannermobile`, `status`) VALUES
+(1, 'Djarum', 'sponsors/desktop/logo/1/djarum-logo-wallpaper.jpg', 'sponsors/tablet/logo/1/djarum-logo-wallpaper.jpg', 'sponsors/mobile/logo/1/djarum-logo-wallpaper.jpg', 'sponsors/desktop/banner/1/banner.jpg', 'sponsors/desktop/tablet/1/banner.jpg', 'sponsors/mobile/banner/1/banner.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -16688,10 +16694,10 @@ INSERT INTO `sponsors` (`id`, `sponsor`, `logo`, `banner`, `status`) VALUES
 -- Table structure for table `sports`
 --
 
-CREATE TABLE `sports` (
+CREATE TABLE IF NOT EXISTS `sports` (
   `id` int(11) NOT NULL,
   `sport_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sports`
@@ -16707,7 +16713,7 @@ INSERT INTO `sports` (`id`, `sport_name`) VALUES
 -- Table structure for table `sports_events`
 --
 
-CREATE TABLE `sports_events` (
+CREATE TABLE IF NOT EXISTS `sports_events` (
   `id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
   `home_team_phase_id` int(11) NOT NULL,
@@ -16717,16 +16723,16 @@ CREATE TABLE `sports_events` (
   `event_status` tinyint(4) NOT NULL DEFAULT '0',
   `weather_id` int(11) DEFAULT NULL,
   `soccer_live_id` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `sports_events`
 --
 
 INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_team_phase_id`, `start_date`, `start_time`, `event_status`, `weather_id`, `soccer_live_id`) VALUES
-(2, 1, 6, 1, '2016-03-19', '20:45:00', 1, NULL, NULL),
-(3, 1, 4, 20, '2016-03-19', '15:00:00', 1, NULL, NULL),
-(4, 1, 5, 7, '2016-03-19', '15:00:00', 1, NULL, NULL),
+(2, 1, 6, 1, '2016-12-21', '20:45:00', 1, NULL, NULL),
+(3, 1, 4, 20, '2016-12-21', '15:00:00', 1, NULL, NULL),
+(4, 1, 5, 7, '2016-12-21', '15:00:00', 1, NULL, NULL),
 (5, 1, 18, 14, '2016-03-19', '15:00:00', 1, NULL, NULL),
 (6, 1, 19, 12, '2016-03-19', '15:00:00', 1, NULL, NULL),
 (7, 1, 16, 2, '2016-03-19', '17:30:00', 1, NULL, NULL),
@@ -16734,21 +16740,21 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 (9, 1, 13, 8, '2016-03-20', '13:30:00', 1, NULL, NULL),
 (10, 1, 17, 3, '2016-03-20', '16:00:00', 1, NULL, NULL),
 (11, 1, 9, 10, '2016-03-20', '16:00:00', 1, NULL, NULL),
-(12, 1, 34, 27, '2016-08-27', '18:30:00', 0, NULL, NULL),
-(13, 1, 23, 40, '2016-08-27', '21:00:00', 0, NULL, NULL),
-(14, 1, 24, 22, '2016-08-27', '21:00:00', 0, NULL, NULL),
-(15, 1, 25, 31, '2016-08-27', '21:00:00', 0, NULL, NULL),
+(12, 1, 34, 27, '2016-12-21', '18:30:00', 0, NULL, NULL),
+(13, 1, 23, 40, '2016-12-21', '21:00:00', 0, NULL, NULL),
+(14, 1, 24, 22, '2016-12-21', '21:00:00', 0, NULL, NULL),
+(15, 1, 25, 31, '2016-12-21', '21:00:00', 0, NULL, NULL),
 (16, 1, 26, 33, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (17, 1, 30, 32, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (18, 1, 35, 21, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (19, 1, 38, 29, '2016-08-27', '23:30:00', 0, NULL, NULL),
 (20, 1, 36, 39, '2016-08-28', '19:30:00', 0, NULL, NULL),
 (21, 1, 28, 37, '2016-08-28', '22:00:00', 0, NULL, NULL),
-(22, 1, 38, 29, '2016-12-17', '16:00:00', 0, NULL, NULL),
-(23, 1, 36, 39, '2016-12-17', '16:30:00', 0, NULL, NULL),
-(24, 1, 28, 37, '2016-12-17', '17:00:00', 0, NULL, NULL),
-(25, 1, 38, 29, '2016-12-17', '17:00:00', 0, NULL, NULL),
-(26, 1, 36, 39, '2016-12-17', '17:30:00', 0, NULL, NULL),
+(22, 1, 38, 29, '2016-12-21', '16:00:00', 0, NULL, NULL),
+(23, 1, 36, 39, '2016-12-21', '16:30:00', 0, NULL, NULL),
+(24, 1, 28, 37, '2016-12-21', '17:00:00', 0, NULL, NULL),
+(25, 1, 38, 29, '2016-12-21', '17:00:00', 0, NULL, NULL),
+(26, 1, 36, 39, '2016-12-21', '17:30:00', 0, NULL, NULL),
 (27, 1, 28, 37, '2016-12-17', '18:00:00', 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -16757,13 +16763,13 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 -- Table structure for table `subscribe`
 --
 
-CREATE TABLE `subscribe` (
+CREATE TABLE IF NOT EXISTS `subscribe` (
   `id` int(22) NOT NULL,
   `email` varchar(512) NOT NULL,
   `country` varchar(100) NOT NULL,
   `submitdate` datetime(6) NOT NULL,
   `statusid` int(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subscribe`
@@ -16782,12 +16788,12 @@ INSERT INTO `subscribe` (`id`, `email`, `country`, `submitdate`, `statusid`) VAL
 -- Table structure for table `teams`
 --
 
-CREATE TABLE `teams` (
+CREATE TABLE IF NOT EXISTS `teams` (
   `id` int(11) NOT NULL,
   `team_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `team_nickname` varchar(25) COLLATE utf8_unicode_ci NOT NULL,
   `team_shorthand` varchar(100) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `teams`
@@ -16824,7 +16830,7 @@ INSERT INTO `teams` (`id`, `team_name`, `team_nickname`, `team_shorthand`) VALUE
 -- Table structure for table `teams_phases`
 --
 
-CREATE TABLE `teams_phases` (
+CREATE TABLE IF NOT EXISTS `teams_phases` (
   `id` int(11) NOT NULL,
   `sports_id` int(11) NOT NULL,
   `leagues_id` int(11) NOT NULL,
@@ -16835,7 +16841,7 @@ CREATE TABLE `teams_phases` (
   `stadium_city` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `stadium_country` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `phase_status` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `teams_phases`
@@ -16889,7 +16895,7 @@ INSERT INTO `teams_phases` (`id`, `sports_id`, `leagues_id`, `teams_id`, `start_
 -- Table structure for table `team_home_site`
 --
 
-CREATE TABLE `team_home_site` (
+CREATE TABLE IF NOT EXISTS `team_home_site` (
   `stadium_name` varchar(50) NOT NULL,
   `stadium_city` varchar(50) NOT NULL,
   `stadium_country` varchar(25) NOT NULL
@@ -16927,7 +16933,7 @@ INSERT INTO `team_home_site` (`stadium_name`, `stadium_city`, `stadium_country`)
 -- Table structure for table `users`
 --
 
-CREATE TABLE `users` (
+CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -16943,7 +16949,7 @@ CREATE TABLE `users` (
   `dob` date NOT NULL,
   `register_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `activation` int(22) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `users`
@@ -16974,7 +16980,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 -- Table structure for table `verificationads`
 --
 
-CREATE TABLE `verificationads` (
+CREATE TABLE IF NOT EXISTS `verificationads` (
   `id` int(22) NOT NULL,
   `userid` int(22) NOT NULL,
   `contestid` int(22) NOT NULL,
@@ -16982,7 +16988,7 @@ CREATE TABLE `verificationads` (
   `userinput` varchar(512) NOT NULL,
   `verificationdate` datetime NOT NULL,
   `statusid` int(22) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `verificationads`
@@ -16997,12 +17003,12 @@ INSERT INTO `verificationads` (`id`, `userid`, `contestid`, `recaptcha`, `userin
 -- Table structure for table `video`
 --
 
-CREATE TABLE `video` (
+CREATE TABLE IF NOT EXISTS `video` (
   `id` int(22) NOT NULL,
   `video` varchar(512) NOT NULL,
   `sponsorsid` int(11) NOT NULL,
   `statusid` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `video`
@@ -17018,10 +17024,10 @@ INSERT INTO `video` (`id`, `video`, `sponsorsid`, `statusid`) VALUES
 -- Table structure for table `video_tests`
 --
 
-CREATE TABLE `video_tests` (
+CREATE TABLE IF NOT EXISTS `video_tests` (
   `id` int(11) NOT NULL,
   `word` varchar(50) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `video_tests`
@@ -17173,107 +17179,107 @@ ALTER TABLE `video_tests`
 -- AUTO_INCREMENT for table `contests`
 --
 ALTER TABLE `contests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
 --
 -- AUTO_INCREMENT for table `contests_has_sports_events`
 --
 ALTER TABLE `contests_has_sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=61;
 --
 -- AUTO_INCREMENT for table `contests_prize`
 --
 ALTER TABLE `contests_prize`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `contests_rosters`
 --
 ALTER TABLE `contests_rosters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
 --
 -- AUTO_INCREMENT for table `contests_users_entries`
 --
 ALTER TABLE `contests_users_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=51;
 --
 -- AUTO_INCREMENT for table `leagues`
 --
 ALTER TABLE `leagues`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `players`
 --
 ALTER TABLE `players`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1319;
 --
 -- AUTO_INCREMENT for table `players_phases`
 --
 ALTER TABLE `players_phases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1319;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1319;
 --
 -- AUTO_INCREMENT for table `points_formula`
 --
 ALTER TABLE `points_formula`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `soccer_stats`
 --
 ALTER TABLE `soccer_stats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14245;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14245;
 --
 -- AUTO_INCREMENT for table `soccer_stats_calcs`
 --
 ALTER TABLE `soccer_stats_calcs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1230;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1230;
 --
 -- AUTO_INCREMENT for table `sponsors`
 --
 ALTER TABLE `sponsors`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `sports`
 --
 ALTER TABLE `sports`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `sports_events`
 --
 ALTER TABLE `sports_events`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
 --
 -- AUTO_INCREMENT for table `subscribe`
 --
 ALTER TABLE `subscribe`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `teams`
 --
 ALTER TABLE `teams`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=24;
 --
 -- AUTO_INCREMENT for table `teams_phases`
 --
 ALTER TABLE `teams_phases`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- AUTO_INCREMENT for table `verificationads`
 --
 ALTER TABLE `verificationads`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `video`
 --
 ALTER TABLE `video`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `video_tests`
 --
 ALTER TABLE `video_tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

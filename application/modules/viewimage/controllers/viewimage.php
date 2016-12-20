@@ -11,16 +11,16 @@ class Viewimage extends MX_Controller {
 
     }
 
-    function logo($type,$id)
+    function logo($type,$device,$id)
     {
       $this->load->model('mdlviewimage');
-      $this->mdlviewimage->get_logo($type,$id);
+      $this->mdlviewimage->get_logo($type,$device,$id);
     }
 
-    function banner($type,$id)
+    function banner($type,$device,$id)
     {
       $this->load->model('mdlviewimage');
-      $this->mdlviewimage->get_banner($type,$id);
+      $this->mdlviewimage->get_banner($type,$device,$id);
     }
 
 }

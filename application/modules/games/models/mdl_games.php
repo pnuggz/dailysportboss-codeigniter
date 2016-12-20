@@ -16,7 +16,7 @@ class Mdl_games extends CI_Model
         if($league_id)$whereliga = " AND sports_events_end.leagues_id = ".$league_id;
 
         $query = $this->db->query("
-        SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
+        SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id,sponsors.sponsor, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
                     SELECT contests.id, contests.contest_name, contests.sponsors_id, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name, leagues.league_shorthand
                     FROM contests
@@ -29,6 +29,7 @@ class Mdl_games extends CI_Model
                 ) as t1
             JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
             JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
+            JOIN sponsors on sponsors.id = t1.sponsors_id
             JOIN (
                 SELECT *
                 FROM (
@@ -48,6 +49,13 @@ class Mdl_games extends CI_Model
             "contest_id" => $row->id,
             "contest_name" => $row->contest_name,
             "sponsor_id" => $row->sponsors_id,
+            'sponsorname'           =>  $row->sponsor,
+            'sponsorlogodesktop'           =>  base_url().'viewimage/logo/sponsor/desktop/'.$row->sponsors_id,
+            'sponsorlogotablet'           =>  base_url().'viewimage/logo/sponsor/tablet/'.$row->sponsors_id,
+            'sponsorlogomobile'           =>  base_url().'viewimage/logo/sponsor/mobile/'.$row->sponsors_id,
+            'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
+            'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
+            'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
             "userid"  => $row->user_id,
             "user_entry_count" => $row->user_entry_count,
             "roster_name"  => $row->roster_name,
@@ -66,7 +74,7 @@ class Mdl_games extends CI_Model
         $whereliga='';
         if($league_id) $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
         $query = $this->db->query('
-            SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
+            SELECT t1.id, t1.contest_name, t1.sponsors_id,sponsors.sponsor, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
             FROM (
                     SELECT contests.id, contests.contest_name, contests.sponsors_id, sports_events_end.start_date as end_date, sports_events_end.start_time as end_time, leagues.id as leagues_id, leagues.league_name, leagues.league_shorthand
                     FROM `contests`
@@ -78,6 +86,7 @@ class Mdl_games extends CI_Model
                     ORDER BY contests.id ASC, sports_events_end.start_date DESC, sports_events_end.start_time DESC
                 ) as t1
             JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
+            JOIN sponsors on sponsors.id = t1.sponsors_id
             JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
             JOIN (
                 SELECT *
@@ -98,6 +107,13 @@ class Mdl_games extends CI_Model
             "contest_id" => $row->id,
             "contest_name" => $row->contest_name,
             "sponsor_id" => $row->sponsors_id,
+            'sponsorname'           =>  $row->sponsor,
+            'sponsorlogodesktop'           =>  base_url().'viewimage/logo/sponsor/desktop/'.$row->sponsors_id,
+            'sponsorlogotablet'           =>  base_url().'viewimage/logo/sponsor/tablet/'.$row->sponsors_id,
+            'sponsorlogomobile'           =>  base_url().'viewimage/logo/sponsor/mobile/'.$row->sponsors_id,
+            'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
+            'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
+            'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
             "userid"  => $row->user_id,
             "user_entry_count" => $row->user_entry_count,
             "roster_name"  => $row->roster_name,
@@ -133,8 +149,12 @@ class Mdl_games extends CI_Model
               "creation_date_time" => $row->creation_date_time,
               "sponsor_id" => $row->sponsors_id,
               "sponsorname"  => $row->sponsor,
-              'sponsorlogo'           =>  base_url().'viewimage/logo/sponsor/'.$row->sponsors_id,
-              'sponsorbanner'         =>  base_url().'viewimage/banner/sponsor/'.$row->sponsors_id,
+              'sponsorlogodesktop'           =>  base_url().'viewimage/logo/sponsor/desktop/'.$row->sponsors_id,
+              'sponsorlogotablet'           =>  base_url().'viewimage/logo/sponsor/tablet/'.$row->sponsors_id,
+              'sponsorlogomobile'           =>  base_url().'viewimage/logo/sponsor/mobile/'.$row->sponsors_id,
+              'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
+              'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
+              'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
           );
         }
 

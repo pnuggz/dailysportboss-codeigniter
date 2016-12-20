@@ -111,8 +111,12 @@ class Mdl_draft extends CI_Model
              'user_entry_count'      =>  $user_entry_count,
              "sponsor_id" => $row->sponsors_id,
              "sponsorname"  => $row->sponsor,
-             'sponsorlogo'           =>  base_url().'viewimage/logo/sponsor/'.$row->sponsors_id,
-             'sponsorbanner'         =>  base_url().'viewimage/banner/sponsor/'.$row->sponsors_id,
+             'sponsorlogodesktop'           =>  base_url().'viewimage/logo/sponsor/desktop/'.$row->sponsors_id,
+             'sponsorlogotablet'           =>  base_url().'viewimage/logo/sponsor/tablet/'.$row->sponsors_id,
+             'sponsorlogomobile'           =>  base_url().'viewimage/logo/sponsor/mobile/'.$row->sponsors_id,
+             'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
+             'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
+             'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
              "leagues_id" => $row->leagues_id,
              "prize" => $row->currency.' '.number_format($row->prize).$row->upto
            );
@@ -170,7 +174,9 @@ class Mdl_draft extends CI_Model
            'league_name' => $row->league_name,
            'league_shorthand' => $row->league_shorthand,
            'league_country' => $row->league_country,
-           'league_logo'   =>  base_url().'viewimage/logo/leagues/'.$row->id,
+           'league_logodesktop'   =>  base_url().'viewimage/logo/leagues/desktop/'.$row->id,
+           'league_logotablet'   =>  base_url().'viewimage/logo/leagues/tablet/'.$row->id,
+           'league_logomobile'   =>  base_url().'viewimage/logo/leagues/mobile/'.$row->id,
          );
        }
 
