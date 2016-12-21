@@ -446,29 +446,25 @@ class Mdl_draft extends CI_Model
 
     function get_all_players_one($contest_id,$position) {
         $query_start = $this->db->query('
-            SELECT
-            sports_events.start_date
-            FROM `contests_has_sports_events`
-            JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-            WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
-            ORDER BY sports_events.start_date ASC
-            LIMIT 1
+                SELECT tt1.contests_id, tt1.start_date as sports_events_start_date, tt2.start_date as sports_events_end_date
+                FROM (
+                    SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                    FROM `contests_has_sports_events`
+                    JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                    ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC
+                ) tt1
+                JOIN (
+                    SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                    FROM `contests_has_sports_events`
+                    JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                    ORDER BY contests_has_sports_events.contests_id, sports_events.start_date DESC
+                ) tt2 ON tt2.contests_id = tt1.contests_id
+                WHERE tt1.contests_id = "'.$contest_id.'"
+                GROUP BY tt1.contests_id
         ');
         foreach ($query_start->result() as $row) {
-            $contest_start_date = $row->start_date;
-        }
-
-        $query_end = $this->db->query('
-            SELECT
-            sports_events.start_date
-            FROM `contests_has_sports_events`
-            JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-            WHERE contests_has_sports_events.contests_id = ' .$contest_id. '
-            ORDER BY sports_events.start_date DESC
-            LIMIT 1
-        ');
-        foreach ($query_end->result() as $row) {
-            $contest_end_date = $row->start_date;
+            $contest_start_date = $row->sports_events_start_date;
+            $contest_end_date = $row->sports_events_end_date;
         }
 
         $wherepos='';
@@ -480,7 +476,7 @@ class Mdl_draft extends CI_Model
         }
 
         $query = $this->db->query('
-                SELECT
+               SELECT
                 i9.players_phases_id,
                 i9.players_phases_teams_phases_id,
                 i9.position,
@@ -488,6 +484,9 @@ class Mdl_draft extends CI_Model
                 i9.weight,
                 i9.depth_chart,
                 i9.descrip,
+                i9.oppid,
+                opp_teams.team_name AS opp_team_name,
+                opp_teams.team_shorthand AS opp_team_shorthand,
                 i6.salary,
                 players.first_name,
                 players.last_name,
@@ -503,41 +502,41 @@ class Mdl_draft extends CI_Model
                                     players_phases.weight,
                                     players_phases.depth_chart,
                                     teamsId.descrip,
-                                    teamsId.teams_phases_ids
+                                    teamsId.teams_phases_ids,
+                    				teamsId.oppid
                     FROM (
                     SELECT
-                    sports_events.home_team_phase_id as teams_phases_ids, \'home\' descrip
+                    sports_events.home_team_phase_id as teams_phases_ids, \'home\' descrip, opp.away_team_phase_id AS oppid
                     FROM contests_has_sports_events
                     INNER JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-                    WHERE contests_has_sports_events.contests_id = '.$contest_id.'
+                    INNER JOIN sports_events AS opp ON opp.id = sports_events.id
+                    WHERE contests_has_sports_events.contests_id = "'.$contest_id.'"
                         UNION
                         SELECT
-                        sports_events.away_team_phase_id, \'away\' descrip
+                        sports_events.away_team_phase_id, \'away\' descrip, opp.home_team_phase_id AS oppid
                         FROM contests_has_sports_events
                         INNER JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-                        WHERE contests_has_sports_events.contests_id = '.$contest_id.'
+                        INNER JOIN sports_events AS opp ON opp.id = sports_events.id
+                        WHERE contests_has_sports_events.contests_id = "'.$contest_id.'"
                     ) teamsId
                     JOIN players_phases ON players_phases.teams_phases_id = teamsId.teams_phases_ids
                     WHERE players_phases.phase_status = 0 '.$wherepos.'
                 ) i9
-                JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = i9.players_phases_id
-                JOIN (
-                    SELECT
-                    soccer_stats.id,
-                    soccer_stats.players_phases_id,
-                    soccer_stats.salary
-                    FROM soccer_stats
-                    WHERE soccer_stats.id IN (
-                            SELECT MAX(soccer_stats.id)
-                            FROM soccer_stats
-                            WHERE soccer_stats.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'"
-                            GROUP BY soccer_stats.players_phases_id
-                        )
-                ) i6 ON i9.players_phases_id = i6.players_phases_id
-                JOIN teams_phases ON teams_phases.id = i9.players_phases_teams_phases_id
-                JOIN teams ON teams.id = teams_phases.teams_id
-                JOIN players_phases ON players_phases.id = i9.players_phases_id
-                JOIN players ON players.id = players_phases.players_id
+                    JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = i9.players_phases_id
+                    JOIN (
+                        SELECT
+                        soccer_stats.id,
+                        soccer_stats.players_phases_id,
+                        soccer_stats.salary
+                        FROM soccer_stats
+                        WHERE soccer_stats.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'"
+                    ) i6 ON i9.players_phases_id = i6.players_phases_id
+                    JOIN teams_phases ON teams_phases.id = i9.players_phases_teams_phases_id
+                    JOIN teams ON teams.id = teams_phases.teams_id
+                    JOIN players_phases ON players_phases.id = i9.players_phases_id
+                    JOIN players ON players.id = players_phases.players_id
+                    JOIN teams_phases AS opp_teams_phases ON opp_teams_phases.id = i9.oppid
+                    JOIN teams AS opp_teams ON opp_teams.id = opp_teams_phases.teams_id
         ');
         return $query;
     }

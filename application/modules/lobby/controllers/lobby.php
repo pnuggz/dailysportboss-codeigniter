@@ -54,35 +54,10 @@ class Lobby extends MX_Controller {
           $token = '';
         }
 
-        $opid = 0;
-        $array_players = array();
-        $this->load->module('contestslobby');
-        $data = $this->contestslobby->get_events_id($contest_id);
-        foreach ($data->result() as $row) {
-            $array_team_home[] = $row->team_id_home;
-            $array_team_away[] = $row->team_id_away;
-        }
-
         $this->load->model('mdl_draft');
         $data = $this->mdl_draft->get_all_players_one($contest_id,$position);
         foreach ($data->result() as $row){
-            foreach ($array_team_home as $key => $tidh) {
-                if ($row->players_phases_teams_phases_id == $tidh) {
-                    $oppid = $array_team_away[$key];
-                } else {
 
-                }
-            }
-
-            foreach ($array_team_away as $key => $tida) {
-                if ($row->players_phases_teams_phases_id == $tida) {
-                    $oppid = $array_team_home[$key];
-                } else {
-
-                }
-            }
-
-            $opp = $this->mdl_draft->get_data_opp_one($oppid);
             $array_players[] = array(
                 'player_phase_id'   =>      $row->players_phases_id,
                 'first_name'   =>      $row->first_name,
@@ -92,9 +67,9 @@ class Lobby extends MX_Controller {
                 'team_shorthand'        =>      $row->team_shorthand,
                 'pos'      =>      $row->position,
                 'role'     =>      $row->depth_chart,
-                'oppid'     =>      $oppid,
-                'opp_team_name' => $opp['team_name'],
-                'opp_team_shorthand' => $opp['team_shorthand'],
+                'oppid'     =>      $row->oppid,
+                'opp_team_name' => $row->opp_team_name,
+                'opp_team_shorthand' => $row->opp_team_shorthand,
                 'fp_avg'    =>  $row->avg_fp,
                 'fp_form'    =>  $row->form,
                 'salary'    =>  $row->salary
