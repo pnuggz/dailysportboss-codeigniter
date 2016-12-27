@@ -148,10 +148,7 @@ class Lobby extends MX_Controller {
                 'depth_chart'   => $row->depth_chart
             );
         }
-
-
-
-
+        
         $result = array();
         foreach( $array_player_individual as $keyA => $valA ) {
             foreach( $array_stat_individual as $keyB => $valB ) {
@@ -160,16 +157,13 @@ class Lobby extends MX_Controller {
                 }
             }
         }
-
-
-
+        
         $datas = array(
           'token' => $token,
           'data' => $result,
         );
 
         $this->output->set_output(json_encode($datas), 200);
-
     }
 
     function events($contest_id) {
@@ -263,6 +257,100 @@ class Lobby extends MX_Controller {
             );
         }
         $this->output->set_output(json_encode(array('token'=>$token,'data'=>$array)), 200);
+    }
+
+    function join($contest_id)
+    {
+        if(array_key_exists('userid',$this->session->userdata))
+        {
+            $userid = $this->session->userdata('userid');
+        }
+
+        if(isset($userid))
+        {
+            $this->load->model('mdl_draft');
+            $err = array();
+            $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+
+            foreach ($cekCount->result() as $row) {
+                $total_entry_count = $row->number_of_total_entry;
+                $user_entry_count = $row->number_of_user_entry;
+                $total_entry_max = $row->entry_max;
+                $user_entry_max= $row->entry_limit_register;
+            }
+
+            if($cekContest==0)
+            {
+                $err['message'][] = 'Sorry, Contest has already started.';
+            }
+
+            if($total_entry_count >= $total_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+            }
+
+            if($user_entry_count >= $user_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach maximum entry.';
+            }
+
+            if(!array_key_exists('message',$err))
+            {
+                $data = array(
+                    'token' => $this->session->userdata['token']
+                );
+                $this->output->set_output(json_encode($data), 200);
+            }else{
+                $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
+            }
+
+        } else {
+            $userid = 1;
+
+            $this->load->model('mdl_draft');
+            $err = array();
+            $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+
+            foreach ($cekCount->result() as $row) {
+                $total_entry_count = $row->number_of_total_entry;
+                $total_entry_max = $row->entry_max;
+            }
+
+            if($cekContest==0)
+            {
+                $err['message'][] = 'Sorry, Contest has already started.';
+            }
+
+            if($total_entry_count >= $total_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+            }
+
+            if(!array_key_exists('message',$err))
+            {
+            }else{
+                $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
+            }
+        }
+
+    }
+
+    function test($contest_id,$userid) {
+        $this->load->model('mdl_draft');
+        $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+
+        foreach ($cekCount->result() as $row) {
+            $result = array(
+                'total_entry_count'    =>   $row->number_of_total_entry,
+                'user_entry_count'    =>  $row->number_of_user_entry,
+                'total_entry_max'   =>  $row->entry_max,
+                'user_entry_max'    =>  $row->entry_limit_register
+            );
+        }
+
+        echo json_encode($result);
     }
 
     function generate_token($userid,$username) {
