@@ -90,77 +90,16 @@ class Lobby extends MX_Controller {
         }else{
           $token = '';
         }
-        $this->load->module('players_phaseslobby');
-        $player_stats = $this->players_phaseslobby->get_player_stats_individual_trial($contest_id, $player_id);
-
-        $array_stat_individual = array();
-        foreach ($player_stats->result() as $row) {
-            $fp_goals = $row->goals * 5;
-            $fp_assists = $row->assists * 4;
-            $fp_key_passes = $row->key_passes * 1;
-            $fp_tackles = $row->tackles * 0.4;
-            $fp_interceptions = $row->interceptions * 0.4;
-            $fp_clearances = $row->clearances * 0.5;
-            $fp_passes = $row->passes * 0.02;
-            $fp_crosses = $row->crosses * 0.4;
-            $fp_accurate_crosses = $row->accurate_crosses * 1;
-            $fp_total = $fp_goals + $fp_assists + $fp_key_passes + $fp_tackles + $fp_interceptions + $fp_clearances + $fp_passes + $fp_crosses + $fp_accurate_crosses;
-
-            $array_stat_individual[] = array(
-                'player_phase_id' => $row->players_phases_id,
-                'date'  => $row->date,
-                'goals' => $row->goals,
-                'assists' => $row->assists,
-                'key_passes' => $row->key_passes,
-                'tackles' => $row->tackles,
-                'interceptions' => $row->interceptions,
-                'clearances' => $row->clearances,
-                'passes' => $row->passes,
-                'crosses' => $row->crosses,
-                'accurate_crosses' => $row->accurate_crosses,
-                'fp_total'  => $fp_total,
-                'salary' => $row->latest_salary
-            );
-        }
-
 
         $this->load->module('players_phaseslobby');
-        $data = $this->players_phaseslobby->get_players_list_contest_individual($contest_id, $player_id);
+        $data['player_info'] = $this->players_phaseslobby->get_players_list_contest_individual($contest_id, $player_id);
 
-        foreach ($data->result() as $row) {
-            $from = new DateTime($row->dob);
-            $to = new DateTime('today');
-            $age = $from->diff($to)->y;
+        $this->load->module('players_phaseslobby');
+        $data['player_stats_log'] = $this->players_phaseslobby->get_player_stats_individual_trial($contest_id, $player_id);
 
-            $array_player_individual[] = array(
-                'player_phase_id' => $row->players_phases_id,
-                'first_name' => $row->first_name,
-                'last_name' => $row->last_name,
-                'weight' => $row->weight,
-                'height' => $row->height,
-                'team_phase_id' => $row->players_phases_teams_phases_id,
-                'team_name' => $row->team_name,
-                'team_shorthand' => $row->team_shorthand,
-                'pos' => $row->position,
-                'age' => $age,
-                'fp_avg' => $row->avg_fp,
-                'fp_form' => $row->form,
-                'depth_chart'   => $row->depth_chart
-            );
-        }
-        
-        $result = array();
-        foreach( $array_player_individual as $keyA => $valA ) {
-            foreach( $array_stat_individual as $keyB => $valB ) {
-                if( $valA['player_phase_id'] == $valB['player_phase_id'] ) {
-                    $result[] = $valA + $valB;
-                }
-            }
-        }
-        
         $datas = array(
           'token' => $token,
-          'data' => $result,
+          'data' => $data,
         );
 
         $this->output->set_output(json_encode($datas), 200);
@@ -335,22 +274,6 @@ class Lobby extends MX_Controller {
             }
         }
 
-    }
-
-    function test($contest_id,$userid) {
-        $this->load->model('mdl_draft');
-        $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
-
-        foreach ($cekCount->result() as $row) {
-            $result = array(
-                'total_entry_count'    =>   $row->number_of_total_entry,
-                'user_entry_count'    =>  $row->number_of_user_entry,
-                'total_entry_max'   =>  $row->entry_max,
-                'user_entry_max'    =>  $row->entry_limit_register
-            );
-        }
-
-        echo json_encode($result);
     }
 
     function generate_token($userid,$username) {
