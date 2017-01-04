@@ -616,17 +616,10 @@ class Mdl_draft extends CI_Model
             $result[] = array(
                 'eventsid'              =>      $row->eventsid,
                 'team_id_home'          =>      $row->team_id_home,
-<<<<<<< HEAD
-                'team_shorthand_home'   =>      $row->team_shorthand_home,
-                'team_name_home'        =>      $row->team_name_home,
-                'team_id_away'          =>      $row->team_id_away,
-                'team_shorthand_away'   =>      $row->team_shorthand_away,
-=======
                 'team_full_home'        =>      $row->team_full_home,
                 'team_name_home'        =>      $row->team_name_home,
                 'team_id_away'          =>      $row->team_id_away,
                 'team_full_away'        =>      $row->team_full_away,
->>>>>>> 9938d4440edbb08c71ecad30f212f731668378ea
                 'team_name_away'        =>      $row->team_name_away,
                 'start_date'            =>      $row->start_date,
                 'start_time'            =>      $row->start_time,
