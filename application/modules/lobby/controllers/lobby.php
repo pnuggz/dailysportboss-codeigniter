@@ -54,35 +54,10 @@ class Lobby extends MX_Controller {
           $token = '';
         }
 
-        $opid = 0;
-        $array_players = array();
-        $this->load->module('contestslobby');
-        $data = $this->contestslobby->get_events_id($contest_id);
-        foreach ($data->result() as $row) {
-            $array_team_home[] = $row->team_id_home;
-            $array_team_away[] = $row->team_id_away;
-        }
-
         $this->load->model('mdl_draft');
         $data = $this->mdl_draft->get_all_players_one($contest_id,$position);
         foreach ($data->result() as $row){
-            foreach ($array_team_home as $key => $tidh) {
-                if ($row->players_phases_teams_phases_id == $tidh) {
-                    $oppid = $array_team_away[$key];
-                } else {
 
-                }
-            }
-
-            foreach ($array_team_away as $key => $tida) {
-                if ($row->players_phases_teams_phases_id == $tida) {
-                    $oppid = $array_team_home[$key];
-                } else {
-
-                }
-            }
-
-            $opp = $this->mdl_draft->get_data_opp_one($oppid);
             $array_players[] = array(
                 'player_phase_id'   =>      $row->players_phases_id,
                 'first_name'   =>      $row->first_name,
@@ -92,9 +67,9 @@ class Lobby extends MX_Controller {
                 'team_shorthand'        =>      $row->team_shorthand,
                 'pos'      =>      $row->position,
                 'role'     =>      $row->depth_chart,
-                'oppid'     =>      $oppid,
-                'opp_team_name' => $opp['team_name'],
-                'opp_team_shorthand' => $opp['team_shorthand'],
+                'oppid'     =>      $row->oppid,
+                'opp_team_name' => $row->opp_team_name,
+                'opp_team_shorthand' => $row->opp_team_shorthand,
                 'fp_avg'    =>  $row->avg_fp,
                 'fp_form'    =>  $row->form,
                 'salary'    =>  $row->salary
@@ -115,86 +90,19 @@ class Lobby extends MX_Controller {
         }else{
           $token = '';
         }
-        $this->load->module('players_phaseslobby');
-        $player_stats = $this->players_phaseslobby->get_player_stats_individual_trial($contest_id, $player_id);
-
-        $array_stat_individual = array();
-        foreach ($player_stats->result() as $row) {
-            $fp_goals = $row->goals * 5;
-            $fp_assists = $row->assists * 4;
-            $fp_key_passes = $row->key_passes * 1;
-            $fp_tackles = $row->tackles * 0.4;
-            $fp_interceptions = $row->interceptions * 0.4;
-            $fp_clearances = $row->clearances * 0.5;
-            $fp_passes = $row->passes * 0.02;
-            $fp_crosses = $row->crosses * 0.4;
-            $fp_accurate_crosses = $row->accurate_crosses * 1;
-            $fp_total = $fp_goals + $fp_assists + $fp_key_passes + $fp_tackles + $fp_interceptions + $fp_clearances + $fp_passes + $fp_crosses + $fp_accurate_crosses;
-
-            $array_stat_individual[] = array(
-                'player_phase_id' => $row->players_phases_id,
-                'date'  => $row->date,
-                'goals' => $row->goals,
-                'assists' => $row->assists,
-                'key_passes' => $row->key_passes,
-                'tackles' => $row->tackles,
-                'interceptions' => $row->interceptions,
-                'clearances' => $row->clearances,
-                'passes' => $row->passes,
-                'crosses' => $row->crosses,
-                'accurate_crosses' => $row->accurate_crosses,
-                'fp_total'  => $fp_total,
-                'salary' => $row->latest_salary
-            );
-        }
-
 
         $this->load->module('players_phaseslobby');
-        $data = $this->players_phaseslobby->get_players_list_contest_individual($contest_id, $player_id);
+        $data['player_info'] = $this->players_phaseslobby->get_players_list_contest_individual($contest_id, $player_id);
 
-        foreach ($data->result() as $row) {
-            $from = new DateTime($row->dob);
-            $to = new DateTime('today');
-            $age = $from->diff($to)->y;
-
-            $array_player_individual[] = array(
-                'player_phase_id' => $row->players_phases_id,
-                'first_name' => $row->first_name,
-                'last_name' => $row->last_name,
-                'weight' => $row->weight,
-                'height' => $row->height,
-                'team_phase_id' => $row->players_phases_teams_phases_id,
-                'team_name' => $row->team_name,
-                'team_shorthand' => $row->team_shorthand,
-                'pos' => $row->position,
-                'age' => $age,
-                'fp_avg' => $row->avg_fp,
-                'fp_form' => $row->form,
-                'depth_chart'   => $row->depth_chart
-            );
-        }
-
-
-
-
-        $result = array();
-        foreach( $array_player_individual as $keyA => $valA ) {
-            foreach( $array_stat_individual as $keyB => $valB ) {
-                if( $valA['player_phase_id'] == $valB['player_phase_id'] ) {
-                    $result[] = $valA + $valB;
-                }
-            }
-        }
-
-
+        $this->load->module('players_phaseslobby');
+        $data['player_stats_log'] = $this->players_phaseslobby->get_player_stats_individual_trial($contest_id, $player_id);
 
         $datas = array(
           'token' => $token,
-          'data' => $result,
+          'data' => $data,
         );
 
         $this->output->set_output(json_encode($datas), 200);
-
     }
 
     function events($contest_id) {
@@ -290,6 +198,84 @@ class Lobby extends MX_Controller {
             );
         }
         $this->output->set_output(json_encode(array('token'=>$token,'data'=>$array)), 200);
+    }
+
+    function join($contest_id)
+    {
+        if(array_key_exists('userid',$this->session->userdata))
+        {
+            $userid = $this->session->userdata('userid');
+        }
+
+        if(isset($userid))
+        {
+            $this->load->model('mdl_draft');
+            $err = array();
+            $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+
+            foreach ($cekCount->result() as $row) {
+                $total_entry_count = $row->number_of_total_entry;
+                $user_entry_count = $row->number_of_user_entry;
+                $total_entry_max = $row->entry_max;
+                $user_entry_max= $row->entry_limit_register;
+            }
+
+            if($cekContest==0)
+            {
+                $err['message'][] = 'Sorry, Contest has already started.';
+            }
+
+            if($total_entry_count >= $total_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+            }
+
+            if($user_entry_count >= $user_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach maximum entry.';
+            }
+
+            if(!array_key_exists('message',$err))
+            {
+                $data = array(
+                    'token' => $this->session->userdata['token']
+                );
+                $this->output->set_output(json_encode($data), 200);
+            }else{
+                $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
+            }
+
+        } else {
+            $userid = 1;
+
+            $this->load->model('mdl_draft');
+            $err = array();
+            $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+
+            foreach ($cekCount->result() as $row) {
+                $total_entry_count = $row->number_of_total_entry;
+                $total_entry_max = $row->entry_max;
+            }
+
+            if($cekContest==0)
+            {
+                $err['message'][] = 'Sorry, Contest has already started.';
+            }
+
+            if($total_entry_count >= $total_entry_max)
+            {
+                $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+            }
+
+            if(!array_key_exists('message',$err))
+            {
+            }else{
+                $this->output->set_output(json_encode(array('error'=>$err)), 200);http_response_code(400);
+            }
+        }
+
     }
 
     function generate_token($userid,$username) {

@@ -97,19 +97,31 @@ class Draft extends Secure_area {
 
         if($userid)
         {
-          $this->load->model('mdl_draft');
-          $err = array();
-          $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
-          $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
+            $this->load->model('mdl_draft');
+            $err = array();
+            $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
-          if($cekCount)
+            foreach ($cekCount->result() as $row) {
+                    $total_entry_count = $row->number_of_total_entry;
+                    $user_entry_count = $row->number_of_user_entry;
+                    $total_entry_max = $row->entry_max;
+                    $user_entry_max= $row->entry_limit_register;
+            }
+
+          if($cekContest==0)
           {
-            $err['message'][] = 'Sorry, cannot join contests because reach limit registered team.';
+            $err['message'][] = 'Sorry, Contest has already started.';
           }
 
-          if($cekmaxCount)
+          if($total_entry_count >= $total_entry_max)
           {
-            $err['message'][] = 'Sorry, cannot join contests because reach maximum entry.';
+            $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+          }
+
+          if($user_entry_count >= $user_entry_max)
+          {
+            $err['message'][] = 'Sorry, cannot join Contest because reach maximum entry.';
           }
 
           if(!array_key_exists('message',$err))
@@ -128,7 +140,21 @@ class Draft extends Secure_area {
 
     }
 
+    function test($contest_id,$userid) {
+        $this->load->model('mdl_draft');
+        $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
+        foreach ($cekCount->result() as $row) {
+            $result = array(
+                'total_entry_count'    =>   $row->number_of_total_entry,
+                'user_entry_count'    =>  $row->number_of_user_entry,
+                'total_entry_max'   =>  $row->entry_max,
+                'user_entry_max'    =>  $row->entry_limit_register
+            );
+        }
+
+        echo json_encode($result);
+    }
 
     function games($contest_id)
     {
@@ -152,27 +178,34 @@ class Draft extends Secure_area {
         $userid = '';
       }
 
-      if($userid && $eventsid && $contest_id)
-      {
-        $this->load->model('mdl_draft');
-        $err = array();
-        $cekContest = $this->mdl_draft->check_events_start($eventsid);
-        $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
-        $cekmaxCount = $this->mdl_draft->check_register_contest_count($contest_id,$userid);
-        if($cekContest==0)
-        {
-          $err['message'][] = 'Sorry, contests already start.';
-        }
+          if($userid && $eventsid && $contest_id)
+          {
+              $this->load->model('mdl_draft');
+              $err = array();
+              $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+              $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
-        if($cekCount)
-        {
-          $err['message'][] = 'Sorry, cannot join contests because reach limit registered team.';
-        }
+              foreach ($cekCount->result() as $row) {
+                  $total_entry_count = $row->number_of_total_entry;
+                  $user_entry_count = $row->number_of_user_entry;
+                  $total_entry_max = $row->entry_max;
+                  $user_entry_max= $row->entry_limit_register;
+              }
 
-        if($cekmaxCount)
-        {
-          $err['message'][] = 'Sorry, cannot join contests because reach maximum entry.';
-        }
+              if($cekContest==0)
+              {
+                  $err['message'][] = 'Sorry, Contest has already started.';
+              }
+
+              if($total_entry_count >= $total_entry_max)
+              {
+                  $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+              }
+
+              if($user_entry_count >= $user_entry_max)
+              {
+                  $err['message'][] = 'Sorry, cannot join Contest because reach maximum entry.';
+              }
 
         if(!array_key_exists('message',$err))
         {

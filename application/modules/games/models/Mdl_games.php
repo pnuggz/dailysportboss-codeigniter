@@ -9,11 +9,11 @@ class Mdl_games extends CI_Model
         parent::__construct();
     }
 
-    function get_games_status_active($league_id, $current_date, $user_id)
+    function get_games_status_active($league_id, $user_id)
     {
         $result = array();
         $whereliga='';
-        if($league_id)$whereliga = " AND sports_events_end.leagues_id = ".$league_id;
+        if($league_id)$whereliga = " AND t11.leagues_id = ".$league_id;
 
         $query = $this->db->query("
         SELECT t1.id, t1.contest_name, t1.sponsors_id, contests_users_entries.user_id,sponsors.sponsor, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
@@ -31,17 +31,39 @@ class Mdl_games extends CI_Model
             JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
             JOIN sponsors on sponsors.id = t1.sponsors_id
             JOIN (
-                SELECT *
-                FROM (
-                SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
-                FROM contests_has_sports_events
-                JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
-                ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
-                    ) tt1
-                    GROUP BY tt1.contests_id
-                ) t2 ON t2.contests_id = t1.id
-                WHERE contests_users_entries.user_id = '".$user_id."'
-        ORDER BY t2.start_date, t2.start_time, t1.contest_name, contests_rosters.roster_name, contests_users_entries.user_entry_count ASC
+					SELECT
+                	t11.id,
+                	t11.contest_name,
+                	t11.sponsors_id,
+                	t11.start_date,
+                	t11.start_time,
+                	t11.leagues_id,
+                	t11.league_name,
+                	t11.league_shorthand,
+                	t11.contest_status
+                    FROM (
+                        SELECT
+                        contests.id,
+                        contests.contest_name,
+                        contests.sponsors_id,
+                        sports_events.start_date,
+                        sports_events.start_time,
+                        leagues.id as leagues_id,
+                        leagues.league_name,
+                        leagues.league_shorthand,
+                        contests.contest_status
+                        FROM contests
+                        JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+                        JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+                        JOIN leagues ON leagues.id = sports_events.leagues_id
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
+                    ) t11
+					WHERE t11.contest_status = 0 ".$whereliga."
+                    GROUP BY t11.id
+                ) AS t1 ON t1.id = contests_users_entries.contest_id
+            JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
+            WHERE contests_users_entries.user_id = '".$user_id."'  AND ((CURRENT_DATE < t1.start_date) OR (t1.start_date = CURRENT_DATE AND CURRENT_TIME <= SUBTIME(t1.start_time, '00:30:00')))
+            ORDER BY t1.start_date DESC, t1.start_time ASC, contests_users_entries.user_entry_count ASC
         ");
         foreach($query->result() as $row)
         {
@@ -68,10 +90,11 @@ class Mdl_games extends CI_Model
         return $result;
     }
 
-    function get_games_status_inactive($league_id, $current_date, $user_id)
+    function get_games_status_inactive($league_id, $user_id)
     {
         $result = array();
         $whereliga='';
+<<<<<<< HEAD
         if($league_id) $whereliga = " AND sports_events_end.leagues_id = ".$league_id;
         $query = $this->db->query('
             SELECT t1.id, t1.contest_name, t1.sponsors_id,sponsors.sponsor, contests_users_entries.user_id, contests_users_entries.user_entry_count, contests_rosters.roster_name, t1.leagues_id, t1.league_shorthand, t2.start_date, t2.start_time
@@ -88,19 +111,58 @@ class Mdl_games extends CI_Model
             JOIN contests_users_entries ON t1.id = contests_users_entries.contest_id
             JOIN sponsors on sponsors.id = t1.sponsors_id
             JOIN contests_rosters on contests_rosters.contests_users_entry_id = contests_users_entries.id
+=======
+        if($league_id)$whereliga = " AND t11.leagues_id = ".$league_id;
+
+        $query = $this->db->query("
+			SELECT
+			t1.id,
+			t1.contest_name,
+			t1.sponsors_id,
+			t1.leagues_id,
+			t1.league_shorthand,
+			t1.start_date,
+			t1.start_time,
+			contests_users_entries.user_id,
+			contests_users_entries.user_entry_count,
+			contests_rosters.roster_name
+			FROM contests_users_entries
+>>>>>>> 9938d4440edbb08c71ecad30f212f731668378ea
             JOIN (
-                SELECT *
-                FROM (
-                SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
-                FROM `contests_has_sports_events`
-                JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
-                ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC, sports_events.start_time ASC
-                    ) tt1
-                    GROUP BY tt1.contests_id
-                ) t2 ON t2.contests_id = t1.id
-                WHERE contests_users_entries.user_id = '.$user_id.'
-        ORDER BY t2.start_date ASC, t2.start_time ASC, t1.contest_name ASC, contests_rosters.roster_name ASC, contests_users_entries.user_entry_count ASC
-        ');
+					SELECT
+                	t11.id,
+                	t11.contest_name,
+                	t11.sponsors_id,
+                	t11.start_date,
+                	t11.start_time,
+                	t11.leagues_id,
+                	t11.league_name,
+                	t11.league_shorthand,
+                	t11.contest_status
+                    FROM (
+                        SELECT
+                        contests.id,
+                        contests.contest_name,
+                        contests.sponsors_id,
+                        sports_events.start_date,
+                        sports_events.start_time,
+                        leagues.id as leagues_id,
+                        leagues.league_name,
+                        leagues.league_shorthand,
+                        contests.contest_status
+                        FROM contests
+                        JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+                        JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+                        JOIN leagues ON leagues.id = sports_events.leagues_id
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
+                    ) t11
+					WHERE t11.contest_status = 1 ".$whereliga."
+                    GROUP BY t11.id
+                ) AS t1 ON t1.id = contests_users_entries.contest_id
+            JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
+            WHERE contests_users_entries.user_id = '".$user_id."'  AND ((CURRENT_DATE > t1.start_date) OR (t1.start_date = CURRENT_DATE AND CURRENT_TIME > SUBTIME(t1.start_time, '00:30:00')))
+            ORDER BY t1.start_date DESC, t1.start_time ASC, contests_users_entries.user_entry_count ASC
+        ");
         foreach($query->result() as $row)
         {
           $result[] = array(
@@ -122,6 +184,78 @@ class Mdl_games extends CI_Model
             "start_date"  => date("d-m-Y",strtotime($row->start_date)),
             "start_time"  => $row->start_time
           );
+        }
+        return $result;
+    }
+
+    function get_games_status_running($league_id, $user_id)
+    {
+        $result = array();
+        $whereliga='';
+        if($league_id)$whereliga = " AND t11.leagues_id = ".$league_id;
+
+        $query = $this->db->query("
+			SELECT
+			t1.id,
+			t1.contest_name,
+			t1.sponsors_id,
+			t1.leagues_id,
+			t1.league_shorthand,
+			t1.start_date,
+			t1.start_time,
+			contests_users_entries.user_id,
+			contests_users_entries.user_entry_count,
+			contests_rosters.roster_name
+			FROM contests_users_entries
+            JOIN (
+					SELECT
+                	t11.id,
+                	t11.contest_name,
+                	t11.sponsors_id,
+                	t11.start_date,
+                	t11.start_time,
+                	t11.leagues_id,
+                	t11.league_name,
+                	t11.league_shorthand,
+                	t11.contest_status
+                    FROM (
+                        SELECT
+                        contests.id,
+                        contests.contest_name,
+                        contests.sponsors_id,
+                        sports_events.start_date,
+                        sports_events.start_time,
+                        leagues.id as leagues_id,
+                        leagues.league_name,
+                        leagues.league_shorthand,
+                        contests.contest_status
+                        FROM contests
+                        JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+                        JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+                        JOIN leagues ON leagues.id = sports_events.leagues_id
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
+                    ) t11
+					WHERE t11.contest_status = 0 ".$whereliga."
+                    GROUP BY t11.id
+                ) AS t1 ON t1.id = contests_users_entries.contest_id
+            JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
+            WHERE contests_users_entries.user_id = '".$user_id."'  AND ((CURRENT_DATE > t1.start_date) OR (t1.start_date = CURRENT_DATE AND CURRENT_TIME > SUBTIME(t1.start_time, '00:30:00')))
+            ORDER BY t1.start_date DESC, t1.start_time ASC, contests_users_entries.user_entry_count ASC
+        ");
+        foreach($query->result() as $row)
+        {
+            $result[] = array(
+                "contest_id" => $row->id,
+                "contest_name" => $row->contest_name,
+                "sponsor_id" => $row->sponsors_id,
+                "userid"  => $row->user_id,
+                "user_entry_count" => $row->user_entry_count,
+                "roster_name"  => $row->roster_name,
+                "leagues_id" => $row->leagues_id,
+                "league_shorthand" => $row->league_shorthand,
+                "start_date"  => date("d-m-Y",strtotime($row->start_date)),
+                "start_time"  => $row->start_time
+            );
         }
         return $result;
     }

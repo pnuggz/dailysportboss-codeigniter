@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+define('ROOT', dirname(dirname(__FILE__)));
+define('DS', DIRECTORY_SEPARATOR);
 require_once(APPPATH.DS."modules/secure_area.php");
 
 class Players_phases extends Secure_area {

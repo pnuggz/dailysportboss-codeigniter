@@ -16,12 +16,12 @@ class Games extends Secure_area {
 
     function listgames($league_id=null)
     {
-        $current_date = '2016-03-18';
         $user_id = $this->session->userdata('userid');
 
         $this->load->model('mdl_games');
-        $data['active_contests'] = $this->mdl_games->get_games_status_active($league_id, $current_date, $user_id);
-        $data['inactive_contests'] = $this->mdl_games->get_games_status_inactive($league_id, $current_date, $user_id);
+        $data['active_contests'] = $this->mdl_games->get_games_status_active($league_id, $user_id);
+        $data['inactive_contests'] = $this->mdl_games->get_games_status_inactive($league_id, $user_id);
+        $data['running_contests'] = $this->mdl_games->get_games_status_running($league_id, $user_id);
 
         $result = array(
           'token' => $this->session->userdata['token'],

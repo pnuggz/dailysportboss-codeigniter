@@ -186,7 +186,30 @@ class Mdl_players_phases extends CI_Model {
                 JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = players_phases.id
                 WHERE players_phases.id = '.$player_id.'
         ');
-        return $query;
+
+        foreach ($query->result() as $row) {
+            $from = new DateTime($row->dob);
+            $to = new DateTime('today');
+            $age = $from->diff($to)->y;
+
+            $array_player_individual[] = array(
+                'player_phase_id' => $row->players_phases_id,
+                'first_name' => $row->first_name,
+                'last_name' => $row->last_name,
+                'weight' => $row->weight,
+                'height' => $row->height,
+                'team_phase_id' => $row->players_phases_teams_phases_id,
+                'team_name' => $row->team_name,
+                'team_shorthand' => $row->team_shorthand,
+                'pos' => $row->position,
+                'age' => $age,
+                'fp_avg' => $row->avg_fp,
+                'fp_form' => $row->form,
+                'depth_chart'   => $row->depth_chart
+            );
+        }
+
+        return $array_player_individual;
     }
 
     function get_player_stats($contest_id) {
@@ -347,58 +370,93 @@ class Mdl_players_phases extends CI_Model {
     }
 
     function get_player_stats_individual_trial($contest_id, $player_id) {
-        $query_start = $this->db->query('
-        SELECT MAX(sports_events.start_date) as start_date
-        FROM `contests_has_sports_events`
-        JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-        WHERE contests_has_sports_events.contests_id = '.$contest_id.'
-        ');
-
-        foreach($query_start->result() as $row) {
-            $contest_start_date = $row->start_date;
-        };
-
-        $query_end = $this->db->query('
-        SELECT MIN(sports_events.start_date) as start_date
-        FROM `contests_has_sports_events`
-        JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-        WHERE contests_has_sports_events.contests_id = '.$contest_id.'
-        ');
-        foreach($query_end->result() as $row) {
-            $contest_end_date = $row->start_date;
-        };
-
-        $query_season = $this->db->query('
-        SELECT MIN(teams_phases.start_date) as start_date
-        FROM teams_phases
-        ');
-        foreach($query_season->result() as $row) {
-            $season_start_date = $row->start_date;
-        };
-
         $query = $this->db->query('
-        SELECT *
-        FROM `soccer_stats`
+        SELECT 
+        soccer_stats.goals * 5 AS fp_goals,
+        soccer_stats.assists * 4 AS fp_assists,
+        soccer_stats.key_passes * 1 AS fp_key_passes,
+        soccer_stats.tackles * 0.4 AS fp_tackles,
+        soccer_stats.interceptions * 0.4 AS fp_interceptions,
+        soccer_stats.clearances * 0.5 AS fp_clearances,
+        soccer_stats.passes * 0.02 AS fp_passes,
+        soccer_stats.crosses * 0.4 AS fp_crosses,
+        soccer_stats.accurate_crosses * 1 AS fp_accurate_crosses,
+        (
+            soccer_stats.goals * 5 + 
+            soccer_stats.assists * 4 + 
+            soccer_stats.key_passes * 1 + 
+            soccer_stats.tackles * 0.4 + 
+            soccer_stats.interceptions * 0.4 + 
+            soccer_stats.clearances * 0.5 + 
+            soccer_stats.passes * 0.02 + 
+            soccer_stats.crosses * 0.4 + 
+            soccer_stats.accurate_crosses * 1 
+        ) AS fp_total
+        FROM soccer_stats
         JOIN (
-            SELECT
-            soccer_stats.id,
-            soccer_stats.players_phases_id,
-            soccer_stats.salary as latest_salary
-            FROM soccer_stats
-            WHERE soccer_stats.id IN (
-                    SELECT MAX(soccer_stats.id)
-                    FROM soccer_stats
-                    WHERE soccer_stats.date <= "' .$contest_end_date. '"
-                    GROUP BY soccer_stats.players_phases_id
-                    )
-            ) i1 ON soccer_stats.players_phases_id = i1.players_phases_id
-        WHERE (soccer_stats.date >= " '.$season_start_date.' " AND soccer_stats.date < " '.$contest_start_date.' " AND soccer_stats.players_phases_id = '.$player_id.')
-        ORDER BY `soccer_stats`.`date` DESC
+            SELECT 
+            sports_events.start_date, 
+            sports_events.start_time, 
+            t1.players_phases_id
+            FROM contests
+            JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
+            JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+            JOIN (
+                SELECT 
+                players_phases.id as players_phases_id,
+                t11.teams_phases_ids,
+                t11.id
+                FROM players_phases
+                JOIN (
+                    SELECT
+                    sports_events.id, sports_events.home_team_phase_id as teams_phases_ids, \'home\' descrip, sports_events.start_date, contests_has_sports_events.contests_id
+                    FROM contests_has_sports_events
+                    INNER JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
+                    WHERE contests_has_sports_events.contests_id = "'.$contest_id.'"
+                    UNION 
+                    SELECT
+                    sports_events.id, sports_events.away_team_phase_id, \'away\' descrip, sports_events.start_date, contests_has_sports_events.contests_id
+                    FROM contests_has_sports_events
+                    INNER JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
+                    WHERE contests_has_sports_events.contests_id = "'.$contest_id.'"
+                ) t11 ON players_phases.teams_phases_id = t11.teams_phases_ids
+                WHERE players_phases.id = "'.$player_id.'"
+            ) t1 ON t1.id = sports_events.id
+        ) t2 ON t2.players_phases_id = soccer_stats.players_phases_id 
+        JOIN (
+            SELECT 
+            players_phases.start_date AS season_start_date,
+            players_phases.id
+            FROM players_phases
+            WHERE players_phases.phase_status = 0 AND players_phases.id = "'.$player_id.'"
+        ) t3 ON  t3.id = soccer_stats.players_phases_id
+        WHERE (soccer_stats.date >= t3.season_start_date AND soccer_stats.date < t2.start_date)
+        ORDER BY soccer_stats.date DESC 
         ');
-        
-        return $query;
+
+        if($query->num_rows() > 0) {
+            foreach($query->result() as $row) {
+                $array_stats_log[] = array(
+                    "fp_goals" => $row->fp_goals,
+                    "fp_assists" => $row->fp_assists,
+                    "fp_key_passes" => $row->fp_key_passes,
+                    "fp_tackles"  => $row->fp_tackles,
+                    "fp_interceptions" => $row->fp_interceptions,
+                    "fp_clearances"  => $row->fp_clearances,
+                    "fp_passes" => $row->fp_passes,
+                    "fp_crosses" => $row->fp_crosses,
+                    "fp_accurate_crosses"  => $row->fp_accurate_crosses,
+                    "fp_total"  => $row->fp_total
+                );
+            }
+        } else {
+            $array_stats_log[] = array(
+            );
+        }
+
+        return $array_stats_log;
     }
-//
+
 //    function get_player_stats_individual_trial($contest_id, $player_id) {
 //        $table = $this->get_table();
 //        $events_date = $this->db->query('
