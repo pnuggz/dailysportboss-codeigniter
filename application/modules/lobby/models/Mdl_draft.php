@@ -586,17 +586,10 @@ class Mdl_draft extends CI_Model
         sports_events.id as eventsid,
         sports_events.home_team_phase_id as team_id_home,
         sports_events.away_team_phase_id as team_id_away,
-<<<<<<< HEAD
-        teams_home.team_shorthand as team_shorthand_home,
-        teams_away.team_shorthand as team_shorthand_away,
-        teams_home.team_name as team_name_home,
-        teams_away.team_name as team_name_away,
-=======
         teams_home.team_name as team_full_home,
         teams_home.team_shorthand as team_name_home,
         teams_away.team_name as team_full_away,
         teams_away.team_shorthand as team_name_away,
->>>>>>> 9938d4440edbb08c71ecad30f212f731668378ea
         sports_events.start_date,
         sports_events.start_time,
         teams_phases_home.stadium_name as home_ground
