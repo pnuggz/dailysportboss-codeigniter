@@ -49,6 +49,19 @@ class Users extends Secure_area {
         $this->output->set_output(json_encode(array('success'=>array('message'=>'Success log out'))), 200);
     }
 
+    function winners()
+    {
+        $this->load->model('mdl_users');
+        $user_id = $this->session->userdata('userid');
+        $data = $this->mdl_users->get_contest_winners($user_id);
+
+        $result = array(
+          'token' => $this->session->userdata['token'],
+          'data'  => $data
+        );
+        $this->output->set_output(json_encode($result), 200);
+    }
+
     function edit() {
       $this->load->helper('security');
       $id = $this->session->userdata['userid'];

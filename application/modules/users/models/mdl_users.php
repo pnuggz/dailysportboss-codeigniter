@@ -24,6 +24,45 @@ class Mdl_users extends CI_Model {
         return $table;
     }
 
+    function get_contest_winners($user_id)
+    {
+        $result = array();
+        $query = $this->db->query('
+        SELECT *
+        FROM contests_winners
+        JOIN contests_users_entries on contests_users_entries.id = contests_winners.contests_users_entry_id
+        JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
+        JOIN contests on contests.id = contests_winners.contestsid
+        JOIN sponsors ON sponsors.id = contests.sponsors_id
+        WHERE contests_users_entries.user_id = ' . $user_id . '
+        ');
+        foreach($query->result() as $row)
+        {
+          $result[] = array(
+              "id" => $row->id,
+              "contest_id" => $row->contest_id,
+              "userid" => $row->user_id,
+              "entry_date_time" => $row->entry_date_time,
+              "user_entry_count" => $row->user_entry_count,
+              "contests_users_entry_id" => $row->contests_users_entry_id,
+              "roster_name" => $row->roster_name,
+              "creation_date_time" => $row->creation_date_time,
+              "sponsor_id" => $row->sponsors_id,
+              "sponsorname"  => $row->sponsor,
+              'sponsorlogodesktop'           =>  base_url().'viewimage/logo/sponsor/desktop/'.$row->sponsors_id,
+              'sponsorlogotablet'           =>  base_url().'viewimage/logo/sponsor/tablet/'.$row->sponsors_id,
+              'sponsorlogomobile'           =>  base_url().'viewimage/logo/sponsor/mobile/'.$row->sponsors_id,
+              'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
+              'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
+              'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
+              "verificationcode" => $row->verificationcode,
+              "rank" => $row->rank,
+          );
+        }
+
+        return $result;
+    }
+
     function get($order_by) {
         $table = $this->get_table();
         $this->db->order_by($order_by);
