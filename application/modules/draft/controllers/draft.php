@@ -182,7 +182,7 @@ class Draft extends Secure_area {
           {
               $this->load->model('mdl_draft');
               $err = array();
-              $cekContest = $this->mdl_draft->check_contest_start($contest_id);
+              $cekContest = $this->mdl_draft->check_contest_start($eventsid);
               $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
               foreach ($cekCount->result() as $row) {

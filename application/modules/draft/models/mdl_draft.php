@@ -79,35 +79,35 @@ class Mdl_draft extends CI_Model
          return $result;
     }
 
-//    function check_contest_start($contest_id)
-//    {
-//      $result = 0;
-//      $today = date('Y-m-d');
-//      $now = date('H:i:s');
-//      $query = $this->db->query("
-//        SELECT *
-//        FROM contests
-//        WHERE start_date > '".$today."' AND id = '".$contest_id."'
-//        ");
-//       $query;
-//
-//       if($query->num_rows() > 0)
-//       {
-//          $result = $query->num_rows();
-//       }else{
-//         $query1 = $this->db->query("
-//           SELECT *
-//           FROM contests
-//           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$contest_id."'
-//           ");
-//          $query1;
-//          $result = $query1->num_rows();
-//       }
-//
-//       return $result;
-//    }
+    function check_contest_start($eventsid)
+    {
+      $result = 0;
+      $today = date('Y-m-d');
+      $now = date('H:i:s');
+      $query = $this->db->query("
+        SELECT *
+        FROM sports_events
+        WHERE start_date > '".$today."' AND id = '".$eventsid."'
+        ");
+       $query;
 
-    function check_contest_start($contest_id)
+       if($query->num_rows() > 0)
+       {
+          $result = $query->num_rows();
+       }else{
+         $query1 = $this->db->query("
+           SELECT *
+           FROM sports_events
+           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$contest_id."'
+           ");
+          $query1;
+          $result = $query1->num_rows();
+       }
+
+        return $result;
+    }
+
+    function check_contest_start_old($contest_id)
     {
         $result = 0;
         $query = $this->db->query("
@@ -135,7 +135,7 @@ class Mdl_draft extends CI_Model
                                sports_events.event_status
                         FROM contests_has_sports_events
                         JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
-                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC 
+                        ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
                     ) t11
                     WHERE t11.event_status = 0
                     GROUP BY t11.contests_id
@@ -262,7 +262,7 @@ class Mdl_draft extends CI_Model
 
     function check_contest_count($contest_id,$userid) {
         $query = $this->db->query("
-            SELECT 
+            SELECT
             COUNT(contests_users_entries.contest_id) AS number_of_user_entry,
             contests.entry_max,
             contests.entry_limit_register,

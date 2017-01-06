@@ -16,6 +16,7 @@ class Captcha extends Secure_area
       $randomword = $this->getRandomWord();
       $this->session->set_userdata('randomword',$randomword);
       $data = array(
+            'token' => $this->session->userdata['token'],
             'randomword' => $randomword,
             'captcha' => $this->recaptcha->getWidget(), // menampilkan recaptcha
             'script_captcha' => $this->recaptcha->getScriptTag(), // javascript recaptcha ditaruh di head
