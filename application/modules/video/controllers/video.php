@@ -10,12 +10,12 @@ class Video extends MX_Controller {
     function index() {
 
     }
-    
 
-    function ads($id)
+
+    function ads($type,$id)
     {
       $this->load->model('mdlviewvideo');
-      $this->mdlviewvideo->get_video_ads($id);
+      $this->mdlviewvideo->get_video_ads($type,$id);
     }
 
 }

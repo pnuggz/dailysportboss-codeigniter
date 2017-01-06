@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 05, 2017 at 12:52 AM
+-- Generation Time: Jan 06, 2017 at 05:49 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -54,7 +54,7 @@ INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_
 (14, 1, 0, 'EPL Derbies', '2016-04-27', '12:00:00', 100, 1, 1, 1, 1, 1, 0),
 (15, 1, 0, 'Test new', '2016-04-27', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (16, 1, 0, 'Saturday EPL Galore', '2016-08-22', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(17, 1, 0, 'Weekend EPL Special', '2016-12-21', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(17, 1, 0, 'Weekend EPL Special', '2017-01-07', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (18, 1, 0, 'EPL Nov', '2016-11-23', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (24, 1, 0, 'EPL Nov', '2016-12-24', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
 (25, 1, 0, 'EPL Nov', '2016-12-21', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
@@ -2959,6 +2959,26 @@ INSERT INTO `points_formula` (`id`, `sports_id`, `goals`, `assists`, `key_passes
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `randomword`
+--
+
+CREATE TABLE IF NOT EXISTS `randomword` (
+  `id` int(22) NOT NULL,
+  `randomword` varchar(100) NOT NULL,
+  `userid` int(22) NOT NULL,
+  `createdate` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `randomword`
+--
+
+INSERT INTO `randomword` (`id`, `randomword`, `userid`, `createdate`) VALUES
+(1, 'kXMNO', 2, '2017-01-06 16:29:06');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `soccer_stats`
 --
 
@@ -2990,7 +3010,7 @@ INSERT INTO `soccer_stats` (`id`, `players_phases_id`, `date`, `salary`, `goals`
 (1191, 1, '2016-03-02', '0.00', 0, 0, 0, 3, 1, 1, 19, 3, 2),
 (1192, 3, '2016-03-01', '0.00', 0, 0, 1, 0, 0, 0, 7, 0, 0),
 (1193, 4, '2016-03-02', '0.00', 0, 0, 0, 2, 0, 0, 45, 3, 0),
-(1194, 5, '2016-03-01', '0.00', 1, 0, 0, 0, 0, 0, 18, 2, 1),
+(1194, 5, '2017-01-06', '0.00', 1, 0, 0, 0, 0, 0, 18, 2, 1),
 (1195, 6, '2016-03-01', '0.00', 0, 0, 0, 0, 0, 1, 29, 0, 0),
 (1196, 7, '2016-03-02', '0.00', 0, 0, 0, 1, 0, 0, 20, 1, 0),
 (1197, 8, '2016-03-02', '0.00', 0, 0, 0, 0, 0, 0, 0, 0, 0),
@@ -16756,9 +16776,9 @@ CREATE TABLE IF NOT EXISTS `sports_events` (
 --
 
 INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_team_phase_id`, `start_date`, `start_time`, `event_status`, `weather_id`, `soccer_live_id`) VALUES
-(2, 1, 6, 1, '2016-12-21', '20:45:00', 1, NULL, NULL),
-(3, 1, 4, 20, '2016-12-21', '15:00:00', 1, NULL, NULL),
-(4, 1, 5, 7, '2016-12-21', '15:00:00', 1, NULL, NULL),
+(2, 1, 6, 1, '2017-01-06', '20:45:00', 1, NULL, NULL),
+(3, 1, 4, 20, '2017-01-06', '15:00:00', 1, NULL, NULL),
+(4, 1, 5, 7, '2017-01-06', '15:00:00', 1, NULL, NULL),
 (5, 1, 18, 14, '2016-03-19', '15:00:00', 1, NULL, NULL),
 (6, 1, 19, 12, '2016-03-19', '15:00:00', 1, NULL, NULL),
 (7, 1, 16, 2, '2016-03-19', '17:30:00', 1, NULL, NULL),
@@ -16766,22 +16786,22 @@ INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_tea
 (9, 1, 13, 8, '2016-03-20', '13:30:00', 1, NULL, NULL),
 (10, 1, 17, 3, '2016-03-20', '16:00:00', 1, NULL, NULL),
 (11, 1, 9, 10, '2016-03-20', '16:00:00', 1, NULL, NULL),
-(12, 1, 34, 27, '2016-12-21', '18:30:00', 0, NULL, NULL),
-(13, 1, 23, 40, '2016-12-21', '21:00:00', 0, NULL, NULL),
-(14, 1, 24, 22, '2016-12-21', '21:00:00', 0, NULL, NULL),
-(15, 1, 25, 31, '2016-12-21', '21:00:00', 0, NULL, NULL),
-(16, 1, 26, 33, '2016-08-27', '21:00:00', 0, NULL, NULL),
+(12, 1, 34, 27, '2017-01-06', '18:30:00', 0, NULL, NULL),
+(13, 1, 23, 40, '2017-01-06', '21:00:00', 0, NULL, NULL),
+(14, 1, 24, 22, '2017-01-06', '21:00:00', 0, NULL, NULL),
+(15, 1, 25, 31, '2017-01-06', '21:00:00', 0, NULL, NULL),
+(16, 1, 26, 33, '2017-01-07', '21:00:00', 0, NULL, NULL),
 (17, 1, 30, 32, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (18, 1, 35, 21, '2016-08-27', '21:00:00', 0, NULL, NULL),
 (19, 1, 38, 29, '2016-08-27', '23:30:00', 0, NULL, NULL),
-(20, 1, 36, 39, '2016-08-28', '19:30:00', 0, NULL, NULL),
-(21, 1, 28, 37, '2016-08-28', '22:00:00', 0, NULL, NULL),
-(22, 1, 38, 29, '2016-12-21', '16:00:00', 0, NULL, NULL),
-(23, 1, 36, 39, '2016-12-21', '16:30:00', 0, NULL, NULL),
-(24, 1, 28, 37, '2016-12-21', '17:00:00', 0, NULL, NULL),
-(25, 1, 38, 29, '2016-12-21', '17:00:00', 0, NULL, NULL),
-(26, 1, 36, 39, '2016-12-21', '17:30:00', 0, NULL, NULL),
-(27, 1, 28, 37, '2016-12-17', '18:00:00', 0, NULL, NULL);
+(20, 1, 36, 39, '2017-01-06', '19:30:00', 0, NULL, NULL),
+(21, 1, 28, 37, '2017-01-06', '22:00:00', 0, NULL, NULL),
+(22, 1, 38, 29, '2017-01-06', '16:00:00', 0, NULL, NULL),
+(23, 1, 36, 39, '2017-01-06', '16:30:00', 0, NULL, NULL),
+(24, 1, 28, 37, '2017-01-06', '17:00:00', 0, NULL, NULL),
+(25, 1, 38, 29, '2017-01-06', '17:00:00', 0, NULL, NULL),
+(26, 1, 36, 39, '2017-01-06', '17:30:00', 0, NULL, NULL),
+(27, 1, 28, 37, '2017-01-06', '18:00:00', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -17014,14 +17034,16 @@ CREATE TABLE IF NOT EXISTS `verificationads` (
   `userinput` varchar(512) NOT NULL,
   `verificationdate` datetime NOT NULL,
   `statusid` int(22) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `verificationads`
 --
 
 INSERT INTO `verificationads` (`id`, `userid`, `contestid`, `recaptcha`, `userinput`, `verificationdate`, `statusid`) VALUES
-(4, 21, 1, '1', 'ztdcL', '2016-11-14 03:02:51', 1);
+(4, 21, 1, '1', 'ztdcL', '2016-11-14 03:02:51', 1),
+(5, 2, 17, 'success', 'asSSa', '2017-01-06 23:19:06', 1),
+(6, 2, 17, 'success', 'kXMNO', '2017-01-06 23:37:28', 1);
 
 -- --------------------------------------------------------
 
@@ -17031,7 +17053,9 @@ INSERT INTO `verificationads` (`id`, `userid`, `contestid`, `recaptcha`, `userin
 
 CREATE TABLE IF NOT EXISTS `video` (
   `id` int(22) NOT NULL,
-  `video` varchar(512) NOT NULL,
+  `videomp4` varchar(512) NOT NULL,
+  `videoogv` varchar(512) NOT NULL,
+  `videowebm` varchar(512) NOT NULL,
   `sponsorsid` int(11) NOT NULL,
   `statusid` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
@@ -17040,9 +17064,9 @@ CREATE TABLE IF NOT EXISTS `video` (
 -- Dumping data for table `video`
 --
 
-INSERT INTO `video` (`id`, `video`, `sponsorsid`, `statusid`) VALUES
-(1, 'video/1/djarum-super.webm', 1, 1),
-(2, 'video/1/djarum-super.webm', 2, 1);
+INSERT INTO `video` (`id`, `videomp4`, `videoogv`, `videowebm`, `sponsorsid`, `statusid`) VALUES
+(1, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/DjarumSuperAd.ogv', 'video/1/webm/Daily-Sport-Manager-revA.webm', 1, 1),
+(2, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/DjarumSuperAd.ogv', 'video/1/webm/Daily-Sport-Manager-revA.webm', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -17126,6 +17150,12 @@ ALTER TABLE `players_phases`
 -- Indexes for table `points_formula`
 --
 ALTER TABLE `points_formula`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `randomword`
+--
+ALTER TABLE `randomword`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -17258,6 +17288,11 @@ ALTER TABLE `players_phases`
 ALTER TABLE `points_formula`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `randomword`
+--
+ALTER TABLE `randomword`
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+--
 -- AUTO_INCREMENT for table `soccer_stats`
 --
 ALTER TABLE `soccer_stats`
@@ -17306,7 +17341,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `verificationads`
 --
 ALTER TABLE `verificationads`
-  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+  MODIFY `id` int(22) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `video`
 --
