@@ -14,7 +14,8 @@ class Captcha extends Secure_area
     {
       $this->load->library(array('form_validation', 'Recaptcha'));
       $randomword = $this->getRandomWord();
-      $this->session->set_userdata('randomword',$randomword);
+      $this->load->model('mdl_captcha');
+      $save = $this->mdl_captcha->insertrandomword($randomword,$this->session->userdata['userid']);
       $data = array(
             'token' => $this->session->userdata['token'],
             'randomword' => $randomword,
@@ -70,8 +71,9 @@ class Captcha extends Secure_area
 
     function checkuserinput($input)
     {
-      $randomword = $this->session->userdata('randomword');
-      if($input === $randomword)
+      $this->load->model('mdl_captcha');
+      $randomword = $this->mdl_captcha->verificationRandomWord($input,$this->session->userdata('userid'));
+      if($randomword > 0)
       {
         return TRUE;
       }else{
