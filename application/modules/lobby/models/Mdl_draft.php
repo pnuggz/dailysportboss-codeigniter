@@ -82,7 +82,7 @@ class Mdl_draft extends CI_Model
               WHERE  contests.contest_status = 0 AND ((SUBDATE(t3.sports_events_start_date, INTERVAL 1 DAY)) OR (CURRENT_DATE = t3.sports_events_start_date AND CURRENT_TIME <= SUBTIME(t3.sports_events_start_time, \'00:30:00\')))              ORDER BY t1.start_date DESC, t1.start_time ASC, contests.contest_name DESC
         ');
          $query;
-         //CURRENT_DATE BETWEEN contests.start_date AND 
+         //CURRENT_DATE BETWEEN contests.start_date AND
          foreach($query->result() as $row)
          {
 
@@ -503,9 +503,11 @@ class Mdl_draft extends CI_Model
                 GROUP BY tt1.contests_id
         ');
         foreach ($query_start->result() as $row) {
-            $contest_start_date = $row->sports_events_start_date;
+            //$contest_start_date = $row->sports_events_start_date;
             $contest_end_date = $row->sports_events_end_date;
         }
+
+        $contest_start_date = '2016-08-27';
 
         $wherepos='';
 

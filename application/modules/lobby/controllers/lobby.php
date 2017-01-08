@@ -53,7 +53,7 @@ class Lobby extends MX_Controller {
         }else{
           $token = '';
         }
-
+        $array_players = array();
         $this->load->model('mdl_draft');
         $data = $this->mdl_draft->get_all_players_one($contest_id,$position);
         foreach ($data->result() as $row){
