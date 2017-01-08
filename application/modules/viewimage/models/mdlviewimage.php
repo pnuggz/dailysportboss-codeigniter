@@ -131,4 +131,50 @@ class Mdlviewimage extends CI_Model {
         }
     }
 
+    function get_player_photo($id)
+    {
+      $file = '';
+      $query = $this->db->query('
+              SELECT players.photo
+              FROM players
+              JOIN players_phases ON players_phases.players_id = players.id
+              WHERE players_phases.id = '.$id.'
+      ');
+
+      foreach($query->result() as $row)
+      {
+        $file = $row->photo;
+      }
+
+      if(!$file)$file = 'players/users-user-icon.png';
+
+      if (file_exists($file)) {
+        $filename = basename($file);
+        $fnamearr = explode(".", $filename);
+        $extension = end($fnamearr);
+
+        switch ($extension){
+          case "jpg" 	: $mime = "image/jpeg"; break;
+          case "jpeg" : $mime = "image/jpeg"; break;
+          case "png" 	: $mime = "image/png"; break;
+          case "gif" 	: $mime = "image/gif"; break;
+          case "xlsx" : $mime = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"; break;
+          case "pdf" 	: $mime = "application/pdf"; break;
+          case "swf"	: $mime = "application/x-shockwave-flash";break;
+          default 	: $mime = "application/force-download";break;
+        }
+
+
+        header('Content-type:'.$mime);
+        header('Content-Disposition: inline; filename="'.$filename.'"');
+        header('Content-Transfer-Encoding: binary');
+        header('Accept-Ranges: bytes');
+        header('Content-Length: ' . filesize($file));
+        ob_end_flush();
+        @readfile($file);
+      }else{
+        return false;
+      }
+    }
+
 }

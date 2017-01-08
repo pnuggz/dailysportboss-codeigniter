@@ -23,4 +23,10 @@ class Viewimage extends MX_Controller {
       $this->mdlviewimage->get_banner($type,$device,$id);
     }
 
+    function player($id)
+    {
+      $this->load->model('mdlviewimage');
+      $this->mdlviewimage->get_player_photo($id);
+    }
+
 }
