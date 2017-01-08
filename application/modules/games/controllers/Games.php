@@ -372,6 +372,7 @@ class Games extends Secure_area {
 
         $this->load->model('mdl_games');
         $query = $this->mdl_games->simulate_team_fp($contest_id);
+        $array = array();
         foreach ($query->result() as $row) {
             $array[] = array(
                 'entry_id'      =>      $row->user_id,
