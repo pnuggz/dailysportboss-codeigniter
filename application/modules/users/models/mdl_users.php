@@ -33,6 +33,7 @@ class Mdl_users extends CI_Model {
         JOIN contests_users_entries on contests_users_entries.id = contests_winners.contests_users_entry_id
         JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
         JOIN contests on contests.id = contests_winners.contestsid
+        JOIN contests_prize on contests_prize.id=contests.contests_prizes_id
         JOIN sponsors ON sponsors.id = contests.sponsors_id
         WHERE contests_users_entries.user_id = ' . $user_id . '
         ');
@@ -57,6 +58,7 @@ class Mdl_users extends CI_Model {
               'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
               "verificationcode" => $row->verificationcode,
               "rank" => $row->rank,
+              "prize" => $row->currency.' '.number_format($row->prize,0)
           );
         }
 
