@@ -682,6 +682,7 @@ class Mdl_games extends CI_Model
             $contest_start_date = $row->start_date;
         }
 
+
         $query_end = $this->db->query('
             SELECT
             sports_events.start_date

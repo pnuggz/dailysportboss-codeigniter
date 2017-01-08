@@ -373,14 +373,17 @@ class Games extends Secure_area {
         $this->load->model('mdl_games');
         $query = $this->mdl_games->simulate_team_fp($contest_id);
         $array = array();
+        $rank = 1;
         foreach ($query->result() as $row) {
             $array[] = array(
+                'ranking'       =>  $rank,
                 'entry_id'      =>      $row->user_id,
                 'entry_number'      =>      $row->user_entry_count,
                 'entry_username'    =>      $row->username,
                 'entry_roster_name'     =>      $row->roster_name,
                 'entry_total_team_fp'       =>      $row->total_team_fp
             );
+            $rank++;
         }
         echo json_encode($array);
     }
