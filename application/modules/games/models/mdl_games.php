@@ -25,6 +25,7 @@ class Mdl_games extends CI_Model
 			t1.league_shorthand,
 			t1.start_date,
 			t1.start_time,
+      sponsors.sponsor,
 			contests_users_entries.user_id,
 			contests_users_entries.user_entry_count,
 			contests_rosters.roster_name
@@ -61,6 +62,7 @@ class Mdl_games extends CI_Model
                     GROUP BY t11.id
                 ) AS t1 ON t1.id = contests_users_entries.contest_id
             JOIN contests_rosters ON contests_rosters.contests_users_entry_id = contests_users_entries.id
+            JOIN sponsors ON sponsors.id = t1.sponsors_id
             WHERE contests_users_entries.user_id = '".$user_id."'  AND ((CURRENT_DATE < t1.start_date) OR (t1.start_date = CURRENT_DATE AND CURRENT_TIME <= SUBTIME(t1.start_time, '00:30:00')))
             ORDER BY t1.start_date DESC, t1.start_time ASC, contests_users_entries.user_entry_count ASC
         ");
