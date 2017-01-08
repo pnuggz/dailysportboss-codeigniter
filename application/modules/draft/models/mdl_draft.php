@@ -98,7 +98,7 @@ class Mdl_draft extends CI_Model
          $query1 = $this->db->query("
            SELECT *
            FROM sports_events
-           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$contest_id."'
+           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$eventsid."'
            ");
           $query1;
           $result = $query1->num_rows();
