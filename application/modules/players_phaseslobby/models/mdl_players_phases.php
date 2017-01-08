@@ -165,6 +165,29 @@ class Mdl_players_phases extends CI_Model {
 
     function get_players_list_contest_individual($contest_id, $player_id) {
       $array_player_individual = array();
+      $query_start = $this->db->query('
+              SELECT tt1.contests_id, tt1.start_date as sports_events_start_date, tt2.start_date as sports_events_end_date
+              FROM (
+                  SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                  FROM `contests_has_sports_events`
+                  JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                  ORDER BY contests_has_sports_events.contests_id, sports_events.start_date ASC
+              ) tt1
+              JOIN (
+                  SELECT DISTINCT contests_has_sports_events.contests_id, sports_events.start_date, sports_events.start_time
+                  FROM `contests_has_sports_events`
+                  JOIN sports_events ON sports_events.id = contests_has_sports_events.sports_events_id
+                  ORDER BY contests_has_sports_events.contests_id, sports_events.start_date DESC
+              ) tt2 ON tt2.contests_id = tt1.contests_id
+              WHERE tt1.contests_id = "'.$contest_id.'"
+              GROUP BY tt1.contests_id
+      ');
+      foreach ($query_start->result() as $row) {
+          //$contest_start_date = $row->sports_events_start_date;
+          $contest_end_date = $row->sports_events_end_date;
+      }
+
+      $contest_start_date = '2016-08-27';
     $query = $this->db->query('
             SELECT
             players_phases.id as players_phases_id,
@@ -178,6 +201,7 @@ class Mdl_players_phases extends CI_Model {
             players_phases.depth_chart,
             teams.team_name,
             teams.team_shorthand,
+            i6.salary,
             opp_teams.id AS opp_id,
             opp_teams.team_name AS opp_name,
             opp_teams.team_shorthand AS opp_shorthand,
@@ -185,6 +209,14 @@ class Mdl_players_phases extends CI_Model {
             soccer_stats_calcs.form
             FROM players_phases
             JOIN players ON players_phases.players_id = players.id
+            JOIN (
+                SELECT
+                soccer_stats.id,
+                soccer_stats.players_phases_id,
+                soccer_stats.salary
+                FROM soccer_stats
+                WHERE soccer_stats.date BETWEEN "'.$contest_start_date.'" AND "'.$contest_end_date.'"
+            ) i6 ON players_phases.id = i6.players_phases_id
             JOIN teams_phases ON players_phases.teams_phases_id = teams_phases.id
             JOIN teams ON teams.id = teams_phases.teams_id
             JOIN soccer_stats_calcs ON soccer_stats_calcs.players_phases_id = players_phases.id
@@ -216,7 +248,8 @@ class Mdl_players_phases extends CI_Model {
             'age' => $age,
             'fp_avg' => $row->avg_fp,
             'fp_form' => $row->form,
-            'depth_chart'   => $row->depth_chart
+            'depth_chart'   => $row->depth_chart,
+            'salary'  => $row->salary
         );
     }
 
