@@ -199,7 +199,7 @@ class Mdl_players_phases extends CI_Model {
         $to = new DateTime('today');
         $age = $from->diff($to)->y;
 
-        $array_player_individual[] = array(
+        $array_player_individual = array(
             'player_phase_id' => $row->players_phases_id,
             'photo'   =>  base_url().'viewimage/player/'.$row->players_phases_id,
             'first_name' => $row->first_name,
