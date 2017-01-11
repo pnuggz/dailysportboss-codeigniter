@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 08, 2017 at 08:17 PM
+-- Generation Time: Jan 11, 2017 at 05:21 PM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `contests_rosters` (
   `player8` int(11) DEFAULT NULL,
   `player9` int(11) DEFAULT NULL,
   `player10` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_rosters`
@@ -219,7 +219,9 @@ INSERT INTO `contests_rosters` (`id`, `contests_users_entry_id`, `roster_name`, 
 (43, 46, 'OnlineTest', '2016-08-21 07:40:52', 147, 36, 169, 341, 235, 249, 118, 105, 419, 242),
 (44, 47, 'Test Roster', '2016-08-23 09:22:00', 1034, 710, 1170, 1059, 879, 1166, 790, 1274, 981, 801),
 (45, 48, 'Version 1', '2016-08-24 09:45:44', 1118, 1168, 1296, 825, 625, 1267, 1252, 1262, 980, 982),
-(46, 49, 'Version 2', '2016-08-24 12:16:52', 1118, 1168, 1296, 1193, 625, 1252, 1267, 1262, 980, 620);
+(46, 49, 'Version 2', '2016-08-24 12:16:52', 1118, 1168, 1296, 1193, 625, 1252, 1267, 1262, 980, 620),
+(47, 50, 'testing20202020', '2017-01-10 17:59:33', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(48, 51, 'testing20202020', '2017-01-11 07:47:07', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191);
 
 -- --------------------------------------------------------
 
@@ -233,7 +235,7 @@ CREATE TABLE IF NOT EXISTS `contests_users_entries` (
   `user_id` int(11) NOT NULL,
   `entry_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_entry_count` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_users_entries`
@@ -274,7 +276,9 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 (46, 3, 1, '2016-08-21 07:40:52', 11),
 (47, 17, 1, '2016-08-23 09:22:00', 1),
 (48, 17, 2, '2016-11-08 13:48:33', 1),
-(49, 17, 2, '2016-11-08 13:48:31', 2);
+(49, 17, 2, '2016-11-08 13:48:31', 2),
+(50, 17, 20, '2017-01-10 17:59:33', 1),
+(51, 17, 18, '2017-01-11 07:47:07', 1);
 
 -- --------------------------------------------------------
 
@@ -17015,9 +17019,9 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 (10, 'asasas@gmail.com', '942656fd05b5b2da42ef45433ac64f1d', 'rttess', 'asdasdsa', 'asdsadsa', 0, '3535353', 'sadsadsa', '', '1970-01-01', 0, '0000-00-00', '2016-10-24 18:37:45', 1),
 (11, 'teasasdo@gmail.com', 'b93939873fd4923043b9dec975811f66', 'asdadsadasdsa3242', 'asdasdsa', 'asdsadsa', 0, '3535353', 'sadsadsa', '', '2016-10-10', 0, '0000-00-00', '2016-10-26 23:52:42', 1),
 (17, 'sss@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tesss', '', '1991-06-13', 0, '0000-00-00', '2016-11-07 20:21:23', 1),
-(18, 'aditdwipssutranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:36', 0),
+(18, 'aditdwipssutranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:36', 1),
 (19, 'aditdwiputput@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:56', 0),
-(20, 'aditdwiputrantos@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 0),
+(20, 'aditdwiputrantos@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 1),
 (21, 'aditdwiputranto@gmail.com', '7f2ababa423061c509f4923dd04b6cf1', 'testingserver', 'Aditya', 'Dwi Putranto', 0, '087878787', 'tes123', '12410', '1991-06-13', 1, '0000-00-00', '2016-11-09 21:13:03', 1),
 (22, 'boo@test.com', '3b3915a32f903b718f6819480f60b5da', 'ptest', 'Ryan', 'Nug', 0, '081232141235', '123 AAA Street', '13256', '2016-01-01', 0, '0000-00-00', '2016-12-17 07:36:29', 0);
 
@@ -17066,8 +17070,8 @@ CREATE TABLE IF NOT EXISTS `video` (
 --
 
 INSERT INTO `video` (`id`, `videomp4`, `videoogv`, `videowebm`, `sponsorsid`, `statusid`) VALUES
-(1, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/DjarumSuperAd.ogv', 'video/1/webm/Daily-Sport-Manager-revA.webm', 1, 1),
-(2, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/DjarumSuperAd.ogv', 'video/1/webm/Daily-Sport-Manager-revA.webm', 2, 1);
+(1, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/djarum-super.ogv', 'video/1/webm/djarum-super.webm', 1, 1),
+(2, 'video/1/mp4/djarum-super.mp4', 'video/1/ogv/djarum-super.ogv', 'video/1/webm/djarum-super.webm', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -17257,12 +17261,12 @@ ALTER TABLE `contests_prize`
 -- AUTO_INCREMENT for table `contests_rosters`
 --
 ALTER TABLE `contests_rosters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=47;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
 --
 -- AUTO_INCREMENT for table `contests_users_entries`
 --
 ALTER TABLE `contests_users_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=50;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
 --
 -- AUTO_INCREMENT for table `contests_winners`
 --

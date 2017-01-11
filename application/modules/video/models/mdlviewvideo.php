@@ -58,7 +58,6 @@ class Mdlviewvideo extends CI_Model {
             }
           break;
         }
-
         $this->load->library('Videostream');
         $stream = new Videostream($file);
         $stream->start();

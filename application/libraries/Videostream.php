@@ -31,7 +31,6 @@ class Videostream
     private function setHeader()
     {
         ob_get_clean();
-        header('Content-Description: File Transfer');
         $ext = strtolower(pathinfo($this->path, PATHINFO_EXTENSION));
         switch ($ext)
         {
@@ -41,6 +40,9 @@ class Videostream
         case "webm":
         header("Content-Type: video/webm");
         break;
+        case "ogv":
+        header("Content-Type: video/ogv");
+        break;
         default:
         header('Content-Type: application/octet-stream');
         break;
@@ -48,9 +50,9 @@ class Videostream
 
 
         header('Content-Disposition: attachment; filename='.basename($this->path));
-        header('Expires: 0');
-        header('Cache-Control: must-revalidate');
-        header('Pragma: public');
+        header("Expires: ".gmdate('D, d M Y H:i:s', time()+2592000) . ' GMT');
+        header("Cache-Control: max-age=2592000, public");
+        header("Last-Modified: ".gmdate('D, d M Y H:i:s', @filemtime($this->path)) . ' GMT' );
         $this->start = 0;
         $this->size  = filesize($this->path);
         $this->end   = $this->size - 1;
@@ -108,23 +110,21 @@ class Videostream
     /**
      * perform the streaming of calculated range
      */
-    private function stream()
-    {
-        $i = $this->start;
-        set_time_limit(0);
-        while(!feof($this->stream) && $i <= $this->end) {
-            $bytesToRead = $this->buffer;
-            if(($i+$bytesToRead) > $this->end) {
-                $bytesToRead = $this->end - $i + 1;
-            }
-            $data = fread($this->stream, $bytesToRead);
-            echo $data;
-            flush_buffers();
-            $i += $bytesToRead;
-        }
-        fclose ($this->stream);
-        exit();
-    }
+     private function stream()
+     {
+         $i = $this->start;
+         set_time_limit(0);
+         while(!feof($this->stream) && $i <= $this->end) {
+             $bytesToRead = $this->buffer;
+             if(($i+$bytesToRead) > $this->end) {
+                 $bytesToRead = $this->end - $i + 1;
+             }
+             $data = fread($this->stream, $bytesToRead);
+             echo $data;
+             flush();
+             $i += $bytesToRead;
+         }
+     }
 
     /**
      * Start streaming video content
