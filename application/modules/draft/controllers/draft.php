@@ -178,6 +178,8 @@ class Draft extends Secure_area {
         $userid = '';
       }
 
+      //$data = $this->input->post('forwards');
+    //  print_r(explode('[',$data));exit;
           if($userid && $eventsid && $contest_id)
           {
               $this->load->model('mdl_draft');
