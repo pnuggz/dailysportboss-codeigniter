@@ -169,6 +169,15 @@ class Draft extends Secure_area {
         $this->output->set_output(json_encode($data), 200);
     }
 
+    private function convertStringtoArray($value){
+      $data = explode('[',$value);
+      array_shift($data);
+      $data = explode(']',$data[0]);
+      $data = explode(',',$data[0]);
+      return $data;
+    }
+
+
     function add($contest_id,$eventsid = null)
     {
       if(array_key_exists('userid',$this->session->userdata))
@@ -178,8 +187,6 @@ class Draft extends Secure_area {
         $userid = '';
       }
 
-      //$data = $this->input->post('forwards');
-    //  print_r(explode('[',$data));exit;
           if($userid && $eventsid && $contest_id)
           {
               $this->load->model('mdl_draft');
@@ -216,9 +223,9 @@ class Draft extends Secure_area {
           $this->load->helper('security');
           $this->load->library('form_validation');
           $this->form_validation->set_rules('roster_name', 'Roster Name', 'trim|required|max_length[512]|xss_clean');
-          $this->form_validation->set_rules('forwards[]', 'Forwards', 'required|callback_cekforward');
-          $this->form_validation->set_rules('midfielders[]', 'Midfielders', 'required|callback_cekmidfielders');
-          $this->form_validation->set_rules('defenders[]', 'Defenders', 'required|callback_cekdefenders');
+          $this->form_validation->set_rules('forwards', 'Forwards', 'required|callback_cekforward');
+          $this->form_validation->set_rules('midfielders', 'Midfielders', 'required|callback_cekmidfielders');
+          $this->form_validation->set_rules('defenders', 'Defenders', 'required|callback_cekdefenders');
 
 
           if($this->form_validation->run($this) == FALSE)
@@ -253,9 +260,9 @@ class Draft extends Secure_area {
                   'roster_name'       =>      $this->input->post('roster_name')
               );
 
-              $forwards_post = $this->input->post('forwards');
-              $midfielders_post = $this->input->post('midfielders');
-              $defenders_post = $this->input->post('defenders');
+              $forwards_post = $this->convertStringtoArray($this->input->post('forwards'));
+              $midfielders_post = $this->convertStringtoArray($this->input->post('midfielders'));
+              $defenders_post = $this->convertStringtoArray($this->input->post('defenders'));
 
               $defenders = array(
                   'player1'       =>      $defenders_post[0],
@@ -298,7 +305,8 @@ class Draft extends Secure_area {
     function cekforward()
     {
       $validforward = 2;
-      if(count($this->input->post('forwards')) < $validforward || count($this->input->post('forwards')) > $validforward)
+      $forwardscek = $this->convertStringtoArray($this->input->post('forwards'));
+      if(count($forwardscek) < $validforward || count($forwardscek) > $validforward)
       {
         $this->form_validation->set_message('cekforward', 'Forwards must have 2 players.');
         return FALSE;
@@ -310,7 +318,8 @@ class Draft extends Secure_area {
     function cekmidfielders()
     {
       $validmidfielders = 4;
-      if(count($this->input->post('midfielders')) < $validmidfielders  || count($this->input->post('midfielders')) > $validmidfielders)
+      $midfielderscek = $this->convertStringtoArray($this->input->post('midfielders'));
+      if(count($midfielderscek) < $validmidfielders  || count($midfielderscek) > $validmidfielders)
       {
         $this->form_validation->set_message('cekmidfielders', 'Mid Fielders must have 4 players.');
         return FALSE;
@@ -322,7 +331,8 @@ class Draft extends Secure_area {
     function cekdefenders()
     {
       $validdefenders = 4;
-      if(count($this->input->post('defenders')) < $validdefenders  || count($this->input->post('defenders')) > $validdefenders)
+      $defenderscek = $this->convertStringtoArray($this->input->post('defenders'));
+      if(count($defenderscek) < $validdefenders  || count($defenderscek) > $validdefenders)
       {
         $this->form_validation->set_message('cekdefenders', 'Defenders must have 4 players.');
         return FALSE;
