@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 11, 2017 at 05:21 PM
+-- Generation Time: Jan 13, 2017 at 05:35 AM
 -- Server version: 10.1.13-MariaDB
 -- PHP Version: 5.4.45
 
@@ -47,17 +47,17 @@ CREATE TABLE IF NOT EXISTS `contests` (
 --
 
 INSERT INTO `contests` (`id`, `leagues_id`, `entry_fee`, `contest_name`, `start_date`, `start_time`, `entry_max`, `entry_limit_register`, `guarantee_type_id`, `multi_type_id`, `contests_prizes_id`, `sponsors_id`, `contest_status`) VALUES
-(1, 1, 0, 'Saturday EPL Galore', '2017-01-14', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
-(2, 1, 0, 'Sunday EPL Craze', '2017-01-14', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
-(3, 1, 0, 'Weekend EPL Smash', '2017-01-14', '01:00:00', 5000, 1, 1, 1, 1, 1, 0),
-(11, 1, 0, 'EPL Derbies', '2017-01-14', '12:00:00', 25, 1, 1, 1, 1, 1, 0),
-(14, 1, 0, 'EPL Derbies', '2017-01-14', '12:00:00', 100, 1, 1, 1, 1, 1, 0),
-(15, 1, 0, 'Test new', '2017-01-14', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(16, 1, 0, 'Saturday EPL Galore', '2017-01-14', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(17, 1, 0, 'Weekend EPL Special', '2017-01-14', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(18, 1, 0, 'EPL Nov', '2017-01-14', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(24, 1, 0, 'EPL Nov', '2017-01-14', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
-(25, 1, 0, 'EPL Nov', '2017-01-14', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
+(1, 1, 0, 'Saturday EPL Galore', '2017-01-16', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(2, 1, 0, 'Sunday EPL Craze', '2017-01-16', '12:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(3, 1, 0, 'Weekend EPL Smash', '2017-01-16', '01:00:00', 5000, 1, 1, 1, 1, 1, 0),
+(11, 1, 0, 'EPL Derbies', '2017-01-16', '12:00:00', 25, 1, 1, 1, 1, 1, 0),
+(14, 1, 0, 'EPL Derbies', '2017-01-18', '12:00:00', 100, 1, 1, 1, 1, 1, 0),
+(15, 1, 0, 'Test new', '2017-01-18', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(16, 1, 0, 'Saturday EPL Galore', '2017-01-12', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(17, 1, 0, 'Weekend EPL Special', '2017-01-12', '12:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(18, 1, 0, 'EPL Nov', '2017-01-12', '13:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(24, 1, 0, 'EPL Nov', '2017-01-12', '16:00:00', 1000, 1, 1, 1, 1, 1, 0),
+(25, 1, 0, 'EPL Nov', '2017-01-18', '16:30:00', 1000, 1, 1, 1, 1, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -179,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `contests_rosters` (
   `player8` int(11) DEFAULT NULL,
   `player9` int(11) DEFAULT NULL,
   `player10` int(11) DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_rosters`
@@ -221,7 +221,12 @@ INSERT INTO `contests_rosters` (`id`, `contests_users_entry_id`, `roster_name`, 
 (45, 48, 'Version 1', '2016-08-24 09:45:44', 1118, 1168, 1296, 825, 625, 1267, 1252, 1262, 980, 982),
 (46, 49, 'Version 2', '2016-08-24 12:16:52', 1118, 1168, 1296, 1193, 625, 1252, 1267, 1262, 980, 620),
 (47, 50, 'testing20202020', '2017-01-10 17:59:33', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
-(48, 51, 'testing20202020', '2017-01-11 07:47:07', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191);
+(48, 51, 'testing20202020', '2017-01-11 07:47:07', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(49, 52, 'testing20202020', '2017-01-11 16:53:18', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(50, 53, 'testing20202020', '2017-01-11 16:57:33', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(51, 54, 'testing20202020', '2017-01-11 17:04:08', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(52, 55, 'testing20202020', '2017-01-11 17:21:17', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191),
+(53, 56, 'testing20202020', '2017-01-11 18:52:16', 225, 262, 118, 9, 74, 333, 115, 23, 115, 191);
 
 -- --------------------------------------------------------
 
@@ -235,7 +240,7 @@ CREATE TABLE IF NOT EXISTS `contests_users_entries` (
   `user_id` int(11) NOT NULL,
   `entry_date_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_entry_count` int(11) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `contests_users_entries`
@@ -273,12 +278,7 @@ INSERT INTO `contests_users_entries` (`id`, `contest_id`, `user_id`, `entry_date
 (43, 3, 1, '2016-08-01 03:04:05', 9),
 (44, 3, 1, '2016-08-07 14:26:13', 10),
 (45, 1, 1, '2016-08-15 13:47:53', 7),
-(46, 3, 1, '2016-08-21 07:40:52', 11),
-(47, 17, 1, '2016-08-23 09:22:00', 1),
-(48, 17, 2, '2016-11-08 13:48:33', 1),
-(49, 17, 2, '2016-11-08 13:48:31', 2),
-(50, 17, 20, '2017-01-10 17:59:33', 1),
-(51, 17, 18, '2017-01-11 07:47:07', 1);
+(46, 3, 1, '2016-08-21 07:40:52', 11);
 
 -- --------------------------------------------------------
 
@@ -16781,32 +16781,32 @@ CREATE TABLE IF NOT EXISTS `sports_events` (
 --
 
 INSERT INTO `sports_events` (`id`, `leagues_id`, `home_team_phase_id`, `away_team_phase_id`, `start_date`, `start_time`, `event_status`, `weather_id`, `soccer_live_id`) VALUES
-(2, 1, 6, 1, '2017-01-14', '20:45:00', 1, NULL, NULL),
-(3, 1, 4, 20, '2017-01-14', '15:00:00', 1, NULL, NULL),
-(4, 1, 5, 7, '2017-01-14', '15:00:00', 1, NULL, NULL),
+(2, 1, 6, 1, '2017-01-16', '20:45:00', 1, NULL, NULL),
+(3, 1, 4, 20, '2017-01-18', '15:00:00', 1, NULL, NULL),
+(4, 1, 5, 7, '2017-01-18', '15:00:00', 1, NULL, NULL),
 (5, 1, 18, 14, '2017-01-14', '15:00:00', 1, NULL, NULL),
-(6, 1, 19, 12, '2017-01-14', '15:00:00', 1, NULL, NULL),
-(7, 1, 16, 2, '2017-01-14', '17:30:00', 1, NULL, NULL),
-(8, 1, 11, 15, '2017-01-14', '13:30:00', 1, NULL, NULL),
-(9, 1, 13, 8, '2017-01-14', '13:30:00', 1, NULL, NULL),
+(6, 1, 19, 12, '2017-01-16', '15:00:00', 1, NULL, NULL),
+(7, 1, 16, 2, '2017-01-16', '17:30:00', 1, NULL, NULL),
+(8, 1, 11, 15, '2017-01-18', '13:30:00', 1, NULL, NULL),
+(9, 1, 13, 8, '2017-01-18', '13:30:00', 1, NULL, NULL),
 (10, 1, 17, 3, '2017-01-14', '16:00:00', 1, NULL, NULL),
-(11, 1, 9, 10, '2017-01-14', '16:00:00', 1, NULL, NULL),
-(12, 1, 34, 27, '2017-01-14', '18:30:00', 0, NULL, NULL),
-(13, 1, 23, 40, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(14, 1, 24, 22, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(15, 1, 25, 31, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(16, 1, 26, 33, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(17, 1, 30, 32, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(18, 1, 35, 21, '2017-01-14', '21:00:00', 0, NULL, NULL),
-(19, 1, 38, 29, '2017-01-14', '23:30:00', 0, NULL, NULL),
-(20, 1, 36, 39, '2017-01-14', '19:30:00', 0, NULL, NULL),
-(21, 1, 28, 37, '2017-01-14', '22:00:00', 0, NULL, NULL),
-(22, 1, 38, 29, '2017-01-14', '16:00:00', 0, NULL, NULL),
-(23, 1, 36, 39, '2017-01-14', '16:30:00', 0, NULL, NULL),
-(24, 1, 28, 37, '2017-01-14', '17:00:00', 0, NULL, NULL),
-(25, 1, 38, 29, '2017-01-14', '17:00:00', 0, NULL, NULL),
-(26, 1, 36, 39, '2017-01-14', '17:30:00', 0, NULL, NULL),
-(27, 1, 28, 37, '2017-01-14', '18:00:00', 0, NULL, NULL);
+(11, 1, 9, 10, '2017-01-18', '16:00:00', 1, NULL, NULL),
+(12, 1, 34, 27, '2017-01-12', '18:30:00', 0, NULL, NULL),
+(13, 1, 23, 40, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(14, 1, 24, 22, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(15, 1, 25, 31, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(16, 1, 26, 33, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(17, 1, 30, 32, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(18, 1, 35, 21, '2017-01-12', '21:00:00', 0, NULL, NULL),
+(19, 1, 38, 29, '2017-01-12', '23:30:00', 0, NULL, NULL),
+(20, 1, 36, 39, '2017-01-12', '19:30:00', 0, NULL, NULL),
+(21, 1, 28, 37, '2017-01-12', '22:00:00', 0, NULL, NULL),
+(22, 1, 38, 29, '2017-01-12', '16:00:00', 0, NULL, NULL),
+(23, 1, 36, 39, '2017-01-12', '16:30:00', 0, NULL, NULL),
+(24, 1, 28, 37, '2017-01-12', '17:00:00', 0, NULL, NULL),
+(25, 1, 38, 29, '2017-01-18', '17:00:00', 0, NULL, NULL),
+(26, 1, 36, 39, '2017-01-18', '17:30:00', 0, NULL, NULL),
+(27, 1, 28, 37, '2017-01-18', '18:00:00', 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -17020,7 +17020,7 @@ INSERT INTO `users` (`id`, `email`, `password`, `username`, `first_name`, `last_
 (11, 'teasasdo@gmail.com', 'b93939873fd4923043b9dec975811f66', 'asdadsadasdsa3242', 'asdasdsa', 'asdsadsa', 0, '3535353', 'sadsadsa', '', '2016-10-10', 0, '0000-00-00', '2016-10-26 23:52:42', 1),
 (17, 'sss@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tesss', '', '1991-06-13', 0, '0000-00-00', '2016-11-07 20:21:23', 1),
 (18, 'aditdwipssutranto@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:36', 1),
-(19, 'aditdwiputput@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:56', 0),
+(19, 'aditdwiputput@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyy', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:50:56', 1),
 (20, 'aditdwiputrantos@gmail.com', 'ae2b1fca515949e5d54fb22b8ed95575', 'clumsyyyt', 'Aditya', 'Dwi Putranto', 0, '6346464', 'tessssss', '12410', '1991-06-13', 0, '0000-00-00', '2016-11-08 11:51:23', 1),
 (21, 'aditdwiputranto@gmail.com', '7f2ababa423061c509f4923dd04b6cf1', 'testingserver', 'Aditya', 'Dwi Putranto', 0, '087878787', 'tes123', '12410', '1991-06-13', 1, '0000-00-00', '2016-11-09 21:13:03', 1),
 (22, 'boo@test.com', '3b3915a32f903b718f6819480f60b5da', 'ptest', 'Ryan', 'Nug', 0, '081232141235', '123 AAA Street', '13256', '2016-01-01', 0, '0000-00-00', '2016-12-17 07:36:29', 0);
@@ -17261,12 +17261,12 @@ ALTER TABLE `contests_prize`
 -- AUTO_INCREMENT for table `contests_rosters`
 --
 ALTER TABLE `contests_rosters`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=49;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=54;
 --
 -- AUTO_INCREMENT for table `contests_users_entries`
 --
 ALTER TABLE `contests_users_entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=57;
 --
 -- AUTO_INCREMENT for table `contests_winners`
 --
