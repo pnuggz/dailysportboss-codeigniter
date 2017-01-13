@@ -125,35 +125,40 @@ class Mdl_draft extends CI_Model
          return $result;
     }
 
-//    function check_contest_start($contest_id)
-//    {
-//      $result = 0;
-//      $today = date('Y-m-d');
-//      $now = date('H:i:s');
-//      $query = $this->db->query("
-//        SELECT *
-//        FROM contests
-//        WHERE start_date > '".$today."' AND id = '".$contest_id."'
-//        ");
-//       $query;
-//
-//       if($query->num_rows() > 0)
-//       {
-//          $result = $query->num_rows();
-//       }else{
-//         $query1 = $this->db->query("
-//           SELECT *
-//           FROM contests
-//           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$contest_id."'
-//           ");
-//          $query1;
-//          $result = $query1->num_rows();
-//       }
-//
-//       return $result;
-//    }
+function check_contest_start($contest_id)
+    {
+      $result = 0;
+      $today = date('Y-m-d');
+      $now = date('H:i:s');
+      $query = $this->db->query("
+      SELECT contests.id
+      FROM contests_has_sports_events
+      JOIN contests ON contests.id = contests_has_sports_events.contests_id
+      JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
+      WHERE sports_events.start_date > '".$today."' AND contests.id = '".$contest_id."'
+      ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
+        ");
+       $query;
+       if($query->num_rows() > 0)
+       {
+          $result = $query->num_rows();
+       }else{
+         $query1 = $this->db->query("
+           SELECT *
+           FROM contests
+           JOIN contests_has_sports_events ON contests.id = contests_has_sports_events.contests_id
+           JOIN sports_events ON contests_has_sports_events.sports_events_id = sports_events.id
+           WHERE sports_events.start_date >= '".$today."' AND sports_events.start_time >= '".$now."' AND contests.id = '".$contest_id."'
+           ORDER BY sports_events.start_date ASC, sports_events.start_time ASC
+           ");
+          $query1;
+          $result = $query1->num_rows();
+       }
 
-    function check_contest_start($contest_id)
+       return $result;
+    }
+
+    /*function check_contest_start($contest_id)
     {
         $result = 0;
         $query = $this->db->query("
@@ -197,7 +202,7 @@ class Mdl_draft extends CI_Model
         }
 
         return $result;
-    }
+    }*/
 
     function check_contest_count($contest_id,$userid) {
 

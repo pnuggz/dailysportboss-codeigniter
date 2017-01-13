@@ -202,9 +202,14 @@ class Lobby extends MX_Controller {
 
     function join($contest_id)
     {
-        if(array_key_exists('userid',$this->session->userdata))
-        {
-            $userid = $this->session->userdata('userid');
+        $cektoken = $this->cekToken($this->input->request_headers());
+
+        if($cektoken) {
+            $userid = $cektoken['userid'];
+            $token = $this->generate_token($cektoken['userid'],$cektoken['username']);
+        } else {
+            $user_entry_count = '-';
+            $token = '';
         }
 
         if(isset($userid))
@@ -239,7 +244,7 @@ class Lobby extends MX_Controller {
             if(!array_key_exists('message',$err))
             {
                 $data = array(
-                    'token' => $this->session->userdata['token']
+                    'token' => $token
                 );
                 $this->output->set_output(json_encode($data), 200);
             }else{
@@ -247,27 +252,27 @@ class Lobby extends MX_Controller {
             }
 
         } else {
-            $userid = 1;
+            $userid = '';
 
             $this->load->model('mdl_draft');
             $err = array();
             $cekContest = $this->mdl_draft->check_contest_start($contest_id);
-            $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
+            //$cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
-            foreach ($cekCount->result() as $row) {
-                $total_entry_count = $row->number_of_total_entry;
-                $total_entry_max = $row->entry_max;
-            }
+            //foreach ($cekCount->result() as $row) {
+              //  $total_entry_count = $row->number_of_total_entry;
+                //$total_entry_max = $row->entry_max;
+            //}
 
             if($cekContest==0)
             {
                 $err['message'][] = 'Sorry, Contest has already started.';
             }
 
-            if($total_entry_count >= $total_entry_max)
-            {
-                $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
-            }
+            //if($total_entry_count >= $total_entry_max)
+            //{
+              //  $err['message'][] = 'Sorry, cannot join Contest because reach limit registered team.';
+            //}
 
             if(!array_key_exists('message',$err))
             {
