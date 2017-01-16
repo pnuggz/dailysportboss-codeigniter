@@ -214,7 +214,7 @@ function check_contest_start($contest_id)
             IFNULL(t1.number_of_total_entry, 0) AS number_of_total_entry
             FROM `contests_users_entries`
             JOIN contests ON contests.id = contests_users_entries.contest_id
-            JOIN (
+            LEFT JOIN (
                 SELECT COUNT(contests_users_entries.id) AS number_of_total_entry,
                 contests_users_entries.contest_id
                 FROM contests_users_entries
