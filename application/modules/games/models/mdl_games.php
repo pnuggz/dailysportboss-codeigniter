@@ -25,6 +25,7 @@ class Mdl_games extends CI_Model
         t1.league_shorthand,
         t1.start_date,
         t1.start_time,
+        t1.prize,
         sponsors.sponsor,
         contests_users_entries.user_id,
         contests_users_entries.user_entry_count,
@@ -46,7 +47,8 @@ class Mdl_games extends CI_Model
                     t11.leagues_id,
                     t11.league_name,
                     t11.league_shorthand,
-                    t11.contest_status
+                    t11.contest_status,
+                    t11.prize
                       FROM (
                           SELECT
                           contests.id,
@@ -57,8 +59,10 @@ class Mdl_games extends CI_Model
                           leagues.id as leagues_id,
                           leagues.league_name,
                           leagues.league_shorthand,
-                          contests.contest_status
+                          contests.contest_status,
+                          contests_prize.prize
                           FROM contests
+                          JOIN contests_prize on contests.contests_prizes_id = contests_prize.id
                           JOIN contests_has_sports_events on contests_has_sports_events.contests_id = contests.id
                           JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
                           JOIN leagues ON leagues.id = sports_events.leagues_id
@@ -92,6 +96,7 @@ class Mdl_games extends CI_Model
               "league_shorthand" => $row->league_shorthand,
               "start_date"  => date("d-m-Y",strtotime($row->start_date)),
               "start_time"  => $row->start_time,
+              "prize"       => $row->prize,
               "status"      => $row->status
             );
           }
