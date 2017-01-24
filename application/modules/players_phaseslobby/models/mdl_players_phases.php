@@ -187,7 +187,7 @@ class Mdl_players_phases extends CI_Model {
           $contest_end_date = $row->sports_events_end_date;
       }
 
-      $contest_start_date = '2016-08-27';
+      //$contest_start_date = '2016-08-27';
     $query = $this->db->query('
             SELECT
             players_phases.id as players_phases_id,
@@ -207,8 +207,8 @@ class Mdl_players_phases extends CI_Model {
             opp_teams.team_shorthand AS opp_shorthand,
             soccer_stats_calcs.avg_fp,
             soccer_stats_calcs.form,
-            i9.nextteam,
-            i9.startingat
+            teams.team_shorthand as nextteam,
+            DATE_FORMAT(players_phases.start_date,"%d/%m") as startingat
             FROM players_phases
             JOIN players ON players_phases.players_id = players.id
             JOIN (
@@ -225,19 +225,6 @@ class Mdl_players_phases extends CI_Model {
             JOIN sports_events ON (sports_events.home_team_phase_id = players_phases.teams_phases_id OR sports_events.away_team_phase_id = players_phases.teams_phases_id)
             JOIN teams_phases AS opp_teams_phases ON opp_teams_phases.id = (IF(players_phases.teams_phases_id = sports_events.home_team_phase_id, sports_events.away_team_phase_id, sports_events.home_team_phase_id))
             JOIN teams AS opp_teams ON opp_teams_phases.teams_id = opp_teams.id
-            LEFT JOIN (
-              SELECT players_phases.players_id,players_phases.id as players_phases_id,DATE_FORMAT(players_phases.start_date,"%d/%m") as startingat,teams.team_shorthand as nextteam
-              FROM `players_phases`
-              JOIN (SELECT
-                        players_id
-                        FROM players_phases
-                        GROUP BY players_id
-                        HAVING COUNT(*)>1
-                    ) dt ON `players_phases`.players_id=dt.players_id
-              JOIN teams_phases ON `players_phases`.`teams_phases_id`= teams_phases.id
-              JOIN teams ON teams_phases.teams_id = teams.id
-              WHERE players_phases.phase_status = 0 AND players_phases.start_date >= "'.$contest_start_date.'"
-            ) i9 ON players.id = i9.players_id AND i9.players_phases_id != '.$player_id.'
             WHERE players_phases.id = '.$player_id.'
     ');
 

@@ -79,15 +79,18 @@ class Mdl_draft extends CI_Model
          return $result;
     }
 
-    function check_contest_start($eventsid)
+    function check_contest_start($contest_id,$eventsid=null)
     {
       $result = 0;
       $today = date('Y-m-d');
       $now = date('H:i:s');
+      $eventsid= " AND sports_events.id = '".$eventsid."'";
+      $contestid= " AND contests_has_sports_events.contests_id = '".$contest_id."'";
       $query = $this->db->query("
         SELECT *
-        FROM sports_events
-        WHERE start_date > '".$today."' AND id = '".$eventsid."'
+        FROM contests_has_sports_events
+        JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+        WHERE sports_events.start_date > '".$today."'.$eventsid.$contestid
         ");
        $query;
 
@@ -97,9 +100,10 @@ class Mdl_draft extends CI_Model
        }else{
          $query1 = $this->db->query("
            SELECT *
-           FROM sports_events
-           WHERE start_date >= '".$today."' AND start_time >= '".$now."' AND id = '".$eventsid."'
-           ");
+           FROM contests_has_sports_events
+           JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
+           WHERE sports_events.start_date >= '".$today."' AND sports_events.start_time >= '".$now."'
+           ".$eventsid.$contestid);
           $query1;
           $result = $query1->num_rows();
        }
@@ -269,7 +273,7 @@ class Mdl_draft extends CI_Model
             IFNULL(t1.number_of_total_entry, 0) AS number_of_total_entry
             FROM `contests_users_entries`
             JOIN contests ON contests.id = contests_users_entries.contest_id
-            JOIN (
+            LEFT JOIN (
                 SELECT COUNT(contests_users_entries.id) AS number_of_total_entry,
                 contests_users_entries.contest_id
                 FROM contests_users_entries

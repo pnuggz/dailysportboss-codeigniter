@@ -170,7 +170,10 @@ class Draft extends Secure_area {
     }
 
     private function convertStringtoArray($value){
-      $data = explode(',',$data);
+      $data = explode('[',$value);
+      array_shift($data);
+      $data = explode(']',$data[0]);
+      $data = explode(',',$data[0]);
       return $data;
     }
 
@@ -184,11 +187,11 @@ class Draft extends Secure_area {
         $userid = '';
       }
 
-          if($userid && $eventsid && $contest_id)
+          if($userid && $contest_id)
           {
               $this->load->model('mdl_draft');
               $err = array();
-              $cekContest = $this->mdl_draft->check_contest_start($eventsid);
+              $cekContest = $this->mdl_draft->check_contest_start($contest_id,$eventsid);
               $cekCount = $this->mdl_draft->check_contest_count($contest_id,$userid);
 
               foreach ($cekCount->result() as $row) {

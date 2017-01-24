@@ -345,21 +345,34 @@ class Mdl_games extends CI_Model
     function get_contest_players($contest_id, $user_id, $user_entry_number)
     {
         $query = $this->db->query('
-        SELECT *
+        SELECT *,COALESCE(t2.entry, 0 ) as entry_count
         FROM `contests_users_entries`
         JOIN contests_rosters on contests_users_entries.id = contests_rosters.contests_users_entry_id
         JOIN contests on contests.id = contests_users_entries.contest_id
+        JOIN contests_prize on contests.contests_prizes_id = contests_prize.id
+        LEFT JOIN (
+              SELECT contests_users_entries.contest_id, COUNT(*) as entry
+              FROM contests_users_entries
+              GROUP BY contest_id
+        ) t2 ON t2.contest_id = contests.id
         JOIN sponsors ON sponsors.id = contests.sponsors_id
         WHERE contests_users_entries.contest_id = ' . $contest_id . ' AND contests_users_entries.user_id = ' . $user_id . ' AND contests_users_entries.user_entry_count = ' . $user_entry_number . '
         ');
         foreach($query->result() as $row)
         {
-          $result[] = array(
+          $result = array(
               "id" => $row->id,
               "contest_id" => $row->contest_id,
+              "leagues_id" => $row->leagues_id,
+              "start_date" => $row->start_date,
+              "start_time" => $row->start_time,
               "userid" => $row->user_id,
               "entry_date_time" => $row->entry_date_time,
               "user_entry_count" => $row->user_entry_count,
+              "entry_max" => $row->entry_max,
+              "entry_fee" => $row->entry_fee,
+              "entry_count" => $row->entry_count,
+              'entry_max_register' => $row->entry_limit_register,
               "contests_users_entry_id" => $row->contests_users_entry_id,
               "roster_name" => $row->roster_name,
               "creation_date_time" => $row->creation_date_time,
@@ -371,6 +384,7 @@ class Mdl_games extends CI_Model
               'sponsorbannerdesktop'         =>  base_url().'viewimage/banner/sponsor/desktop/'.$row->sponsors_id,
               'sponsorbannertablet'         =>  base_url().'viewimage/banner/sponsor/tablet/'.$row->sponsors_id,
               'sponsorbannermobile'         =>  base_url().'viewimage/banner/sponsor/mobile/'.$row->sponsors_id,
+              'prize'       => $row->currency.' '.$row->prize,
           );
         }
 
