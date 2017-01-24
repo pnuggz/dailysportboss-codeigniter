@@ -90,8 +90,8 @@ class Mdl_draft extends CI_Model
         SELECT *
         FROM contests_has_sports_events
         JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
-        WHERE sports_events.start_date > '".$today."'.$eventsid.$contestid
-        ");
+        WHERE sports_events.start_date > '".$today."'
+        ".$contestid);
        $query;
 
        if($query->num_rows() > 0)
@@ -103,7 +103,7 @@ class Mdl_draft extends CI_Model
            FROM contests_has_sports_events
            JOIN sports_events on contests_has_sports_events.sports_events_id = sports_events.id
            WHERE sports_events.start_date >= '".$today."' AND sports_events.start_time >= '".$now."'
-           ".$eventsid.$contestid);
+           ".$contestid);
           $query1;
           $result = $query1->num_rows();
        }

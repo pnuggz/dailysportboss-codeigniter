@@ -170,10 +170,7 @@ class Draft extends Secure_area {
     }
 
     private function convertStringtoArray($value){
-      $data = explode('[',$value);
-      array_shift($data);
-      $data = explode(']',$data[0]);
-      $data = explode(',',$data[0]);
+      $data = explode(',',$value);
       return $data;
     }
 
